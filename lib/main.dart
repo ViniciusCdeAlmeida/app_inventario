@@ -1,8 +1,12 @@
+import 'package:app_inventario/models/conexao.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'providers/configuracao_conexao.dart';
+import 'screens/configuracao_conexao_edicao_tela.dart';
 import 'screens/login_tela.dart';
 import 'providers/autenticacao.dart';
+import 'screens/configuracao_conexao_tela.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,15 +21,24 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (ctx) => Autenticacao(),
         ),
+        ChangeNotifierProvider(
+          create: (ctx) => ConfiguracaoConexao(),
+        ),
       ],
       child: Consumer<Autenticacao>(
         builder: (ctx, _, __) => MaterialApp(
           title: 'APP inventario',
           theme: ThemeData(
-            primarySwatch: Colors.lightGreen,
-            accentColor: Colors.purple,
+            primaryColor: const Color(0xFF72C70E),
           ),
           home: LoginTela(),
+          routes: {
+            ConfiguracaoConexaoTela.routeName: (ctx) =>
+                ConfiguracaoConexaoTela(),
+            ConfiguracaoConexaoEdicaoTela.routeName: (ctx) =>
+                ConfiguracaoConexaoEdicaoTela(),
+            LoginTela.routeName: (ctx) => LoginTela(),
+          },
         ),
       ),
     );

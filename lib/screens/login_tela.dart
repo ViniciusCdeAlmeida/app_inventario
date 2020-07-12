@@ -1,20 +1,27 @@
+import 'package:app_inventario/widgets/menu_cabecalho.dart';
+
 import '../widgets/login_card.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 
 class LoginTela extends StatelessWidget {
+  static const routeName = '/home';
   @override
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('CITSmart - Inventário'),
+      ),
+      drawer: MenuDrawer(),
       body: Stack(
         children: <Widget>[
           Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 colors: [
-                  Color.fromRGBO(215, 117, 255, 1).withOpacity(0.5),
-                  Color.fromRGBO(255, 188, 117, 1).withOpacity(0.9),
+                  Color.fromRGBO(199, 177, 14, 78).withOpacity(0.5),
+                  Color.fromRGBO(34, 180, 199, 78).withOpacity(0.9),
                 ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,

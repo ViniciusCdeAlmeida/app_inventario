@@ -70,52 +70,53 @@ class _LoginCardState extends State<LoginCard> {
       ),
       elevation: 8.0,
       child: Container(
-          // height: 260,
-          // constraints:
-          //     BoxConstraints(minHeight: 260),
-          height: deviceSize.height,
-          width: deviceSize.width,
-          padding: EdgeInsets.all(15.0),
-          child: Form(
-            key: _formKey,
-            child: SingleChildScrollView(
-              child: Column(
-                children: <Widget>[
-                  TextFormField(
-                    decoration: InputDecoration(labelText: 'Usuario'),
-                    onSaved: (user) {
-                      _loginData['userName'] = user;
-                    },
-                  ),
-                  TextFormField(
-                    decoration: InputDecoration(labelText: 'Password'),
-                    obscureText: true,
-                    controller: _passwordController,
-                    onSaved: (pass) {
-                      _loginData['password'] = pass;
-                    },
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  if (_isLoading)
-                    CircularProgressIndicator()
-                  else
-                    RaisedButton(
-                      onPressed: _submit,
-                      child: Text('Logar'),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 30.0,
-                        vertical: 8.0,
-                      ),
+        // height: 260,
+        // constraints:
+        //     BoxConstraints(minHeight: 260),
+        height: deviceSize.height,
+        width: deviceSize.width,
+        padding: EdgeInsets.all(15.0),
+        child: Form(
+          key: _formKey,
+          child: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                TextFormField(
+                  decoration: InputDecoration(labelText: 'Usuario'),
+                  onSaved: (user) {
+                    _loginData['userName'] = user;
+                  },
+                ),
+                TextFormField(
+                  decoration: InputDecoration(labelText: 'Senha'),
+                  obscureText: true,
+                  controller: _passwordController,
+                  onSaved: (pass) {
+                    _loginData['password'] = pass;
+                  },
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                if (_isLoading)
+                  CircularProgressIndicator()
+                else
+                  RaisedButton(
+                    onPressed: _submit,
+                    child: Text('Logar'),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
                     ),
-                ],
-              ),
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 30.0,
+                      vertical: 8.0,
+                    ),
+                  ),
+              ],
             ),
-          )),
+          ),
+        ),
+      ),
     );
   }
 }

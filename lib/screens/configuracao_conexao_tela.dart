@@ -1,14 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class ConfiguracaoConexaoTela extends StatefulWidget {
-  @override
-  _ConfiguracaoConexaoTelaState createState() =>
-      _ConfiguracaoConexaoTelaState();
-}
+import '../widgets/menu_cabecalho.dart';
+import '../screens/configuracao_conexao_edicao_tela.dart';
+import '../providers/configuracao_conexao.dart';
+import '../widgets/configuracao_conexao_item.dart';
 
-class _ConfiguracaoConexaoTelaState extends State<ConfiguracaoConexaoTela> {
+class ConfiguracaoConexaoTela extends StatelessWidget {
+  static const routeName = '/configuracaoTela';
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    final conexoesDados = Provider.of<ConfiguracaoConexao>(context);
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Configurações de conexão'),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.add),
+            onPressed: () {
+              Navigator.of(context)
+                  .pushNamed(ConfiguracaoConexaoEdicaoTela.routeName);
+            },
+          ),
+        ],
+      ),
+      drawer: MenuDrawer(),
+      body: Padding(
+        padding: EdgeInsets.all(8),
+        child: ListView.builder(
+          itemCount: conexoesDados.conexoes.length,
+          itemBuilder: (_, i) => Column(
+            children: [
+              ConfiguracaoConexaoItem(
+                id: conexoesDados.conexoes[i].id,
+                url: conexoesDados.conexoes[i].url,
+                nome: conexoesDados.conexoes[i].nome,
+              ),
+              Divider()
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
