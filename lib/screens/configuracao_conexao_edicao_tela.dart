@@ -35,20 +35,20 @@ class _ConfiguracaoConexaoEdicaoTelaState
 
   @override
   void didChangeDependencies() {
-    if (_inicial) {
-      final conexaoId = ModalRoute.of(context).settings.arguments as String;
-      if (conexaoId != null) {
-        _edicaoConexao =
-            Provider.of<ConfiguracaoConexao>(context, listen: false)
-                .findById(conexaoId);
-        _valoresIniciais = {
-          'url': _edicaoConexao.url,
-          'nome': _edicaoConexao.nome,
-          'ativo': _edicaoConexao.ativo,
-        };
-      }
-    }
-    _inicial = false;
+    // if (_inicial) {
+    //   final conexaoId = ModalRoute.of(context).settings.arguments as String;
+    //   if (conexaoId != null) {
+    //     _edicaoConexao =
+    //         Provider.of<ConfiguracaoConexao>(context, listen: false)
+    //             .findById(conexaoId);
+    //     _valoresIniciais = {
+    //       'url': _edicaoConexao.url,
+    //       'nome': _edicaoConexao.nome,
+    //       'ativo': _edicaoConexao.ativo,
+    //     };
+    //   }
+    // }
+    // _inicial = false;
     super.didChangeDependencies();
   }
 
@@ -95,6 +95,7 @@ class _ConfiguracaoConexaoEdicaoTelaState
           child: ListView(
             children: <Widget>[
               TextFormField(
+                key: Key('urlText'),
                 initialValue: _valoresIniciais['url'],
                 decoration: InputDecoration(
                   labelText: 'Url',
@@ -120,6 +121,7 @@ class _ConfiguracaoConexaoEdicaoTelaState
                 },
               ),
               TextFormField(
+                key: Key('nomeText'),
                 initialValue: _valoresIniciais['nome'],
                 decoration: InputDecoration(
                   labelText: 'Nome',
@@ -150,6 +152,7 @@ class _ConfiguracaoConexaoEdicaoTelaState
                   children: <Widget>[
                     Text("Ativa"),
                     Switch(
+                      key: Key('switchText'),
                       value: _valoresIniciais['ativo'],
                       onChanged: (value) {
                         setState(

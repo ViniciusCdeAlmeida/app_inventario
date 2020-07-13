@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
+import 'package:app_inventario/models/conexao.dart';
 import 'package:http/io_client.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
@@ -9,6 +10,7 @@ import 'package:dio/adapter.dart';
 import '../models/http_exception.dart';
 
 class Autenticacao with ChangeNotifier {
+  Conexao _conexaoAtual;
   String _token;
   String _userId;
 
@@ -27,7 +29,7 @@ class Autenticacao with ChangeNotifier {
 
     Dio dio = new Dio()
       ..options.baseUrl =
-          "https://192.168.15.2:8443/citgrp-patrimonio-web/rest/inventarioMobile/";
+          _conexaoAtual.url + "/citgrp-patrimonio-web/rest/inventarioMobile/";
     (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
         (client) {
       client.badCertificateCallback =
@@ -55,5 +57,11 @@ class Autenticacao with ChangeNotifier {
 
   Future<void> login(String userName, String password) async {
     return _authenticate(userName, password);
+  }
+
+  Conexao conexaoAtual(List<Conexao> conexao) {
+    _conexaoAtual =
+        conexao.where((element) => (element.ativo == true)).toList()[0];
+    return _conexaoAtual;
   }
 }

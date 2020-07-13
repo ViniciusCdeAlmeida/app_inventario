@@ -1,3 +1,5 @@
+import 'package:app_inventario/providers/configuracao_conexao.dart';
+
 import '../providers/autenticacao.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -17,6 +19,7 @@ class _LoginCardState extends State<LoginCard> {
     'user': '',
     'password': '',
   };
+
   var _isLoading = false;
   final _passwordController = TextEditingController();
 
@@ -39,6 +42,8 @@ class _LoginCardState extends State<LoginCard> {
   }
 
   Future<void> _submit() async {
+    var _conexoes = Provider.of<ConfiguracaoConexao>(context);
+    var _autenticacao = Provider.of<Autenticacao>(context);
     if (!_formKey.currentState.validate()) {
       // Invalid FormKey
       return;
@@ -47,6 +52,7 @@ class _LoginCardState extends State<LoginCard> {
     setState(() {
       _isLoading = true;
     });
+    _autenticacao.conexaoAtual(_conexoes.conexoes);
     try {
       await Provider.of<Autenticacao>(context, listen: false).login(
         _loginData['userName'],
