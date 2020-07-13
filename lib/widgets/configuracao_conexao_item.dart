@@ -8,41 +8,45 @@ class ConfiguracaoConexaoItem extends StatelessWidget {
   final String id;
   final String nome;
   final String url;
-  final bool ativa;
+  final bool ativo;
 
   ConfiguracaoConexaoItem({
     @required this.id,
     @required this.url,
     @required this.nome,
-    this.ativa,
+    this.ativo,
   });
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(nome),
-      subtitle: Text(url),
-      trailing: Container(
-        width: 100,
-        child: Row(
-          children: <Widget>[
-            IconButton(
-              icon: Icon(Icons.edit),
-              onPressed: () {
-                Navigator.of(context)
-                    .pushNamed(ConfiguracaoConexaoEdicaoTela.routeName);
-              },
-              color: Theme.of(context).primaryColor,
-            ),
-            IconButton(
-              icon: Icon(Icons.delete),
-              onPressed: () {
-                Provider.of<ConfiguracaoConexao>(context, listen: false)
-                    .deletarConexao(id);
-              },
-              color: Theme.of(context).errorColor,
-            )
-          ],
+    return ListTileTheme(
+      textColor: ativo == false ? Colors.black : Colors.deepPurple[400],
+      child: ListTile(
+        title: Text(nome),
+        subtitle: Text(url),
+        trailing: Container(
+          width: 100,
+          child: Row(
+            children: <Widget>[
+              IconButton(
+                icon: Icon(Icons.edit),
+                onPressed: () {
+                  Navigator.of(context).pushNamed(
+                      ConfiguracaoConexaoEdicaoTela.routeName,
+                      arguments: id);
+                },
+                color: Theme.of(context).primaryColor,
+              ),
+              IconButton(
+                icon: Icon(Icons.delete),
+                onPressed: () {
+                  Provider.of<ConfiguracaoConexao>(context, listen: false)
+                      .deletarConexao(id);
+                },
+                color: Theme.of(context).errorColor,
+              )
+            ],
+          ),
         ),
       ),
     );

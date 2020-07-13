@@ -36,6 +36,7 @@ class ConfiguracaoConexaoTela extends StatelessWidget {
                 id: conexoesDados.conexoes[i].id,
                 url: conexoesDados.conexoes[i].url,
                 nome: conexoesDados.conexoes[i].nome,
+                ativo: conexoesDados.conexoes[i].ativo,
               ),
               Divider()
             ],

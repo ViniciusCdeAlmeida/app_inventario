@@ -120,7 +120,7 @@ class _ConfiguracaoConexaoEdicaoTelaState
                 },
               ),
               TextFormField(
-                initialValue: _valoresIniciais['Nome'],
+                initialValue: _valoresIniciais['nome'],
                 decoration: InputDecoration(
                   labelText: 'Nome',
                   helperText: 'Informe o nome',
@@ -154,6 +154,7 @@ class _ConfiguracaoConexaoEdicaoTelaState
                       onChanged: (value) {
                         setState(
                           () {
+                            _valoresIniciais['ativo'] = value;
                             _edicaoConexao = Conexao(
                               ativo: value,
                               url: _edicaoConexao.url,
