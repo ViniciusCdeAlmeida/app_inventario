@@ -54,6 +54,9 @@ class LoginTela extends StatelessWidget {
                           ),
                         ],
                       ),
+                      child: Text(
+                        'App Inventario',
+                      ),
                     ),
                   ),
                   Flexible(
