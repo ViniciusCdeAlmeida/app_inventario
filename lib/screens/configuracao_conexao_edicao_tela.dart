@@ -35,20 +35,20 @@ class _ConfiguracaoConexaoEdicaoTelaState
 
   @override
   void didChangeDependencies() {
-    // if (_inicial) {
-    //   final conexaoId = ModalRoute.of(context).settings.arguments as String;
-    //   if (conexaoId != null) {
-    //     _edicaoConexao =
-    //         Provider.of<ConfiguracaoConexao>(context, listen: false)
-    //             .findById(conexaoId);
-    //     _valoresIniciais = {
-    //       'url': _edicaoConexao.url,
-    //       'nome': _edicaoConexao.nome,
-    //       'ativo': _edicaoConexao.ativo,
-    //     };
-    //   }
-    // }
-    // _inicial = false;
+    if (_inicial) {
+      final conexaoId = ModalRoute.of(context).settings.arguments as String;
+      if (conexaoId != null) {
+        _edicaoConexao =
+            Provider.of<ConfiguracaoConexao>(context, listen: false)
+                .findById(conexaoId);
+        _valoresIniciais = {
+          'url': _edicaoConexao.url,
+          'nome': _edicaoConexao.nome,
+          'ativo': _edicaoConexao.ativo,
+        };
+      }
+    }
+    _inicial = false;
     super.didChangeDependencies();
   }
 

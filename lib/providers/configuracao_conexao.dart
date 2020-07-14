@@ -32,6 +32,25 @@ class ConfiguracaoConexao with ChangeNotifier {
     }
   }
 
+  bool verificaConexaoAtiva() {
+    int teste = _conexao.indexWhere((value) => value.ativo == true);
+    if (teste != -1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  void atualizarConexaoAtiva(String id) {
+    final conexaoIdx = _conexao.indexWhere((value) => value.id == id);
+    if (!_conexao[conexaoIdx].ativo) {
+      _conexao[conexaoIdx].ativo = true;
+    } else {
+      _conexao[conexaoIdx].ativo = false;
+    }
+    notifyListeners();
+  }
+
   void deletarConexao(String id) {
     _conexao.removeWhere((value) => value.id == id);
     notifyListeners();

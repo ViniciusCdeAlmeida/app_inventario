@@ -1,4 +1,3 @@
-import 'package:app_inventario/models/conexao.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -30,6 +29,8 @@ class MyApp extends StatelessWidget {
           title: 'APP inventario',
           theme: ThemeData(
             primaryColor: const Color(0xFF72C70E),
+            toggleableActiveColor: Color(0xFF2247C7),
+            errorColor: Color(0xFF7A1C02),
           ),
           home: LoginTela(),
           routes: {

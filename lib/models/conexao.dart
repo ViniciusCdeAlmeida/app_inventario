@@ -4,7 +4,7 @@ class Conexao with ChangeNotifier {
   final String id;
   final String url;
   final String nome;
-  final bool ativo;
+  bool ativo;
 
   Conexao({
     this.id,

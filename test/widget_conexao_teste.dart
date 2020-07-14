@@ -15,18 +15,25 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  Widget buildTestableWidget(Widget widget) {
-    return MediaQuery(
-      data: MediaQueryData(),
-      child: widget,
-    );
-  }
-
   testWidgets('Adição url: https://citgrp-homolog.centralit.com.br/',
       (WidgetTester tester) async {
     // Build our app and trigger a frame.
-
-    // await tester.pumpWidget(buildTestableWidget(ConfiguracaoConexaoTela()));
+    final conexoesDados = new ConfiguracaoConexao();
+    List<Conexao> testeConexoes = [
+      Conexao(
+          url: 'https://citgrp-homolog.centralit.com.br/',
+          nome: 'url 1',
+          ativo: false,
+          id: '1'),
+      Conexao(
+          url: 'https://https://192.168.15.2:8443/',
+          nome: 'url 2',
+          ativo: true,
+          id: '2')
+    ];
+    for (var i = 0; i < testeConexoes.length; i++) {
+      conexoesDados.adicionarConexao(testeConexoes[i]);
+    }
     await tester.pumpWidget(
       ChangeNotifierProvider<ConfiguracaoConexao>(
         create: (ctx) => ConfiguracaoConexao(),
@@ -37,25 +44,10 @@ void main() {
             ConfiguracaoConexaoEdicaoTela.routeName: (ctx) =>
                 ConfiguracaoConexaoEdicaoTela()
           },
-          home: ConfiguracaoConexaoTela(),
+          home: ConfiguracaoConexaoEdicaoTela(),
         ),
       ),
     );
-
-    // await tester.pumpWidget(
-    //   MultiProvider(
-    //     providers: [
-    //       ChangeNotifierProvider<ConfiguracaoConexao>(
-    //         create: (ctx) => ConfiguracaoConexao(),
-    //         child: Builder(
-    //           builder: (_) => ConfiguracaoConexaoTela(),
-    //         ),
-    //       ),
-    //     ],
-    //   ),
-    // );
-
-    await tester.tap(find.byIcon(Icons.minimize));
 
     // expect(taps, findsOneWidget);
     // expect(pmp, 'matcher');
@@ -63,9 +55,9 @@ void main() {
     // await tester.enterText(
     //     find.byKey(Key('urlText')), 'https://citgrp-homolog.centralit.com.br/');
     // await tester.enterText(find.byKey(Key('nomeText')), 'url1');
+    // await tester.press(find.byIcon(Icons.save));
     // await tester.enterText(find.byKey(Key('switchText')), 'true');
     // await tester.tap(find.byType(Switch));
-    // await tester.tap(find.byIcon(Icons.save));
     await tester.pump();
   });
 }
