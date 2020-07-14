@@ -2,19 +2,22 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:app_inventario/models/conexao.dart';
-import 'package:http/io_client.dart';
+import 'package:app_inventario/models/login.dart';
+import 'package:app_inventario/models/organizacao.dart';
+// import 'package:http/io_client.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:dio/adapter.dart';
 
-import '../models/http_exception.dart';
+// import '../models/http_exception.dart';
 
 class Autenticacao with ChangeNotifier {
+  Login usrLogado;
   Conexao _conexaoAtual;
-  String _token;
+  // String _token;
   String _userId;
 
-  String get token {}
+  // String get token {}
 
   String get userId {
     return _userId;
@@ -25,7 +28,6 @@ class Autenticacao with ChangeNotifier {
     HttpClient httpClient = new HttpClient();
     httpClient.badCertificateCallback =
         ((X509Certificate cert, String host, int port) => trustSelfSigned);
-    IOClient ioClient = new IOClient(httpClient);
 
     Dio dio = new Dio()
       ..options.baseUrl =
@@ -35,22 +37,28 @@ class Autenticacao with ChangeNotifier {
       client.badCertificateCallback =
           (X509Certificate cert, String host, int port) => trustSelfSigned;
     };
-    String url =
-        'https://192.168.15.2:8443/citgrp-patrimonio-web/rest/inventarioMobile/usuarioValidoV2?username=$userName&password=$password';
     try {
-      final response = await dio
+      Response response = await dio
           .get("usuarioValidoV2/?username=$userName&password=$password");
-      print(response.data.toString());
-
-      final response2 = await ioClient.get(
-        url,
+      usrLogado = Login(
+        id: response.data['id'].toString(),
+        organizacao: (response.data['organizacoes'] as List<dynamic>)
+            .map(
+              (item) => Organizacao(
+                codigo: item['organizacao']['codigo'],
+                codigoENome: item['organizacao']['codigoENome'],
+                id: item['id'],
+                sigla: item['organizacao']['sigla'],
+                nome: item['organizacao']['nome'],
+              ),
+            )
+            .toList(),
+        userName: response.data['username'],
       );
-      final responseData = json.decode(response2.body) as Map<String, dynamic>;
-      print(responseData);
-      print(response.data['id']);
     } catch (error) {
       throw error;
     }
+    print(usrLogado);
 
     notifyListeners();
   }

@@ -1,8 +1,7 @@
-import 'package:app_inventario/widgets/menu_cabecalho.dart';
-
 import '../widgets/login_card.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
+import '../widgets/cabecalho/menu_cabecalho.dart';
 
 class LoginTela extends StatelessWidget {
   static const routeName = '/home';
@@ -54,16 +53,6 @@ class LoginTela extends StatelessWidget {
                             offset: Offset(0, 2),
                           ),
                         ],
-                      ),
-                      child: Text(
-                        'App Inventario',
-                        // style: TextStyle(
-                        //   color:
-                        //       Theme.of(context).accentTextTheme.headline6.color,
-                        //   fontSize: 50,
-                        //   fontFamily: 'Anton',
-                        //   fontWeight: FontWeight.normal,
-                        // ),
                       ),
                     ),
                   ),

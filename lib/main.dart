@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'providers/configuracao_conexao.dart';
-import 'screens/configuracao_conexao_edicao_tela.dart';
+import 'screens/configuracao/configuracao_conexao_edicao_tela.dart';
 import 'screens/login_tela.dart';
 import 'providers/autenticacao.dart';
-import 'screens/configuracao_conexao_tela.dart';
+import 'screens/configuracao/configuracao_conexao_tela.dart';
 
 void main() {
   runApp(MyApp());

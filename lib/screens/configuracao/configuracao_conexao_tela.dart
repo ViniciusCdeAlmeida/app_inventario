@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../widgets/menu_cabecalho.dart';
-import '../screens/configuracao_conexao_edicao_tela.dart';
-import '../providers/configuracao_conexao.dart';
-import '../widgets/configuracao_conexao_item.dart';
+import '../../widgets/cabecalho/menu_cabecalho.dart';
+import '../../screens/configuracao/configuracao_conexao_edicao_tela.dart';
+import '../../providers/configuracao_conexao.dart';
+import '../../widgets/configuracao_conexao_item.dart';
 
 class ConfiguracaoConexaoTela extends StatelessWidget {
   static const routeName = '/configuracaoTela';

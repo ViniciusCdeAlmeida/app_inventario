@@ -1,9 +1,9 @@
 import 'package:app_inventario/providers/configuracao_conexao.dart';
-import 'package:app_inventario/widgets/alerta_conexao.dart';
+import 'package:app_inventario/widgets/alerta/alerta_conexao.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../screens/configuracao_conexao_edicao_tela.dart';
+import '../screens/configuracao/configuracao_conexao_edicao_tela.dart';
 // import './alerta_conexao.dart';
 
 class ConfiguracaoConexaoItem extends StatefulWidget {
@@ -28,9 +28,6 @@ class _ConfiguracaoConexaoItemState extends State<ConfiguracaoConexaoItem> {
   @override
   Widget build(BuildContext context) {
     // final devideSize = MediaQuery.of(context).size;
-    final conexaoAtiva =
-        Provider.of<ConfiguracaoConexao>(context, listen: false)
-            .atualizarConexaoAtiva(widget.id);
     return ListTile(
       title: Text(widget.nome),
       subtitle: Text(
@@ -46,16 +43,20 @@ class _ConfiguracaoConexaoItemState extends State<ConfiguracaoConexaoItem> {
                 ? Theme.of(context).toggleableActiveColor
                 : null,
           ),
-          onPressed: () =>
-              Provider.of<ConfiguracaoConexao>(context, listen: false)
+          onPressed: () => widget.ativo == false
+              ? Provider.of<ConfiguracaoConexao>(context, listen: false)
                       .verificaConexaoAtiva()
                   ? showDialog(
                       context: context,
                       builder: (context) {
-                        return AlertaConexao();
+                        return AlertaConexao(id: widget.id);
                       },
                     )
-                  : {conexaoAtiva},
+                  : {
+                      Provider.of<ConfiguracaoConexao>(context, listen: false)
+                          .atualizarConexaoAtiva(widget.id)
+                    }
+              : null,
         ),
       ),
       trailing: Container(
@@ -84,35 +85,4 @@ class _ConfiguracaoConexaoItemState extends State<ConfiguracaoConexaoItem> {
       ),
     );
   }
-}
-
-showAlertDialog(BuildContext context) {
-  // set up the buttons
-  Widget cancelButton = FlatButton(
-    child: Text("Cancel"),
-    onPressed: () {},
-  );
-  Widget continueButton = FlatButton(
-    child: Text("Continue"),
-    onPressed: () {},
-  );
-
-  // set up the AlertDialog
-  AlertDialog alert = AlertDialog(
-    title: Text("AlertDialog"),
-    content:
-        Text("Would you like to continue learning how to use Flutter alerts?"),
-    actions: [
-      cancelButton,
-      continueButton,
-    ],
-  );
-
-  // show the dialog
-  showDialog(
-    context: context,
-    builder: (BuildContext context) {
-      return alert;
-    },
-  );
 }
