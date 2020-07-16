@@ -1,11 +1,19 @@
+import 'package:app_inventario/providers/levantamento.dart';
+import 'package:app_inventario/screens/inventario/inventario_geral_tela.dart';
+import 'package:app_inventario/screens/inventario/inventario_item_tela.dart';
+import 'package:app_inventario/screens/inventario/inventario_selecao_tela.dart';
+import 'package:app_inventario/screens/inventario/levantamento_fisico_tela.dart';
+import 'package:app_inventario/screens/inventario/levantamento_item_tela.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'providers/configuracao_conexao.dart';
 import 'screens/configuracao/configuracao_conexao_edicao_tela.dart';
-import 'screens/login_tela.dart';
+import 'screens/login/login_tela.dart';
 import 'providers/autenticacao.dart';
 import 'screens/configuracao/configuracao_conexao_tela.dart';
+import 'package:app_inventario/providers/inventario.dart';
+import 'package:app_inventario/screens/organizacao/organizacao_tela.dart';
 
 void main() {
   runApp(MyApp());
@@ -23,22 +31,35 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (ctx) => ConfiguracaoConexao(),
         ),
+        ChangeNotifierProvider(
+          create: (ctx) => Inventario(),
+        ),
+        ChangeNotifierProvider(
+          create: (ctx) => Levantamento(),
+        ),
       ],
       child: Consumer<Autenticacao>(
-        builder: (ctx, _, __) => MaterialApp(
+        builder: (ctx, autenticacaoDados, _) => MaterialApp(
           title: 'APP inventario',
           theme: ThemeData(
             primaryColor: const Color(0xFF72C70E),
             toggleableActiveColor: Color(0xFF2247C7),
             errorColor: Color(0xFF7A1C02),
           ),
-          home: LoginTela(),
+          home:
+              autenticacaoDados.existeUsuario ? OrganizacaoTela() : LoginTela(),
           routes: {
             ConfiguracaoConexaoTela.routeName: (ctx) =>
                 ConfiguracaoConexaoTela(),
             ConfiguracaoConexaoEdicaoTela.routeName: (ctx) =>
                 ConfiguracaoConexaoEdicaoTela(),
             LoginTela.routeName: (ctx) => LoginTela(),
+            OrganizacaoTela.routeName: (ctx) => OrganizacaoTela(),
+            InventarioSelecaoTela.routeName: (ctx) => InventarioSelecaoTela(),
+            InventarioGeralTela.routeName: (ctx) => InventarioGeralTela(),
+            InventarioItemTela.routeName: (ctx) => InventarioItemTela(),
+            LevantamentoFisicoTela.routeName: (ctx) => LevantamentoFisicoTela(),
+            LevantamentoItemTela.routeName: (ctx) => LevantamentoItemTela(),
           },
         ),
       ),

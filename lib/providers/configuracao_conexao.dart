@@ -3,17 +3,22 @@ import 'package:flutter/material.dart';
 import '../models/conexao.dart';
 
 class ConfiguracaoConexao with ChangeNotifier {
-  List<Conexao> _conexao = [];
+  // List<Conexao> _conexao = [];
 
-  // List<Conexao> _conexao = [
-  //   Conexao(
-  //       url: 'https://citgrp-homolog.centralit.com.br/',
-  //       nome: 'url 1',
-  //       ativo: false,
-  //       id: '1'),
-  //   Conexao(
-  //       url: 'https://192.168.15.2:8443/', nome: 'url 2', ativo: true, id: '2')
-  // ];
+  List<Conexao> _conexao = [
+    Conexao(
+      url: 'https://citgrp-homolog.centralit.com.br/',
+      nome: 'url 1',
+      ativo: false,
+      id: '1',
+    ),
+    Conexao(
+      url: 'https://192.168.15.2:8443/',
+      nome: 'url 2',
+      ativo: true,
+      id: '2',
+    )
+  ];
 
   List<Conexao> get conexoes {
     return [..._conexao];

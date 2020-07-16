@@ -1,10 +1,10 @@
 import 'package:app_inventario/providers/configuracao_conexao.dart';
 
-import '../providers/autenticacao.dart';
+import '../../providers/autenticacao.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../models/http_exception.dart';
+import '../../models/http_exception.dart';
 
 class LoginCard extends StatefulWidget {
   LoginCard({Key key}) : super(key: key);
@@ -76,9 +76,6 @@ class _LoginCardState extends State<LoginCard> {
       ),
       elevation: 8.0,
       child: Container(
-        // height: 260,
-        // constraints:
-        //     BoxConstraints(minHeight: 260),
         height: deviceSize.height,
         width: deviceSize.width,
         padding: EdgeInsets.all(15.0),

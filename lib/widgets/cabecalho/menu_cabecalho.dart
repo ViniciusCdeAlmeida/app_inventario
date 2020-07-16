@@ -1,5 +1,5 @@
 import 'package:app_inventario/screens/configuracao/configuracao_conexao_tela.dart';
-import 'package:app_inventario/screens/login_tela.dart';
+import 'package:app_inventario/screens/login/login_tela.dart';
 import 'package:flutter/material.dart';
 
 import '../../screens/configuracao/configuracao_bens_tela.dart';
