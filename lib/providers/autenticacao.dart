@@ -13,6 +13,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class Autenticacao with ChangeNotifier {
   Login _usrLogado;
   Conexao _conexaoAtual;
+  int idOrganizacao;
   // String _token;
   // String _userId;
 
@@ -28,6 +29,14 @@ class Autenticacao with ChangeNotifier {
 
   List<Organizacao> get lista2Organizacoes {
     return [..._usrLogado.organizacao];
+  }
+
+  get idUnidade {
+    return idOrganizacao;
+  }
+
+  set idUnidade(int idOrganizacao) {
+    this.idOrganizacao = idOrganizacao;
   }
 
   String get atualConexao {

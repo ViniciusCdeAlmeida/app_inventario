@@ -1,174 +1,68 @@
-import 'package:app_inventario/providers/levantamento.dart';
+import 'package:app_inventario/customizacoes/estagios.dart';
+import 'package:app_inventario/screens/inventario/levantamentoFisico/levantamento_fisico_tela.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-enum Acoes {
-  buscarLevantamentos,
-  buscarLevantamento,
-  buscarInventarios,
-  buscarInventario,
-  exluirLevantamentos,
-  exluirLevantamento,
-  enviaLevantamento,
-  exluirInventarios,
-  exluirInventario,
-  enviaInventario,
-  gerarArquivoBackup,
-}
-
-handleDemoAction(
-  Acoes action,
-  BuildContext context,
-  int idOrganizacao,
-  String conexao,
-) {
-  Future teste;
-  switch (action) {
-    case Acoes.buscarLevantamentos:
-      print('1');
-      teste = Provider.of<Levantamento>(context)
-          .buscaLevantamento(idOrganizacao, conexao);
-      print(teste);
-      break;
-    case Acoes.buscarLevantamento:
-      break;
-    case Acoes.buscarInventarios:
-      break;
-    case Acoes.buscarInventario:
-      break;
-    case Acoes.exluirLevantamentos:
-      break;
-    case Acoes.exluirLevantamento:
-      break;
-    case Acoes.exluirInventarios:
-      break;
-    case Acoes.exluirInventario:
-      break;
-    case Acoes.gerarArquivoBackup:
-      break;
-    case Acoes.enviaInventario:
-      break;
-    case Acoes.enviaLevantamento:
-      break;
-  }
-}
+import '../../customizacoes/acoes.dart';
+import 'package:app_inventario/customizacoes/handleAction.dart';
+import 'package:app_inventario/widgets/customizados/popupMenu_custom.dart';
 
 // Especializar o widget PopupMenuItem
-class AcoesLevantamento extends StatelessWidget {
+class AcoesLevantamento extends StatefulWidget {
   final String conexao;
   final int idOrganizacao;
 
   AcoesLevantamento(this.conexao, this.idOrganizacao);
 
   @override
+  _AcoesLevantamentoState createState() => _AcoesLevantamentoState();
+}
+
+class _AcoesLevantamentoState extends State<AcoesLevantamento> {
+  Estagios estagio;
+  @override
   Widget build(BuildContext context) {
     return PopupMenuButton<Acoes>(
       onSelected: (value) {
-        handleDemoAction(
-          value,
-          context,
-          idOrganizacao,
-          conexao,
-        );
+        setState(() {
+          LevantamentoFisicoTela();
+          estagio = Estagios.CARREGANDO;
+          handleAction(
+            value,
+            context,
+            widget.conexao,
+          );
+        });
+        estagio = Estagios.FINALIZADO;
       },
       offset: Offset(0, 100),
       itemBuilder: (context) => <PopupMenuEntry<Acoes>>[
         PopupMenuItem<Acoes>(
-          // height: 10,
-          child: Container(
-            child: Row(
-              // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              // crossAxisAlignment: CrossAxisAlignment.end,
-              children: <Widget>[
-                Icon(Icons.cloud_download),
-                Padding(
-                  padding: EdgeInsets.all(10),
-                  child: Text('Carregar Levantamentos'),
-                ),
-              ],
-            ),
-          ),
+          child:
+              PopupMenuCustom('Carregar Levantamentos', Icons.cloud_download),
           value: Acoes.buscarLevantamentos,
         ),
         const PopupMenuDivider(),
         PopupMenuItem<Acoes>(
-          // height: 10,
-          child: Container(
-            child: Row(
-              // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              // crossAxisAlignment: CrossAxisAlignment.end,
-              children: <Widget>[
-                Icon(Icons.save_alt),
-                Padding(
-                  padding: EdgeInsets.all(10),
-                  child: Text('Carregar Levantamento'),
-                ),
-              ],
-            ),
-          ),
+          child: PopupMenuCustom('Carregar Levantamento', Icons.save_alt),
           value: Acoes.buscarLevantamento,
         ),
         const PopupMenuDivider(),
         PopupMenuItem<Acoes>(
-          // height: 10,
-          child: Container(
-            child: Row(
-              // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              // crossAxisAlignment: CrossAxisAlignment.end,
-              children: <Widget>[
-                Icon(Icons.delete),
-                Padding(
-                  padding: EdgeInsets.all(10),
-                  child: Text('Excluir Levantamentos'),
-                ),
-              ],
-            ),
-          ),
+          child: PopupMenuCustom('Excluir Levantamentos', Icons.delete),
           value: Acoes.exluirLevantamentos,
         ),
         const PopupMenuDivider(),
         PopupMenuItem<Acoes>(
-          child: Container(
-            child: Row(
-              children: <Widget>[
-                Icon(Icons.delete_outline),
-                Padding(
-                  padding: EdgeInsets.all(10),
-                  child: Text('Excluir Levantamento'),
-                ),
-              ],
-            ),
-          ),
-          value: Acoes.exluirLevantamentos,
+          child: PopupMenuCustom('Excluir Levantamento', Icons.delete_outline),
+          value: Acoes.exluirLevantamento,
         ),
         const PopupMenuDivider(),
         PopupMenuItem<Acoes>(
-          child: Container(
-            child: Row(
-              children: <Widget>[
-                Icon(Icons.cloud_upload),
-                Padding(
-                  padding: EdgeInsets.all(10),
-                  child: Text('Enviar Levantamentos'),
-                ),
-              ],
-            ),
-          ),
+          child: PopupMenuCustom('Enviar Levantamentos', Icons.cloud_upload),
           value: Acoes.enviaLevantamento,
         ),
         const PopupMenuDivider(),
         PopupMenuItem<Acoes>(
-          child: Container(
-            child: Row(
-              children: <Widget>[
-                Icon(Icons.content_copy),
-                Padding(
-                  padding: EdgeInsets.all(10),
-                  child: Text('Gerar arquivo de backup'),
-                ),
-              ],
-            ),
-          ),
+          child: PopupMenuCustom('Gerar arquivo de backup', Icons.content_copy),
           value: Acoes.gerarArquivoBackup,
         ),
       ],

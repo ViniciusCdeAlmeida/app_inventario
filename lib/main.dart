@@ -1,9 +1,9 @@
-import 'package:app_inventario/providers/levantamento.dart';
-import 'package:app_inventario/screens/inventario/inventario_geral_tela.dart';
-import 'package:app_inventario/screens/inventario/inventario_item_tela.dart';
+import 'package:app_inventario/providers/levantamentos.dart';
+import 'package:app_inventario/screens/inventario/inventarioGeral/inventario_geral_tela.dart';
+import 'package:app_inventario/screens/inventario/inventarioGeral/inventario_item_tela.dart';
 import 'package:app_inventario/screens/inventario/inventario_selecao_tela.dart';
-import 'package:app_inventario/screens/inventario/levantamento_fisico_tela.dart';
-import 'package:app_inventario/screens/inventario/levantamento_item_tela.dart';
+import 'package:app_inventario/screens/inventario/levantamentoFisico/levantamento_fisico_tela.dart';
+import 'package:app_inventario/screens/inventario/levantamentoFisico/levantamento_item_tela.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -34,8 +34,14 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (ctx) => Inventario(),
         ),
-        ChangeNotifierProvider(
-          create: (ctx) => Levantamento(),
+        // ChangeNotifierProvider(
+        //   create: (ctx) => Levantamentos(),
+        // ),
+        ChangeNotifierProxyProvider<Autenticacao, Levantamentos>(
+          update: (ctx, autenticacao, previousData) => Levantamentos(
+            previousData == null ? [] : previousData.levantamentos,
+            autenticacao.idUnidade,
+          ),
         ),
       ],
       child: Consumer<Autenticacao>(

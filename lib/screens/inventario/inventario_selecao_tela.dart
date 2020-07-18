@@ -1,4 +1,5 @@
 import 'package:app_inventario/models/telaArgumentos.dart';
+import 'package:app_inventario/providers/autenticacao.dart';
 import 'package:app_inventario/providers/inventario.dart';
 import 'package:flutter/material.dart';
 import 'package:app_inventario/widgets/cabecalho/app_cabecalho.dart';
@@ -12,6 +13,7 @@ class InventarioSelecaoTela extends StatelessWidget {
     final inventario = Provider.of<Inventario>(context);
     final TelaArgumentos unidadeDados =
         ModalRoute.of(context).settings.arguments;
+    Provider.of<Autenticacao>(context).idUnidade = unidadeDados.id;
     return Scaffold(
       appBar: AppBar(
         title: Text('Selecione um tipo de inventario'),
