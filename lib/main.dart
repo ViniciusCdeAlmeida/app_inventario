@@ -4,12 +4,12 @@ import 'package:app_inventario/screens/inventario/inventarioGeral/inventario_ite
 import 'package:app_inventario/screens/inventario/inventario_selecao_tela.dart';
 import 'package:app_inventario/screens/inventario/levantamentoFisico/levantamento_fisico_tela.dart';
 import 'package:app_inventario/screens/inventario/levantamentoFisico/levantamento_item_tela.dart';
+import 'package:app_inventario/widgets/customizados/pagina_principal.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'providers/configuracao_conexao.dart';
 import 'screens/configuracao/configuracao_conexao_edicao_tela.dart';
-import 'screens/login/login_tela.dart';
 import 'providers/autenticacao.dart';
 import 'screens/configuracao/configuracao_conexao_tela.dart';
 import 'package:app_inventario/providers/inventario.dart';
@@ -52,14 +52,15 @@ class MyApp extends StatelessWidget {
             toggleableActiveColor: Color(0xFF2247C7),
             errorColor: Color(0xFF7A1C02),
           ),
-          home:
-              autenticacaoDados.existeUsuario ? OrganizacaoTela() : LoginTela(),
+          home: autenticacaoDados.existeUsuario
+              ? OrganizacaoTela()
+              : PaginaPrincipal(),
           routes: {
             ConfiguracaoConexaoTela.routeName: (ctx) =>
                 ConfiguracaoConexaoTela(),
             ConfiguracaoConexaoEdicaoTela.routeName: (ctx) =>
                 ConfiguracaoConexaoEdicaoTela(),
-            LoginTela.routeName: (ctx) => LoginTela(),
+            PaginaPrincipal.routeName: (ctx) => PaginaPrincipal(),
             OrganizacaoTela.routeName: (ctx) => OrganizacaoTela(),
             InventarioSelecaoTela.routeName: (ctx) => InventarioSelecaoTela(),
             InventarioGeralTela.routeName: (ctx) => InventarioGeralTela(),

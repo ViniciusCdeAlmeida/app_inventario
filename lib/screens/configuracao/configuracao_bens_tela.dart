@@ -45,7 +45,7 @@ class _ConfiguracaoBensTelaState extends State<ConfiguracaoBensTela> {
               FlatButton.icon(
                 icon: Icon(Icons.save),
                 onPressed: _adicionarDigitosBens,
-                label: Text('Salvar'),
+                label: const Text('Salvar'),
                 color: Theme.of(context).primaryColor,
                 textColor: Theme.of(context).textTheme.button.color,
               )

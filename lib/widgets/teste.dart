@@ -1,47 +1,47 @@
-import 'package:app_inventario/providers/autenticacao.dart';
+import 'package:app_inventario/customizacoes/acoes.dart';
+// import 'package:app_inventario/customizacoes/estagios.dart';
 import 'package:app_inventario/providers/levantamentos.dart';
-import 'package:app_inventario/widgets/inventario/levantamentoFisico/levantamento_fisico_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-class TesteRoda extends StatelessWidget {
-  Future<void> _refreshProd(
-    BuildContext context,
-    String conexao,
-    int idOrganizacao,
-  ) async {
-    await Provider.of<Levantamentos>(context)
-        .buscaLevantamento(idOrganizacao, conexao);
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    print('object');
-    final String conexao = Provider.of<Autenticacao>(context).atualConexao;
-    final int idUnidade = Provider.of<Autenticacao>(context).idUnidade;
-    return FutureBuilder(
-      future: _refreshProd(context, conexao, idUnidade),
-      builder: (ctx, snapshot) =>
-          snapshot.connectionState == ConnectionState.waiting
-              ? Center(
-                  child: CircularProgressIndicator(),
-                )
-              : Consumer<Levantamentos>(
-                  builder: (ctx, productsData, _) => Padding(
-                    padding: EdgeInsets.all(8),
-                    child: ListView.builder(
-                      itemBuilder: (_, idx) => Column(
-                        children: [
-                          LevantamentoFisicoItem(
-                            productsData.levantamentos[idx],
-                          ),
-                          Divider(),
-                        ],
-                      ),
-                      itemCount: productsData.levantamentos.length,
-                    ),
-                  ),
-                ),
-    );
+Future<void> refreshProd2(
+    BuildContext context, String conexao, int id, Acoes acoes) async {
+  switch (acoes) {
+    case Acoes.buscarLevantamentos:
+      await Provider.of<Levantamentos>(context).buscaLevantamento(id, conexao);
+      // this.levantamentosLista =
+      Provider.of<Levantamentos>(context).levantamentos;
+      // _estagio = Estagios.FINALIZADO;
+      break;
+    case Acoes.buscarLevantamento:
+      print('2');
+      break;
+    case Acoes.exluirLevantamentos:
+      print('3');
+      break;
+    case Acoes.exluirLevantamento:
+      print('4');
+      break;
+    case Acoes.enviaLevantamento:
+      print('5');
+      break;
+    case Acoes.buscarInventarios:
+      print('6');
+      break;
+    case Acoes.buscarInventario:
+      print('7');
+      break;
+    case Acoes.exluirInventarios:
+      print('8');
+      break;
+    case Acoes.exluirInventario:
+      print('9');
+      break;
+    case Acoes.enviaInventario:
+      print('10');
+      break;
+    case Acoes.gerarArquivoBackup:
+      print('11');
+      break;
   }
 }

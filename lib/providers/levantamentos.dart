@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:app_inventario/customizacoes/estagios.dart';
 import 'package:app_inventario/models/dominio.dart';
 import 'package:app_inventario/models/levantamento.dart';
 import 'package:dio/adapter.dart';
@@ -10,7 +9,6 @@ import 'package:flutter/material.dart';
 class Levantamentos with ChangeNotifier {
   List<Levantamento> _levantamentos = [];
   final int idOrganizacao;
-  Estagios estagio = Estagios.INICIAL;
 
   Levantamentos(this._levantamentos, this.idOrganizacao);
 
@@ -63,17 +61,13 @@ class Levantamentos with ChangeNotifier {
           ),
         ),
       );
-      // print(_levantamentos);
-      estagio = Estagios.FINALIZADO;
     } catch (error) {
-      estagio = Estagios.ERROR;
       throw error;
     }
     notifyListeners();
   }
 
   Future<void> buscaLevantamento(int idOrganizacao, String conexao) async {
-    this.estagio = Estagios.CARREGANDO;
     return _getLevantamento(idOrganizacao, conexao);
   }
 }

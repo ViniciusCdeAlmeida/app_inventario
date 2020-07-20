@@ -150,7 +150,7 @@ class _ConfiguracaoConexaoEdicaoTelaState
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Text("Ativa"),
+                    const Text("Ativa"),
                     Switch(
                       key: Key('switchText'),
                       value: _valoresIniciais['ativo'],

@@ -41,7 +41,7 @@ class _ConfiguracaoNumeroTelaState extends State<ConfiguracaoNumeroTela> {
               FlatButton.icon(
                 icon: Icon(Icons.save),
                 onPressed: _adicionarLetra,
-                label: Text('Salvar'),
+                label: const Text('Salvar'),
                 color: Theme.of(context).primaryColor,
                 textColor: Theme.of(context).textTheme.button.color,
               )

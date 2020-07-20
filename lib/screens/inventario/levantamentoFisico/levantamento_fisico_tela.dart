@@ -1,9 +1,8 @@
 import 'package:app_inventario/customizacoes/acoes.dart';
 import 'package:app_inventario/customizacoes/estagios.dart';
-import 'package:app_inventario/customizacoes/handleAction.dart';
+import 'package:app_inventario/models/levantamento.dart';
 import 'package:app_inventario/providers/autenticacao.dart';
 import 'package:app_inventario/providers/levantamentos.dart';
-import 'package:app_inventario/widgets/cabecalho/acoes_levantamento_cabecalho.dart';
 import 'package:app_inventario/widgets/cabecalho/app_cabecalho.dart';
 import 'package:app_inventario/widgets/customizados/popupMenu_custom.dart';
 import 'package:app_inventario/widgets/inventario/levantamentoFisico/levantamento_fisico_item.dart';
@@ -18,33 +17,25 @@ class LevantamentoFisicoTela extends StatefulWidget {
 }
 
 class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
-  dynamic levantamentosLista;
+  List<Levantamento> levantamentosLista;
   var _isInit = true;
-  var _isLoading = false;
+  // var _isLoading = false;
   Estagios _estagio = Estagios.INICIAL;
   Acoes test;
-  Future<String> x;
-
-  @override
-  void initState() {
-    print('initState $_estagio');
-    if (_estagio == Estagios.INICIAL) {}
-    super.initState();
-  }
 
   @override
   void didChangeDependencies() {
     if (_isInit) {
       setState(() {
-        _isLoading = true;
+        // _isLoading = true;
       });
       if (Provider.of<Levantamentos>(context).levantamentos.isEmpty)
         setState(() {
-          _isLoading = false;
+          // _isLoading = false;
         });
     }
     _isInit = false;
-    print(_isLoading);
+    // print(_isLoading);
     super.didChangeDependencies();
   }
 
@@ -70,21 +61,6 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
       case Acoes.enviaLevantamento:
         print('5');
         break;
-      case Acoes.buscarInventarios:
-        print('6');
-        break;
-      case Acoes.buscarInventario:
-        print('7');
-        break;
-      case Acoes.exluirInventarios:
-        print('8');
-        break;
-      case Acoes.exluirInventario:
-        print('9');
-        break;
-      case Acoes.enviaInventario:
-        print('10');
-        break;
       case Acoes.gerarArquivoBackup:
         print('11');
         break;
@@ -98,7 +74,7 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
     final idOrganizacao = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Levantamentos'),
+        title: const Text('Levantamentos'),
         actions: <Widget>[
           GestureDetector(
             child: PopupMenuButton<Acoes>(

@@ -16,7 +16,7 @@ class InventarioSelecaoTela extends StatelessWidget {
     Provider.of<Autenticacao>(context).idUnidade = unidadeDados.id;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Selecione um tipo de inventario'),
+        title: const Text('Selecione um tipo de inventario'),
       ),
       drawer: AppDrawer(),
       body: Padding(

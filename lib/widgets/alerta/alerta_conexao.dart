@@ -16,13 +16,13 @@ class _AlertaConexaoState extends State<AlertaConexao> {
   @override
   Widget build(BuildContext context) {
     Widget cancelarBtn = FlatButton(
-      child: Text("Não"),
+      child: const Text("Não"),
       onPressed: () {
         Navigator.of(context).pop();
       },
     );
     Widget continuarBtn = FlatButton(
-      child: Text("Sim"),
+      child: const Text("Sim"),
       onPressed: () {
         Provider.of<ConfiguracaoConexao>(context, listen: false)
             .ativarConexao(widget.id);
@@ -32,8 +32,8 @@ class _AlertaConexaoState extends State<AlertaConexao> {
 
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
-      title: Text("Atenção"),
-      content: Text("Existe conexão ativa. Deseja ativar essa conexão?"),
+      title: const Text("Atenção"),
+      content: const Text("Existe conexão ativa. Deseja ativar essa conexão?"),
       actions: [
         cancelarBtn,
         continuarBtn,

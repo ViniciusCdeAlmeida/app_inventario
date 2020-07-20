@@ -17,13 +17,13 @@ class _InventarioGeralTelaState extends State<InventarioGeralTela> {
     final idOrganizacao = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       appBar: AppBar(
-        title: Text('Inventarios'),
+        title: const Text('Inventarios'),
         actions: <Widget>[
           AcoesInventario(conexao, idOrganizacao),
         ],
       ),
       drawer: AppDrawer(),
-      body: Text('Inventario Geral'),
+      body: const Text('Inventario Geral'),
     );
   }
 }
