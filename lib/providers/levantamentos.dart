@@ -46,7 +46,7 @@ class Levantamentos with ChangeNotifier {
         print('$actbyt');
         print('$totalbyt');
       });
-      _levantamentos = compute(helperLevantamento(responseData));
+      _levantamentos = (helperLevantamento(responseData));
       _levantamentos = helperLevantamento(response.data);
       // print(_levantamentos);
       estagio = Estagios.FINALIZADO;
