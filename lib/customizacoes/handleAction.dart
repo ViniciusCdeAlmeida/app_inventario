@@ -1,5 +1,4 @@
 import 'package:app_inventario/providers/autenticacao.dart';
-import 'package:app_inventario/screens/inventario/levantamentoFisico/levantamento_fisico_tela.dart';
 import 'package:flutter/material.dart';
 
 import './acoes.dart';

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:io';
+import 'package:app_inventario/helpers/helper_usuario.dart';
 import 'package:app_inventario/models/conexao.dart';
 import 'package:app_inventario/models/login.dart';
 import 'package:app_inventario/models/organizacao.dart';
@@ -63,21 +64,7 @@ class Autenticacao with ChangeNotifier {
           // .get("usuarioValidoV2/?username=vinicius.correa&password=interno");
           .get("usuarioValidoV2/?username=vinicius.correa&password=interno");
       // print(response);
-      _usrLogado = Login(
-        id: response.data['id'].toString(),
-        organizacao: (response.data['organizacoes'] as List<dynamic>)
-            .map(
-              (item) => Organizacao(
-                codigo: item['organizacao']['codigo'],
-                codigoENome: item['organizacao']['codigoENome'],
-                id: item['organizacao']['id'],
-                sigla: item['organizacao']['sigla'],
-                nome: item['organizacao']['nome'],
-              ),
-            )
-            .toList(),
-        userName: response.data['username'],
-      );
+      _usrLogado = helperLogin(response.data);
     } catch (error) {
       throw error;
     }

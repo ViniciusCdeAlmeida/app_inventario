@@ -5,7 +5,7 @@ import 'package:app_inventario/providers/autenticacao.dart';
 import 'package:app_inventario/providers/levantamentos.dart';
 import 'package:app_inventario/widgets/cabecalho/app_cabecalho.dart';
 import 'package:app_inventario/widgets/customizados/popupMenu_custom.dart';
-import 'package:app_inventario/widgets/inventario/levantamentoFisico/levantamento_fisico_item.dart';
+import 'package:app_inventario/widgets/inventario/levantamento_fisico_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -70,7 +70,6 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
   @override
   Widget build(BuildContext context) {
     final conexao = Provider.of<Autenticacao>(context).atualConexao;
-    Provider.of<Levantamentos>(context).levantamentos;
     final idOrganizacao = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       appBar: AppBar(
@@ -132,7 +131,6 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
           ? null
           : _estagio == Estagios.CARREGANDO
               ? FutureBuilder(
-                  initialData: false,
                   future: _refreshProd2(context, conexao, idOrganizacao, test),
                   builder: (ctx, snapshot) =>
                       snapshot.connectionState == ConnectionState.waiting

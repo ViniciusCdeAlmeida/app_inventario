@@ -1,4 +1,7 @@
 import 'package:app_inventario/models/levantamento.dart';
+import 'package:app_inventario/models/telaArgumentos.dart';
+import 'package:app_inventario/screens/unidade/unidade_tela.dart';
+import 'package:app_inventario/widgets/unidade/unidade_item.dart';
 import 'package:flutter/material.dart';
 
 class LevantamentoFisicoItem extends StatefulWidget {
@@ -33,7 +36,13 @@ class _LevantamentoFisicoItemState extends State<LevantamentoFisicoItem> {
             title: Text(widget.levantamento.nome),
             trailing: IconButton(
                 icon: Icon(Icons.arrow_forward, color: Colors.black),
-                onPressed: () {}),
+                onPressed: () {
+                  Navigator.pushNamed(
+                    context,
+                    UnidadeTela.routeName,
+                    arguments: widget.levantamento.id,
+                  );
+                }),
           ),
           if (_expanded)
             Container(

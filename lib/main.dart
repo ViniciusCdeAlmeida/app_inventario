@@ -1,9 +1,9 @@
 import 'package:app_inventario/providers/levantamentos.dart';
-import 'package:app_inventario/screens/inventario/inventarioGeral/inventario_geral_tela.dart';
-import 'package:app_inventario/screens/inventario/inventarioGeral/inventario_item_tela.dart';
+import 'package:app_inventario/providers/unidade.dart';
+import 'package:app_inventario/screens/inventario/inventario_geral_tela.dart';
 import 'package:app_inventario/screens/inventario/inventario_selecao_tela.dart';
-import 'package:app_inventario/screens/inventario/levantamentoFisico/levantamento_fisico_tela.dart';
-import 'package:app_inventario/screens/inventario/levantamentoFisico/levantamento_item_tela.dart';
+import 'package:app_inventario/screens/inventario/levantamento_fisico_tela.dart';
+import 'package:app_inventario/screens/unidade/unidade_tela.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -34,13 +34,17 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (ctx) => Inventario(),
         ),
+        ChangeNotifierProvider(
+          create: (ctx) => Unidades(),
+        ),
         // ChangeNotifierProvider(
         //   create: (ctx) => Levantamentos(),
         // ),
         ChangeNotifierProxyProvider<Autenticacao, Levantamentos>(
           update: (ctx, autenticacao, previousData) => Levantamentos(
-            previousData == null ? [] : previousData.levantamentos,
-            autenticacao.idUnidade,
+            levantamentos:
+                previousData == null ? [] : previousData.levantamentos,
+            idOrganizacao: autenticacao.idUnidade,
           ),
         ),
       ],
@@ -63,9 +67,9 @@ class MyApp extends StatelessWidget {
             OrganizacaoTela.routeName: (ctx) => OrganizacaoTela(),
             InventarioSelecaoTela.routeName: (ctx) => InventarioSelecaoTela(),
             InventarioGeralTela.routeName: (ctx) => InventarioGeralTela(),
-            InventarioItemTela.routeName: (ctx) => InventarioItemTela(),
+            UnidadeTela.routeName: (ctx) => UnidadeTela(),
             LevantamentoFisicoTela.routeName: (ctx) => LevantamentoFisicoTela(),
-            LevantamentoItemTela.routeName: (ctx) => LevantamentoItemTela(),
+            // LevantamentoItemTela.routeName: (ctx) => LevantamentoItemTela(),
           },
         ),
       ),

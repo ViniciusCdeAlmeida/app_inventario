@@ -1,24 +1,23 @@
 import 'dart:io';
 
-import 'package:app_inventario/helpers/helper_levantamento.dart';
 import 'package:app_inventario/helpers/helpers_organizacao.dart';
-import 'package:app_inventario/models/levantamento.dart';
 import 'package:app_inventario/models/organizacao.dart';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
-class Levantamentos with ChangeNotifier {
-  List<Levantamento> levantamentos = [];
-  final int idOrganizacao;
+class Unidades with ChangeNotifier {
+  List<Organizacao> unidades = [];
+  final int idInventario;
 
-  Levantamentos({this.levantamentos, this.idOrganizacao});
+  Unidades({this.idInventario});
 
-  List<Levantamento> get getLevantamentos {
-    return [...levantamentos];
+  List<Organizacao> get getUnidades {
+    return [...unidades];
   }
 
-  Future<void> _getLevantamento(int idOrganizacao, String conexao) async {
+  Future<void> _getEstruturasLevantamento(
+      int idInventario, String conexao) async {
     Dio dio = new Dio()
       ..options.baseUrl =
           conexao + "/citgrp-patrimonio-web/rest/inventarioMobile/";
@@ -29,18 +28,19 @@ class Levantamentos with ChangeNotifier {
     };
     try {
       Response response = await dio
-          .get("obterLevantamentosPorUGV2/?idOrganizacao=$idOrganizacao",
+          .get("estruturaPorInventarioV2/?idInventario=$idInventario",
               onReceiveProgress: (actbyt, totalbyt) {
         print('$actbyt');
       });
-      levantamentos = helperLevantamento(response.data);
+      unidades = helperUnidades(response.data);
     } catch (error) {
       throw error;
     }
     notifyListeners();
   }
 
-  Future<void> buscaLevantamento(int idOrganizacao, String conexao) async {
-    return _getLevantamento(idOrganizacao, conexao);
+  Future<void> buscaEstruturasLevantamento(
+      int idInventario, String conexao) async {
+    return _getEstruturasLevantamento(idInventario, conexao);
   }
 }

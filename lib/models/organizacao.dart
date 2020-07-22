@@ -6,6 +6,7 @@ class Organizacao with ChangeNotifier {
   final String nome;
   final String sigla;
   final String codigoENome;
+  final String statusUnidade;
 
   Organizacao({
     this.id,
@@ -13,5 +14,6 @@ class Organizacao with ChangeNotifier {
     this.nome,
     this.sigla,
     this.codigoENome,
+    this.statusUnidade,
   });
 }

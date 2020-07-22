@@ -1,5 +1,5 @@
-import 'package:app_inventario/screens/inventario/inventarioGeral/inventario_geral_tela.dart';
-import 'package:app_inventario/screens/inventario/levantamentoFisico/levantamento_fisico_tela.dart';
+import 'package:app_inventario/screens/inventario/inventario_geral_tela.dart';
+import 'package:app_inventario/screens/inventario/levantamento_fisico_tela.dart';
 import 'package:flutter/material.dart';
 
 class InventarioSelecaoItem extends StatelessWidget {

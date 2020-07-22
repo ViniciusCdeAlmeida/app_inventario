@@ -1,5 +1,4 @@
 import 'package:app_inventario/customizacoes/estagios.dart';
-import 'package:app_inventario/screens/inventario/levantamentoFisico/levantamento_fisico_tela.dart';
 import 'package:flutter/material.dart';
 import '../../customizacoes/acoes.dart';
 import 'package:app_inventario/customizacoes/handleAction.dart';
@@ -23,7 +22,7 @@ class _AcoesLevantamentoState extends State<AcoesLevantamento> {
     return PopupMenuButton<Acoes>(
       onSelected: (value) {
         setState(() {
-          LevantamentoFisicoTela();
+          // LevantamentoFisicoTela();
           estagio = Estagios.CARREGANDO;
           handleAction(
             value,
