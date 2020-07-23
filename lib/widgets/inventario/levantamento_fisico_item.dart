@@ -1,7 +1,6 @@
 import 'package:app_inventario/models/levantamento.dart';
 import 'package:app_inventario/models/telaArgumentos.dart';
 import 'package:app_inventario/screens/unidade/unidade_tela.dart';
-import 'package:app_inventario/widgets/unidade/unidade_item.dart';
 import 'package:flutter/material.dart';
 
 class LevantamentoFisicoItem extends StatefulWidget {
@@ -63,8 +62,6 @@ class _LevantamentoFisicoItemState extends State<LevantamentoFisicoItem> {
                           'Qtde. bens: ${widget.levantamento.quantidadeTotalBens}'),
                       Text(
                           'Objetivo: ${widget.levantamento.dominioStatusInventario.descricao}'),
-                      // Text(
-                      //     '${widget.levantamento.dominioTipoInventario.descricao}'),
                     ],
                   ),
                 ],

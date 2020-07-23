@@ -1,6 +1,4 @@
 import 'package:app_inventario/customizacoes/acoes.dart';
-import 'package:app_inventario/customizacoes/estagios.dart';
-import 'package:app_inventario/models/levantamento.dart';
 import 'package:app_inventario/providers/autenticacao.dart';
 import 'package:app_inventario/providers/levantamentos.dart';
 import 'package:app_inventario/widgets/cabecalho/app_cabecalho.dart';
@@ -53,128 +51,78 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
       listaLevantamentos.buscaLevantamento(idOrganizacao, conexao);
     }
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Levantamentos'),
-          actions: <Widget>[
-            GestureDetector(
-              child: PopupMenuButton<Acoes>(
-                onSelected: (value) {
-                  _refreshProd2(context, conexao, idOrganizacao, value);
-                  // setState(
-                  //   () {
-                  //     test = value;
-                  //     _estagio = Estagios.CARREGANDO;
-                  //   },
-                  // );
-                },
-                offset: Offset(0, 100),
-                itemBuilder: (context) => <PopupMenuEntry<Acoes>>[
-                  PopupMenuItem<Acoes>(
-                    child: PopupMenuCustom(
-                        'Carregar Levantamentos', Icons.cloud_download),
-                    value: Acoes.buscarLevantamentos,
-                  ),
-                  const PopupMenuDivider(),
-                  PopupMenuItem<Acoes>(
-                    child: PopupMenuCustom(
-                        'Carregar Levantamento', Icons.save_alt),
-                    value: Acoes.buscarLevantamento,
-                  ),
-                  const PopupMenuDivider(),
-                  PopupMenuItem<Acoes>(
-                    child:
-                        PopupMenuCustom('Excluir Levantamentos', Icons.delete),
-                    value: Acoes.exluirLevantamentos,
-                  ),
-                  const PopupMenuDivider(),
-                  PopupMenuItem<Acoes>(
-                    child: PopupMenuCustom(
-                        'Excluir Levantamento', Icons.delete_outline),
-                    value: Acoes.exluirLevantamento,
-                  ),
-                  const PopupMenuDivider(),
-                  PopupMenuItem<Acoes>(
-                    child: PopupMenuCustom(
-                        'Enviar Levantamentos', Icons.cloud_upload),
-                    value: Acoes.enviaLevantamento,
-                  ),
-                  const PopupMenuDivider(),
-                  PopupMenuItem<Acoes>(
-                    child: PopupMenuCustom(
-                        'Gerar arquivo de backup', Icons.content_copy),
-                    value: Acoes.gerarArquivoBackup,
-                  ),
-                ],
-              ),
+      appBar: AppBar(
+        title: Text('Levantamentos'),
+        actions: <Widget>[
+          GestureDetector(
+            child: PopupMenuButton<Acoes>(
+              onSelected: (value) {
+                _refreshProd2(context, conexao, idOrganizacao, value);
+              },
+              offset: Offset(0, 100),
+              itemBuilder: (context) => <PopupMenuEntry<Acoes>>[
+                PopupMenuItem<Acoes>(
+                  child: PopupMenuCustom(
+                      'Carregar Levantamentos', Icons.cloud_download),
+                  value: Acoes.buscarLevantamentos,
+                ),
+                const PopupMenuDivider(),
+                PopupMenuItem<Acoes>(
+                  child:
+                      PopupMenuCustom('Carregar Levantamento', Icons.save_alt),
+                  value: Acoes.buscarLevantamento,
+                ),
+                const PopupMenuDivider(),
+                PopupMenuItem<Acoes>(
+                  child: PopupMenuCustom('Excluir Levantamentos', Icons.delete),
+                  value: Acoes.exluirLevantamentos,
+                ),
+                const PopupMenuDivider(),
+                PopupMenuItem<Acoes>(
+                  child: PopupMenuCustom(
+                      'Excluir Levantamento', Icons.delete_outline),
+                  value: Acoes.exluirLevantamento,
+                ),
+                const PopupMenuDivider(),
+                PopupMenuItem<Acoes>(
+                  child: PopupMenuCustom(
+                      'Enviar Levantamentos', Icons.cloud_upload),
+                  value: Acoes.enviaLevantamento,
+                ),
+                const PopupMenuDivider(),
+                PopupMenuItem<Acoes>(
+                  child: PopupMenuCustom(
+                      'Gerar arquivo de backup', Icons.content_copy),
+                  value: Acoes.gerarArquivoBackup,
+                ),
+              ],
             ),
-          ],
-        ),
-        drawer: AppDrawer(),
-        body: listaLevantamentos.isLoading
-            ? Center(
-                child: CircularProgressIndicator(),
-              )
-            : Consumer<Levantamentos>(
-                builder: (context, levantamentoData, child) {
-                  return Padding(
-                    padding: EdgeInsets.all(8),
-                    child: ListView.builder(
-                      itemCount: levantamentoData.getLevantamentos.length,
-                      itemBuilder: (_, idx) => Column(
-                        children: [
-                          LevantamentoFisicoItem(
-                            levantamentoData.getLevantamentos[idx],
-                          ),
-                          Divider(),
-                        ],
-                      ),
+          ),
+        ],
+      ),
+      drawer: AppDrawer(),
+      body: listaLevantamentos.isLoading
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : Consumer<Levantamentos>(
+              builder: (context, levantamentoData, child) {
+                return Padding(
+                  padding: EdgeInsets.all(8),
+                  child: ListView.builder(
+                    itemCount: levantamentoData.getLevantamentos.length,
+                    itemBuilder: (_, idx) => Column(
+                      children: [
+                        LevantamentoFisicoItem(
+                          levantamentoData.getLevantamentos[idx],
+                        ),
+                        Divider(),
+                      ],
                     ),
-                  );
-                },
-              )
-        // _estagio == Estagios.CARREGANDO
-        //     ? FutureBuilder(
-        //         future: _refreshProd2(context, conexao, idOrganizacao, test),
-        //         builder: (ctx, snapshot) =>
-        //             snapshot.connectionState == ConnectionState.waiting
-        //                 ? Center(
-        //                     child: CircularProgressIndicator(),
-        //                   )
-        //                 : Container(),
-        //       )
-        // : Padding(
-        //     padding: EdgeInsets.all(8),
-        //     child: ListView.builder(
-        //       itemCount: this.levantamentosLista.length,
-        //       itemBuilder: (_, idx) => Column(
-        //         children: [
-        //           LevantamentoFisicoItem(
-        //             this.levantamentosLista[idx],
-        //           ),
-        //           Divider(),
-        //         ],
-        //       ),
-        //     ),
-        //   ),
-        );
+                  ),
+                );
+              },
+            ),
+    );
   }
 }
-
-// body: _estagio == Estagios.FINALIZADO
-//           ? Padding(
-//               padding: EdgeInsets.all(8),
-//               child: ListView.builder(
-//                 itemCount: levantamentosLista.length,
-//                 itemBuilder: (_, idx) => Column(
-//                   children: [
-// LevantamentoFisicoItem(
-//   levantamentosLista[idx],
-// ),
-//                     Divider(),
-//                   ],
-//                 ),
-//               ),
-//             )
-//           : _estagio == Estagios.FINALIZADO
-//               ? CircularProgressIndicator()
-//               : null,

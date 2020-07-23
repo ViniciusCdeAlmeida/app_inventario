@@ -13,7 +13,6 @@ class _ConfiguracaoBensTelaState extends State<ConfiguracaoBensTela> {
 
     if (entradaQtde.length > 15 || entradaQtde.length < 6) return;
 
-    // Configaracao()
     Navigator.of(context).pop();
   }
 

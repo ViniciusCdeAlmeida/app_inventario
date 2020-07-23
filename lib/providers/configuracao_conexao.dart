@@ -7,12 +7,6 @@ class ConfiguracaoConexao with ChangeNotifier {
 
   List<Conexao> _conexao = [
     Conexao(
-      url: 'https://citgrp-homolog.centralit.com.br/',
-      nome: 'url 1',
-      ativo: false,
-      id: '1',
-    ),
-    Conexao(
       url: 'https://192.168.15.2:8443/',
       nome: 'url 2',
       ativo: true,

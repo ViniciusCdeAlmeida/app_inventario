@@ -35,7 +35,6 @@ class Unidades with ChangeNotifier {
               onReceiveProgress: (actbyt, totalbyt) {
         // print('$actbyt');
       });
-      print('Entrou Unidade Provider');
       unidades = helperUnidades(response.data);
     } catch (error) {
       throw error;

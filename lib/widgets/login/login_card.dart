@@ -45,7 +45,6 @@ class _LoginCardState extends State<LoginCard> {
     var _conexoes = Provider.of<ConfiguracaoConexao>(context);
     var _autenticacao = Provider.of<Autenticacao>(context);
     if (!_formKey.currentState.validate()) {
-      // Invalid FormKey
       return;
     }
     _formKey.currentState.save();

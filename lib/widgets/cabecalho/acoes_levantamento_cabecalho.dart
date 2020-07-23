@@ -1,4 +1,4 @@
-import 'package:app_inventario/customizacoes/estagios.dart';
+// import 'package:app_inventario/customizacoes/estagios.dart';
 import 'package:flutter/material.dart';
 import '../../customizacoes/acoes.dart';
 import 'package:app_inventario/customizacoes/handleAction.dart';
@@ -16,21 +16,21 @@ class AcoesLevantamento extends StatefulWidget {
 }
 
 class _AcoesLevantamentoState extends State<AcoesLevantamento> {
-  Estagios estagio;
+  // Estagios estagio;
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton<Acoes>(
       onSelected: (value) {
         setState(() {
           // LevantamentoFisicoTela();
-          estagio = Estagios.CARREGANDO;
+          // estagio = Estagios.CARREGANDO;
           handleAction(
             value,
             context,
             widget.conexao,
           );
         });
-        estagio = Estagios.FINALIZADO;
+        // estagio = Estagios.FINALIZADO;
       },
       offset: Offset(0, 100),
       itemBuilder: (context) => <PopupMenuEntry<Acoes>>[

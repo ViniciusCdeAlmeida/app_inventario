@@ -67,7 +67,6 @@ class MyApp extends StatelessWidget {
             InventarioGeralTela.routeName: (ctx) => InventarioGeralTela(),
             UnidadeTela.routeName: (ctx) => UnidadeTela(),
             LevantamentoFisicoTela.routeName: (ctx) => LevantamentoFisicoTela(),
-            // LevantamentoItemTela.routeName: (ctx) => LevantamentoItemTela(),
           },
         ),
       ),

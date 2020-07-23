@@ -32,28 +32,6 @@ class AppDrawer extends StatelessWidget {
               Provider.of<Autenticacao>(context, listen: false).sair();
             },
           ),
-          // Divider(),
-          // ListTile(
-          //   leading: Icon(Icons.info_outline),
-          //   title: const Text('Leitura de bens'),
-          //   onTap: () {
-          //     _configBens(context);
-          //   },
-          // ),
-          // Divider(),
-          // ListTile(
-          //   leading: Icon(Icons.edit),
-          //   title: const Text('Número patrimoninal'),
-          //   onTap: () {
-          //     _configNumero(context);
-          //   },
-          // ),
-          // Divider(),
-          // ListTile(
-          //   leading: Icon(Icons.bluetooth),
-          //   title: const Text('Configuração RFID'),
-          //   onTap: null,
-          // ),
         ],
       ),
     );

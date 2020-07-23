@@ -1,1 +1,0 @@
-enum Estagios { ERROR, CARREGANDO, FINALIZADO, INICIAL }

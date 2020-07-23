@@ -1,5 +1,4 @@
 import 'package:app_inventario/models/organizacao.dart';
-import 'package:app_inventario/widgets/cabecalho/app_cabecalho.dart';
 import 'package:flutter/material.dart';
 
 class UnidadeItem extends StatefulWidget {
