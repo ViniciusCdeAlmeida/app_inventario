@@ -1,7 +1,7 @@
-import '../widgets/login_card.dart';
+import '../../widgets/login/login_card.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
-import '../widgets/cabecalho/menu_cabecalho.dart';
+import '../../widgets/cabecalho/menu_cabecalho.dart';
 
 class LoginTela extends StatelessWidget {
   static const routeName = '/home';

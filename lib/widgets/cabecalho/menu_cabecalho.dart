@@ -1,5 +1,4 @@
 import 'package:app_inventario/screens/configuracao/configuracao_conexao_tela.dart';
-import 'package:app_inventario/screens/login_tela.dart';
 import 'package:flutter/material.dart';
 
 import '../../screens/configuracao/configuracao_bens_tela.dart';
@@ -49,7 +48,8 @@ class MenuDrawer extends StatelessWidget {
             leading: Icon(Icons.home),
             title: const Text('Home'),
             onTap: () {
-              Navigator.of(context).pushNamed(LoginTela.routeName);
+              Navigator.of(context).pop();
+              Navigator.of(context).pushReplacementNamed('/');
             },
           ),
           Divider(),

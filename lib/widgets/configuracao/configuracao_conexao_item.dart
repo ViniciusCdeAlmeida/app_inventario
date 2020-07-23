@@ -3,8 +3,7 @@ import 'package:app_inventario/widgets/alerta/alerta_conexao.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../screens/configuracao/configuracao_conexao_edicao_tela.dart';
-// import './alerta_conexao.dart';
+import '../../screens/configuracao/configuracao_conexao_edicao_tela.dart';
 
 class ConfiguracaoConexaoItem extends StatefulWidget {
   final String id;
