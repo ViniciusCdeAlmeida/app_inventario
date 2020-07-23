@@ -35,14 +35,18 @@ class _LevantamentoFisicoItemState extends State<LevantamentoFisicoItem> {
             subtitle: Text(widget.levantamento.codigo),
             title: Text(widget.levantamento.nome),
             trailing: IconButton(
-                icon: Icon(Icons.arrow_forward, color: Colors.black),
-                onPressed: () {
-                  Navigator.pushNamed(
-                    context,
-                    UnidadeTela.routeName,
-                    arguments: widget.levantamento.id,
-                  );
-                }),
+              icon: Icon(Icons.arrow_forward, color: Colors.black),
+              onPressed: () {
+                Navigator.pushNamed(
+                  context,
+                  UnidadeTela.routeName,
+                  arguments: TelaArgumentos(
+                    id: widget.levantamento.id,
+                    arg1: widget.levantamento.nome,
+                  ),
+                );
+              },
+            ),
           ),
           if (_expanded)
             Container(
