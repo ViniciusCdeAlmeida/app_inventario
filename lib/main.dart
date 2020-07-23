@@ -37,10 +37,8 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (ctx) => Unidades(),
         ),
-        // ChangeNotifierProvider(
-        //   create: (ctx) => Levantamentos(),
-        // ),
         ChangeNotifierProxyProvider<Autenticacao, Levantamentos>(
+          create: (context) => Levantamentos(),
           update: (ctx, autenticacao, previousData) => Levantamentos(
             levantamentos:
                 previousData == null ? [] : previousData.levantamentos,

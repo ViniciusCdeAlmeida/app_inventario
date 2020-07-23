@@ -9,12 +9,15 @@ import 'package:flutter/material.dart';
 class Unidades with ChangeNotifier {
   List<Organizacao> unidades = [];
   final int idInventario;
+  bool _isLoading = false;
 
   Unidades({this.idInventario});
 
   List<Organizacao> get getUnidades {
     return [...unidades];
   }
+
+  bool get isLoading => _isLoading;
 
   Future<void> _getEstruturasLevantamento(
       int idInventario, String conexao) async {
@@ -30,17 +33,22 @@ class Unidades with ChangeNotifier {
       Response response = await dio
           .get("estruturaPorInventarioV2/?idInventario=$idInventario",
               onReceiveProgress: (actbyt, totalbyt) {
-        print('$actbyt');
+        // print('$actbyt');
       });
+      print('Entrou Unidade Provider');
       unidades = helperUnidades(response.data);
     } catch (error) {
       throw error;
     }
-    notifyListeners();
   }
 
   Future<void> buscaEstruturasLevantamento(
       int idInventario, String conexao) async {
-    return _getEstruturasLevantamento(idInventario, conexao);
+    _isLoading = true;
+    notifyListeners();
+    await _getEstruturasLevantamento(idInventario, conexao);
+
+    _isLoading = false;
+    notifyListeners();
   }
 }
