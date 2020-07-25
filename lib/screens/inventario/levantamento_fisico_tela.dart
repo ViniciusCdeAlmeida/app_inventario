@@ -15,8 +15,7 @@ class LevantamentoFisicoTela extends StatefulWidget {
 }
 
 class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
-  Future<void> _refreshProd2(
-      BuildContext context, String conexao, int id, Acoes acoes) async {
+  Future<void> _refreshProd2(String conexao, int id, Acoes acoes) async {
     switch (acoes) {
       case Acoes.buscarLevantamentos:
         await Provider.of<Levantamentos>(context)
@@ -57,7 +56,7 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
           GestureDetector(
             child: PopupMenuButton<Acoes>(
               onSelected: (value) {
-                _refreshProd2(context, conexao, idOrganizacao, value);
+                _refreshProd2(conexao, idOrganizacao, value);
               },
               offset: Offset(0, 100),
               itemBuilder: (context) => <PopupMenuEntry<Acoes>>[

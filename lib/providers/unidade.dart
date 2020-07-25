@@ -1,19 +1,20 @@
 import 'dart:io';
 
 import 'package:app_inventario/helpers/helpers_organizacao.dart';
-import 'package:app_inventario/models/organizacao.dart';
+import 'package:app_inventario/helpers/helpers_unidade.dart';
+import 'package:app_inventario/models/estruturaInventario.dart';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 class Unidades with ChangeNotifier {
-  List<Organizacao> unidades = [];
+  List<EstruturaInventario> unidades = [];
   final int idInventario;
   bool _isLoading = false;
 
   Unidades({this.idInventario});
 
-  List<Organizacao> get getUnidades {
+  List<EstruturaInventario> get getUnidades {
     return [...unidades];
   }
 
@@ -31,11 +32,11 @@ class Unidades with ChangeNotifier {
     };
     try {
       Response response = await dio
-          .get("estruturaPorInventarioV2/?idInventario=$idInventario",
+          .get("quantitativoBensStatusV2/?idInventario=$idInventario",
               onReceiveProgress: (actbyt, totalbyt) {
         // print('$actbyt');
       });
-      unidades = helperUnidades(response.data);
+      unidades = helperEstruturaInventario(response.data);
     } catch (error) {
       throw error;
     }
