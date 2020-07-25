@@ -1,5 +1,6 @@
 import 'package:app_inventario/customizacoes/acoes.dart';
 import 'package:app_inventario/models/estruturaInventario.dart';
+import 'package:app_inventario/widgets/bens/ler_bens_item.dart';
 import 'package:app_inventario/widgets/customizados/popupMenu_custom.dart';
 import 'package:flutter/material.dart';
 
@@ -14,6 +15,26 @@ class UnidadeItem extends StatefulWidget {
 
 class _UnidadeItemState extends State<UnidadeItem> {
   var _expanded = false;
+
+  void _redirecionamento(Acoes acoes, int idUnidade) {
+    switch (acoes) {
+      case Acoes.lerBens:
+        print(idUnidade);
+        Navigator.of(context)
+            .pushNamed(LerBensItens.routeName, arguments: idUnidade);
+        print('object');
+        break;
+      case Acoes.bensPrevistos:
+        print(idUnidade);
+        print('2');
+        break;
+      case Acoes.estatisticas:
+        print(idUnidade);
+        print('3');
+        break;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -62,26 +83,26 @@ class _UnidadeItemState extends State<UnidadeItem> {
                                 color: Colors.black,
                               ),
                               onSelected: (value) {
-                                print('clicou');
+                                _redirecionamento(value, widget.unidade.id);
                               },
                               offset: Offset(0, 100),
                               itemBuilder: (context) => <PopupMenuEntry<Acoes>>[
                                 PopupMenuItem<Acoes>(
                                   child: PopupMenuCustom(
                                       'Ler Bens', Icons.visibility),
-                                  value: Acoes.buscarLevantamentos,
+                                  value: Acoes.lerBens,
                                 ),
                                 const PopupMenuDivider(),
                                 PopupMenuItem<Acoes>(
                                   child: PopupMenuCustom(
                                       'Bens Previstos', Icons.content_paste),
-                                  value: Acoes.buscarLevantamento,
+                                  value: Acoes.bensPrevistos,
                                 ),
                                 const PopupMenuDivider(),
                                 PopupMenuItem<Acoes>(
                                   child: PopupMenuCustom(
-                                      'Estatisticas', Icons.add),
-                                  value: Acoes.exluirLevantamentos,
+                                      'Estatisticas', Icons.equalizer),
+                                  value: Acoes.estatisticas,
                                 ),
                               ],
                             ),
