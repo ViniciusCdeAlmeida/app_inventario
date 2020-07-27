@@ -35,6 +35,10 @@ dependencies:
   dio: ^3.0.9
   async: ^2.4.1
   barcode_scan: any
+  built_value: ^7.1.0
+  built_collection: ^4.3.2
+  built_value_generator: ^7.1.0
+  build_runner: ^1.10.0
 
 dev_dependencies:
   flutter_driver:

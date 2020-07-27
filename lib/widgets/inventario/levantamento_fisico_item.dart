@@ -55,13 +55,13 @@ class _LevantamentoFisicoItemState extends State<LevantamentoFisicoItem> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
+                      Text(widget
+                          .levantamento.dominioStatusInventario.descricao),
                       Text('Data de Inicio: ${widget.levantamento.dataInicio}'),
                       Text(
                           'Qtde. estruturas: ${widget.levantamento.quantidadeEstruturas}'),
                       Text(
                           'Qtde. bens: ${widget.levantamento.quantidadeTotalBens}'),
-                      Text(
-                          'Objetivo: ${widget.levantamento.dominioStatusInventario.descricao}'),
                     ],
                   ),
                 ],

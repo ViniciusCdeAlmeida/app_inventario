@@ -31,11 +31,11 @@ class Levantamentos with ChangeNotifier {
     };
     try {
       Response response = await dio
-          .get("obterLevantamentosPorUGV2/?idOrganizacao=$idOrganizacao",
+          .get("obterLevantamentosPorUG.json?idOrganizacao=$idOrganizacao",
               onReceiveProgress: (actbyt, totalbyt) {
         // print('$actbyt');
       });
-      return helperLevantamento(response.data);
+      return helperLevantamento(response.data["payload"]);
     } catch (error) {
       throw error;
     }
