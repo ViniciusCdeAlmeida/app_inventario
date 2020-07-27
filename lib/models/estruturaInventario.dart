@@ -11,6 +11,7 @@ class EstruturaInventario with ChangeNotifier {
   final int tratados;
   final int baixados;
   final String statusEstrutura;
+  final int idEstrutura;
 
   EstruturaInventario({
     this.id,
@@ -23,5 +24,6 @@ class EstruturaInventario with ChangeNotifier {
     this.tratados,
     this.baixados,
     this.statusEstrutura,
+    this.idEstrutura,
   });
 }

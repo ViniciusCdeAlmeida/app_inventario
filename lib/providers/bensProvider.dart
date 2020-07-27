@@ -1,30 +1,35 @@
-import 'dart:convert';
 import 'dart:io';
-
-// import 'package:app_inventario/helpers/helper_levantamento.dart';
-// import 'package:app_inventario/models/levantamento.dart';
-import 'package:app_inventario/models/serializers.dart';
-import 'package:built_collection/built_collection.dart';
+import 'package:app_inventario/helpers/helper_bemPatrimonial.dart';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+
 import 'package:app_inventario/models/bens.dart';
-import 'package:http/io_client.dart';
 
 class BensProvier with ChangeNotifier {
-  // List<Levantamento> levantamentos = [];
+  List<Bens> _bens = [];
+  List<Bens> _bensEstrutura = [];
   // final int idOrganizacao;
-  // bool _isLoading = false;
+  bool _isLoading = false;
 
-  // Levantamentos({this.levantamentos, this.idOrganizacao});
+  // BensProvier(this._bens);
 
-  // List<Levantamento> get getLevantamentos {
-  //   return levantamentos;
-  // }
+  List<Bens> get getBens {
+    return _bens;
+  }
 
-  // bool get isLoading => _isLoading;
+  List<Bens> get getBensEstrutura {
+    return [..._bensEstrutura];
+  }
 
-  Future<BuiltList<Bens>> _getBens(String conexao) async {
+  void buscaPorEstrutura(int id) {
+    _bensEstrutura =
+        _bens.where((element) => element.idEstutura == id).toList();
+  }
+
+  bool get isLoading => _isLoading;
+
+  Future<List<Bens>> _getBens(String conexao) async {
     Dio dio = new Dio()
       ..options.baseUrl =
           conexao + "/citgrp-patrimonio-web/rest/inventarioMobile/";
@@ -33,44 +38,28 @@ class BensProvier with ChangeNotifier {
       client.badCertificateCallback =
           (X509Certificate cert, String host, int port) => true;
     };
-    // bool trustSelfSigned = true;
-    // HttpClient httpClient = new HttpClient();
-    // httpClient.badCertificateCallback =
-    //     ((X509Certificate cert, String host, int port) => trustSelfSigned);
-    // IOClient ioClient = new IOClient(httpClient);
     try {
       Response response = await dio.get("obterBensPatrimoniais.json",
           onReceiveProgress: (actbyt, totalbyt) {
         // print('$actbyt');
       });
-      // final response2 = await ioClient.get(conexao +
-      //     "/citgrp-patrimonio-web/rest/inventarioMobile/obterBensPatrimoniais.json");
-      // final responseData = json.decode(utf8.decode(response2.bodyBytes));
-      // print(response2.contentLength);
-      // final teste = response.data["payload"];
-      final BuiltList<Bens> listBens = deserializeListOf<Bens>(response.data);
-
-      // Bens benslist = serializers.deserializeWith(Bens.serializer, listBens.toBuilder());
-      // Bens bens = serializers.deserializeWith(
-      //     Bens.serializer, json.decode(utf8.decode(response2.bodyBytes)));
-      // final teste = response.data["payload"];
-      // print(bens);
-      return listBens;
+      print('object');
+      return helperBemPatrimonial(response.data["payload"]);
     } catch (error) {
       throw error;
     }
   }
 
-  // void markAsLoading() {
-  //   _isLoading = true;
-  //   notifyListeners();
-  // }
+  void markAsLoading() {
+    _isLoading = true;
+    notifyListeners();
+  }
 
   Future<void> buscaBens(String conexao) async {
-    // markAsLoading();
-    await _getBens(conexao);
+    markAsLoading();
+    _bens = await _getBens(conexao);
 
-    // _isLoading = false;
-    // notifyListeners();
+    _isLoading = false;
+    notifyListeners();
   }
 }

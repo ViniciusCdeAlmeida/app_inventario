@@ -36,7 +36,7 @@ class _OrganizacaoTelaState extends State<OrganizacaoTela> {
     final organizacoesLista = organizacoes.listaOrganizacoes();
     return Scaffold(
       appBar: AppBar(
-        title: Text('Selecione uma Unidade Gestora'),
+        title: Text('Bens Previstos'),
       ),
       drawer: AppDrawer(),
       body: _isLoading

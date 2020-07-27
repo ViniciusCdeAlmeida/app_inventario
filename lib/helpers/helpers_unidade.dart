@@ -14,6 +14,7 @@ List<EstruturaInventario> helperEstruturaInventario(List listaUnidades) {
         tratados: item[7],
         baixados: item[8],
         statusEstrutura: item[9],
+        idEstrutura: item[10],
       ),
     ),
   );

@@ -1,18 +1,19 @@
 import 'package:built_collection/built_collection.dart';
 import 'package:built_value/serializer.dart';
 import 'package:built_value/standard_json_plugin.dart';
-import 'bens.dart';
+import 'bens_old.dart';
 
 part 'serializers.g.dart';
 
-@SerializersFor(const [Bens])
+@SerializersFor(const [BensOLD])
 Serializers serializers = _$serializers;
 
 final Serializers standardSerializers =
     (serializers.toBuilder()..addPlugin(StandardJsonPlugin())).build();
 
-Bens deserialize<Bens>(dynamic value) => standardSerializers
-    .deserializeWith<Bens>(standardSerializers.serializerForType(Bens), value);
+BensOLD deserialize<BensOLD>(dynamic value) =>
+    standardSerializers.deserializeWith<BensOLD>(
+        standardSerializers.serializerForType(BensOLD), value);
 
-BuiltList<Bens> deserializeListOf<Bens>(dynamic value) => BuiltList.from(
-    value.map((value) => deserialize<Bens>(value)).toList(growable: false));
+BuiltList<BensOLD> deserializeListOf<BensOLD>(dynamic value) => BuiltList.from(
+    value.map((value) => deserialize<BensOLD>(value)).toList(growable: false));

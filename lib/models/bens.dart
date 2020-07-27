@@ -1,36 +1,23 @@
-import 'package:built_collection/built_collection.dart';
-import 'package:built_value/built_value.dart';
-import 'package:built_value/serializer.dart';
+import 'package:flutter/material.dart';
 
-part 'bens.g.dart';
+class Bens with ChangeNotifier {
+  final int id;
+  final String descricaoDominioSituacaoFisica;
+  final String codigoEstrutura;
+  final int idEstutura;
+  final String descricaoMaterial;
+  final String nomeEstrutura;
+  final String numeroPatrimonial;
+  final String descricaoDominioStatus;
 
-abstract class Bens implements Built<Bens, BensBuilder> {
-  static Serializer<Bens> get serializer => _$bensSerializer;
-
-  int get id;
-
-  @nullable
-  String get descricaoDominioSituacaoFisica;
-
-  @nullable
-  String get codigoEstrutura;
-
-  @nullable
-  int get idEstutura;
-
-  @nullable
-  String get descricaoMaterial;
-
-  @nullable
-  String get nomeEstrutura;
-
-  @nullable
-  String get numeroPatrimonial;
-
-  @nullable
-  String get descricaoDominioStatus;
-
-  Bens._();
-
-  factory Bens([updates(BensBuilder b)]) = _$Bens;
+  Bens({
+    this.id,
+    this.descricaoDominioSituacaoFisica,
+    this.codigoEstrutura,
+    this.idEstutura,
+    this.descricaoMaterial,
+    this.nomeEstrutura,
+    this.numeroPatrimonial,
+    this.descricaoDominioStatus,
+  });
 }

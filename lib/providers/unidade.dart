@@ -20,7 +20,7 @@ class Unidades with ChangeNotifier {
 
   bool get isLoading => _isLoading;
 
-  Future<void> _getEstruturasLevantamento(
+  Future<List<EstruturaInventario>> _getEstruturasLevantamento(
       int idInventario, String conexao) async {
     Dio dio = new Dio()
       ..options.baseUrl =
@@ -36,7 +36,7 @@ class Unidades with ChangeNotifier {
               onReceiveProgress: (actbyt, totalbyt) {
         // print('$actbyt');
       });
-      unidades = helperEstruturaInventario(response.data);
+      return helperEstruturaInventario(response.data);
     } catch (error) {
       throw error;
     }
@@ -46,7 +46,7 @@ class Unidades with ChangeNotifier {
       int idInventario, String conexao) async {
     _isLoading = true;
     notifyListeners();
-    await _getEstruturasLevantamento(idInventario, conexao);
+    unidades = await _getEstruturasLevantamento(idInventario, conexao);
 
     _isLoading = false;
     notifyListeners();

@@ -1,5 +1,6 @@
 import 'package:app_inventario/customizacoes/acoes.dart';
 import 'package:app_inventario/models/estruturaInventario.dart';
+import 'package:app_inventario/screens/bens/previstos_bens_tela.dart';
 import 'package:app_inventario/widgets/bens/ler_bens_item.dart';
 import 'package:app_inventario/widgets/customizados/popupMenu_custom.dart';
 import 'package:flutter/material.dart';
@@ -16,20 +17,18 @@ class UnidadeItem extends StatefulWidget {
 class _UnidadeItemState extends State<UnidadeItem> {
   var _expanded = false;
 
-  void _redirecionamento(Acoes acoes, int idUnidade) {
+  void _redirecionamento(Acoes acoes, int idEstrutura) {
     switch (acoes) {
       case Acoes.lerBens:
-        print(idUnidade);
         Navigator.of(context)
-            .pushNamed(LerBensItens.routeName, arguments: idUnidade);
-        print('object');
+            .pushNamed(LerBensItens.routeName, arguments: idEstrutura);
         break;
       case Acoes.bensPrevistos:
-        print(idUnidade);
-        print('2');
+        Navigator.of(context)
+            .pushNamed(PrevistosBensTela.routeName, arguments: idEstrutura);
         break;
       case Acoes.estatisticas:
-        print(idUnidade);
+        print(idEstrutura);
         print('3');
         break;
     }
@@ -83,7 +82,8 @@ class _UnidadeItemState extends State<UnidadeItem> {
                                 color: Colors.black,
                               ),
                               onSelected: (value) {
-                                _redirecionamento(value, widget.unidade.id);
+                                _redirecionamento(
+                                    value, widget.unidade.idEstrutura);
                               },
                               offset: Offset(0, 100),
                               itemBuilder: (context) => <PopupMenuEntry<Acoes>>[

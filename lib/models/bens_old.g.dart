@@ -1,21 +1,21 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'bens.dart';
+part of 'bens_old.dart';
 
 // **************************************************************************
 // BuiltValueGenerator
 // **************************************************************************
 
-Serializer<Bens> _$bensSerializer = new _$BensSerializer();
+Serializer<BensOLD> _$bensOLDSerializer = new _$BensOLDSerializer();
 
-class _$BensSerializer implements StructuredSerializer<Bens> {
+class _$BensOLDSerializer implements StructuredSerializer<BensOLD> {
   @override
-  final Iterable<Type> types = const [Bens, _$Bens];
+  final Iterable<Type> types = const [BensOLD, _$BensOLD];
   @override
-  final String wireName = 'Bens';
+  final String wireName = 'BensOLD';
 
   @override
-  Iterable<Object> serialize(Serializers serializers, Bens object,
+  Iterable<Object> serialize(Serializers serializers, BensOLD object,
       {FullType specifiedType = FullType.unspecified}) {
     final result = <Object>[
       'id',
@@ -67,9 +67,9 @@ class _$BensSerializer implements StructuredSerializer<Bens> {
   }
 
   @override
-  Bens deserialize(Serializers serializers, Iterable<Object> serialized,
+  BensOLD deserialize(Serializers serializers, Iterable<Object> serialized,
       {FullType specifiedType = FullType.unspecified}) {
-    final result = new BensBuilder();
+    final result = new BensOLDBuilder();
 
     final iterator = serialized.iterator;
     while (iterator.moveNext()) {
@@ -116,7 +116,7 @@ class _$BensSerializer implements StructuredSerializer<Bens> {
   }
 }
 
-class _$Bens extends Bens {
+class _$BensOLD extends BensOLD {
   @override
   final int id;
   @override
@@ -134,10 +134,10 @@ class _$Bens extends Bens {
   @override
   final String descricaoDominioStatus;
 
-  factory _$Bens([void Function(BensBuilder) updates]) =>
-      (new BensBuilder()..update(updates)).build();
+  factory _$BensOLD([void Function(BensOLDBuilder) updates]) =>
+      (new BensOLDBuilder()..update(updates)).build();
 
-  _$Bens._(
+  _$BensOLD._(
       {this.id,
       this.descricaoDominioSituacaoFisica,
       this.codigoEstrutura,
@@ -148,21 +148,21 @@ class _$Bens extends Bens {
       this.descricaoDominioStatus})
       : super._() {
     if (id == null) {
-      throw new BuiltValueNullFieldError('Bens', 'id');
+      throw new BuiltValueNullFieldError('BensOLD', 'id');
     }
   }
 
   @override
-  Bens rebuild(void Function(BensBuilder) updates) =>
+  BensOLD rebuild(void Function(BensOLDBuilder) updates) =>
       (toBuilder()..update(updates)).build();
 
   @override
-  BensBuilder toBuilder() => new BensBuilder()..replace(this);
+  BensOLDBuilder toBuilder() => new BensOLDBuilder()..replace(this);
 
   @override
   bool operator ==(Object other) {
     if (identical(other, this)) return true;
-    return other is Bens &&
+    return other is BensOLD &&
         id == other.id &&
         descricaoDominioSituacaoFisica ==
             other.descricaoDominioSituacaoFisica &&
@@ -194,7 +194,7 @@ class _$Bens extends Bens {
 
   @override
   String toString() {
-    return (newBuiltValueToStringHelper('Bens')
+    return (newBuiltValueToStringHelper('BensOLD')
           ..add('id', id)
           ..add(
               'descricaoDominioSituacaoFisica', descricaoDominioSituacaoFisica)
@@ -208,8 +208,8 @@ class _$Bens extends Bens {
   }
 }
 
-class BensBuilder implements Builder<Bens, BensBuilder> {
-  _$Bens _$v;
+class BensOLDBuilder implements Builder<BensOLD, BensOLDBuilder> {
+  _$BensOLD _$v;
 
   int _id;
   int get id => _$this._id;
@@ -250,9 +250,9 @@ class BensBuilder implements Builder<Bens, BensBuilder> {
   set descricaoDominioStatus(String descricaoDominioStatus) =>
       _$this._descricaoDominioStatus = descricaoDominioStatus;
 
-  BensBuilder();
+  BensOLDBuilder();
 
-  BensBuilder get _$this {
+  BensOLDBuilder get _$this {
     if (_$v != null) {
       _id = _$v.id;
       _descricaoDominioSituacaoFisica = _$v.descricaoDominioSituacaoFisica;
@@ -268,22 +268,22 @@ class BensBuilder implements Builder<Bens, BensBuilder> {
   }
 
   @override
-  void replace(Bens other) {
+  void replace(BensOLD other) {
     if (other == null) {
       throw new ArgumentError.notNull('other');
     }
-    _$v = other as _$Bens;
+    _$v = other as _$BensOLD;
   }
 
   @override
-  void update(void Function(BensBuilder) updates) {
+  void update(void Function(BensOLDBuilder) updates) {
     if (updates != null) updates(this);
   }
 
   @override
-  _$Bens build() {
+  _$BensOLD build() {
     final _$result = _$v ??
-        new _$Bens._(
+        new _$BensOLD._(
             id: id,
             descricaoDominioSituacaoFisica: descricaoDominioSituacaoFisica,
             codigoEstrutura: codigoEstrutura,

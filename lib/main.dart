@@ -1,6 +1,7 @@
 import 'package:app_inventario/providers/bensProvider.dart';
 import 'package:app_inventario/providers/levantamentos.dart';
 import 'package:app_inventario/providers/unidade.dart';
+import 'package:app_inventario/screens/bens/previstos_bens_tela.dart';
 import 'package:app_inventario/screens/inventario/inventario_geral_tela.dart';
 import 'package:app_inventario/screens/inventario/inventario_selecao_tela.dart';
 import 'package:app_inventario/screens/inventario/levantamento_fisico_tela.dart';
@@ -74,6 +75,7 @@ class MyApp extends StatelessWidget {
             UnidadeTela.routeName: (ctx) => UnidadeTela(),
             LevantamentoFisicoTela.routeName: (ctx) => LevantamentoFisicoTela(),
             LerBensItens.routeName: (ctx) => LerBensItens(),
+            PrevistosBensTela.routeName: (ctx) => PrevistosBensTela(),
             Teste.routeName: (ctx) => Teste(),
           },
         ),
