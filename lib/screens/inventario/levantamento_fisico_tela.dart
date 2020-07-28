@@ -1,4 +1,5 @@
 import 'package:app_inventario/customizacoes/acoes.dart';
+import 'package:app_inventario/models/levantamento.dart';
 import 'package:app_inventario/providers/autenticacao.dart';
 import 'package:app_inventario/providers/bensProvider.dart';
 import 'package:app_inventario/providers/estruturaLevantamento.dart';
@@ -17,7 +18,8 @@ class LevantamentoFisicoTela extends StatefulWidget {
 }
 
 class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
-  Future<void> _refreshProd2(String conexao, int id, Acoes acoes) async {
+  Future<void> _refreshProd2(String conexao, int id, Acoes acoes,
+      List<Levantamento> listaLevantamento) async {
     switch (acoes) {
       case Acoes.buscarLevantamentos:
         await Provider.of<Levantamentos>(context)
@@ -33,9 +35,8 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
         print('4');
         break;
       case Acoes.enviaLevantamento:
-        print('5');
         await Provider.of<EstruturaLevantamento>(context)
-            .buscaLevantamento(conexao);
+            .buscaEstruturas(conexao, listaLevantamento);
         break;
       case Acoes.gerarArquivoBackup:
         print('11');
@@ -61,7 +62,7 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
           GestureDetector(
             child: PopupMenuButton<Acoes>(
               onSelected: (value) {
-                _refreshProd2(conexao, idOrganizacao, value);
+                _refreshProd2(conexao, idOrganizacao, value, listaAtual);
               },
               offset: Offset(0, 100),
               itemBuilder: (context) => <PopupMenuEntry<Acoes>>[
@@ -89,8 +90,10 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
                 ),
                 const PopupMenuDivider(),
                 PopupMenuItem<Acoes>(
-                  child: PopupMenuCustom(
-                      'Enviar Levantamentos', Icons.cloud_upload),
+                  child:
+                      // PopupMenuCustom(
+                      //     'Enviar Levantamentos', Icons.cloud_upload),
+                      PopupMenuCustom('Buscar Estruturas', Icons.cloud_upload),
                   value: Acoes.enviaLevantamento,
                 ),
                 const PopupMenuDivider(),
@@ -106,8 +109,14 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
       ),
       drawer: AppDrawer(),
       body: listaLevantamentos.isLoading
-          ? Center(
-              child: CircularProgressIndicator(),
+          ? Stack(
+              children: <Widget>[
+                Center(
+                  child: CircularProgressIndicator(
+                    backgroundColor: Colors.brown,
+                  ),
+                ),
+              ],
             )
           : Consumer<Levantamentos>(
               builder: (context, levantamentoData, child) {
