@@ -57,11 +57,18 @@ class _LevantamentoFisicoItemState extends State<LevantamentoFisicoItem> {
                     children: <Widget>[
                       Text(widget
                           .levantamento.dominioStatusInventario.descricao),
-                      Text('Data de Inicio: ${widget.levantamento.dataInicio}'),
                       Text(
                           'Qtde. estruturas: ${widget.levantamento.quantidadeEstruturas}'),
                       Text(
-                          'Qtde. bens: ${widget.levantamento.quantidadeTotalBens}'),
+                          'Qtde. bens Não Informados: ${widget.levantamento.quantidadeTotalBens}'),
+                      Text(
+                          'Qtde. bens Em Inconsistência: ${widget.levantamento.quantidadeTotalBensEmInconsistencia}'),
+                      Text(
+                          'Qtde. bens Sem Inconsistência: ${widget.levantamento.quantidadeTotalBensSemInconsistencia}'),
+                      Text(
+                          'Qtde. bens Tratados: ${widget.levantamento.quantidadeTotalBensTratados}'),
+                      Text(
+                          'Qtde. bens Baixados: ${widget.levantamento.quantidadeTotalBensBaixados}'),
                     ],
                   ),
                 ],

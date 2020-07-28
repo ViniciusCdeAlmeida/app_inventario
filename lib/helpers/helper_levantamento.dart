@@ -7,11 +7,17 @@ List<Levantamento> helperLevantamento(List listaLevantamento) {
       (item) => Levantamento(
         id: item['id'],
         codigo: item['codigo'],
-        dataInicio: item['dataInicio'],
+        codigoENome: item['dataInicio'],
         idOrganizacao: item['idOrganizacao'],
         nome: item['nome'],
         quantidadeEstruturas: item['quantidadeEstruturas'],
         quantidadeTotalBens: item['quantidadeTotalBens'],
+        quantidadeTotalBensTratados: item['quantidadeTotalBensTratados'],
+        quantidadeTotalBensEmInconsistencia:
+            item['quantidadeTotalBensEmInconsistencia'],
+        quantidadeTotalBensSemInconsistencia:
+            item['quantidadeTotalBensSemInconsistencia'],
+        quantidadeTotalBensBaixados: item['quantidadeTotalBensBaixados'],
         dominioStatusInventario: Dominio(
           id: item['dominioStatusInventario']['id'],
           nome: item['dominioStatusInventario']['nome'],
