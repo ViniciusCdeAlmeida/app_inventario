@@ -1,4 +1,5 @@
 import 'package:app_inventario/providers/bensProvider.dart';
+import 'package:app_inventario/providers/estruturaLevantamento.dart';
 import 'package:app_inventario/providers/levantamentos.dart';
 import 'package:app_inventario/providers/unidade.dart';
 import 'package:app_inventario/screens/bens/previstos_bens_tela.dart';
@@ -43,6 +44,9 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (ctx) => BensProvier(),
+        ),
+        ChangeNotifierProvider(
+          create: (ctx) => EstruturaLevantamento(),
         ),
         ChangeNotifierProxyProvider<Autenticacao, Levantamentos>(
           create: (context) => Levantamentos(),
