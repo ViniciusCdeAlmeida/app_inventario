@@ -5,13 +5,14 @@ class EstruturaInventario with ChangeNotifier {
   final String nome;
   final String dataEspelho;
   final String dataAdicao;
-  final int naoInformados;
-  final int naoInconsistencia;
-  final int emInconsistencia;
-  final int tratados;
-  final int baixados;
+  int naoInformados;
+  int naoInconsistencia;
+  int emInconsistencia;
+  int tratados;
+  int baixados;
   final String statusEstrutura;
   final int idEstrutura;
+  int previstos = 0;
 
   EstruturaInventario({
     this.id,
@@ -25,5 +26,6 @@ class EstruturaInventario with ChangeNotifier {
     this.baixados,
     this.statusEstrutura,
     this.idEstrutura,
+    this.previstos,
   });
 }

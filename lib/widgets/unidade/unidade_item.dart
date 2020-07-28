@@ -139,15 +139,7 @@ class _UnidadeItemState extends State<UnidadeItem> {
                             : Text(
                                 'Data de Adição: ${widget.unidade.dataEspelho}'),
                         Text(
-                            'Qtde. de bens Não informados: ${widget.unidade.naoInformados}'),
-                        Text(
-                            'Qtde. de bens Sem inconsistencia: ${widget.unidade.naoInconsistencia}'),
-                        Text(
-                            'Qtde. de bens Em inconsistencias: ${widget.unidade.emInconsistencia}'),
-                        Text(
-                            'Qtde. de bens Tratados: ${widget.unidade.tratados}'),
-                        Text(
-                            'Qtde. de bens Baixados: ${widget.unidade.baixados}'),
+                            'Qtde. de bens previstos: ${widget.unidade.previstos}'),
                       ],
                     ),
                   ],

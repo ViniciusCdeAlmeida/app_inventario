@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:app_inventario/helpers/helper_bemPatrimonial.dart';
+import 'package:app_inventario/models/estruturaInventario.dart';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -9,10 +10,8 @@ import 'package:app_inventario/models/bens.dart';
 class BensProvier with ChangeNotifier {
   List<Bens> _bens = [];
   List<Bens> _bensEstrutura = [];
-  // final int idOrganizacao;
-  bool _isLoading = false;
 
-  // BensProvier(this._bens);
+  bool _isLoading = false;
 
   List<Bens> get getBens {
     return _bens;
@@ -23,8 +22,13 @@ class BensProvier with ChangeNotifier {
   }
 
   void buscaPorEstrutura(int id) {
-    _bensEstrutura =
+    List<Bens> lista =
         _bens.where((element) => element.idEstutura == id).toList();
+    if (lista.isNotEmpty) {
+      _bensEstrutura = lista;
+    } else {
+      _bensEstrutura.clear();
+    }
   }
 
   bool get isLoading => _isLoading;
