@@ -1,6 +1,8 @@
 import 'dart:io';
 
 import 'package:app_inventario/helpers/helper_levantamentoFisicoEst.dart';
+import 'package:app_inventario/models/dadosBensPatrimoniais.dart';
+import 'package:app_inventario/models/dominio.dart';
 import 'package:app_inventario/models/estruturaInventarioNew.dart';
 import 'package:app_inventario/models/levantamento.dart';
 import 'package:dio/adapter.dart';
@@ -8,14 +10,68 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 class EstruturaLevantamento with ChangeNotifier {
-  List<EstruturaInventarioNew> levantamentos = [];
+  List<EstruturaInventarioNew> _levantamentos = [];
+  List<EstruturaInventarioNew> _levantamentosEstrutura = [];
+  List<DadosBensPatrimoniais> _bensEstrutura = [];
   // final int idOrganizacao;
   bool _isLoading = false;
 
   // Levantamentos({this.levantamentos, this.idOrganizacao});
 
   List<EstruturaInventarioNew> get getLevantamentos {
-    return levantamentos;
+    return _levantamentos;
+  }
+
+  List<EstruturaInventarioNew> get getLevantamentosEstrutura {
+    return [..._levantamentosEstrutura];
+  }
+
+  List<DadosBensPatrimoniais> get getBensPorEstrutura {
+    return [..._bensEstrutura];
+  }
+
+  void buscaPorEstrutura(int id) {
+    List<EstruturaInventarioNew> lista =
+        _levantamentos.where((element) => element.idInventario == id).toList();
+    if (lista.isNotEmpty) {
+      _levantamentosEstrutura = lista;
+    } else {
+      _levantamentosEstrutura.clear();
+    }
+  }
+
+  void buscaBensPorEstrutura(int id) {
+    // List<EstruturaInventarioNew> lista = _levantamentos
+    // .where((element) => element.estruturaOrganizacional.id == id
+    //     );
+
+    // List<EstruturaInventarioNew> lista = new List();
+    // _levantamentos.forEach((element, idx) {
+    //   lista.add(element[idx]);
+    // });
+    // List<DadosBensPatrimoniais> lista2 = [];
+    List<EstruturaInventarioNew> lista = _levantamentosEstrutura
+        .where((element) => element.estruturaOrganizacional.id == id)
+        .toList();
+    var listaDadosBens = lista.map((e) => e.dadosBensPatrimoniais);
+
+    // teste3.toList();
+    // print(teste3);
+    _bensEstrutura.addAll(listaDadosBens.expand((element) => element));
+    dynamic teste = _levantamentos.whereType<EstruturaInventarioNew>();
+    // List<DadosBensPatrimoniais> listDados = lista
+    //     .map((e) =>
+    //         e.dadosBensPatrimoniais.whereType<DadosBensPatrimoniais>().toList())
+    //     .cast<DadosBensPatrimoniais>()
+    //     .toList();
+    // print('object');
+    if (lista.isNotEmpty) {
+      // _bensEstrutura = lista.map(
+      //     (e) => e.dadosBensPatrimoniais.whereType<DadosBensPatrimoniais>().toList()).cast<DadosBensPatrimoniais>().toList();
+      // _bensEstrutura = lista.whereType<DadosBensPatrimoniais>().toList();
+    } else {
+      _bensEstrutura.clear();
+    }
   }
 
   bool get isLoading => _isLoading;
@@ -49,16 +105,10 @@ class EstruturaLevantamento with ChangeNotifier {
               onReceiveProgress: (actbyt, totalbyt) {
         // print('$actbyt');
       }, data: filter);
-      levantamentos
+      _levantamentos
           .addAll(helperEstruturaInventarioEst(response.data["objects"]));
       // levantamentos = helperEstruturaInventarioEst(response.data["objects"]);
-      // (response.data["objects"] as List<dynamic>).map(
-      //   (e) {
-      //     (e['inventario'] as List<dynamic>).map((e2) {
-      //       teste = e2['codigoENome'];
-      //     });
-      //   },
-      // );
+      // (_levantamentos).map((e) => teste = e);
       // print(teste);
     } catch (error) {
       throw error;
@@ -74,7 +124,7 @@ class EstruturaLevantamento with ChangeNotifier {
     String conexao,
     List<Levantamento> listLevantamento,
   ) async {
-    levantamentos.clear();
+    _levantamentos.clear();
     // List<int> list = [1, 2, 3, 4, 5];
     // Iterable<Future<List<EstruturaInventarioNew>>> mapped;
 
@@ -94,6 +144,7 @@ class EstruturaLevantamento with ChangeNotifier {
         .toList();
     // levantamentos = await _getLevantamento(conexao);
     _isLoading = false;
+    print('ACABOU');
     notifyListeners();
   }
 }

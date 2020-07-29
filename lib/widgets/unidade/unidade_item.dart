@@ -1,12 +1,13 @@
 import 'package:app_inventario/customizacoes/acoes.dart';
 import 'package:app_inventario/models/estruturaInventario.dart';
+import 'package:app_inventario/models/estruturaInventarioNew.dart';
 import 'package:app_inventario/screens/bens/previstos_bens_tela.dart';
 import 'package:app_inventario/widgets/bens/ler_bens_item.dart';
 import 'package:app_inventario/widgets/customizados/popupMenu_custom.dart';
 import 'package:flutter/material.dart';
 
 class UnidadeItem extends StatefulWidget {
-  final EstruturaInventario unidade;
+  final EstruturaInventarioNew unidade;
 
   UnidadeItem(this.unidade);
 
@@ -43,7 +44,9 @@ class _UnidadeItemState extends State<UnidadeItem> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
-        color: widget.unidade.statusEstrutura == "Tratada"
+        color: widget.unidade.dominioStatusInventarioEstrutura != null &&
+                widget.unidade.dominioStatusInventarioEstrutura.descricao ==
+                    "Tratada"
             ? Colors.brown[200]
             : Colors.white,
         margin: EdgeInsets.all(10),
@@ -82,8 +85,8 @@ class _UnidadeItemState extends State<UnidadeItem> {
                                 color: Colors.black,
                               ),
                               onSelected: (value) {
-                                _redirecionamento(
-                                    value, widget.unidade.idEstrutura);
+                                _redirecionamento(value,
+                                    widget.unidade.estruturaOrganizacional.id);
                               },
                               offset: Offset(0, 100),
                               itemBuilder: (context) => <PopupMenuEntry<Acoes>>[
@@ -107,7 +110,8 @@ class _UnidadeItemState extends State<UnidadeItem> {
                               ],
                             ),
                             title: Text(
-                              widget.unidade.nome,
+                              widget
+                                  .unidade.estruturaOrganizacional.codigoENome,
                               style: TextStyle(
                                   fontSize: 14,
                                   color:
@@ -133,13 +137,17 @@ class _UnidadeItemState extends State<UnidadeItem> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
-                        widget.unidade.dataAdicao != null
-                            ? Text(
-                                'Data de Adição: ${widget.unidade.dataAdicao}')
-                            : Text(
-                                'Data de Adição: ${widget.unidade.dataEspelho}'),
+                        // widget.unidade.dataAdicao != null
+                        //     ? Text(
+                        //         'Data de Adição: ${widget.unidade.dataAdicao}')
+                        //     : Text(
+                        //         'Data de Adição: ${widget.unidade.dataEspelho}'),
+                        widget.unidade.dominioStatusInventarioEstrutura != null
+                            ? Text(widget.unidade
+                                .dominioStatusInventarioEstrutura.descricao)
+                            : Text('Sem status'),
                         Text(
-                            'Qtde. de bens previstos: ${widget.unidade.previstos}'),
+                            'Qtde. de bens previstos: ${widget.unidade.estruturaOrganizacional.id}'),
                       ],
                     ),
                   ],

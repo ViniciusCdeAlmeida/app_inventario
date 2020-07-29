@@ -1,9 +1,10 @@
 import 'package:app_inventario/customizacoes/bensPrevistos.dart';
-import 'package:app_inventario/models/bens.dart';
+import 'package:app_inventario/models/dadosBensPatrimoniais.dart';
+import 'package:app_inventario/models/estruturaInventarioNew.dart';
 import 'package:flutter/material.dart';
 
 class PrevistosBensItem extends StatelessWidget {
-  final Bens bensLista;
+  final DadosBensPatrimoniais bensLista;
 
   PrevistosBensItem(this.bensLista);
 
@@ -20,24 +21,49 @@ class PrevistosBensItem extends StatelessWidget {
                 children: <Widget>[
                   Padding(
                     padding: EdgeInsets.only(bottom: 5),
-                    child: BensPrevistos(
-                        'Número Patrimonial: ', bensLista.numeroPatrimonial),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 5),
-                    child: BensPrevistos(
-                        'Descrição: ', bensLista.descricaoMaterial),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 5),
-                    child: BensPrevistos(
-                        'Situação: ', bensLista.descricaoDominioSituacaoFisica),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(bottom: 5),
-                    child: BensPrevistos(
-                        'Status: ', bensLista.descricaoDominioStatus),
-                  ),
+                    child: BensPrevistos('Número Patrimonial: ',
+                        bensLista.bemPatrimonial.numeroPatrimonialCompleto),
+                  )
+                  // Flex(
+                  //   direction: Axis.vertical,
+                  //   children: <Widget>[
+                  //     ListView.builder(
+                  //       itemBuilder: (_, idx) => Column(
+                  //         children: <Widget>[
+                  //           Padding(
+                  //             padding: EdgeInsets.only(bottom: 5),
+                  //             child: BensPrevistos(
+                  //                 'Número Patrimonial: ',
+                  //                 bensLista
+                  //                     .dadosBensPatrimoniais[idx]
+                  //                     .bemPatrimonial
+                  //                     .numeroPatrimonialCompleto),
+                  //           ),
+                  //         ],
+                  //       ),
+                  //     ),
+                  //   ],
+                  // )
+                  // Padding(
+                  //   padding: EdgeInsets.only(bottom: 5),
+                  //   child: BensPrevistos(
+                  //       'Número Patrimonial: ', bensLista.dadosBensPatrimoniais.map((e) => null)),
+                  // ),
+                  // Padding(
+                  //   padding: EdgeInsets.only(bottom: 5),
+                  //   child: BensPrevistos(
+                  //       'Descrição: ', bensLista.descricaoMaterial),
+                  // ),
+                  // Padding(
+                  //   padding: EdgeInsets.only(bottom: 5),
+                  //   child: BensPrevistos(
+                  //       'Situação: ', bensLista.descricaoDominioSituacaoFisica),
+                  // ),
+                  // Padding(
+                  //   padding: EdgeInsets.only(bottom: 5),
+                  //   child: BensPrevistos(
+                  //       'Status: ', bensLista.descricaoDominioStatus),
+                  // ),
                 ],
               ),
             ),

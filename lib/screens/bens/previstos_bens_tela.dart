@@ -1,4 +1,5 @@
 import 'package:app_inventario/providers/bensProvider.dart';
+import 'package:app_inventario/providers/estruturaLevantamento.dart';
 import 'package:app_inventario/widgets/bens/previstos_bens_item.dart';
 import 'package:app_inventario/widgets/cabecalho/app_cabecalho.dart';
 import 'package:flutter/material.dart';
@@ -9,9 +10,12 @@ class PrevistosBensTela extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final idEstrutura = ModalRoute.of(context).settings.arguments;
-    final bens = Provider.of<BensProvier>(context);
-    final listaBens = Provider.of<BensProvier>(context, listen: false)
-        .buscaPorEstrutura(idEstrutura);
+    // final bens = Provider.of<BensProvier>(context);
+    final bens = Provider.of<EstruturaLevantamento>(context);
+    // final listaBens = Provider.of<BensProvier>(context, listen: false)
+    //     .buscaPorEstrutura(idEstrutura);
+    final listaBens = Provider.of<EstruturaLevantamento>(context, listen: false)
+        .buscaBensPorEstrutura(idEstrutura);
 
     return Scaffold(
       appBar: AppBar(
@@ -25,11 +29,11 @@ class PrevistosBensTela extends StatelessWidget {
           : Padding(
               padding: EdgeInsets.all(8),
               child: ListView.builder(
-                itemCount: bens.getBensEstrutura.length,
+                itemCount: bens.getBensPorEstrutura.length,
                 itemBuilder: (_, idx) => Column(
                   children: [
                     PrevistosBensItem(
-                      bens.getBensEstrutura[idx],
+                      bens.getBensPorEstrutura[idx],
                     ),
                     Divider(),
                   ],
