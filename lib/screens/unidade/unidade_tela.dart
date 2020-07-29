@@ -1,10 +1,7 @@
-import 'package:app_inventario/models/estruturaInventario.dart';
-import 'package:app_inventario/models/estruturaInventarioNew.dart';
 import 'package:app_inventario/models/telaArgumentos.dart';
 import 'package:app_inventario/providers/autenticacao.dart';
 import 'package:app_inventario/providers/estruturaLevantamento.dart';
 import 'package:app_inventario/providers/levantamentos.dart';
-import 'package:app_inventario/providers/unidade.dart';
 import 'package:app_inventario/widgets/cabecalho/app_cabecalho.dart';
 import 'package:app_inventario/widgets/unidade/unidade_item.dart';
 import 'package:flutter/material.dart';
@@ -48,7 +45,7 @@ class _UnidadeTelaState extends State<UnidadeTela> {
         Provider.of<Autenticacao>(context, listen: false).atualConexao;
     unidadeArgs = ModalRoute.of(context).settings.arguments;
     final unidades = Provider.of<Levantamentos>(context);
-    final estruturasInv = Provider.of<EstruturaLevantamento>(context)
+    Provider.of<EstruturaLevantamento>(context)
         .buscaPorEstrutura(unidadeArgs.id);
 
     return Scaffold(

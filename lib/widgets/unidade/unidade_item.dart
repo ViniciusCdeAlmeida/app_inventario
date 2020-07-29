@@ -1,5 +1,4 @@
 import 'package:app_inventario/customizacoes/acoes.dart';
-import 'package:app_inventario/models/estruturaInventario.dart';
 import 'package:app_inventario/models/estruturaInventarioNew.dart';
 import 'package:app_inventario/screens/bens/previstos_bens_tela.dart';
 import 'package:app_inventario/widgets/bens/ler_bens_item.dart';

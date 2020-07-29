@@ -8,18 +8,21 @@ class BensPrevistos extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RichText(
-      text: TextSpan(
-        text: titulo,
-        style: TextStyle(color: Colors.black),
-        children: <TextSpan>[
-          TextSpan(
-            text: texto,
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
+    return Padding(
+      padding: EdgeInsets.only(bottom: 5),
+      child: RichText(
+        text: TextSpan(
+          text: titulo,
+          style: TextStyle(color: Colors.black),
+          children: <TextSpan>[
+            TextSpan(
+              text: texto == null ? 'Não contem' : texto,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

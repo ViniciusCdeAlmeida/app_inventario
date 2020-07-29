@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:app_inventario/helpers/helper_levantamentoFisicoEst.dart';
 import 'package:app_inventario/models/dadosBensPatrimoniais.dart';
-import 'package:app_inventario/models/dominio.dart';
 import 'package:app_inventario/models/estruturaInventarioNew.dart';
 import 'package:app_inventario/models/levantamento.dart';
 import 'package:dio/adapter.dart';
@@ -15,8 +14,6 @@ class EstruturaLevantamento with ChangeNotifier {
   List<DadosBensPatrimoniais> _bensEstrutura = [];
   // final int idOrganizacao;
   bool _isLoading = false;
-
-  // Levantamentos({this.levantamentos, this.idOrganizacao});
 
   List<EstruturaInventarioNew> get getLevantamentos {
     return _levantamentos;
@@ -41,34 +38,13 @@ class EstruturaLevantamento with ChangeNotifier {
   }
 
   void buscaBensPorEstrutura(int id) {
-    // List<EstruturaInventarioNew> lista = _levantamentos
-    // .where((element) => element.estruturaOrganizacional.id == id
-    //     );
-
-    // List<EstruturaInventarioNew> lista = new List();
-    // _levantamentos.forEach((element, idx) {
-    //   lista.add(element[idx]);
-    // });
-    // List<DadosBensPatrimoniais> lista2 = [];
+    _bensEstrutura.clear();
     List<EstruturaInventarioNew> lista = _levantamentosEstrutura
         .where((element) => element.estruturaOrganizacional.id == id)
         .toList();
     var listaDadosBens = lista.map((e) => e.dadosBensPatrimoniais);
-
-    // teste3.toList();
-    // print(teste3);
-    _bensEstrutura.addAll(listaDadosBens.expand((element) => element));
-    dynamic teste = _levantamentos.whereType<EstruturaInventarioNew>();
-    // List<DadosBensPatrimoniais> listDados = lista
-    //     .map((e) =>
-    //         e.dadosBensPatrimoniais.whereType<DadosBensPatrimoniais>().toList())
-    //     .cast<DadosBensPatrimoniais>()
-    //     .toList();
-    // print('object');
     if (lista.isNotEmpty) {
-      // _bensEstrutura = lista.map(
-      //     (e) => e.dadosBensPatrimoniais.whereType<DadosBensPatrimoniais>().toList()).cast<DadosBensPatrimoniais>().toList();
-      // _bensEstrutura = lista.whereType<DadosBensPatrimoniais>().toList();
+      _bensEstrutura.addAll(listaDadosBens.expand((element) => element));
     } else {
       _bensEstrutura.clear();
     }
@@ -105,6 +81,7 @@ class EstruturaLevantamento with ChangeNotifier {
               onReceiveProgress: (actbyt, totalbyt) {
         // print('$actbyt');
       }, data: filter);
+
       _levantamentos
           .addAll(helperEstruturaInventarioEst(response.data["objects"]));
       // levantamentos = helperEstruturaInventarioEst(response.data["objects"]);
@@ -125,24 +102,12 @@ class EstruturaLevantamento with ChangeNotifier {
     List<Levantamento> listLevantamento,
   ) async {
     _levantamentos.clear();
-    // List<int> list = [1, 2, 3, 4, 5];
-    // Iterable<Future<List<EstruturaInventarioNew>>> mapped;
-
-    // Prints ints 1 second apart
-    // mapped = listLevantamento.map((element) => _getLevantamento(conexao, element.id));
-    // for (Future<List<EstruturaInventarioNew>> f in mapped) {
-    //   print(await f);
-    // }
     markAsLoading();
-    // listLevantamento.map((element)  {
-    // print(element.id);
-    // levantamentos =  Future.wait(_getLevantamento(conexao, element.id));
-    // print('object');
-    // });
+
     await Stream.fromIterable(listLevantamento)
         .asyncMap((element) => _getLevantamento(conexao, element.id))
         .toList();
-    // levantamentos = await _getLevantamento(conexao);
+
     _isLoading = false;
     print('ACABOU');
     notifyListeners();

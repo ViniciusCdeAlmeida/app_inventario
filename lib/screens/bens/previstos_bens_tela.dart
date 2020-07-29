@@ -1,4 +1,3 @@
-import 'package:app_inventario/providers/bensProvider.dart';
 import 'package:app_inventario/providers/estruturaLevantamento.dart';
 import 'package:app_inventario/widgets/bens/previstos_bens_item.dart';
 import 'package:app_inventario/widgets/cabecalho/app_cabecalho.dart';
@@ -14,7 +13,7 @@ class PrevistosBensTela extends StatelessWidget {
     final bens = Provider.of<EstruturaLevantamento>(context);
     // final listaBens = Provider.of<BensProvier>(context, listen: false)
     //     .buscaPorEstrutura(idEstrutura);
-    final listaBens = Provider.of<EstruturaLevantamento>(context, listen: false)
+    Provider.of<EstruturaLevantamento>(context, listen: false)
         .buscaBensPorEstrutura(idEstrutura);
 
     return Scaffold(

@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:app_inventario/helpers/helper_bemPatrimonial.dart';
-import 'package:app_inventario/models/estruturaInventario.dart';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
