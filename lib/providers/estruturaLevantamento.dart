@@ -44,7 +44,8 @@ class EstruturaLevantamento with ChangeNotifier {
         .toList();
     var listaDadosBens = lista.map((e) => e.dadosBensPatrimoniais);
     if (lista.isNotEmpty) {
-      _bensEstrutura.addAll(listaDadosBens.expand((element) => element));
+      _bensEstrutura
+          .addAll(listaDadosBens.expand((element) => element).toList());
     } else {
       _bensEstrutura.clear();
     }

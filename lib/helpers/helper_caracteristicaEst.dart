@@ -6,8 +6,8 @@ Caracteristica helperCaracteristica(Map listaCaracteristica) {
     id: listaCaracteristica['id'],
     codigo: listaCaracteristica['codigo'],
     descricao: listaCaracteristica['descricao'],
-    dominioTipoDado: helperDominio(
-      listaCaracteristica['dominioTipoDado'],
-    ),
+    dominioTipoDado: listaCaracteristica['dominioTipoDado'] != null
+        ? helperDominio(listaCaracteristica['dominioTipoDado'])
+        : null,
   );
 }

@@ -10,7 +10,9 @@ List<EstruturaInventarioNew> helperEstruturaInventarioEst(
       (item) => EstruturaInventarioNew(
         id: item['id'],
         dominioStatusInventarioEstrutura:
-            helperDominio(item['dominioStatusInventarioEstrutura']),
+            item['dominioStatusInventarioEstrutura'] != null
+                ? helperDominio(item['dominioStatusInventarioEstrutura'])
+                : null,
         idInventario: item['idInventario'],
         estruturaOrganizacional:
             helperEstruturaOrganizacional(item['estruturaOrganizacional']),

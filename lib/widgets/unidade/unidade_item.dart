@@ -62,20 +62,20 @@ class _UnidadeItemState extends State<UnidadeItem> {
                       Column(
                         children: <Widget>[
                           ListTile(
-                            contentPadding:
-                                EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
-                            leading: IconButton(
-                              icon: Icon(
-                                  (_expanded
-                                      ? Icons.expand_less
-                                      : Icons.expand_more),
-                                  color: Colors.black),
-                              onPressed: () {
-                                setState(() {
-                                  _expanded = !_expanded;
-                                });
-                              },
-                            ),
+                            // contentPadding:
+                            //     EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
+                            // leading: IconButton(
+                            //   icon: Icon(
+                            //       (_expanded
+                            //           ? Icons.expand_less
+                            //           : Icons.expand_more),
+                            //       color: Colors.black),
+                            //   onPressed: () {
+                            //     setState(() {
+                            //       _expanded = !_expanded;
+                            //     });
+                            //   },
+                            // ),
                             trailing:
                                 // PopupMenuTheme(data: null)
                                 PopupMenuButton<Acoes>(
@@ -128,30 +128,30 @@ class _UnidadeItemState extends State<UnidadeItem> {
                 ),
               ),
             ),
-            if (_expanded)
-              Container(
-                padding: EdgeInsets.all(20),
-                child: Row(
-                  children: <Widget>[
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        // widget.unidade.dataAdicao != null
-                        //     ? Text(
-                        //         'Data de Adição: ${widget.unidade.dataAdicao}')
-                        //     : Text(
-                        //         'Data de Adição: ${widget.unidade.dataEspelho}'),
-                        widget.unidade.dominioStatusInventarioEstrutura != null
-                            ? Text(widget.unidade
-                                .dominioStatusInventarioEstrutura.descricao)
-                            : Text('Sem status'),
-                        Text(
-                            'Qtde. de bens previstos: ${widget.unidade.estruturaOrganizacional.id}'),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
+            // if (_expanded)
+            //   Container(
+            //     padding: EdgeInsets.all(20),
+            //     child: Row(
+            //       children: <Widget>[
+            //         Column(
+            //           crossAxisAlignment: CrossAxisAlignment.start,
+            //           children: <Widget>[
+            //             // widget.unidade.dataAdicao != null
+            //             //     ? Text(
+            //             //         'Data de Adição: ${widget.unidade.dataAdicao}')
+            //             //     : Text(
+            //             //         'Data de Adição: ${widget.unidade.dataEspelho}'),
+            //             widget.unidade.dominioStatusInventarioEstrutura != null
+            //                 ? Text(widget.unidade
+            //                     .dominioStatusInventarioEstrutura.descricao)
+            //                 : Text('Sem status'),
+            //             Text(
+            //                 'Qtde. de bens previstos: ${widget.unidade.estruturaOrganizacional.id}'),
+            //           ],
+            //         ),
+            //       ],
+            //     ),
+            //   ),
           ],
         ),
       ),

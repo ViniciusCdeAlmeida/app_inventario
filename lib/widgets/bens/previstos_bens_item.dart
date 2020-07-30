@@ -20,21 +20,20 @@ class PrevistosBensItem extends StatelessWidget {
                 children: <Widget>[
                   BensPrevistos('Número Patrimonial: ',
                       bensLista.bemPatrimonial.numeroPatrimonialCompleto),
-                  BensPrevistos(
-                      'Descrição do material: ',
-                      bensLista.material != null
-                          ? bensLista.material.descricao
-                          : null),
+                  BensPrevistos('Descrição do material: ',
+                      bensLista.bemPatrimonial.material.descricao),
                   BensPrevistos(
                       'Situação: ',
                       bensLista.dominioSituacaoFisica != null
                           ? bensLista.dominioSituacaoFisica.descricao
-                          : null),
+                          : bensLista.inventarioBemPatrimonial
+                              .dominioSituacaoFisica.descricao),
                   BensPrevistos(
                       'Status: ',
                       bensLista.dominioStatus != null
                           ? bensLista.dominioStatus.descricao
-                          : null),
+                          : bensLista.inventarioBemPatrimonial.dominioStatus
+                              .descricao),
                   BensPrevistos(
                       'Status no Inventario: ',
                       bensLista.dominioStatusInventarioBem != null

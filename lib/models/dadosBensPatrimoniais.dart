@@ -1,5 +1,6 @@
 import 'package:app_inventario/models/bemPatrimonial.dart';
 import 'package:app_inventario/models/dominio.dart';
+import 'package:app_inventario/models/inventarioBemPatrimonial.dart';
 import 'package:app_inventario/models/material.dart';
 import 'package:flutter/material.dart';
 
@@ -12,6 +13,7 @@ class DadosBensPatrimoniais with ChangeNotifier {
   final int idInventario;
   final int idInventarioEstruturaOrganizacional;
   final MaterialEst material;
+  final InventarioBemPatrimonial inventarioBemPatrimonial;
 
   DadosBensPatrimoniais({
     this.id,
@@ -22,5 +24,6 @@ class DadosBensPatrimoniais with ChangeNotifier {
     this.idInventario,
     this.idInventarioEstruturaOrganizacional,
     this.material,
+    this.inventarioBemPatrimonial,
   });
 }

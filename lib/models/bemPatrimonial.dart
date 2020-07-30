@@ -1,4 +1,5 @@
 import 'package:app_inventario/models/caracteristicas.dart';
+import 'package:app_inventario/models/material.dart';
 import 'package:flutter/material.dart';
 
 class BemPatrimonial with ChangeNotifier {
@@ -6,6 +7,7 @@ class BemPatrimonial with ChangeNotifier {
   final String numeroPatrimonial;
   final String numeroPatrimonialCompleto;
   final String numeroPatrimonialCompletoAntigo;
+  final MaterialEst material;
   final List<Caracteristicas> caracteristicas;
 
   BemPatrimonial({
@@ -13,6 +15,7 @@ class BemPatrimonial with ChangeNotifier {
     this.numeroPatrimonial,
     this.numeroPatrimonialCompleto,
     this.numeroPatrimonialCompletoAntigo,
+    this.material,
     this.caracteristicas,
   });
 }
