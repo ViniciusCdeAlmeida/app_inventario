@@ -7,6 +7,7 @@ import 'package:app_inventario/providers/levantamentos.dart';
 import 'package:app_inventario/widgets/cabecalho/app_cabecalho.dart';
 import 'package:app_inventario/widgets/customizados/popupMenu_custom.dart';
 import 'package:app_inventario/widgets/inventario/levantamento_fisico_item.dart';
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -51,6 +52,7 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
     final idOrganizacao = ModalRoute.of(context).settings.arguments;
     final listaLevantamentos = Provider.of<Levantamentos>(context);
     final listaAtual = listaLevantamentos.getLevantamentos;
+    final estruturas = Provider.of<EstruturaLevantamento>(context);
 
     if (listaAtual == null && !listaLevantamentos.isLoading) {
       listaLevantamentos.buscaLevantamento(idOrganizacao, conexao);
@@ -108,33 +110,49 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
         ],
       ),
       drawer: AppDrawer(),
-      body: listaLevantamentos.isLoading
+      body: listaLevantamentos.isLoading || estruturas.isLoading
           ? Stack(
               children: <Widget>[
                 Center(
                   child: CircularProgressIndicator(
-                    backgroundColor: Colors.brown,
+                    backgroundColor: Colors.white,
                   ),
                 ),
               ],
             )
-          : Consumer<Levantamentos>(
-              builder: (context, levantamentoData, child) {
-                return Padding(
-                  padding: EdgeInsets.all(8),
-                  child: ListView.builder(
-                    itemCount: levantamentoData.getLevantamentos.length,
-                    itemBuilder: (_, idx) => Column(
-                      children: [
-                        LevantamentoFisicoItem(
-                          levantamentoData.getLevantamentos[idx],
+          : Stack(
+              children: <Widget>[
+                Consumer<Levantamentos>(
+                  builder: (context, levantamentoData, child) {
+                    return Padding(
+                      padding: EdgeInsets.all(8),
+                      child: ListView.builder(
+                        itemCount: levantamentoData.getLevantamentos.length,
+                        itemBuilder: (_, idx) => Column(
+                          children: [
+                            LevantamentoFisicoItem(
+                              levantamentoData.getLevantamentos[idx],
+                            ),
+                            Divider(),
+                          ],
                         ),
-                        Divider(),
-                      ],
-                    ),
-                  ),
-                );
-              },
+                      ),
+                    );
+                  },
+                ),
+                // Builder(
+                //   builder: (context) {
+                //     return Flushbar(
+                //       title: "Some",
+                //       message: "text",
+                //       duration: Duration(seconds: 3),
+                //       flushbarStyle: FlushbarStyle.FLOATING,
+                //       isDismissible: true,
+                //       dismissDirection: FlushbarDismissDirection.HORIZONTAL,
+                //     )..show(context);
+                //   },
+                // ),
+              ],
             ),
     );
   }

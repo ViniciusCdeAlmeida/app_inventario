@@ -12,6 +12,7 @@ class EstruturaLevantamento with ChangeNotifier {
   List<EstruturaInventarioNew> _estruturas = [];
   List<EstruturaInventarioNew> _levantamentosEstrutura = [];
   List<DadosBensPatrimoniais> _bensEstrutura = [];
+  String nomeEstrutura;
   // final int idOrganizacao;
   bool _isLoading = false;
 
@@ -43,11 +44,7 @@ class EstruturaLevantamento with ChangeNotifier {
     List<EstruturaInventarioNew> lista = _levantamentosEstrutura
         .where((element) => element.estruturaOrganizacional.id == id)
         .toList();
-    // var listaDadosBens = lista.map((e) => e.dadosBensPatrimoniais);
-    // _bensEstrutura.addAll(lista
-    //     .map((e) => e.dadosBensPatrimoniais)
-    //     .expand((element) => element)
-    //     .toList());
+
     if (lista.isNotEmpty) {
       _bensEstrutura.addAll(lista
           .map((e) => e.dadosBensPatrimoniais)
@@ -89,14 +86,10 @@ class EstruturaLevantamento with ChangeNotifier {
         // print('$actbyt');
       }, data: filter);
 
-      var teste = response.data["objects"] as List<dynamic>;
+      nomeEstrutura = (response.data["objects"] as List<dynamic>)
+          .first["inventario"]["codigoENome"];
       _estruturas
           .addAll(helperEstruturaInventarioEst(response.data["objects"]));
-      // print(_estruturas.first.idInventario);
-      print(teste.first["inventario"]["codigoENome"]);
-      // levantamentos = helperEstruturaInventarioEst(response.data["objects"]);
-      // (_estruturas).map((e) => teste = e);
-      // print(teste);
     } catch (error) {
       throw error;
     }
@@ -107,7 +100,6 @@ class EstruturaLevantamento with ChangeNotifier {
     notifyListeners();
   }
 
-//inventario SP RJ MG - 002364
   Future<void> buscaEstruturas(
       String conexao, List<Levantamento> listLevantamento) async {
     _estruturas.clear();

@@ -9,12 +9,17 @@ import 'package:flutter/material.dart';
 class Levantamentos with ChangeNotifier {
   List<Levantamento> levantamentos = [];
   final int idOrganizacao;
+  String _nomeLevantamento;
   bool _isLoading = false;
 
   Levantamentos({this.levantamentos, this.idOrganizacao});
 
   List<Levantamento> get getLevantamentos {
     return levantamentos;
+  }
+
+  String get getNomeLevantamentos {
+    return _nomeLevantamento;
   }
 
   bool get isLoading => _isLoading;

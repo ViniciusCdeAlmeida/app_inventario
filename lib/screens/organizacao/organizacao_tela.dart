@@ -25,16 +25,19 @@ class _OrganizacaoTelaState extends State<OrganizacaoTela> {
   void didChangeDependencies() {
     final dominios = Provider.of<DominioProvier>(context);
     final bensPatrimoniais = Provider.of<BensProvier>(context);
+    final organizacoes = Provider.of<Autenticacao>(context);
     if (_isInit) {
       setState(() {
         _isLoading = true;
       });
-      if (Provider.of<Autenticacao>(context).listaOrganizacoes().isNotEmpty)
+      if (organizacoes.lista2Organizacoes.isNotEmpty &&
+          dominios.getDominios.isNotEmpty &&
+          bensPatrimoniais.getBens.isNotEmpty)
         setState(() {
           _isLoading = false;
+          _isInit = false;
         });
     }
-    _isInit = false;
 
     setState(() {
       if ((dominios.getDominios.isNotEmpty &&
