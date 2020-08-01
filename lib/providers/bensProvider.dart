@@ -46,7 +46,6 @@ class BensProvier with ChangeNotifier {
           onReceiveProgress: (actbyt, totalbyt) {
         // print('$actbyt');
       });
-      print('object');
       return helperBemPatrimonial(response.data["payload"]);
     } catch (error) {
       throw error;

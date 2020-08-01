@@ -1,6 +1,7 @@
 import 'package:app_inventario/helpers/helper_dadosBemPatrimonialEst.dart';
 import 'package:app_inventario/helpers/helper_dominio.dart';
 import 'package:app_inventario/helpers/helper_estruturaOrganizacional.dart';
+import 'package:app_inventario/helpers/helper_levantamento.dart';
 import 'package:app_inventario/models/estruturaInventarioNew.dart';
 
 List<EstruturaInventarioNew> helperEstruturaInventarioEst(
@@ -16,6 +17,7 @@ List<EstruturaInventarioNew> helperEstruturaInventarioEst(
         idInventario: item['idInventario'],
         estruturaOrganizacional:
             helperEstruturaOrganizacional(item['estruturaOrganizacional']),
+        inventario: helperLevantamento(item['inventario']),
         dadosBensPatrimoniais: (item['dadosBensPatrimoniais'] as List<dynamic>)
             .map(
               (dadosBens) => helperDadosBensPatrimoniaisEst(dadosBens),

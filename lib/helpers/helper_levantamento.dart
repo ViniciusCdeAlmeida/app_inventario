@@ -1,7 +1,7 @@
 import 'package:app_inventario/models/dominio.dart';
 import '../models/levantamento.dart';
 
-List<Levantamento> helperLevantamento(List listaLevantamento) {
+List<Levantamento> helperLevantamentoList(List listaLevantamento) {
   return List<Levantamento>.from(
     (listaLevantamento).map(
       (item) => Levantamento(
@@ -33,6 +33,39 @@ List<Levantamento> helperLevantamento(List listaLevantamento) {
           codigo: item['dominioTipoInventario']['codigo'],
         ),
       ),
+    ),
+  );
+}
+
+Levantamento helperLevantamento(dynamic levantamento) {
+  // if (dominio != null) {
+  return Levantamento(
+    id: levantamento['id'],
+    codigo: levantamento['codigo'],
+    codigoENome: levantamento['dataInicio'],
+    idOrganizacao: levantamento['idOrganizacao'],
+    nome: levantamento['nome'],
+    quantidadeEstruturas: levantamento['quantidadeEstruturas'],
+    quantidadeTotalBens: levantamento['quantidadeTotalBens'],
+    quantidadeTotalBensTratados: levantamento['quantidadeTotalBensTratados'],
+    quantidadeTotalBensEmInconsistencia:
+        levantamento['quantidadeTotalBensEmInconsistencia'],
+    quantidadeTotalBensSemInconsistencia:
+        levantamento['quantidadeTotalBensSemInconsistencia'],
+    quantidadeTotalBensBaixados: levantamento['quantidadeTotalBensBaixados'],
+    dominioStatusInventario: Dominio(
+      id: levantamento['dominioStatusInventario']['id'],
+      nome: levantamento['dominioStatusInventario']['nome'],
+      descricao: levantamento['dominioStatusInventario']['descricao'],
+      chave: levantamento['dominioStatusInventario']['chave'],
+      codigo: levantamento['dominioStatusInventario']['codigo'],
+    ),
+    dominioTipoInventario: Dominio(
+      id: levantamento['dominioTipoInventario']['id'],
+      nome: levantamento['dominioTipoInventario']['nome'],
+      descricao: levantamento['dominioTipoInventario']['descricao'],
+      chave: levantamento['dominioTipoInventario']['chave'],
+      codigo: levantamento['dominioTipoInventario']['codigo'],
     ),
   );
 }

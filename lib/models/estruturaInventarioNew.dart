@@ -1,6 +1,8 @@
 import 'package:app_inventario/models/dadosBensPatrimoniais.dart';
 import 'package:app_inventario/models/dominio.dart';
+import 'package:app_inventario/models/levantamento.dart';
 import 'package:app_inventario/models/organizacao.dart';
+import 'package:app_inventario/providers/inventario.dart';
 import 'package:flutter/material.dart';
 
 class EstruturaInventarioNew with ChangeNotifier {
@@ -8,6 +10,7 @@ class EstruturaInventarioNew with ChangeNotifier {
   final Dominio dominioStatusInventarioEstrutura;
   final List<DadosBensPatrimoniais> dadosBensPatrimoniais;
   final Organizacao estruturaOrganizacional;
+  final Levantamento inventario;
   final int idInventario;
 
   EstruturaInventarioNew({
@@ -16,5 +19,6 @@ class EstruturaInventarioNew with ChangeNotifier {
     this.dadosBensPatrimoniais,
     this.estruturaOrganizacional,
     this.idInventario,
+    this.inventario,
   });
 }

@@ -35,7 +35,7 @@ class Levantamentos with ChangeNotifier {
               onReceiveProgress: (actbyt, totalbyt) {
         // print('$actbyt');
       });
-      return helperLevantamento(response.data["payload"]);
+      return helperLevantamentoList(response.data["payload"]);
     } catch (error) {
       throw error;
     }

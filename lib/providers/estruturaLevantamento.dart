@@ -9,14 +9,14 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 class EstruturaLevantamento with ChangeNotifier {
-  List<EstruturaInventarioNew> _levantamentos = [];
+  List<EstruturaInventarioNew> _estruturas = [];
   List<EstruturaInventarioNew> _levantamentosEstrutura = [];
   List<DadosBensPatrimoniais> _bensEstrutura = [];
   // final int idOrganizacao;
   bool _isLoading = false;
 
   List<EstruturaInventarioNew> get getLevantamentos {
-    return _levantamentos;
+    return _estruturas;
   }
 
   List<EstruturaInventarioNew> get getLevantamentosEstrutura {
@@ -29,7 +29,7 @@ class EstruturaLevantamento with ChangeNotifier {
 
   void buscaPorEstrutura(int id) {
     List<EstruturaInventarioNew> lista =
-        _levantamentos.where((element) => element.idInventario == id).toList();
+        _estruturas.where((element) => element.idInventario == id).toList();
     if (lista.isNotEmpty) {
       _levantamentosEstrutura = lista;
     } else {
@@ -37,15 +37,22 @@ class EstruturaLevantamento with ChangeNotifier {
     }
   }
 
+//021230 020594 020556 020582 020576 010503
   void buscaBensPorEstrutura(int id) {
     _bensEstrutura.clear();
     List<EstruturaInventarioNew> lista = _levantamentosEstrutura
         .where((element) => element.estruturaOrganizacional.id == id)
         .toList();
-    var listaDadosBens = lista.map((e) => e.dadosBensPatrimoniais);
+    // var listaDadosBens = lista.map((e) => e.dadosBensPatrimoniais);
+    // _bensEstrutura.addAll(lista
+    //     .map((e) => e.dadosBensPatrimoniais)
+    //     .expand((element) => element)
+    //     .toList());
     if (lista.isNotEmpty) {
-      _bensEstrutura
-          .addAll(listaDadosBens.expand((element) => element).toList());
+      _bensEstrutura.addAll(lista
+          .map((e) => e.dadosBensPatrimoniais)
+          .expand((element) => element)
+          .toList());
     } else {
       _bensEstrutura.clear();
     }
@@ -54,7 +61,6 @@ class EstruturaLevantamento with ChangeNotifier {
   bool get isLoading => _isLoading;
 
   Future<void> _getLevantamento(String conexao, int idLevantamento) async {
-    // dynamic teste;
     Dio dio = new Dio()
       ..options.baseUrl =
           conexao + "/citgrp-patrimonio-web/rest/inventarioMobile/";
@@ -83,10 +89,13 @@ class EstruturaLevantamento with ChangeNotifier {
         // print('$actbyt');
       }, data: filter);
 
-      _levantamentos
+      var teste = response.data["objects"] as List<dynamic>;
+      _estruturas
           .addAll(helperEstruturaInventarioEst(response.data["objects"]));
+      // print(_estruturas.first.idInventario);
+      print(teste.first["inventario"]["codigoENome"]);
       // levantamentos = helperEstruturaInventarioEst(response.data["objects"]);
-      // (_levantamentos).map((e) => teste = e);
+      // (_estruturas).map((e) => teste = e);
       // print(teste);
     } catch (error) {
       throw error;
@@ -98,17 +107,16 @@ class EstruturaLevantamento with ChangeNotifier {
     notifyListeners();
   }
 
+//inventario SP RJ MG - 002364
   Future<void> buscaEstruturas(
-    String conexao,
-    List<Levantamento> listLevantamento,
-  ) async {
-    _levantamentos.clear();
+      String conexao, List<Levantamento> listLevantamento) async {
+    _estruturas.clear();
     markAsLoading();
 
     await Stream.fromIterable(listLevantamento)
         .asyncMap((element) => _getLevantamento(conexao, element.id))
         .toList();
-
+    // await _getLevantamento(conexao, 10);
     _isLoading = false;
     print('ACABOU');
     notifyListeners();
