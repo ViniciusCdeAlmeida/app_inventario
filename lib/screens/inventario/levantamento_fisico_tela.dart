@@ -19,6 +19,22 @@ class LevantamentoFisicoTela extends StatefulWidget {
 }
 
 class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  @override
+  void didChangeDependencies() {
+    final nomeEstrutura = Provider.of<EstruturaLevantamento>(context);
+    super.didChangeDependencies();
+    if (nomeEstrutura.getNomeEstrutura != null) {
+      _scaffoldKey.currentState.showSnackBar(
+        SnackBar(
+          content: Text(nomeEstrutura.getNomeEstrutura),
+          duration: Duration(seconds: 1),
+        ),
+      );
+    }
+  }
+
   Future<void> _refreshProd2(String conexao, int id, Acoes acoes,
       List<Levantamento> listaLevantamento) async {
     switch (acoes) {
@@ -58,6 +74,7 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
       listaLevantamentos.buscaLevantamento(idOrganizacao, conexao);
     }
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         title: Text('Levantamentos'),
         actions: <Widget>[

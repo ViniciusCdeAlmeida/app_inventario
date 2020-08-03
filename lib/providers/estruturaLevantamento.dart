@@ -12,7 +12,7 @@ class EstruturaLevantamento with ChangeNotifier {
   List<EstruturaInventarioNew> _estruturas = [];
   List<EstruturaInventarioNew> _levantamentosEstrutura = [];
   List<DadosBensPatrimoniais> _bensEstrutura = [];
-  String nomeEstrutura;
+  String _nomeEstrutura;
   // final int idOrganizacao;
   bool _isLoading = false;
 
@@ -26,6 +26,10 @@ class EstruturaLevantamento with ChangeNotifier {
 
   List<DadosBensPatrimoniais> get getBensPorEstrutura {
     return [..._bensEstrutura];
+  }
+
+  String get getNomeEstrutura {
+    return _nomeEstrutura;
   }
 
   void buscaPorEstrutura(int id) {
@@ -86,8 +90,9 @@ class EstruturaLevantamento with ChangeNotifier {
         // print('$actbyt');
       }, data: filter);
 
-      nomeEstrutura = (response.data["objects"] as List<dynamic>)
+      _nomeEstrutura = (response.data["objects"] as List<dynamic>)
           .first["inventario"]["codigoENome"];
+      notifyListeners();
       _estruturas
           .addAll(helperEstruturaInventarioEst(response.data["objects"]));
     } catch (error) {
@@ -108,6 +113,7 @@ class EstruturaLevantamento with ChangeNotifier {
     await Stream.fromIterable(listLevantamento)
         .asyncMap((element) => _getLevantamento(conexao, element.id))
         .toList();
+    _nomeEstrutura = null;
     // await _getLevantamento(conexao, 10);
     _isLoading = false;
     print('ACABOU');
