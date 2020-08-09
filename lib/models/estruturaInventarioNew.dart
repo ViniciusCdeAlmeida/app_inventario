@@ -2,7 +2,6 @@ import 'package:app_inventario/models/dadosBensPatrimoniais.dart';
 import 'package:app_inventario/models/dominio.dart';
 import 'package:app_inventario/models/levantamento.dart';
 import 'package:app_inventario/models/organizacao.dart';
-import 'package:app_inventario/providers/inventario.dart';
 import 'package:flutter/material.dart';
 
 class EstruturaInventarioNew with ChangeNotifier {

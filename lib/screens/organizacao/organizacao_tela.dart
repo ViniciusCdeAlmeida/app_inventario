@@ -1,6 +1,4 @@
 // import 'package:app_inventario/models/organizacao.dart';
-import 'package:flushbar/flushbar.dart';
-import 'package:app_inventario/customizacoes/snackBar.dart';
 import 'package:app_inventario/providers/autenticacao.dart';
 import 'package:app_inventario/providers/bensProvider.dart';
 import 'package:app_inventario/providers/dominioProvider.dart';

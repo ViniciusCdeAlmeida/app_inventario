@@ -5,6 +5,7 @@ class Caracteristica with ChangeNotifier {
   final int id;
   final String codigo;
   final String descricao;
+  final String chaveDominio;
   final Dominio dominioTipoDado;
 
   Caracteristica({
@@ -12,5 +13,6 @@ class Caracteristica with ChangeNotifier {
     this.codigo,
     this.descricao,
     this.dominioTipoDado,
+    this.chaveDominio,
   });
 }

@@ -60,6 +60,8 @@ class _LevantamentoFisicoItemState extends State<LevantamentoFisicoItem> {
                       Text(
                           'Qtde. estruturas: ${widget.levantamento.quantidadeEstruturas}'),
                       Text(
+                          'Total de itens: ${widget.levantamento.quantidadeTotalBensBaixados + widget.levantamento.quantidadeTotalBensTratados + widget.levantamento.quantidadeTotalBensSemInconsistencia + widget.levantamento.quantidadeTotalBens + widget.levantamento.quantidadeTotalBensEmInconsistencia}'),
+                      Text(
                           'Qtde. bens Não Informados: ${widget.levantamento.quantidadeTotalBens}'),
                       Text(
                           'Qtde. bens Em Inconsistência: ${widget.levantamento.quantidadeTotalBensEmInconsistencia}'),

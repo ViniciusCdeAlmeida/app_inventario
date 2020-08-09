@@ -1,5 +1,4 @@
 import 'package:app_inventario/helpers/helper_dominio.dart';
-import 'package:app_inventario/models/dominio.dart';
 import '../models/levantamento.dart';
 
 List<Levantamento> helperLevantamentoList(List listaLevantamento) {

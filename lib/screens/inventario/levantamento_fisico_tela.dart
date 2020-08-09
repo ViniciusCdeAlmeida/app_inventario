@@ -7,7 +7,6 @@ import 'package:app_inventario/providers/levantamentos.dart';
 import 'package:app_inventario/widgets/cabecalho/app_cabecalho.dart';
 import 'package:app_inventario/widgets/customizados/popupMenu_custom.dart';
 import 'package:app_inventario/widgets/inventario/levantamento_fisico_item.dart';
-import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -157,18 +156,6 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
                     );
                   },
                 ),
-                // Builder(
-                //   builder: (context) {
-                //     return Flushbar(
-                //       title: "Some",
-                //       message: "text",
-                //       duration: Duration(seconds: 3),
-                //       flushbarStyle: FlushbarStyle.FLOATING,
-                //       isDismissible: true,
-                //       dismissDirection: FlushbarDismissDirection.HORIZONTAL,
-                //     )..show(context);
-                //   },
-                // ),
               ],
             ),
     );

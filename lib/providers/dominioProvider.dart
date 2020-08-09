@@ -14,6 +14,12 @@ class DominioProvier with ChangeNotifier {
     return [..._dominios];
   }
 
+  List<Dominio> get getDominiosMarca {
+    return [
+      ..._dominios.where((element) => element.chave == 'tipoCaractMarca')
+    ];
+  }
+
   bool get isLoading => _isLoading;
 
   Future<List<Dominio>> _getDominios(String conexao) async {

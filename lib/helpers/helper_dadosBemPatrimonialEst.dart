@@ -9,6 +9,7 @@ DadosBensPatrimoniais helperDadosBensPatrimoniaisEst(
   return DadosBensPatrimoniais(
     id: listaDadosBemPatrimonial['id'],
     idInventario: listaDadosBemPatrimonial['idInventario'],
+    numeroPatrimonial: listaDadosBemPatrimonial['numeroPatrimonial'],
     idInventarioEstruturaOrganizacional:
         listaDadosBemPatrimonial['idInventarioEstruturaOrganizacional'],
     dominioSituacaoFisica:

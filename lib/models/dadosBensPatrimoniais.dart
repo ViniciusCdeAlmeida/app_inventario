@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 
 class DadosBensPatrimoniais with ChangeNotifier {
   final int id;
+  final String numeroPatrimonial;
   final Dominio dominioSituacaoFisica;
   final Dominio dominioStatus;
   final Dominio dominioStatusInventarioBem;
@@ -25,5 +26,6 @@ class DadosBensPatrimoniais with ChangeNotifier {
     this.idInventarioEstruturaOrganizacional,
     this.material,
     this.inventarioBemPatrimonial,
+    this.numeroPatrimonial,
   });
 }
