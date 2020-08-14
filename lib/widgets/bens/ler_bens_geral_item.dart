@@ -1,4 +1,3 @@
-import 'package:app_inventario/models/caracteristicas.dart';
 import 'package:app_inventario/models/dadosBensPatrimoniais.dart';
 import 'package:app_inventario/models/dominio.dart';
 import 'package:app_inventario/models/inventarioBemPatrimonial.dart';
@@ -17,6 +16,7 @@ class LerBensGeralTela extends StatefulWidget {
 }
 
 class _LerBensGeralTelaState extends State<LerBensGeralTela> {
+  var _expanded = false;
   final _numeroNovoFocusNode = FocusNode();
   final _numeroAntigoFocusNode = FocusNode();
   final _numeroAtualFocusNode = FocusNode();
@@ -29,6 +29,7 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
   bool _novoNumeroPatrimonial = false;
   Dominio _itemSelecionado;
   List<int> dropdownValues = [];
+  Dominio teste1;
 
   List<Dominio> _dominiosInicial = [];
 
@@ -240,105 +241,90 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
               Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  // Flexible(
-                  //   fit: FlexFit.loose,
-                  //   child: ListView.builder(
-                  //     shrinkWrap: true,
-                  //     itemCount:
-                  //         bemPatrimonial.bemPatrimonial.caracteristicas.length,
-                  //     itemBuilder: (_, index) =>
-                  //         DropdownButtonFormField<dynamic>(
-                  //       value: bemPatrimonial
-                  //           .bemPatrimonial.caracteristicas[index],
-                  //       items: bemPatrimonial.bemPatrimonial.caracteristicas
-                  //           .map((itens) {
-                  //         return DropdownMenuItem(
-                  //           value: _dominiosInicial
-                  //               .where((element) =>
-                  //                   element.chave ==
-                  //                   itens.materialCaracteristica.caracteristica
-                  //                       .chaveDominio)
-                  //               .toList(),
-                  //           child: Text(itens.valorMaterialCaracteristica),
-                  //         );
-                  //       }).toList(),
-                  //       onChanged: (novoItemSelecionado) {
-                  //         setState(() {
-                  //           _itemSelecionado = novoItemSelecionado;
-                  //         });
-                  //       },
-                  //     ),
-                  //   ),
-                  // ),
-
-                  Flexible(
-                    fit: FlexFit.loose,
-                    child: ListView.builder(
-                      shrinkWrap: true,
-                      itemCount: _item.bemPatrimonial.caracteristicas.length,
-                      itemBuilder: (_, idx) {
-                        return _item
-                                        .bemPatrimonial
-                                        .caracteristicas[idx]
-                                        .materialCaracteristica
-                                        .caracteristica
-                                        .dominioTipoDado
-                                        .nome ==
-                                    'TEXT_FIELD' &&
-                                _item
-                                        .bemPatrimonial
-                                        .caracteristicas[idx]
-                                        .materialCaracteristica
-                                        .caracteristica
-                                        .dominioTipoDado
-                                        .codigo ==
-                                    1
-                            ? SearchableDropdown.single(
-                                searchFn: (String keyword, _dominiosT) {
-                                  List<int> ret = List<int>();
-                                  if (keyword != null &&
-                                      _dominiosT != null &&
-                                      keyword.isNotEmpty) {
-                                    keyword.split(" ").forEach((k) {
-                                      int i = 0;
-                                      _dominiosInicial.forEach((item) {
-                                        if (k.isNotEmpty &&
-                                            (item.descricao
-                                                .toString()
-                                                .toLowerCase()
-                                                .contains(k.toLowerCase()))) {
-                                          ret.add(i);
-                                        }
-                                        i++;
-                                      });
-                                    });
-                                  }
-                                  if (keyword.isEmpty) {
-                                    ret = Iterable<int>.generate(
-                                            _dominiosT.length)
-                                        .toList();
-                                  }
-                                  return (ret);
-                                },
-                                value: _item.bemPatrimonial.caracteristicas
-                                    .map((itens) =>
-                                        itens.valorMaterialCaracteristica)
-                                    .toList(),
-                                items: _dominiosT,
-                                onChanged: (novoItemSelecionado) {
-                                  setState(
-                                    () {
-                                      _itemSelecionado = novoItemSelecionado;
-                                    },
-                                  );
-                                },
-                              )
-                            : Container();
-                      },
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('Caracteristicas'),
+                      IconButton(
+                        icon: Icon(
+                            (_expanded ? Icons.expand_less : Icons.expand_more),
+                            color: Colors.black),
+                        onPressed: () {
+                          setState(
+                            () {
+                              _expanded = !_expanded;
+                            },
+                          );
+                        },
+                      ),
+                    ],
                   ),
+                  if (_expanded)
+                    Flexible(
+                      fit: FlexFit.loose,
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: _item.bemPatrimonial.caracteristicas.length,
+                        itemBuilder: (_, idx) {
+                          Dominio itemAtual = _dominiosInicial.firstWhere(
+                              (element) =>
+                                  element.id.toString() ==
+                                  _item.bemPatrimonial.caracteristicas[idx]
+                                      .valorMaterialCaracteristica,
+                              orElse: () => null);
+                          return _item
+                                      .bemPatrimonial
+                                      .caracteristicas[idx]
+                                      .materialCaracteristica
+                                      .caracteristica
+                                      .dominioTipoDado
+                                      .nome !=
+                                  'TEXT_FIELD'
+                              ? SearchableDropdown.single(
+                                  searchFn: (String keyword, _dominiosT) {
+                                    List<int> ret = List<int>();
+                                    if (keyword != null &&
+                                        _dominiosT != null &&
+                                        keyword.isNotEmpty) {
+                                      keyword.split(" ").forEach((k) {
+                                        int i = 0;
+                                        _dominiosInicial.forEach((item) {
+                                          if (k.isNotEmpty &&
+                                              (item.descricao
+                                                  .toString()
+                                                  .toLowerCase()
+                                                  .contains(k.toLowerCase()))) {
+                                            ret.add(i);
+                                          }
+                                          i++;
+                                        });
+                                      });
+                                    }
+                                    if (keyword.isEmpty) {
+                                      ret = Iterable<int>.generate(
+                                              _dominiosT.length)
+                                          .toList();
+                                    }
+                                    return (ret);
+                                  },
+                                  items: _dominiosT,
+                                  value: itemAtual,
+                                  isExpanded: true,
+                                  dialogBox: true,
+                                  onChanged: (novoItemSelecionado) {
+                                    setState(
+                                      () {
+                                        teste1 = novoItemSelecionado;
+                                        itemAtual = novoItemSelecionado;
+                                      },
+                                    );
+                                  },
+                                )
+                              : Container();
+                        },
+                      ),
+                    ),
                   Divider(),
-                  // DropdownButton<Dominio>(items: _dominiosInicial, onChanged: null),
                 ],
               ),
             ],
@@ -347,14 +333,45 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
       ),
     );
   }
-
-  void onDropDownChange(dropDownIndex, value) {
-    setState(() {
-      dropdownValues[dropDownIndex] = value;
-    });
-    print('onDropDownChange: $dropDownIndex -> $value');
-  }
 }
+
+// Flexible(
+//   fit: FlexFit.loose,
+//   child: ListView.builder(
+//     shrinkWrap: true,
+//     itemCount:
+//         bemPatrimonial.bemPatrimonial.caracteristicas.length,
+//     itemBuilder: (_, index) =>
+//         DropdownButtonFormField<dynamic>(
+//       value: bemPatrimonial
+//           .bemPatrimonial.caracteristicas[index],
+//       items: bemPatrimonial.bemPatrimonial.caracteristicas
+//           .map((itens) {
+//         return DropdownMenuItem(
+//           value: _dominiosInicial
+//               .where((element) =>
+//                   element.chave ==
+//                   itens.materialCaracteristica.caracteristica
+//                       .chaveDominio)
+//               .toList(),
+//           child: Text(itens.valorMaterialCaracteristica),
+//         );
+//       }).toList(),
+//       onChanged: (novoItemSelecionado) {
+//         setState(() {
+//           _itemSelecionado = novoItemSelecionado;
+//         });
+//       },
+//     ),
+//   ),
+// ),
+
+// void onDropDownChange(dropDownIndex, value) {
+//     setState(() {
+//       dropdownValues[dropDownIndex] = value;
+//     });
+//     print('onDropDownChange: $dropDownIndex -> $value');
+//   }
 
 // List.generate(
 //                     bemPatrimonial.bemPatrimonial.caracteristicas.length,

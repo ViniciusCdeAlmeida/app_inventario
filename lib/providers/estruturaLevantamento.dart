@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:app_inventario/helpers/helper_levantamentoFisicoEst.dart';
 import 'package:app_inventario/models/dadosBensPatrimoniais.dart';
+import 'package:app_inventario/models/dominio.dart';
 import 'package:app_inventario/models/estruturaInventarioNew.dart';
 import 'package:app_inventario/models/levantamento.dart';
 import 'package:dio/adapter.dart';
@@ -12,6 +13,10 @@ class EstruturaLevantamento with ChangeNotifier {
   List<EstruturaInventarioNew> _estruturas = [];
   List<EstruturaInventarioNew> _levantamentosEstrutura = [];
   List<DadosBensPatrimoniais> _bensEstrutura = [];
+  final List<Dominio> listaDominios;
+
+  EstruturaLevantamento({this.listaDominios});
+
   String _nomeEstrutura;
   // final int idOrganizacao;
   bool _isLoading = false;

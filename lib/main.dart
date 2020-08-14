@@ -50,14 +50,20 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (ctx) => DominioProvier(),
         ),
-        ChangeNotifierProvider(
+        // ChangeNotifierProvider(
+        //   create: (ctx) => EstruturaLevantamento(),
+        // ),
+        ChangeNotifierProxyProvider<DominioProvier, EstruturaLevantamento>(
           create: (ctx) => EstruturaLevantamento(),
+          update: (ctx, dominio, estruturas) => EstruturaLevantamento(
+            listaDominios: dominio == null ? [] : dominio.getDominios,
+          ),
         ),
         ChangeNotifierProxyProvider<Autenticacao, Levantamentos>(
           create: (context) => Levantamentos(),
-          update: (ctx, autenticacao, previousData) => Levantamentos(
+          update: (ctx, autenticacao, levantamento) => Levantamentos(
             levantamentos:
-                previousData == null ? [] : previousData.levantamentos,
+                levantamento == null ? [] : levantamento.levantamentos,
             idOrganizacao: autenticacao.idUnidade,
           ),
         ),
