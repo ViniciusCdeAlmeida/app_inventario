@@ -28,6 +28,10 @@ class Autenticacao with ChangeNotifier {
     return _usrLogado.organizacao;
   }
 
+  String get usuarioLogado {
+    return _usrLogado.userName;
+  }
+
   List<Organizacao> get lista2Organizacoes {
     return [..._usrLogado.organizacao];
   }

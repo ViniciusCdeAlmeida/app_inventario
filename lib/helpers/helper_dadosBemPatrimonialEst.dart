@@ -3,9 +3,10 @@ import 'package:app_inventario/helpers/helper_dominio.dart';
 import 'package:app_inventario/helpers/helper_inventarioBemPatrimonial.dart';
 import 'package:app_inventario/helpers/helper_materialEst.dart';
 import 'package:app_inventario/models/dadosBensPatrimoniais.dart';
+import 'package:app_inventario/models/dominio.dart';
 
 DadosBensPatrimoniais helperDadosBensPatrimoniaisEst(
-    dynamic listaDadosBemPatrimonial) {
+    dynamic listaDadosBemPatrimonial, List<Dominio> listaDominios) {
   return DadosBensPatrimoniais(
     id: listaDadosBemPatrimonial['id'],
     idInventario: listaDadosBemPatrimonial['idInventario'],
@@ -25,8 +26,7 @@ DadosBensPatrimoniais helperDadosBensPatrimoniaisEst(
                 listaDadosBemPatrimonial['dominioStatusInventarioBem'])
             : null,
     bemPatrimonial: helperBemPatrimonialEst(
-      listaDadosBemPatrimonial['bemPatrimonial'],
-    ),
+        listaDadosBemPatrimonial['bemPatrimonial'], listaDominios),
     material: helperMaterial(
       listaDadosBemPatrimonial['material'],
     ),

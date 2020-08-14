@@ -3,22 +3,22 @@ import 'package:app_inventario/models/dominio.dart';
 import 'package:flutter/material.dart';
 
 class InventarioBemPatrimonial with ChangeNotifier {
-  final int id;
-  final int idDadosBemPatrimonialMobile;
-  final int idInventarioEstruturaOrganizacionalMobile;
-  final String numeroPatrimonial;
-  final String numeroPatrimonialAntigo;
-  final String numeroPatrimonialNovo;
-  final List<Caracteristicas> caracteristicas;
-  final Dominio dominioSituacaoFisica;
-  final Dominio dominioStatus;
-  final bool bemNaoEncontrado;
-  final bool bemNaoInventariado;
-  final Dominio dominioStatusInventarioBem;
-  final Material material;
-  final String nomeUsuarioColeta;
-  final bool novoBemInvetariado;
-  final String tipoMobile;
+  int id;
+  int idDadosBemPatrimonialMobile;
+  int idInventarioEstruturaOrganizacionalMobile;
+  String numeroPatrimonial;
+  String numeroPatrimonialAntigo;
+  String numeroPatrimonialNovo;
+  List<Caracteristicas> caracteristicas;
+  Dominio dominioSituacaoFisica;
+  Dominio dominioStatus;
+  bool bemNaoEncontrado;
+  bool bemNaoInventariado;
+  Dominio dominioStatusInventarioBem;
+  Material material;
+  String nomeUsuarioColeta;
+  bool novoBemInvetariado;
+  String tipoMobile;
 
   InventarioBemPatrimonial({
     this.id,

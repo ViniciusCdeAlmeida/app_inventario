@@ -128,8 +128,8 @@ class EstruturaLevantamento with ChangeNotifier {
       print((response.data["objects"] as List<dynamic>).first["inventario"]
           ["codigoENome"]);
       notifyListeners();
-      _estruturas
-          .addAll(helperEstruturaInventarioEst(response.data["objects"]));
+      _estruturas.addAll(helperEstruturaInventarioEst(
+          response.data["objects"], listaDominios));
     } catch (error) {
       throw error;
     }

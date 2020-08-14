@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 
 class Caracteristicas with ChangeNotifier {
   final int id;
-  final String valorMaterialCaracteristica;
+  String valorMaterialCaracteristica;
   final MaterialCaracteristica materialCaracteristica;
-  final List<Dominio> listaDominio;
+  final Dominio dominiosCaracteristicas;
 
   Caracteristicas({
     this.id,
     this.valorMaterialCaracteristica,
     this.materialCaracteristica,
-    this.listaDominio,
+    this.dominiosCaracteristicas,
   });
 }

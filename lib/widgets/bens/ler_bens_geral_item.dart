@@ -1,6 +1,7 @@
 import 'package:app_inventario/models/dadosBensPatrimoniais.dart';
 import 'package:app_inventario/models/dominio.dart';
 import 'package:app_inventario/models/inventarioBemPatrimonial.dart';
+import 'package:app_inventario/providers/autenticacao.dart';
 import 'package:app_inventario/providers/dominioProvider.dart';
 import 'package:app_inventario/providers/estruturaLevantamento.dart';
 import 'package:app_inventario/widgets/cabecalho/app_cabecalho.dart';
@@ -52,44 +53,53 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
     bemNaoInventariado: false,
   );
 
-  var _valoresIniciais = {
-    'descricao': null,
-    'caracteristicas': null,
-    'dominioSituacaoFisica': null,
-    'dominioStatus': null,
-    'dominioStatusInventarioBem': null,
-    'idDadosBemPatrimonialMobile': null,
-    'idInventarioEstruturaOrganizacionalMobile': null,
-    'material': null,
-    'nomeUsuarioColeta': null,
-    'novoBemInvetariado': null,
-    'numeroPatrimonial': null,
-    'numeroPatrimonialAntigo': null,
-    'numeroPatrimonialNovo': null,
-    'tipoMobile': 'levantamentoFisico',
-    'bemNaoEncontrado': false,
-    'bemNaoInventariado': false,
-  };
-
-  @override
-  void initState() {
-    super.initState();
-  }
+  // var _valoresIniciais = {
+  //   'descricao': null,
+  //   'caracteristicas': null,
+  //   'dominioSituacaoFisica': null,
+  //   'dominioStatus': null,
+  //   'dominioStatusInventarioBem': null,
+  //   'idDadosBemPatrimonialMobile': null,
+  //   'idInventarioEstruturaOrganizacionalMobile': null,
+  //   'material': null,
+  //   'nomeUsuarioColeta': null,
+  //   'novoBemInvetariado': null,
+  //   'numeroPatrimonial': null,
+  //   'numeroPatrimonialAntigo': null,
+  //   'numeroPatrimonialNovo': null,
+  //   'tipoMobile': 'levantamentoFisico',
+  //   'bemNaoEncontrado': false,
+  //   'bemNaoInventariado': false,
+  // };
 
   var _inicial = true;
 
   @override
   void didChangeDependencies() {
     final idBem = ModalRoute.of(context).settings.arguments;
+    final usuarioColetante =
+        Provider.of<Autenticacao>(context, listen: false).usuarioLogado;
     if (_inicial) {
       _item = Provider.of<EstruturaLevantamento>(context, listen: false)
           .buscaBensPorid(idBem);
-      dropdownValues = List.generate(
-          _item.bemPatrimonial.caracteristicas.length, (value) => 1);
       // _valoresIniciais = {
-      //   'url': _edicaoBemInvent.url,
-      //   'nome': _edicaoBemInvent.nome,
-      //   'ativo': _edicaoBemInvent.ativo,
+      //   'descricao': _item.material.descricao,
+      //   'caracteristicas': _item.bemPatrimonial.caracteristicas,
+      //   'dominioSituacaoFisica': _item.dominioSituacaoFisica,
+      //   'dominioStatus': _item.dominioStatus,
+      //   'dominioStatusInventarioBem': _item.dominioStatusInventarioBem,
+      //   'idDadosBemPatrimonialMobile': _item.id,
+      //   'idInventarioEstruturaOrganizacionalMobile':
+      //       _item.idInventarioEstruturaOrganizacional,
+      //   'material': _item.bemPatrimonial.material,
+      //   'nomeUsuarioColeta': usuarioColetante,
+      //   'novoBemInvetariado': null,
+      //   'numeroPatrimonial': _item.bemPatrimonial.numeroPatrimonial,
+      //   'numeroPatrimonialAntigo': null,
+      //   'numeroPatrimonialNovo': null,
+      //   'tipoMobile': 'levantamentoFisico',
+      //   'bemNaoEncontrado': false,
+      //   'bemNaoInventariado': false,
       // };
     }
     _inicial = false;
@@ -314,8 +324,21 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
                                   onChanged: (novoItemSelecionado) {
                                     setState(
                                       () {
-                                        teste1 = novoItemSelecionado;
-                                        itemAtual = novoItemSelecionado;
+                                        if (novoItemSelecionado == null) {
+                                          print(_valoresIniciais);
+                                          _item
+                                                  .bemPatrimonial
+                                                  .caracteristicas[idx]
+                                                  .valorMaterialCaracteristica =
+                                              null;
+                                        } else {
+                                          print(_valoresIniciais);
+                                          _item
+                                                  .bemPatrimonial
+                                                  .caracteristicas[idx]
+                                                  .valorMaterialCaracteristica =
+                                              novoItemSelecionado.id.toString();
+                                        }
                                       },
                                     );
                                   },
