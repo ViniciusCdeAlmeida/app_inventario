@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import '../models/conexao.dart';
 
 class ConfiguracaoConexao with ChangeNotifier {
-  // List<Conexao> _conexao = [];
-
   List<Conexao> _conexao = [
     Conexao(
       url: 'https://192.168.15.2:8443/',

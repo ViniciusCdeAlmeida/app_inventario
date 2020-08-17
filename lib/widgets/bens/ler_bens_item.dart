@@ -1,5 +1,4 @@
 import 'package:app_inventario/widgets/cabecalho/app_cabecalho.dart';
-import 'package:app_inventario/widgets/teste.dart';
 import 'package:flutter/material.dart';
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/services.dart';
@@ -61,9 +60,8 @@ class _LerBensItensState extends State<LerBensItens> {
 
       setState(() {
         scanResult = result;
-        print(result.rawContent);
-        Navigator.of(context)
-            .popAndPushNamed(Teste.routeName, arguments: result.rawContent);
+        // Navigator.of(context)
+        //     .popAndPushNamed(Teste.routeName, arguments: result.rawContent);
       });
     } on PlatformException catch (e) {
       var result = ScanResult(

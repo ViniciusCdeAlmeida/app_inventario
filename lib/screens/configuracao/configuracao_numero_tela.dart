@@ -11,7 +11,6 @@ class _ConfiguracaoNumeroTelaState extends State<ConfiguracaoNumeroTela> {
   void _adicionarLetra() {
     final entradaLetra = _letraControler.text;
 
-    // Configaracao()
     Navigator.of(context).pop();
   }
 

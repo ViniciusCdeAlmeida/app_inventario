@@ -109,8 +109,6 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
                 const PopupMenuDivider(),
                 PopupMenuItem<Acoes>(
                   child:
-                      // PopupMenuCustom(
-                      //     'Enviar Levantamentos', Icons.cloud_upload),
                       PopupMenuCustom('Buscar Estruturas', Icons.cloud_upload),
                   value: Acoes.enviaLevantamento,
                 ),

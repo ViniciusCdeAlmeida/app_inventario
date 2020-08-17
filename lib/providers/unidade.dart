@@ -30,11 +30,8 @@ class Unidades with ChangeNotifier {
           (X509Certificate cert, String host, int port) => true;
     };
     try {
-      Response response = await dio
-          .get("quantitativoBensStatusV2/?idInventario=$idInventario",
-              onReceiveProgress: (actbyt, totalbyt) {
-        // print('$actbyt');
-      });
+      Response response =
+          await dio.get("quantitativoBensStatusV2/?idInventario=$idInventario");
       return helperEstruturaInventario(response.data);
     } catch (error) {
       throw error;

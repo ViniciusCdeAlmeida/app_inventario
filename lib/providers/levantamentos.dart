@@ -36,10 +36,7 @@ class Levantamentos with ChangeNotifier {
     };
     try {
       Response response = await dio
-          .get("obterLevantamentosPorUGV3.json?idOrganizacao=$idOrganizacao",
-              onReceiveProgress: (actbyt, totalbyt) {
-        // print('$actbyt');
-      });
+          .get("obterLevantamentosPorUGV3.json?idOrganizacao=$idOrganizacao");
       return helperLevantamentoList(response.data["payload"]);
     } catch (error) {
       throw error;

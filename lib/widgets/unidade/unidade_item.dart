@@ -35,7 +35,6 @@ class _UnidadeItemState extends State<UnidadeItem> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // color: Colors.black,
       child: Card(
         elevation: 7,
         shape: RoundedRectangleBorder(
@@ -51,7 +50,6 @@ class _UnidadeItemState extends State<UnidadeItem> {
           children: <Widget>[
             FittedBox(
               child: SizedBox(
-                // height: 100,
                 width: MediaQuery.of(context).size.width,
                 child: CustomPaint(
                   child: Flex(
