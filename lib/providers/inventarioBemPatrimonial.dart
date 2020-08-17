@@ -24,9 +24,7 @@ class InventarioBemPatrimonialProvider with ChangeNotifier {
     };
     try {
       await dio.post("saveInventarioBemPatrimonialMobile.json",
-          onReceiveProgress: (actbyt, totalbyt) {
-        // print('$actbyt');
-      }, data: _inventariados);
+          data: _inventariados);
     } catch (error) {
       throw error;
     }

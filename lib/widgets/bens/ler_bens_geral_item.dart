@@ -136,7 +136,6 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
         ),
       );
     }
-    // }
     setState(() {
       _isLoading = false;
     });

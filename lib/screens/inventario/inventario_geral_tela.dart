@@ -10,13 +10,10 @@ class InventarioGeralTela extends StatefulWidget {
 class _InventarioGeralTelaState extends State<InventarioGeralTela> {
   @override
   Widget build(BuildContext context) {
-    // final idOrganizacao = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       appBar: AppBar(
         title: Text('Inventarios'),
-        actions: <Widget>[
-          // AcoesInventario(idOrganizacao),
-        ],
+        actions: <Widget>[],
       ),
       drawer: AppDrawer(),
       body: Text('Inventario Geral'),

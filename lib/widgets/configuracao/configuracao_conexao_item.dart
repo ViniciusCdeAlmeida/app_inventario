@@ -26,7 +26,6 @@ class ConfiguracaoConexaoItem extends StatefulWidget {
 class _ConfiguracaoConexaoItemState extends State<ConfiguracaoConexaoItem> {
   @override
   Widget build(BuildContext context) {
-    // final devideSize = MediaQuery.of(context).size;
     return ListTile(
       title: Text(widget.nome),
       subtitle: Text(

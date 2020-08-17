@@ -18,7 +18,6 @@ class EstruturaLevantamento with ChangeNotifier {
   EstruturaLevantamento({this.listaDominios});
 
   String _nomeEstrutura;
-  // final int idOrganizacao;
   bool _isLoading = false;
 
   List<EstruturaInventarioNew> get getLevantamentos {
@@ -47,7 +46,6 @@ class EstruturaLevantamento with ChangeNotifier {
     }
   }
 
-//021230 020594 020556 020582 020576 010503
   void buscaBensPorEstrutura(int id) {
     _bensEstrutura.clear();
     List<EstruturaInventarioNew> lista = _levantamentosEstrutura
@@ -99,11 +97,9 @@ class EstruturaLevantamento with ChangeNotifier {
           },
         ],
       };
-      Response response = await dio
-          .post("obterInventarioEstruturaOrganizacionalPorDemandaV2.json",
-              onReceiveProgress: (actbyt, totalbyt) {
-        // print('$actbyt');
-      }, data: filter);
+      Response response = await dio.post(
+          "obterInventarioEstruturaOrganizacionalPorDemandaV2.json",
+          data: filter);
 
       _nomeEstrutura = (response.data["objects"] as List<dynamic>)
           .first["inventario"]["codigoENome"];

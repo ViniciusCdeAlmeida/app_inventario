@@ -17,23 +17,6 @@ class UnidadeTela extends StatefulWidget {
 class _UnidadeTelaState extends State<UnidadeTela> {
   TelaArgumentos unidadeArgs;
 
-  @override
-  void initState() {
-    // Future.delayed(Duration.zero).then((_) async {
-    //   unidadeArgs = ModalRoute.of(context).settings.arguments;
-    //   final conexao =
-    //       Provider.of<Autenticacao>(context, listen: false).atualConexao;
-    //   await Provider.of<Unidades>(context)
-    //       .buscaEstruturasLevantamento(unidadeArgs.id, conexao);
-    // });
-    // Future.delayed(Duration.zero).then((_) async {
-    //   unidadeArgs = ModalRoute.of(context).settings.arguments;
-    //   Provider.of<EstruturaLevantamento>(context)
-    //       .buscaPorEstrutura(unidadeArgs.id);
-    // });
-    super.initState();
-  }
-
   Future<void> _carregaUnidades(BuildContext context, String conexao) async {
     // await Provider.of<EstruturaLevantamento>(context, listen: false)
     //     .buscaPorEstrutura(unidadeArgs.id);
@@ -59,7 +42,6 @@ class _UnidadeTelaState extends State<UnidadeTela> {
             )
           : RefreshIndicator(
               onRefresh: () => _carregaUnidades(context, conexao),
-              // onRefresh: null,
               child: Consumer<EstruturaLevantamento>(
                 builder: (ctx, unidadesData, _) => Padding(
                   padding: EdgeInsets.all(8),
@@ -77,9 +59,6 @@ class _UnidadeTelaState extends State<UnidadeTela> {
                 ),
               ),
             ),
-      // }
-      // ),
-      // ),
     );
   }
 }

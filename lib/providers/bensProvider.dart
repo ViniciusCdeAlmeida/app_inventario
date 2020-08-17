@@ -42,10 +42,7 @@ class BensProvier with ChangeNotifier {
           (X509Certificate cert, String host, int port) => true;
     };
     try {
-      Response response = await dio.get("obterBensPatrimoniais.json",
-          onReceiveProgress: (actbyt, totalbyt) {
-        // print('$actbyt');
-      });
+      Response response = await dio.get("obterBensPatrimoniais.json");
       return helperBemPatrimonial(response.data["payload"]);
     } catch (error) {
       throw error;
