@@ -1,5 +1,4 @@
 import 'package:app_inventario/helpers/helper_dominio.dart';
-import 'package:app_inventario/models/caracteristica.dart';
 import 'package:app_inventario/models/inventarioBemPatrimonial.dart';
 
 InventarioBemPatrimonial helperInventarioBemPatrimonial(Map listaBens) {

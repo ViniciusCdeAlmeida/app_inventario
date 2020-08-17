@@ -1,8 +1,5 @@
-import 'dart:convert';
 import 'dart:io';
-import 'package:app_inventario/helpers/helper_dominio.dart';
 import 'package:app_inventario/helpers/helper_inventarioBemPatrimonial.dart';
-import 'package:app_inventario/models/dominio.dart';
 import 'package:app_inventario/models/inventarioBemPatrimonial.dart';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';

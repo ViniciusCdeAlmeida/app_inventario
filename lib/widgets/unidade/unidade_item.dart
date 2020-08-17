@@ -15,8 +15,6 @@ class UnidadeItem extends StatefulWidget {
 }
 
 class _UnidadeItemState extends State<UnidadeItem> {
-  var _expanded = false;
-
   void _redirecionamento(Acoes acoes, int idEstrutura) {
     switch (acoes) {
       case Acoes.lerBens:
@@ -62,23 +60,7 @@ class _UnidadeItemState extends State<UnidadeItem> {
                       Column(
                         children: <Widget>[
                           ListTile(
-                            // contentPadding:
-                            //     EdgeInsets.fromLTRB(0.0, 0.0, 0.0, 0.0),
-                            // leading: IconButton(
-                            //   icon: Icon(
-                            //       (_expanded
-                            //           ? Icons.expand_less
-                            //           : Icons.expand_more),
-                            //       color: Colors.black),
-                            //   onPressed: () {
-                            //     setState(() {
-                            //       _expanded = !_expanded;
-                            //     });
-                            //   },
-                            // ),
-                            trailing:
-                                // PopupMenuTheme(data: null)
-                                PopupMenuButton<Acoes>(
+                            trailing: PopupMenuButton<Acoes>(
                               icon: Icon(
                                 Icons.more_vert,
                                 color: Colors.black,
@@ -111,14 +93,8 @@ class _UnidadeItemState extends State<UnidadeItem> {
                             title: Text(
                               widget
                                   .unidade.estruturaOrganizacional.codigoENome,
-                              style: TextStyle(
-                                  fontSize: 14,
-                                  color:
-                                      // widget.unidade.statusEstrutura ==
-                                      //         "Tratada"
-                                      //     ? Colors.white
-                                      //     :
-                                      Colors.black),
+                              style:
+                                  TextStyle(fontSize: 14, color: Colors.black),
                             ),
                           ),
                         ],
@@ -128,30 +104,6 @@ class _UnidadeItemState extends State<UnidadeItem> {
                 ),
               ),
             ),
-            // if (_expanded)
-            //   Container(
-            //     padding: EdgeInsets.all(20),
-            //     child: Row(
-            //       children: <Widget>[
-            //         Column(
-            //           crossAxisAlignment: CrossAxisAlignment.start,
-            //           children: <Widget>[
-            //             // widget.unidade.dataAdicao != null
-            //             //     ? Text(
-            //             //         'Data de Adição: ${widget.unidade.dataAdicao}')
-            //             //     : Text(
-            //             //         'Data de Adição: ${widget.unidade.dataEspelho}'),
-            //             widget.unidade.dominioStatusInventarioEstrutura != null
-            //                 ? Text(widget.unidade
-            //                     .dominioStatusInventarioEstrutura.descricao)
-            //                 : Text('Sem status'),
-            //             Text(
-            //                 'Qtde. de bens previstos: ${widget.unidade.estruturaOrganizacional.id}'),
-            //           ],
-            //         ),
-            //       ],
-            //     ),
-            //   ),
           ],
         ),
       ),

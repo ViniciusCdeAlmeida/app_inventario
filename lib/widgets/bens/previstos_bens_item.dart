@@ -54,7 +54,6 @@ class PrevistosBensItem extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      // Text('Inventariar'),
                       IconButton(
                         icon: bensLista.inventarioBemPatrimonial == null
                             ? Icon(Icons.content_paste)

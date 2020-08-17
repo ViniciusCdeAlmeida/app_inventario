@@ -65,24 +65,6 @@ class EstruturaLevantamento with ChangeNotifier {
   }
 
   dynamic buscaBensPorid(String id) {
-    // dynamic lista = _levantamentosEstrutura
-    //     .where((element) => element.dadosBensPatrimoniais.contains(id));
-    // List<DadosBensPatrimoniais> lista2 = [];
-    // dynamic lista2 = _levantamentosEstrutura
-    //     .map((e) => e.dadosBensPatrimoniais.whereType<DadosBensPatrimoniais>());
-    // List<DadosBensPatrimoniais> lista3 = _levantamentosEstrutura
-    //     .map((e) => e.dadosBensPatrimoniais.whereType<DadosBensPatrimoniais>())
-    //     .expand((element) => element)
-    //     .toList();
-    // lista2.add(lista);
-    // var teste = lista3.where((element) => element.bemPatrimonial.id == id);
-    // var teste2 = lista4
-    // .where((element) => element.bemPatrimonial.numeroPatrimonial == id);
-    // print(lista);
-    // print(lista3); 89597
-    // print(teste2);
-    // print('object');
-
     List<DadosBensPatrimoniais> lista4 = _estruturas
         .map((e) => e.dadosBensPatrimoniais.whereType<DadosBensPatrimoniais>())
         .expand((element) => element)
@@ -149,7 +131,6 @@ class EstruturaLevantamento with ChangeNotifier {
         .asyncMap((element) => _getLevantamento(conexao, element.id))
         .toList();
     _nomeEstrutura = null;
-    // await _getLevantamento(conexao, 4);
     _isLoading = false;
     print('ACABOU');
     notifyListeners();

@@ -1,7 +1,6 @@
 import 'package:app_inventario/models/dadosBensPatrimoniais.dart';
 import 'package:app_inventario/models/dominio.dart';
 import 'package:app_inventario/models/inventarioBemPatrimonial.dart';
-import 'package:app_inventario/models/levantamento.dart';
 import 'package:app_inventario/providers/autenticacao.dart';
 import 'package:app_inventario/providers/dominioProvider.dart';
 import 'package:app_inventario/providers/estruturaLevantamento.dart';
@@ -32,8 +31,6 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
   final _form = GlobalKey<FormState>();
   DadosBensPatrimoniais _item;
   bool _novoNumeroPatrimonial = false;
-  List<int> dropdownValues = [];
-  Dominio teste1;
   var _isLoading = false;
   var _inicial = true;
 
@@ -512,124 +509,3 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
     );
   }
 }
-
-// Flexible(
-//   fit: FlexFit.loose,
-//   child: ListView.builder(
-//     shrinkWrap: true,
-//     itemCount:
-//         bemPatrimonial.bemPatrimonial.caracteristicas.length,
-//     itemBuilder: (_, index) =>
-//         DropdownButtonFormField<dynamic>(
-//       value: bemPatrimonial
-//           .bemPatrimonial.caracteristicas[index],
-//       items: bemPatrimonial.bemPatrimonial.caracteristicas
-//           .map((itens) {
-//         return DropdownMenuItem(
-//           value: _dominiosInicial
-//               .where((element) =>
-//                   element.chave ==
-//                   itens.materialCaracteristica.caracteristica
-//                       .chaveDominio)
-//               .toList(),
-//           child: Text(itens.valorMaterialCaracteristica),
-//         );
-//       }).toList(),
-//       onChanged: (novoItemSelecionado) {
-//         setState(() {
-//           _itemSelecionado = novoItemSelecionado;
-//         });
-//       },
-//     ),
-//   ),
-// ),
-
-// void onDropDownChange(dropDownIndex, value) {
-//     setState(() {
-//       dropdownValues[dropDownIndex] = value;
-//     });
-//     print('onDropDownChange: $dropDownIndex -> $value');
-//   }
-
-// List.generate(
-//                     bemPatrimonial.bemPatrimonial.caracteristicas.length,
-//                     (index) {
-//                       return Container(
-//                         child: DropdownButton(
-//                             isExpanded: true,
-//                             onChanged: (value) =>
-//                                 onDropDownChange(index, value),
-//                             value: bemPatrimonial
-//                                 .bemPatrimonial.caracteristicas[index],
-//                             items: bemPatrimonial.bemPatrimonial.caracteristicas
-//                                 .map((list) {
-//                               return DropdownMenuItem(
-//                                 child:
-//                                     Text('${list.valorMaterialCaracteristica}'),
-//                                 value: list,
-//                               );
-//                             }).toList()),
-//                       );
-//                     },
-//                   ),
-
-// SearchableDropdown.single(
-//   value: bemPatrimonial.bemPatrimonial.caracteristicas
-//       .map((itens) => itens.valorMaterialCaracteristica),
-//   items: _dominiosInicial.map(
-//     (Dominio itens) {
-//       return DropdownMenuItem(
-//         value: itens,
-//         child: Text(itens.descricao),
-//       );
-//     },
-//   ).toList(),
-//   onChanged: (novoItemSelecionado) {
-//     setState(
-//       () {
-//         _itemSelecionado = novoItemSelecionado;
-//       },
-//     );
-//   },
-// ),
-
-//   FittedBox(
-//     child: DropdownButton<Dominio>(
-//       value: _itemSelecionado,
-//       items: _dominiosInicial.map((Dominio itens) {
-//         return DropdownMenuItem(
-//           value: itens,
-//           child: Text(itens.descricao),
-//         );
-//       }).toList(),
-// onChanged: (novoItemSelecionado) {
-//   setState(() {
-//     _itemSelecionado = novoItemSelecionado;
-//   });
-//       },
-//     ),
-//   ),
-// ],
-
-// Column(
-//   children: [
-//     ListView.builder(
-//       itemCount: bemPatrimonial.bemPatrimonial.caracteristicas.length,
-//       itemBuilder: (_, index) => DropdownButtonFormField<MaterialCaracteristica>(
-//         value: bemPatrimonial.bemPatrimonial.caracteristicas[index].materialCaracteristica,
-//         items: bemPatrimonial.bemPatrimonial.caracteristicas.map((itens) {
-//           return DropdownMenuItem(
-//             value: itens.materialCaracteristica,
-//             child: Text(itens.),
-//           );
-//         }).toList(),
-//         onChanged: (novoItemSelecionado) {
-//           setState(() {
-//             // _itemSelecionado = novoItemSelecionado;
-//           });
-//         },
-//       ),
-//     ),
-//   ],
-// ),
-// ),
