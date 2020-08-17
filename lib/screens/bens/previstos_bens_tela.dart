@@ -9,9 +9,9 @@ class PrevistosBensTela extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final idEstrutura = ModalRoute.of(context).settings.arguments;
-    final bens = Provider.of<EstruturaLevantamento>(context);
-    Provider.of<EstruturaLevantamento>(context, listen: false)
+    Provider.of<EstruturaLevantamento>(context)
         .buscaBensPorEstrutura(idEstrutura);
+    final bens = Provider.of<EstruturaLevantamento>(context);
 
     return Scaffold(
       appBar: AppBar(

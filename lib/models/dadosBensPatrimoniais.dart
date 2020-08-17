@@ -15,6 +15,7 @@ class DadosBensPatrimoniais with ChangeNotifier {
   final int idInventarioEstruturaOrganizacional;
   final MaterialEst material;
   final InventarioBemPatrimonial inventarioBemPatrimonial;
+  bool inventariado;
 
   DadosBensPatrimoniais({
     this.id,
@@ -27,5 +28,6 @@ class DadosBensPatrimoniais with ChangeNotifier {
     this.material,
     this.inventarioBemPatrimonial,
     this.numeroPatrimonial,
+    this.inventariado,
   });
 }

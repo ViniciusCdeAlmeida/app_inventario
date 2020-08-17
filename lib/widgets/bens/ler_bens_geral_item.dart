@@ -5,6 +5,7 @@ import 'package:app_inventario/providers/autenticacao.dart';
 import 'package:app_inventario/providers/dominioProvider.dart';
 import 'package:app_inventario/providers/estruturaLevantamento.dart';
 import 'package:app_inventario/providers/inventarioBemPatrimonial.dart';
+import 'package:app_inventario/screens/bens/previstos_bens_tela.dart';
 import 'package:app_inventario/widgets/cabecalho/app_cabecalho.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -18,7 +19,6 @@ class LerBensGeralTela extends StatefulWidget {
 }
 
 class _LerBensGeralTelaState extends State<LerBensGeralTela> {
-  bool _inventariado = false;
   var _expanded = false;
   final _numeroNovoFocusNode = FocusNode();
   final _numeroAntigoFocusNode = FocusNode();
@@ -63,7 +63,7 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
       _item = Provider.of<EstruturaLevantamento>(context, listen: false)
           .buscaBensPorid(idBem);
       if (_item.inventarioBemPatrimonial != null) {
-        _inventariado = true;
+        _item.inventariado = true;
       }
       _edicaoBemInvent.dominioSituacaoFisica = _item.dominioSituacaoFisica;
       _edicaoBemInvent.dominioStatus = _item.dominioStatus;
@@ -119,6 +119,7 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
         context,
         listen: false,
       ).salvaDados(_edicaoBemInvent, conexao);
+      _item.inventariado = true;
     } catch (error) {
       await showDialog<Null>(
         context: context,
@@ -139,6 +140,10 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
     setState(() {
       _isLoading = false;
     });
+    // Navigator.pushNamed(
+    //   context,
+    //   PrevistosBensTela.routeName,
+    // );
     Navigator.of(context).pop();
   }
 
@@ -153,7 +158,7 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
           style: TextStyle(fontSize: 15),
         ),
         actions: [
-          if (!_inventariado)
+          if (!_item.inventariado)
             IconButton(
               icon: Icon(
                 Icons.check,
@@ -210,7 +215,7 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
                         isExpanded: true,
                         dialogBox: true,
                         displayClearIcon: false,
-                        readOnly: _inventariado,
+                        readOnly: _item.inventariado,
                         iconDisabledColor: Colors.black,
                         value: Provider.of<DominioProvier>(context)
                             .getDominiosBens(_item.dominioSituacaoFisica.chave)
@@ -247,7 +252,7 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
                         isExpanded: true,
                         dialogBox: true,
                         displayClearIcon: false,
-                        readOnly: _inventariado,
+                        readOnly: _item.inventariado,
                         iconDisabledColor: Colors.black,
                         value: Provider.of<DominioProvier>(context)
                             .getDominiosBens(_item.dominioStatus.chave)
@@ -400,7 +405,7 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
                                   ? Padding(
                                       padding: const EdgeInsets.all(10.0),
                                       child: SearchableDropdown.single(
-                                        readOnly: _inventariado,
+                                        readOnly: _item.inventariado,
                                         iconDisabledColor: Colors.black,
                                         label: _item
                                             .bemPatrimonial
@@ -465,7 +470,7 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
                                       padding: EdgeInsets.all(10),
                                       child: TextFormField(
                                         key: Key('numeroPatrimonialText'),
-                                        enabled: _inventariado == true
+                                        enabled: _item.inventariado == true
                                             ? false
                                             : true,
                                         initialValue: _item

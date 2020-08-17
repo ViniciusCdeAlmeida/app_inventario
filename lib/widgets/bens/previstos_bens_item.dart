@@ -3,11 +3,17 @@ import 'package:app_inventario/models/dadosBensPatrimoniais.dart';
 import 'package:app_inventario/widgets/bens/ler_bens_geral_item.dart';
 import 'package:flutter/material.dart';
 
-class PrevistosBensItem extends StatelessWidget {
-  final DadosBensPatrimoniais bensLista;
+// ignore: must_be_immutable
+class PrevistosBensItem extends StatefulWidget {
+  DadosBensPatrimoniais bemInventario;
 
-  PrevistosBensItem(this.bensLista);
+  PrevistosBensItem(this.bemInventario);
 
+  @override
+  _PrevistosBensItemState createState() => _PrevistosBensItemState();
+}
+
+class _PrevistosBensItemState extends State<PrevistosBensItem> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -20,50 +26,55 @@ class PrevistosBensItem extends StatelessWidget {
                 children: <Widget>[
                   BensPrevistos(
                       'Número Patrimonial: ',
-                      bensLista.bemPatrimonial != null &&
-                              bensLista.bemPatrimonial.numeroPatrimonial != null
-                          ? bensLista.bemPatrimonial.numeroPatrimonial
-                          : bensLista
-                              .inventarioBemPatrimonial.numeroPatrimonial),
+                      widget.bemInventario.bemPatrimonial != null &&
+                              widget.bemInventario.bemPatrimonial
+                                      .numeroPatrimonial !=
+                                  null
+                          ? widget
+                              .bemInventario.bemPatrimonial.numeroPatrimonial
+                          : widget.bemInventario.inventarioBemPatrimonial
+                              .numeroPatrimonial),
                   BensPrevistos('Descrição do material: ',
-                      bensLista.material.codigoEDescricao),
+                      widget.bemInventario.material.codigoEDescricao),
                   BensPrevistos(
                       'Situação fisica: ',
-                      bensLista.dominioSituacaoFisica != null
-                          ? bensLista.dominioSituacaoFisica.descricao
-                          : bensLista.inventarioBemPatrimonial
+                      widget.bemInventario.dominioSituacaoFisica != null
+                          ? widget.bemInventario.dominioSituacaoFisica.descricao
+                          : widget.bemInventario.inventarioBemPatrimonial
                                       .dominioSituacaoFisica !=
                                   null
-                              ? bensLista.inventarioBemPatrimonial
+                              ? widget.bemInventario.inventarioBemPatrimonial
                                   .dominioSituacaoFisica.descricao
                               : 'Não contem'),
                   BensPrevistos(
                       'Status do bem: ',
-                      bensLista.dominioStatus != null
-                          ? bensLista.dominioStatus.descricao
-                          : bensLista.inventarioBemPatrimonial.dominioStatus !=
+                      widget.bemInventario.dominioStatus != null
+                          ? widget.bemInventario.dominioStatus.descricao
+                          : widget.bemInventario.inventarioBemPatrimonial
+                                      .dominioStatus !=
                                   null
-                              ? bensLista.inventarioBemPatrimonial.dominioStatus
-                                  .descricao
+                              ? widget.bemInventario.inventarioBemPatrimonial
+                                  .dominioStatus.descricao
                               : 'Não contem'),
                   BensPrevistos(
                       'Status no Inventario: ',
-                      bensLista.dominioStatusInventarioBem != null
-                          ? bensLista.dominioStatusInventarioBem.descricao
+                      widget.bemInventario.dominioStatusInventarioBem != null
+                          ? widget.bemInventario.dominioStatusInventarioBem
+                              .descricao
                           : null),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       IconButton(
-                        icon: bensLista.inventarioBemPatrimonial == null
+                        icon: !widget.bemInventario.inventariado
                             ? Icon(Icons.content_paste)
                             : Icon(Icons.check),
                         onPressed: () {
                           Navigator.pushNamed(
                             context,
                             LerBensGeralTela.routeName,
-                            arguments:
-                                bensLista.bemPatrimonial.numeroPatrimonial,
+                            arguments: widget
+                                .bemInventario.bemPatrimonial.numeroPatrimonial,
                           );
                         },
                       ),

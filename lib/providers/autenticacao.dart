@@ -64,7 +64,8 @@ class Autenticacao with ChangeNotifier {
     };
     try {
       Response response = await dio
-          .get("usuarioValidoV2/?username=$userName&password=$password");
+          // .get("usuarioValidoV2/?username=$userName&password=$password");
+          .get("usuarioValidoV2/?username=vinicius.correa&password=interno");
       _usrLogado = helperLogin(response.data);
     } catch (error) {
       throw error;

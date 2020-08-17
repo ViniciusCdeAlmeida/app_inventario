@@ -11,6 +11,9 @@ DadosBensPatrimoniais helperDadosBensPatrimoniaisEst(
     id: listaDadosBemPatrimonial['id'],
     idInventario: listaDadosBemPatrimonial['idInventario'],
     numeroPatrimonial: listaDadosBemPatrimonial['numeroPatrimonial'],
+    inventariado: listaDadosBemPatrimonial['inventarioBemPatrimonial'] == null
+        ? false
+        : true,
     idInventarioEstruturaOrganizacional:
         listaDadosBemPatrimonial['idInventarioEstruturaOrganizacional'],
     dominioSituacaoFisica:
