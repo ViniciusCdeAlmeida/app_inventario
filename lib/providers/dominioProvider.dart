@@ -20,6 +20,24 @@ class DominioProvier with ChangeNotifier {
     ];
   }
 
+  List<DropdownMenuItem<Dominio>> getDominiosDropdownBens(String chave) {
+    List<Dominio> dominioFiltrado = [
+      ..._dominios.where((element) => element.chave == chave)
+    ];
+    return dominioFiltrado.map(
+      (itens) {
+        return DropdownMenuItem(
+          value: itens,
+          child: Text(itens.descricao),
+        );
+      },
+    ).toList();
+  }
+
+  List<Dominio> getDominiosBens(String chave) {
+    return [..._dominios.where((element) => element.chave == chave)];
+  }
+
   bool get isLoading => _isLoading;
 
   Future<List<Dominio>> _getDominios(String conexao) async {

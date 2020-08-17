@@ -56,7 +56,9 @@ class PrevistosBensItem extends StatelessWidget {
                     children: [
                       // Text('Inventariar'),
                       IconButton(
-                        icon: Icon(Icons.content_paste),
+                        icon: bensLista.inventarioBemPatrimonial == null
+                            ? Icon(Icons.content_paste)
+                            : Icon(Icons.check),
                         onPressed: () {
                           Navigator.pushNamed(
                             context,

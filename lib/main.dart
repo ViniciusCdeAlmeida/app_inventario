@@ -1,6 +1,7 @@
 import 'package:app_inventario/providers/bensProvider.dart';
 import 'package:app_inventario/providers/dominioProvider.dart';
 import 'package:app_inventario/providers/estruturaLevantamento.dart';
+import 'package:app_inventario/providers/inventarioBemPatrimonial.dart';
 import 'package:app_inventario/providers/levantamentos.dart';
 import 'package:app_inventario/providers/unidade.dart';
 import 'package:app_inventario/screens/bens/previstos_bens_tela.dart';
@@ -50,9 +51,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (ctx) => DominioProvier(),
         ),
-        // ChangeNotifierProvider(
-        //   create: (ctx) => EstruturaLevantamento(),
-        // ),
+        ChangeNotifierProvider(
+          create: (ctx) => InventarioBemPatrimonialProvider(),
+        ),
         ChangeNotifierProxyProvider<DominioProvier, EstruturaLevantamento>(
           create: (ctx) => EstruturaLevantamento(),
           update: (ctx, dominio, estruturas) => EstruturaLevantamento(
