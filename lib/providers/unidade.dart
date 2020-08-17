@@ -1,25 +1,25 @@
 import 'dart:io';
 
-import 'package:app_inventario/helpers/helpers_organizacao.dart';
-import 'package:app_inventario/models/organizacao.dart';
+import 'package:app_inventario/helpers/helpers_unidade.dart';
+import 'package:app_inventario/models/estruturaInventario.dart';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 class Unidades with ChangeNotifier {
-  List<Organizacao> unidades = [];
+  List<EstruturaInventario> unidades = [];
   final int idInventario;
   bool _isLoading = false;
 
   Unidades({this.idInventario});
 
-  List<Organizacao> get getUnidades {
+  List<EstruturaInventario> get getUnidades {
     return [...unidades];
   }
 
   bool get isLoading => _isLoading;
 
-  Future<void> _getEstruturasLevantamento(
+  Future<List<EstruturaInventario>> _getEstruturasLevantamento(
       int idInventario, String conexao) async {
     Dio dio = new Dio()
       ..options.baseUrl =
@@ -31,11 +31,11 @@ class Unidades with ChangeNotifier {
     };
     try {
       Response response = await dio
-          .get("estruturaPorInventarioV2/?idInventario=$idInventario",
+          .get("quantitativoBensStatusV2/?idInventario=$idInventario",
               onReceiveProgress: (actbyt, totalbyt) {
         // print('$actbyt');
       });
-      unidades = helperUnidades(response.data);
+      return helperEstruturaInventario(response.data);
     } catch (error) {
       throw error;
     }
@@ -45,7 +45,7 @@ class Unidades with ChangeNotifier {
       int idInventario, String conexao) async {
     _isLoading = true;
     notifyListeners();
-    await _getEstruturasLevantamento(idInventario, conexao);
+    unidades = await _getEstruturasLevantamento(idInventario, conexao);
 
     _isLoading = false;
     notifyListeners();

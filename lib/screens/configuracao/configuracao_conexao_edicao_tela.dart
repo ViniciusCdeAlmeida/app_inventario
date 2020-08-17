@@ -61,9 +61,9 @@ class _ConfiguracaoConexaoEdicaoTelaState
   }
 
   void _salvarForm() {
-    final ehValido = _form.currentState.validate();
+    final valido = _form.currentState.validate();
 
-    if (!ehValido) {
+    if (!valido) {
       return;
     }
     _form.currentState.save();

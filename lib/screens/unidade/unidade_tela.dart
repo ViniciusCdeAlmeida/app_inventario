@@ -1,6 +1,7 @@
 import 'package:app_inventario/models/telaArgumentos.dart';
 import 'package:app_inventario/providers/autenticacao.dart';
-import 'package:app_inventario/providers/unidade.dart';
+import 'package:app_inventario/providers/estruturaLevantamento.dart';
+import 'package:app_inventario/providers/levantamentos.dart';
 import 'package:app_inventario/widgets/cabecalho/app_cabecalho.dart';
 import 'package:app_inventario/widgets/unidade/unidade_item.dart';
 import 'package:flutter/material.dart';
@@ -18,19 +19,24 @@ class _UnidadeTelaState extends State<UnidadeTela> {
 
   @override
   void initState() {
-    Future.delayed(Duration.zero).then((_) async {
-      unidadeArgs = ModalRoute.of(context).settings.arguments;
-      final conexao =
-          Provider.of<Autenticacao>(context, listen: false).atualConexao;
-      await Provider.of<Unidades>(context)
-          .buscaEstruturasLevantamento(unidadeArgs.id, conexao);
-    });
+    // Future.delayed(Duration.zero).then((_) async {
+    //   unidadeArgs = ModalRoute.of(context).settings.arguments;
+    //   final conexao =
+    //       Provider.of<Autenticacao>(context, listen: false).atualConexao;
+    //   await Provider.of<Unidades>(context)
+    //       .buscaEstruturasLevantamento(unidadeArgs.id, conexao);
+    // });
+    // Future.delayed(Duration.zero).then((_) async {
+    //   unidadeArgs = ModalRoute.of(context).settings.arguments;
+    //   Provider.of<EstruturaLevantamento>(context)
+    //       .buscaPorEstrutura(unidadeArgs.id);
+    // });
     super.initState();
   }
 
   Future<void> _carregaUnidades(BuildContext context, String conexao) async {
-    await Provider.of<Unidades>(context, listen: false)
-        .buscaEstruturasLevantamento(unidadeArgs.id, conexao);
+    // await Provider.of<EstruturaLevantamento>(context, listen: false)
+    //     .buscaPorEstrutura(unidadeArgs.id);
   }
 
   @override
@@ -38,7 +44,9 @@ class _UnidadeTelaState extends State<UnidadeTela> {
     final conexao =
         Provider.of<Autenticacao>(context, listen: false).atualConexao;
     unidadeArgs = ModalRoute.of(context).settings.arguments;
-    final unidades = Provider.of<Unidades>(context);
+    final unidades = Provider.of<Levantamentos>(context);
+    Provider.of<EstruturaLevantamento>(context)
+        .buscaPorEstrutura(unidadeArgs.id);
 
     return Scaffold(
       appBar: AppBar(
@@ -51,19 +59,20 @@ class _UnidadeTelaState extends State<UnidadeTela> {
             )
           : RefreshIndicator(
               onRefresh: () => _carregaUnidades(context, conexao),
-              child: Consumer<Unidades>(
+              // onRefresh: null,
+              child: Consumer<EstruturaLevantamento>(
                 builder: (ctx, unidadesData, _) => Padding(
                   padding: EdgeInsets.all(8),
                   child: ListView.builder(
                     itemBuilder: (_, idx) => Column(
                       children: [
                         UnidadeItem(
-                          unidadesData.getUnidades[idx],
+                          unidadesData.getLevantamentosEstrutura[idx],
                         ),
                         Divider(),
                       ],
                     ),
-                    itemCount: unidadesData.getUnidades.length,
+                    itemCount: unidadesData.getLevantamentosEstrutura.length,
                   ),
                 ),
               ),

@@ -11,7 +11,10 @@ class PopupMenuCustom extends StatelessWidget {
     return Container(
       child: Row(
         children: <Widget>[
-          Icon(icone),
+          Icon(
+            icone,
+            color: Colors.black,
+          ),
           Padding(
             padding: EdgeInsets.all(10),
             child: Text(texto),

@@ -1,9 +1,17 @@
+import 'package:app_inventario/providers/bensProvider.dart';
+import 'package:app_inventario/providers/dominioProvider.dart';
+import 'package:app_inventario/providers/estruturaLevantamento.dart';
+import 'package:app_inventario/providers/inventarioBemPatrimonial.dart';
 import 'package:app_inventario/providers/levantamentos.dart';
 import 'package:app_inventario/providers/unidade.dart';
+import 'package:app_inventario/screens/bens/previstos_bens_tela.dart';
 import 'package:app_inventario/screens/inventario/inventario_geral_tela.dart';
 import 'package:app_inventario/screens/inventario/inventario_selecao_tela.dart';
 import 'package:app_inventario/screens/inventario/levantamento_fisico_tela.dart';
 import 'package:app_inventario/screens/unidade/unidade_tela.dart';
+import 'package:app_inventario/widgets/bens/ler_bens_geral_item.dart';
+import 'package:app_inventario/widgets/bens/ler_bens_item.dart';
+import 'package:app_inventario/widgets/teste.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -37,11 +45,26 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (ctx) => Unidades(),
         ),
+        ChangeNotifierProvider(
+          create: (ctx) => BensProvier(),
+        ),
+        ChangeNotifierProvider(
+          create: (ctx) => DominioProvier(),
+        ),
+        ChangeNotifierProvider(
+          create: (ctx) => InventarioBemPatrimonialProvider(),
+        ),
+        ChangeNotifierProxyProvider<DominioProvier, EstruturaLevantamento>(
+          create: (ctx) => EstruturaLevantamento(),
+          update: (ctx, dominio, estruturas) => EstruturaLevantamento(
+            listaDominios: dominio == null ? [] : dominio.getDominios,
+          ),
+        ),
         ChangeNotifierProxyProvider<Autenticacao, Levantamentos>(
           create: (context) => Levantamentos(),
-          update: (ctx, autenticacao, previousData) => Levantamentos(
+          update: (ctx, autenticacao, levantamento) => Levantamentos(
             levantamentos:
-                previousData == null ? [] : previousData.levantamentos,
+                levantamento == null ? [] : levantamento.levantamentos,
             idOrganizacao: autenticacao.idUnidade,
           ),
         ),
@@ -67,6 +90,10 @@ class MyApp extends StatelessWidget {
             InventarioGeralTela.routeName: (ctx) => InventarioGeralTela(),
             UnidadeTela.routeName: (ctx) => UnidadeTela(),
             LevantamentoFisicoTela.routeName: (ctx) => LevantamentoFisicoTela(),
+            LerBensItens.routeName: (ctx) => LerBensItens(),
+            PrevistosBensTela.routeName: (ctx) => PrevistosBensTela(),
+            LerBensGeralTela.routeName: (ctx) => LerBensGeralTela(),
+            Teste.routeName: (ctx) => Teste(),
           },
         ),
       ),

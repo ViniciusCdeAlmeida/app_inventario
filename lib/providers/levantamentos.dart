@@ -9,12 +9,17 @@ import 'package:flutter/material.dart';
 class Levantamentos with ChangeNotifier {
   List<Levantamento> levantamentos = [];
   final int idOrganizacao;
+  String _nomeLevantamento;
   bool _isLoading = false;
 
   Levantamentos({this.levantamentos, this.idOrganizacao});
 
   List<Levantamento> get getLevantamentos {
     return levantamentos;
+  }
+
+  String get getNomeLevantamentos {
+    return _nomeLevantamento;
   }
 
   bool get isLoading => _isLoading;
@@ -31,11 +36,11 @@ class Levantamentos with ChangeNotifier {
     };
     try {
       Response response = await dio
-          .get("obterLevantamentosPorUGV2/?idOrganizacao=$idOrganizacao",
+          .get("obterLevantamentosPorUGV3.json?idOrganizacao=$idOrganizacao",
               onReceiveProgress: (actbyt, totalbyt) {
         // print('$actbyt');
       });
-      return helperLevantamento(response.data);
+      return helperLevantamentoList(response.data["payload"]);
     } catch (error) {
       throw error;
     }

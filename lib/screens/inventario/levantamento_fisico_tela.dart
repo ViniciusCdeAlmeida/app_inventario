@@ -1,5 +1,8 @@
 import 'package:app_inventario/customizacoes/acoes.dart';
+import 'package:app_inventario/models/levantamento.dart';
 import 'package:app_inventario/providers/autenticacao.dart';
+import 'package:app_inventario/providers/bensProvider.dart';
+import 'package:app_inventario/providers/estruturaLevantamento.dart';
 import 'package:app_inventario/providers/levantamentos.dart';
 import 'package:app_inventario/widgets/cabecalho/app_cabecalho.dart';
 import 'package:app_inventario/widgets/customizados/popupMenu_custom.dart';
@@ -15,8 +18,24 @@ class LevantamentoFisicoTela extends StatefulWidget {
 }
 
 class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
-  Future<void> _refreshProd2(
-      BuildContext context, String conexao, int id, Acoes acoes) async {
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  @override
+  void didChangeDependencies() {
+    final nomeEstrutura = Provider.of<EstruturaLevantamento>(context);
+    super.didChangeDependencies();
+    if (nomeEstrutura.getNomeEstrutura != null) {
+      _scaffoldKey.currentState.showSnackBar(
+        SnackBar(
+          content: Text(nomeEstrutura.getNomeEstrutura),
+          duration: Duration(seconds: 1),
+        ),
+      );
+    }
+  }
+
+  Future<void> _refreshProd2(String conexao, int id, Acoes acoes,
+      List<Levantamento> listaLevantamento) async {
     switch (acoes) {
       case Acoes.buscarLevantamentos:
         await Provider.of<Levantamentos>(context)
@@ -32,10 +51,12 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
         print('4');
         break;
       case Acoes.enviaLevantamento:
-        print('5');
+        await Provider.of<EstruturaLevantamento>(context)
+            .buscaEstruturas(conexao, listaLevantamento);
         break;
       case Acoes.gerarArquivoBackup:
         print('11');
+        await Provider.of<BensProvier>(context).buscaBens(conexao);
         break;
     }
   }
@@ -46,18 +67,20 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
     final idOrganizacao = ModalRoute.of(context).settings.arguments;
     final listaLevantamentos = Provider.of<Levantamentos>(context);
     final listaAtual = listaLevantamentos.getLevantamentos;
+    final estruturas = Provider.of<EstruturaLevantamento>(context);
 
     if (listaAtual == null && !listaLevantamentos.isLoading) {
       listaLevantamentos.buscaLevantamento(idOrganizacao, conexao);
     }
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         title: Text('Levantamentos'),
         actions: <Widget>[
           GestureDetector(
             child: PopupMenuButton<Acoes>(
               onSelected: (value) {
-                _refreshProd2(context, conexao, idOrganizacao, value);
+                _refreshProd2(conexao, idOrganizacao, value, listaAtual);
               },
               offset: Offset(0, 100),
               itemBuilder: (context) => <PopupMenuEntry<Acoes>>[
@@ -85,8 +108,10 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
                 ),
                 const PopupMenuDivider(),
                 PopupMenuItem<Acoes>(
-                  child: PopupMenuCustom(
-                      'Enviar Levantamentos', Icons.cloud_upload),
+                  child:
+                      // PopupMenuCustom(
+                      //     'Enviar Levantamentos', Icons.cloud_upload),
+                      PopupMenuCustom('Buscar Estruturas', Icons.cloud_upload),
                   value: Acoes.enviaLevantamento,
                 ),
                 const PopupMenuDivider(),
@@ -101,27 +126,37 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
         ],
       ),
       drawer: AppDrawer(),
-      body: listaLevantamentos.isLoading
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
-          : Consumer<Levantamentos>(
-              builder: (context, levantamentoData, child) {
-                return Padding(
-                  padding: EdgeInsets.all(8),
-                  child: ListView.builder(
-                    itemCount: levantamentoData.getLevantamentos.length,
-                    itemBuilder: (_, idx) => Column(
-                      children: [
-                        LevantamentoFisicoItem(
-                          levantamentoData.getLevantamentos[idx],
-                        ),
-                        Divider(),
-                      ],
-                    ),
+      body: listaLevantamentos.isLoading || estruturas.isLoading
+          ? Stack(
+              children: <Widget>[
+                Center(
+                  child: CircularProgressIndicator(
+                    backgroundColor: Colors.white,
                   ),
-                );
-              },
+                ),
+              ],
+            )
+          : Stack(
+              children: <Widget>[
+                Consumer<Levantamentos>(
+                  builder: (context, levantamentoData, child) {
+                    return Padding(
+                      padding: EdgeInsets.all(8),
+                      child: ListView.builder(
+                        itemCount: levantamentoData.getLevantamentos.length,
+                        itemBuilder: (_, idx) => Column(
+                          children: [
+                            LevantamentoFisicoItem(
+                              levantamentoData.getLevantamentos[idx],
+                            ),
+                            Divider(),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ],
             ),
     );
   }
