@@ -119,7 +119,8 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
         context,
         listen: false,
       ).salvaDados(_edicaoBemInvent, conexao);
-      _item.inventariado = true;
+
+      Provider.of<EstruturaLevantamento>(context).atualizaDados(_item);
     } catch (error) {
       await showDialog<Null>(
         context: context,

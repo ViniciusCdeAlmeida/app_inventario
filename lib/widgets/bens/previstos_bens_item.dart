@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 class PrevistosBensItem extends StatefulWidget {
   DadosBensPatrimoniais bemInventario;
 
-  PrevistosBensItem(this.bemInventario);
+  PrevistosBensItem({@required this.bemInventario});
 
   @override
   _PrevistosBensItemState createState() => _PrevistosBensItemState();
@@ -70,8 +70,7 @@ class _PrevistosBensItemState extends State<PrevistosBensItem> {
                             ? Icon(Icons.content_paste)
                             : Icon(Icons.check),
                         onPressed: () {
-                          Navigator.pushNamed(
-                            context,
+                          Navigator.of(context).pushNamed(
                             LerBensGeralTela.routeName,
                             arguments: widget
                                 .bemInventario.bemPatrimonial.numeroPatrimonial,

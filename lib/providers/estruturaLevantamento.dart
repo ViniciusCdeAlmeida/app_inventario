@@ -20,6 +20,8 @@ class EstruturaLevantamento with ChangeNotifier {
   String _nomeEstrutura;
   bool _isLoading = false;
 
+  bool get isLoading => _isLoading;
+
   List<EstruturaInventarioNew> get getLevantamentos {
     return _estruturas;
   }
@@ -72,8 +74,6 @@ class EstruturaLevantamento with ChangeNotifier {
         .first;
   }
 
-  bool get isLoading => _isLoading;
-
   Future<void> _getLevantamento(String conexao, int idLevantamento) async {
     Dio dio = new Dio()
       ..options.baseUrl =
@@ -116,6 +116,14 @@ class EstruturaLevantamento with ChangeNotifier {
   void markAsLoading() {
     _isLoading = true;
     notifyListeners();
+  }
+
+  void atualizaDados(DadosBensPatrimoniais item) {
+    final idx = _bensEstrutura.indexWhere((value) => value.id == item.id);
+    if (idx >= 0) {
+      _bensEstrutura[idx].inventariado = true;
+      notifyListeners();
+    }
   }
 
   Future<void> buscaEstruturas(

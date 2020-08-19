@@ -18,24 +18,20 @@ class PrevistosBensTela extends StatelessWidget {
         title: Text('Bens Previstos'),
       ),
       drawer: AppDrawer(),
-      body: bens.isLoading
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
-          : Padding(
-              padding: EdgeInsets.all(8),
-              child: ListView.builder(
-                itemCount: bens.getBensPorEstrutura.length,
-                itemBuilder: (_, idx) => Column(
-                  children: [
-                    PrevistosBensItem(
-                      bens.getBensPorEstrutura[idx],
-                    ),
-                    Divider(),
-                  ],
-                ),
+      body: Padding(
+        padding: EdgeInsets.all(8),
+        child: ListView.builder(
+          itemCount: bens.getBensPorEstrutura.length,
+          itemBuilder: (_, idx) => Column(
+            children: [
+              PrevistosBensItem(
+                bemInventario: bens.getBensPorEstrutura[idx],
               ),
-            ),
+              Divider(),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

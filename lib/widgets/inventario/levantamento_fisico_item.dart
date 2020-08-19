@@ -36,8 +36,7 @@ class _LevantamentoFisicoItemState extends State<LevantamentoFisicoItem> {
             trailing: IconButton(
               icon: Icon(Icons.arrow_forward, color: Colors.black),
               onPressed: () {
-                Navigator.pushNamed(
-                  context,
+                Navigator.of(context).pushNamed(
                   UnidadeTela.routeName,
                   arguments: TelaArgumentos(
                     id: widget.levantamento.id,
