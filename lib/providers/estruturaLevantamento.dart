@@ -13,6 +13,8 @@ class EstruturaLevantamento with ChangeNotifier {
   List<EstruturaInventarioNew> _estruturas = [];
   List<EstruturaInventarioNew> _levantamentosEstrutura = [];
   List<DadosBensPatrimoniais> _bensEstrutura = [];
+  String _quantidadeDigitos;
+  String _digitoVerificador;
   final List<Dominio> listaDominios;
 
   EstruturaLevantamento({this.listaDominios});
@@ -36,6 +38,22 @@ class EstruturaLevantamento with ChangeNotifier {
 
   String get getNomeEstrutura {
     return _nomeEstrutura;
+  }
+
+  String get getDigitosLeitura {
+    return _quantidadeDigitos;
+  }
+
+  String get getDigitoVerificador {
+    return _digitoVerificador;
+  }
+
+  void setDigitosLeitura(String digitos) {
+    _quantidadeDigitos = digitos;
+  }
+
+  void setDigitoVerificador(String digito) {
+    _digitoVerificador = digito;
   }
 
   void buscaPorEstrutura(int id) {
@@ -65,11 +83,11 @@ class EstruturaLevantamento with ChangeNotifier {
   }
 
   dynamic buscaBensPorid(String id) {
-    List<DadosBensPatrimoniais> lista4 = _estruturas
+    List<DadosBensPatrimoniais> listaBens = _estruturas
         .map((e) => e.dadosBensPatrimoniais.whereType<DadosBensPatrimoniais>())
         .expand((element) => element)
         .toList();
-    return lista4
+    return listaBens
         .where((element) => element.bemPatrimonial.numeroPatrimonial == id)
         .first;
   }

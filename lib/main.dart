@@ -9,7 +9,7 @@ import 'package:app_inventario/screens/inventario/inventario_geral_tela.dart';
 import 'package:app_inventario/screens/inventario/inventario_selecao_tela.dart';
 import 'package:app_inventario/screens/inventario/levantamento_fisico_tela.dart';
 import 'package:app_inventario/screens/unidade/unidade_tela.dart';
-import 'package:app_inventario/widgets/bens/ler_bens_geral_item.dart';
+import 'package:app_inventario/screens/bens/ler_bens_geral_tela.dart';
 import 'package:app_inventario/widgets/bens/ler_bens_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

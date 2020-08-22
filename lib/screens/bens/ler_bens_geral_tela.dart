@@ -5,7 +5,6 @@ import 'package:app_inventario/providers/autenticacao.dart';
 import 'package:app_inventario/providers/dominioProvider.dart';
 import 'package:app_inventario/providers/estruturaLevantamento.dart';
 import 'package:app_inventario/providers/inventarioBemPatrimonial.dart';
-import 'package:app_inventario/screens/bens/previstos_bens_tela.dart';
 import 'package:app_inventario/widgets/cabecalho/app_cabecalho.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -31,6 +30,7 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
   final _form = GlobalKey<FormState>();
   DadosBensPatrimoniais _item;
   bool _novoNumeroPatrimonial = false;
+  String _digitos;
   var _isLoading = false;
   var _inicial = true;
 
@@ -141,15 +141,14 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
     setState(() {
       _isLoading = false;
     });
-    // Navigator.pushNamed(
-    //   context,
-    //   PrevistosBensTela.routeName,
-    // );
+
     Navigator.of(context).pop();
   }
 
   @override
   Widget build(BuildContext context) {
+    _digitos = Provider.of<EstruturaLevantamento>(context).getDigitosLeitura;
+    Provider.of<DominioProvier>(context, listen: false).getDominiosMarca;
     _dominiosInicial =
         Provider.of<DominioProvier>(context, listen: false).getDominiosMarca;
     return Scaffold(
@@ -323,6 +322,7 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
                         onSaved: (value) {
                           _edicaoBemInvent.numeroPatrimonialNovo = value;
                         },
+                        maxLength: _digitos.length,
                       ),
                     )
                   : Container(),
@@ -401,8 +401,8 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
                                           .materialCaracteristica
                                           .caracteristica
                                           .dominioTipoDado
-                                          .nome !=
-                                      'TEXT_FIELD'
+                                          .nome ==
+                                      'TIPO_DOMINIO'
                                   ? Padding(
                                       padding: const EdgeInsets.all(10.0),
                                       child: SearchableDropdown.single(
@@ -467,39 +467,50 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
                                         },
                                       ),
                                     )
-                                  : Container(
-                                      padding: EdgeInsets.all(10),
-                                      child: TextFormField(
-                                        key: Key('numeroPatrimonialText'),
-                                        enabled: _item.inventariado == true
-                                            ? false
-                                            : true,
-                                        initialValue: _item
-                                            .bemPatrimonial
-                                            .caracteristicas[idx]
-                                            .valorMaterialCaracteristica,
-                                        textAlignVertical:
-                                            TextAlignVertical.bottom,
-                                        decoration: InputDecoration(
-                                          labelText: _item
+                                  : _item
                                               .bemPatrimonial
                                               .caracteristicas[idx]
                                               .materialCaracteristica
                                               .caracteristica
-                                              .descricao,
-                                          border: OutlineInputBorder(),
-                                        ),
-                                        onFieldSubmitted: (_) {
-                                          FocusScope.of(context)
-                                              .requestFocus(_dropdownFocusNode);
-                                        },
-                                        onSaved: (value) {
-                                          _edicaoBemInvent.caracteristicas[idx]
-                                                  .valorMaterialCaracteristica =
-                                              value == "" ? null : value;
-                                        },
-                                      ),
-                                    );
+                                              .dominioTipoDado
+                                              .nome ==
+                                          'TEXT_FIELD'
+                                      ? Container(
+                                          padding: EdgeInsets.all(10),
+                                          child: TextFormField(
+                                            key: Key('numeroPatrimonialText'),
+                                            enabled: _item.inventariado == true
+                                                ? false
+                                                : true,
+                                            initialValue: _item
+                                                .bemPatrimonial
+                                                .caracteristicas[idx]
+                                                .valorMaterialCaracteristica,
+                                            textAlignVertical:
+                                                TextAlignVertical.bottom,
+                                            decoration: InputDecoration(
+                                              labelText: _item
+                                                  .bemPatrimonial
+                                                  .caracteristicas[idx]
+                                                  .materialCaracteristica
+                                                  .caracteristica
+                                                  .descricao,
+                                              border: OutlineInputBorder(),
+                                            ),
+                                            onFieldSubmitted: (_) {
+                                              FocusScope.of(context)
+                                                  .requestFocus(
+                                                      _dropdownFocusNode);
+                                            },
+                                            onSaved: (value) {
+                                              _edicaoBemInvent
+                                                      .caracteristicas[idx]
+                                                      .valorMaterialCaracteristica =
+                                                  value == "" ? null : value;
+                                            },
+                                          ),
+                                        )
+                                      : Container();
                             },
                           ),
                         )

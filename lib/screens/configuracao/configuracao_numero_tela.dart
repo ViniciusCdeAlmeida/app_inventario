@@ -1,4 +1,7 @@
+import 'package:app_inventario/providers/estruturaLevantamento.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 class ConfiguracaoNumeroTela extends StatefulWidget {
   @override
@@ -6,12 +9,29 @@ class ConfiguracaoNumeroTela extends StatefulWidget {
 }
 
 class _ConfiguracaoNumeroTelaState extends State<ConfiguracaoNumeroTela> {
-  final _letraControler = TextEditingController();
+  final _form = GlobalKey<FormState>();
+  String _valorInicial;
+  String _valorFinal;
 
   void _adicionarLetra() {
-    final entradaLetra = _letraControler.text;
+    _form.currentState.save();
+
+    if (_valorFinal == null) {
+      Provider.of<EstruturaLevantamento>(context)
+          .setDigitoVerificador(_valorInicial);
+    } else {
+      Provider.of<EstruturaLevantamento>(context)
+          .setDigitoVerificador(_valorFinal);
+    }
 
     Navigator.of(context).pop();
+  }
+
+  @override
+  void didChangeDependencies() {
+    _valorInicial =
+        Provider.of<EstruturaLevantamento>(context).getDigitoVerificador;
+    super.didChangeDependencies();
   }
 
   @override
@@ -28,14 +48,24 @@ class _ConfiguracaoNumeroTelaState extends State<ConfiguracaoNumeroTela> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: <Widget>[
-              TextField(
-                autofocus: true,
-                decoration: InputDecoration(
-                  labelText: 'Letra do novo número patrimonial',
-                  helperText: 'Informe a letra',
+              Form(
+                key: _form,
+                child: TextFormField(
+                  key: Key('digitoText'),
+                  initialValue: _valorInicial,
+                  textInputAction: TextInputAction.done,
+                  // inputFormatters: [
+                  //   FilteringTextInputFormatter.allow(RegExp("[a-zA-Z]")),
+                  // ],
+                  autofocus: true,
+                  decoration: InputDecoration(
+                    labelText: 'Letra do novo número patrimonial',
+                    helperText: 'Informe a letra',
+                  ),
+                  onChanged: (value) {
+                    _valorFinal = value;
+                  },
                 ),
-                controller: _letraControler,
-                onSubmitted: null,
               ),
               FlatButton.icon(
                 icon: Icon(Icons.save),
