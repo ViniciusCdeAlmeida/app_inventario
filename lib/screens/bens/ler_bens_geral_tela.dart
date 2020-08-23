@@ -1,5 +1,6 @@
 import 'package:app_inventario/models/dadosBensPatrimoniais.dart';
 import 'package:app_inventario/models/dominio.dart';
+import 'package:app_inventario/models/estruturaInventario.dart';
 import 'package:app_inventario/models/inventarioBemPatrimonial.dart';
 import 'package:app_inventario/providers/autenticacao.dart';
 import 'package:app_inventario/providers/dominioProvider.dart';
@@ -100,6 +101,8 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
   }
 
   Future<void> _saveForm() async {
+    String _digitoVerificador =
+        Provider.of<EstruturaLevantamento>(context).getDigitoVerificador;
     String conexao = Provider.of<Autenticacao>(context).atualConexao;
     final isValid = _form.currentState.validate();
     if (!isValid) {
@@ -112,7 +115,7 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
 
     if (_edicaoBemInvent.numeroPatrimonialNovo == null) {
       _edicaoBemInvent.numeroPatrimonialNovo =
-          _edicaoBemInvent.numeroPatrimonial;
+          _digitoVerificador + _edicaoBemInvent.numeroPatrimonial;
     }
     try {
       await Provider.of<InventarioBemPatrimonialProvider>(
@@ -147,6 +150,8 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
 
   @override
   Widget build(BuildContext context) {
+    String _digitoVerificador =
+        Provider.of<EstruturaLevantamento>(context).getDigitoVerificador;
     _digitos = Provider.of<EstruturaLevantamento>(context).getDigitosLeitura;
     Provider.of<DominioProvier>(context, listen: false).getDominiosMarca;
     _dominiosInicial =
@@ -320,9 +325,10 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
                               .requestFocus(_numeroNovoFocusNode);
                         },
                         onSaved: (value) {
-                          _edicaoBemInvent.numeroPatrimonialNovo = value;
+                          _edicaoBemInvent.numeroPatrimonialNovo =
+                              _digitoVerificador + value;
                         },
-                        maxLength: _digitos.length,
+                        maxLength: _digitos == null ? null : _digitos.length,
                       ),
                     )
                   : Container(),

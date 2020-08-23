@@ -1,5 +1,7 @@
 import 'dart:io';
+import 'package:app_inventario/helpers/helper_bemPatrimonialEst.dart';
 import 'package:app_inventario/helpers/helper_dominio.dart';
+import 'package:app_inventario/models/bemPatrimonial.dart';
 import 'package:app_inventario/models/dominio.dart';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
@@ -7,6 +9,16 @@ import 'package:flutter/material.dart';
 
 class DominioProvier with ChangeNotifier {
   List<Dominio> _dominios = [];
+  int _startFilter = 0;
+  List<BemPatrimonialDemanda> _bensDemanda = [];
+
+  Map filter = {
+    "start": 1,
+    "dir": "asc",
+    "sort": "numeroPatrimonial",
+    "limit": 1000,
+    "filters": [],
+  };
 
   bool _isLoading = false;
 
@@ -57,6 +69,36 @@ class DominioProvier with ChangeNotifier {
     }
   }
 
+  Future<void> _getBensDemanda({String conexao, int itemAtual}) async {
+    Dio dio = new Dio()
+      ..options.baseUrl =
+          conexao + "/citgrp-patrimonio-web/rest/inventarioMobile/";
+    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+        (client) {
+      client.badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+    };
+    try {
+      if (_startFilter != 0 && filter['start'] < _startFilter) {
+        filter['start'] = itemAtual;
+        Response response =
+            await dio.post("obterBensPatrimoniaisDemandaV2.json", data: filter);
+        _bensDemanda.addAll(
+            helperBemPatrimonialDemanda(response.data["objects"], _dominios));
+      } else {
+        final response = await dio
+            .post("obterBensPatrimoniaisDemandaV2.json", data: filter)
+            .then(
+          (value) {
+            _startFilter = value.data['totalPages'];
+          },
+        );
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+
   void markAsLoading() {
     _isLoading = true;
     notifyListeners();
@@ -65,8 +107,24 @@ class DominioProvier with ChangeNotifier {
   Future<void> buscaDominios(String conexao) async {
     markAsLoading();
     _dominios = await _getDominios(conexao);
-
-    _isLoading = false;
-    notifyListeners();
+    await _getBensDemanda(conexao: conexao);
+    if (_startFilter != 0) {
+      List<dynamic> teste = [];
+      for (var i = 0; i < _startFilter; i++) {
+        teste.insert(i, i + 1);
+      }
+      await Stream.fromIterable(teste)
+          .asyncMap(
+            (element) => _getBensDemanda(conexao: conexao, itemAtual: element),
+          )
+          .toList();
+      _isLoading = false;
+      notifyListeners();
+    } else {
+      _isLoading = false;
+      notifyListeners();
+    }
+    // _isLoading = false;
+    // notifyListeners();
   }
 }
