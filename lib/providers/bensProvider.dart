@@ -61,38 +61,6 @@ class BensProvier with ChangeNotifier {
     }
   }
 
-  // Future<void> _getBensDemanda(String conexao) async {
-  //   Dio dio = new Dio()
-  //     ..options.baseUrl =
-  //         conexao + "/citgrp-patrimonio-web/rest/inventarioMobile/";
-  //   (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
-  //       (client) {
-  //     client.badCertificateCallback =
-  //         (X509Certificate cert, String host, int port) => true;
-  //   };
-  //   try {
-  //     if (_startFilter != 0 && filter['start'] < _startFilter) {
-  //       Response response =
-  //           await dio.post("obterBensPatrimoniaisDemandaV2.json", data: filter);
-  //       _bensDemanda
-  //           .addAll(helperBemPatrimonialDemanda(response.data["objects"]));
-  //     } else {
-  //       Response response = await dio
-  //           .post("obterBensPatrimoniaisDemandaV2.json", data: filter)
-  //           .then(
-  //         (value) {
-  //           _startFilter = value.data['totalPages'];
-  //         },
-  //       );
-  //     }
-  //     // Response response =
-  //     //     await dio.get("obterBensPatrimoniaisDemandaV2.json").then((value) {});
-  //     // return helperBemPatrimonial(response.data["payload"]);
-  //   } catch (error) {
-  //     throw error;
-  //   }
-  // }
-
   void markAsLoading() {
     _isLoading = true;
     notifyListeners();

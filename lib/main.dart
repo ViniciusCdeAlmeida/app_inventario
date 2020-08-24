@@ -1,3 +1,15 @@
+import 'package:app_inventario/models/bemPatrimonial.dart';
+import 'package:app_inventario/models/bens.dart';
+import 'package:app_inventario/models/caracteristica.dart';
+import 'package:app_inventario/models/caracteristicas.dart';
+import 'package:app_inventario/models/caracteristicasSub.dart';
+import 'package:app_inventario/models/dadosBensPatrimoniais.dart';
+import 'package:app_inventario/models/estruturaInventario.dart';
+import 'package:app_inventario/models/estruturaInventarioNew.dart';
+import 'package:app_inventario/models/levantamento.dart';
+import 'package:app_inventario/models/materialCaracteristica.dart';
+import 'package:app_inventario/models/materialEst.dart';
+import 'package:app_inventario/models/organizacao.dart';
 import 'package:app_inventario/providers/bensProvider.dart';
 import 'package:app_inventario/providers/dominioProvider.dart';
 import 'package:app_inventario/providers/estruturaLevantamento.dart';
@@ -12,17 +24,53 @@ import 'package:app_inventario/screens/unidade/unidade_tela.dart';
 import 'package:app_inventario/screens/bens/ler_bens_geral_tela.dart';
 import 'package:app_inventario/widgets/bens/ler_bens_item.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
+import 'package:path_provider/path_provider.dart' as path_provider;
 
-import 'providers/configuracao_conexao.dart';
-import 'screens/configuracao/configuracao_conexao_edicao_tela.dart';
-import 'screens/login/login_tela.dart';
-import 'providers/autenticacao.dart';
-import 'screens/configuracao/configuracao_conexao_tela.dart';
+import 'package:app_inventario/models/dominio.dart';
+import 'package:app_inventario/models/inventarioBemPatrimonial.dart';
+import 'package:app_inventario/providers/configuracao_conexao.dart';
+import 'package:app_inventario/screens/configuracao/configuracao_conexao_edicao_tela.dart';
+import 'package:app_inventario/screens/login/login_tela.dart';
+import 'package:app_inventario/providers/autenticacao.dart';
+import 'package:app_inventario/screens/configuracao/configuracao_conexao_tela.dart';
 import 'package:app_inventario/providers/inventario.dart';
 import 'package:app_inventario/screens/organizacao/organizacao_tela.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  final appDocumentDir = await path_provider.getApplicationDocumentsDirectory();
+  Hive.init(appDocumentDir.path);
+
+  Hive.registerAdapter(BemPatrimonialAdapter());
+  Hive.registerAdapter(BemPatrimonialDemandaAdapter());
+  Hive.registerAdapter(BensAdapter());
+  Hive.registerAdapter(CaracteristicaAdapter());
+  Hive.registerAdapter(CaracteristicasAdapter());
+  Hive.registerAdapter(CaracteristicasSubAdapter());
+  Hive.registerAdapter(DadosBensPatrimoniaisAdapter());
+  Hive.registerAdapter(DominioAdapter());
+  Hive.registerAdapter(EstruturaInventarioAdapter());
+  Hive.registerAdapter(EstruturaInventarioNewAdapter());
+  Hive.registerAdapter(InventarioBemPatrimonialAdapter());
+  Hive.registerAdapter(LevantamentoAdapter());
+  Hive.registerAdapter(MaterialCaracteristicaAdapter());
+  Hive.registerAdapter(MaterialEstAdapter());
+  Hive.registerAdapter(OrganizacaoAdapter());
+
+  // Hive.deleteBoxFromDisk('dominios');
+  // Hive.deleteBoxFromDisk('bemPatrimonialDemanda');
+  // Hive.deleteBoxFromDisk('levantamento');
+  // Hive.deleteBoxFromDisk('estruturaInventarioNew');
+  // Hive.deleteBoxFromDisk('estruturaInventario');
+
+  await Hive.openBox<Dominio>('dominios');
+  await Hive.openBox<BemPatrimonialDemanda>('bemPatrimonialDemanda');
+  await Hive.openBox<Levantamento>('levantamento');
+  await Hive.openBox<EstruturaInventarioNew>('estruturaInventarioNew');
+  await Hive.openBox<EstruturaInventario>('estruturaInventario');
+
   runApp(MyApp());
 }
 

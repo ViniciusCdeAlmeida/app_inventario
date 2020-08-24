@@ -6,12 +6,16 @@ import 'package:app_inventario/models/dominio.dart';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 
 class DominioProvier with ChangeNotifier {
   List<Dominio> _dominios = [];
   int _startFilter = 0;
   List<BemPatrimonialDemanda> _bensDemanda = [];
-
+  Box<Dominio> _dominiosBox = Hive.box<Dominio>('dominios');
+  Box<BemPatrimonialDemanda> _bemPatrimonialDemandaBox =
+      Hive.box<BemPatrimonialDemanda>('bemPatrimonialDemanda');
+// USED - 207, RSS - 551
   Map filter = {
     "start": 1,
     "dir": "asc",
@@ -23,18 +27,12 @@ class DominioProvier with ChangeNotifier {
   bool _isLoading = false;
 
   List<Dominio> get getDominios {
-    return [..._dominios];
-  }
-
-  List<Dominio> get getDominiosMarca {
-    return [
-      ..._dominios.where((element) => element.chave == 'tipoCaractMarca')
-    ];
+    return [..._dominiosBox.values.toList()];
   }
 
   List<DropdownMenuItem<Dominio>> getDominiosDropdownBens(String chave) {
     List<Dominio> dominioFiltrado = [
-      ..._dominios.where((element) => element.chave == chave)
+      ..._dominiosBox.values.toList().where((element) => element.chave == chave)
     ];
     return dominioFiltrado.map(
       (itens) {
@@ -47,55 +45,62 @@ class DominioProvier with ChangeNotifier {
   }
 
   List<Dominio> getDominiosBens(String chave) {
-    return [..._dominios.where((element) => element.chave == chave)];
+    return [
+      ..._dominiosBox.values.toList().where((element) => element.chave == chave)
+    ];
   }
 
   bool get isLoading => _isLoading;
 
   Future<List<Dominio>> _getDominios(String conexao) async {
-    Dio dio = new Dio()
-      ..options.baseUrl =
-          conexao + "/citgrp-patrimonio-web/rest/inventarioMobile/";
-    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
-        (client) {
-      client.badCertificateCallback =
-          (X509Certificate cert, String host, int port) => true;
-    };
-    try {
-      Response response = await dio.get("obterDominiosInventario.json");
-      return helperDominioLista(response.data["payload"]);
-    } catch (error) {
-      throw error;
+    if (_dominiosBox.isEmpty) {
+      Dio dio = new Dio()
+        ..options.baseUrl =
+            conexao + "/citgrp-patrimonio-web/rest/inventarioMobile/";
+      (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+          (client) {
+        client.badCertificateCallback =
+            (X509Certificate cert, String host, int port) => true;
+      };
+      try {
+        Response response = await dio.get("obterDominiosInventario.json");
+        _dominiosBox.addAll((helperDominioLista(response.data["payload"])));
+        return _dominiosBox.values.toList();
+      } catch (error) {
+        throw error;
+      }
     }
   }
 
   Future<void> _getBensDemanda({String conexao, int itemAtual}) async {
-    Dio dio = new Dio()
-      ..options.baseUrl =
-          conexao + "/citgrp-patrimonio-web/rest/inventarioMobile/";
-    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
-        (client) {
-      client.badCertificateCallback =
-          (X509Certificate cert, String host, int port) => true;
-    };
-    try {
-      if (_startFilter != 0 && filter['start'] < _startFilter) {
-        filter['start'] = itemAtual;
-        Response response =
-            await dio.post("obterBensPatrimoniaisDemandaV2.json", data: filter);
-        _bensDemanda.addAll(
-            helperBemPatrimonialDemanda(response.data["objects"], _dominios));
-      } else {
-        final response = await dio
-            .post("obterBensPatrimoniaisDemandaV2.json", data: filter)
-            .then(
-          (value) {
-            _startFilter = value.data['totalPages'];
-          },
-        );
+    if (_bemPatrimonialDemandaBox.isEmpty || filter['start'] < _startFilter) {
+      Dio dio = new Dio()
+        ..options.baseUrl =
+            conexao + "/citgrp-patrimonio-web/rest/inventarioMobile/";
+      (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+          (client) {
+        client.badCertificateCallback =
+            (X509Certificate cert, String host, int port) => true;
+      };
+      try {
+        if (_startFilter != 0 && filter['start'] < _startFilter) {
+          filter['start'] = itemAtual;
+          Response response = await dio
+              .post("obterBensPatrimoniaisDemandaV2.json", data: filter);
+          await _bemPatrimonialDemandaBox.addAll(
+              helperBemPatrimonialDemanda(response.data["objects"], _dominios));
+        } else {
+          final response = await dio
+              .post("obterBensPatrimoniaisDemandaV2.json", data: filter)
+              .then(
+            (value) {
+              _startFilter = value.data['totalPages'];
+            },
+          );
+        }
+      } catch (error) {
+        throw error;
       }
-    } catch (error) {
-      throw error;
     }
   }
 
@@ -105,6 +110,7 @@ class DominioProvier with ChangeNotifier {
   }
 
   Future<void> buscaDominios(String conexao) async {
+    // Hive.close();
     markAsLoading();
     _dominios = await _getDominios(conexao);
     await _getBensDemanda(conexao: conexao);

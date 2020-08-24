@@ -1,4 +1,4 @@
-import 'package:app_inventario/models/material.dart';
+import 'package:app_inventario/models/materialEst.dart';
 
 MaterialEst helperMaterial(Map dominio) {
   if (dominio != null) {
@@ -7,5 +7,6 @@ MaterialEst helperMaterial(Map dominio) {
       codigoEDescricao: dominio['codigoEDescricao'],
       descricao: dominio['descricao'],
     );
-  }
+  } else
+    return null;
 }

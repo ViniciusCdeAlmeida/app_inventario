@@ -35,8 +35,6 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
   var _isLoading = false;
   var _inicial = true;
 
-  List<Dominio> _dominiosInicial = [];
-
   var _edicaoBemInvent = InventarioBemPatrimonial(
     caracteristicas: null,
     dominioSituacaoFisica: null,
@@ -84,6 +82,7 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
           _item.bemPatrimonial.numeroPatrimonial;
     }
     _inicial = false;
+
     super.didChangeDependencies();
   }
 
@@ -114,8 +113,13 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
     });
 
     if (_edicaoBemInvent.numeroPatrimonialNovo == null) {
-      _edicaoBemInvent.numeroPatrimonialNovo =
-          _digitoVerificador + _edicaoBemInvent.numeroPatrimonial;
+      if (_digitoVerificador == null) {
+        _edicaoBemInvent.numeroPatrimonialNovo =
+            _edicaoBemInvent.numeroPatrimonial;
+      } else {
+        _edicaoBemInvent.numeroPatrimonialNovo =
+            _digitoVerificador + _edicaoBemInvent.numeroPatrimonial;
+      }
     }
     try {
       await Provider.of<InventarioBemPatrimonialProvider>(
@@ -153,9 +157,7 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
     String _digitoVerificador =
         Provider.of<EstruturaLevantamento>(context).getDigitoVerificador;
     _digitos = Provider.of<EstruturaLevantamento>(context).getDigitosLeitura;
-    Provider.of<DominioProvier>(context, listen: false).getDominiosMarca;
-    _dominiosInicial =
-        Provider.of<DominioProvier>(context, listen: false).getDominiosMarca;
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -428,7 +430,8 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
                                               keyword.isNotEmpty) {
                                             keyword.split(" ").forEach((k) {
                                               int i = 0;
-                                              _dominiosInicial.forEach((item) {
+                                              _dominiosDropdownAtual
+                                                  .forEach((item) {
                                                 if (k.isNotEmpty &&
                                                     (item.descricao
                                                         .toString()

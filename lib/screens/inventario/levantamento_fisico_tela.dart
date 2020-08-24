@@ -69,7 +69,7 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
     final listaAtual = listaLevantamentos.getLevantamentos;
     final estruturas = Provider.of<EstruturaLevantamento>(context);
 
-    if (listaAtual == null && !listaLevantamentos.isLoading) {
+    if (listaAtual.isEmpty && !listaLevantamentos.isLoading) {
       listaLevantamentos.buscaLevantamento(idOrganizacao, conexao);
     }
     return Scaffold(

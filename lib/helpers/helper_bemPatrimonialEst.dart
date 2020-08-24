@@ -38,7 +38,7 @@ List<BemPatrimonialDemanda> helperBemPatrimonialDemanda(
           numeroPatrimonialCompleto: item['numeroPatrimonialCompleto'],
           numeroPatrimonialCompletoAntigo:
               item['numeroPatrimonialCompletoAntigo'],
-          material: helperMaterial(item['material']),
+          materialBem: helperMaterial(item['material']),
           dominioSituacaoFisica: helperDominio(item['dominioSituacaoFisica']),
           dominioStatus: helperDominio(item['dominioStatus']),
           estruturaOrganizacionalAtual: helperEstruturaOrganizacional(

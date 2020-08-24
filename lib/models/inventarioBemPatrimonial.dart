@@ -1,24 +1,59 @@
 import 'package:app_inventario/models/caracteristicas.dart';
 import 'package:app_inventario/models/dominio.dart';
-import 'package:app_inventario/models/material.dart';
+import 'package:app_inventario/models/materialEst.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 
+part 'inventarioBemPatrimonial.g.dart';
+
+@HiveType(typeId: 10)
 class InventarioBemPatrimonial with ChangeNotifier {
+  @HiveField(0)
   int id;
+
+  @HiveField(1)
   int idDadosBemPatrimonialMobile;
+
+  @HiveField(2)
   int idInventarioEstruturaOrganizacionalMobile;
+
+  @HiveField(3)
   String numeroPatrimonial;
+
+  @HiveField(4)
   String numeroPatrimonialAntigo;
+
+  @HiveField(5)
   String numeroPatrimonialNovo;
+
+  @HiveField(6)
   List<Caracteristicas> caracteristicas;
+
+  @HiveField(7)
   Dominio dominioSituacaoFisica;
+
+  @HiveField(8)
   Dominio dominioStatus;
+
+  @HiveField(9)
   bool bemNaoEncontrado;
+
+  @HiveField(10)
   bool bemNaoInventariado;
+
+  @HiveField(11)
   Dominio dominioStatusInventarioBem;
+
+  @HiveField(12)
   MaterialEst material;
+
+  @HiveField(13)
   String nomeUsuarioColeta;
+
+  @HiveField(14)
   bool novoBemInvetariado;
+
+  @HiveField(15)
   String tipoMobile;
 
   InventarioBemPatrimonial({
