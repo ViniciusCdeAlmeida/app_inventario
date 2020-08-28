@@ -3,14 +3,19 @@ import 'package:app_inventario/helpers/helper_bemPatrimonialEst.dart';
 import 'package:app_inventario/helpers/helper_dominio.dart';
 import 'package:app_inventario/models/bemPatrimonial.dart';
 import 'package:app_inventario/models/dominio.dart';
+import 'package:app_inventario/models/database/databaseMoor.dart';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:moor_flutter/moor_flutter.dart';
 
 class DominioProvier with ChangeNotifier {
   List<Dominio> _dominios = [];
   int _startFilter = 0;
   List<BemPatrimonialDemanda> _bensDemanda = [];
+  final AppDatabase db;
+
+  DominioProvier() : db = AppDatabase();
 
   Map filter = {
     "start": 1,
@@ -50,8 +55,12 @@ class DominioProvier with ChangeNotifier {
     return [..._dominios.where((element) => element.chave == chave)];
   }
 
-  bool get isLoading => _isLoading;
+  void getDominiosBens2(String chave) {
+    db.getDominioBens(chave);
+    // return [..._dominios.where((element) => element.chave == chave)];
+  }
 
+  bool get isLoading => _isLoading;
   Future<List<Dominio>> _getDominios(String conexao) async {
     Dio dio = new Dio()
       ..options.baseUrl =
@@ -63,6 +72,10 @@ class DominioProvier with ChangeNotifier {
     };
     try {
       Response response = await dio.get("obterDominiosInventario.json");
+
+      db.insertDominio(response.data["payload"] as List);
+      // var teste = await db.getAllDominio();
+      // List<DominioDBData> teste1 = await db.getDominioBens('tipoCaractMarca');
       return helperDominioLista(response.data["payload"]);
     } catch (error) {
       throw error;
@@ -83,8 +96,11 @@ class DominioProvier with ChangeNotifier {
         filter['start'] = itemAtual;
         Response response =
             await dio.post("obterBensPatrimoniaisDemandaV2.json", data: filter);
-        _bensDemanda.addAll(
-            helperBemPatrimonialDemanda(response.data["objects"], _dominios));
+
+        await db.insertBensPatrimoniais(response.data["objects"] as List);
+        // var teste = await db.getAllBensPatrimoniais();
+        // _bensDemanda.addAll(
+        //     helperBemPatrimonialDemanda(response.data["objects"], _dominios));
       } else {
         final response = await dio
             .post("obterBensPatrimoniaisDemandaV2.json", data: filter)
@@ -106,6 +122,8 @@ class DominioProvier with ChangeNotifier {
 
   Future<void> buscaDominios(String conexao) async {
     markAsLoading();
+    db.deleteTable(db.bensPatrimoniaisDB);
+    db.deleteTable(db.dominioDB);
     _dominios = await _getDominios(conexao);
     await _getBensDemanda(conexao: conexao);
     if (_startFilter != 0) {
@@ -119,6 +137,7 @@ class DominioProvier with ChangeNotifier {
           )
           .toList();
       _isLoading = false;
+      // var teste2 = await db.getAllBensPatrimoniais();
       notifyListeners();
     } else {
       _isLoading = false;
