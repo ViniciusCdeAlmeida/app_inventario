@@ -1,34 +1,33 @@
 import 'dart:io';
 
-import 'package:app_inventario/helpers/helper_levantamentoFisicoEst.dart';
-import 'package:app_inventario/models/dadosBensPatrimoniais.dart';
-import 'package:app_inventario/models/dominio.dart';
-import 'package:app_inventario/models/estruturaInventarioNew.dart';
-import 'package:app_inventario/models/levantamento.dart';
+import 'package:app_inventario/main.dart';
+import 'package:app_inventario/models/serialized/dadosBensPatrimoniais.dart';
+import 'package:app_inventario/models/serialized/estruturaInventario.dart';
+import 'package:app_inventario/models/serialized/levantamento.dart';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
 class EstruturaLevantamento with ChangeNotifier {
-  List<EstruturaInventarioNew> _estruturas = [];
-  List<EstruturaInventarioNew> _levantamentosEstrutura = [];
+  List<EstruturaInventario> _estruturas = [];
+  List<EstruturaInventario> _levantamentosEstrutura = [];
   List<DadosBensPatrimoniais> _bensEstrutura = [];
   String _quantidadeDigitos;
   String _digitoVerificador;
-  final List<Dominio> listaDominios;
+  // final List<Dominio> listaDominios;
 
-  EstruturaLevantamento({this.listaDominios});
+  // EstruturaLevantamento({this.listaDominios});
 
   String _nomeEstrutura;
   bool _isLoading = false;
 
   bool get isLoading => _isLoading;
 
-  List<EstruturaInventarioNew> get getLevantamentos {
+  List<EstruturaInventario> get getLevantamentos {
     return _estruturas;
   }
 
-  List<EstruturaInventarioNew> get getLevantamentosEstrutura {
+  List<EstruturaInventario> get getLevantamentosEstrutura {
     return [..._levantamentosEstrutura];
   }
 
@@ -56,41 +55,41 @@ class EstruturaLevantamento with ChangeNotifier {
     _digitoVerificador = digito;
   }
 
-  void buscaPorEstrutura(int id) {
-    List<EstruturaInventarioNew> lista =
-        _estruturas.where((element) => element.idInventario == id).toList();
-    if (lista.isNotEmpty) {
-      _levantamentosEstrutura = lista;
-    } else {
-      _levantamentosEstrutura.clear();
-    }
-  }
+  // void buscaPorEstrutura(int id) {
+  //   List<EstruturaInventario> lista =
+  //       _estruturas.where((element) => element.id == id).toList();
+  //   if (lista.isNotEmpty) {
+  //     _levantamentosEstrutura = lista;
+  //   } else {
+  //     _levantamentosEstrutura.clear();
+  //   }
+  // }
 
-  void buscaBensPorEstrutura(int id) {
-    _bensEstrutura.clear();
-    List<EstruturaInventarioNew> lista = _levantamentosEstrutura
-        .where((element) => element.estruturaOrganizacional.id == id)
-        .toList();
+  // void buscaBensPorEstrutura(int id) {
+  //   _bensEstrutura.clear();
+  //   List<EstruturaInventario> lista = _levantamentosEstrutura
+  //       .where((element) => element.estruturaOrganizacional.id == id)
+  //       .toList();
 
-    if (lista.isNotEmpty) {
-      _bensEstrutura.addAll(lista
-          .map((e) => e.dadosBensPatrimoniais)
-          .expand((element) => element)
-          .toList());
-    } else {
-      _bensEstrutura.clear();
-    }
-  }
+  //   if (lista.isNotEmpty) {
+  //     _bensEstrutura.addAll(lista
+  //         .map((e) => e.dadosBensPatrimoniais)
+  //         .expand((element) => element)
+  //         .toList());
+  //   } else {
+  //     _bensEstrutura.clear();
+  //   }
+  // }
 
-  dynamic buscaBensPorid(String id) {
-    List<DadosBensPatrimoniais> listaBens = _estruturas
-        .map((e) => e.dadosBensPatrimoniais.whereType<DadosBensPatrimoniais>())
-        .expand((element) => element)
-        .toList();
-    return listaBens
-        .where((element) => element.bemPatrimonial.numeroPatrimonial == id)
-        .first;
-  }
+  // dynamic buscaBensPorid(String id) {
+  //   List<DadosBensPatrimoniais> listaBens = _estruturas
+  //       .map((e) => e.dadosBensPatrimoniais.whereType<DadosBensPatrimoniais>())
+  //       .expand((element) => element)
+  //       .toList();
+  //   return listaBens
+  //       .where((element) => element.bemPatrimonial.numeroPatrimonial == id)
+  //       .first;
+  // }
 
   Future<void> _getLevantamento(String conexao, int idLevantamento) async {
     Dio dio = new Dio()
@@ -118,14 +117,15 @@ class EstruturaLevantamento with ChangeNotifier {
       Response response = await dio.post(
           "obterInventarioEstruturaOrganizacionalPorDemandaV2.json",
           data: filter);
-
       _nomeEstrutura = (response.data["objects"] as List<dynamic>)
           .first["inventario"]["codigoENome"];
       print((response.data["objects"] as List<dynamic>).first["inventario"]
           ["codigoENome"]);
       notifyListeners();
-      _estruturas.addAll(helperEstruturaInventarioEst(
-          response.data["objects"], listaDominios));
+      await db.estruturaInventarioDao
+          .insertEstruturaInventario((response.data["objects"] as List));
+      // _estruturas.addAll(
+      //     EstruturaInventario.fromJson(response.data["objects"]));
     } catch (error) {
       throw error;
     }
@@ -144,17 +144,25 @@ class EstruturaLevantamento with ChangeNotifier {
     }
   }
 
+  Future<void> buscaEst(int idInventario) async {
+    // var teste1 =
+    //     await db.estruturaInventarioDao.getAllEstruturasPorLevantamento(65);
+    // var teste2 = await db.estruturaInventarioDao.getAllDadosPorEstrutura(2966);
+    // print('object');
+  }
+
   Future<void> buscaEstruturas(
       String conexao, List<Levantamento> listLevantamento) async {
     _estruturas.clear();
     markAsLoading();
 
+    db.deleteTable(db.estruturaInventarioDB);
+    db.deleteTable(db.dadosBemPatrimoniaisDB);
     await Stream.fromIterable(listLevantamento)
         .asyncMap((element) => _getLevantamento(conexao, element.id))
         .toList();
     _nomeEstrutura = null;
     _isLoading = false;
-    print('ACABOU');
     notifyListeners();
   }
 }

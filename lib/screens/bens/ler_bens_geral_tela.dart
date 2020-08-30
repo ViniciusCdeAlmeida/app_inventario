@@ -1,9 +1,7 @@
-import 'package:app_inventario/models/dadosBensPatrimoniais.dart';
-import 'package:app_inventario/models/dominio.dart';
-import 'package:app_inventario/models/estruturaInventario.dart';
-import 'package:app_inventario/models/inventarioBemPatrimonial.dart';
+import 'package:app_inventario/models/serialized/dadosBensPatrimoniais.dart';
+import 'package:app_inventario/models/serialized/dominio.dart';
 import 'package:app_inventario/providers/autenticacao.dart';
-import 'package:app_inventario/providers/dominioProvider.dart';
+import 'package:app_inventario/providers/inicializacao.dart';
 import 'package:app_inventario/providers/estruturaLevantamento.dart';
 import 'package:app_inventario/providers/inventarioBemPatrimonial.dart';
 import 'package:app_inventario/widgets/cabecalho/app_cabecalho.dart';
@@ -37,23 +35,24 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
 
   List<Dominio> _dominiosInicial = [];
 
-  var _edicaoBemInvent = InventarioBemPatrimonial(
-    caracteristicas: null,
-    dominioSituacaoFisica: null,
-    dominioStatus: null,
-    dominioStatusInventarioBem: null,
-    idDadosBemPatrimonialMobile: null,
-    idInventarioEstruturaOrganizacionalMobile: null,
-    material: null,
-    nomeUsuarioColeta: null,
-    novoBemInvetariado: false,
-    numeroPatrimonial: null,
-    numeroPatrimonialAntigo: null,
-    numeroPatrimonialNovo: null,
-    tipoMobile: 'levantamentoFisico',
-    bemNaoEncontrado: false,
-    bemNaoInventariado: false,
-  );
+  var _edicaoBemInvent;
+  // = InventarioBemPatrimonial(
+  //   caracteristicas: null,
+  //   dominioSituacaoFisica: null,
+  //   dominioStatus: null,
+  //   dominioStatusInventarioBem: null,
+  //   idDadosBemPatrimonialMobile: null,
+  //   idInventarioEstruturaOrganizacionalMobile: null,
+  //   material: null,
+  //   nomeUsuarioColeta: null,
+  //   novoBemInvetariado: false,
+  //   numeroPatrimonial: null,
+  //   numeroPatrimonialAntigo: null,
+  //   numeroPatrimonialNovo: null,
+  //   tipoMobile: 'levantamentoFisico',
+  //   bemNaoEncontrado: false,
+  //   bemNaoInventariado: false,
+  // );
 
   @override
   void didChangeDependencies() {
@@ -61,8 +60,8 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
     final usuarioColetante =
         Provider.of<Autenticacao>(context, listen: false).usuarioLogado;
     if (_inicial) {
-      _item = Provider.of<EstruturaLevantamento>(context, listen: false)
-          .buscaBensPorid(idBem);
+      // _item = Provider.of<EstruturaLevantamento>(context, listen: false)
+      //     .buscaBensPorid(idBem);
       if (_item.inventarioBemPatrimonial != null) {
         _item.inventariado = true;
       }
@@ -153,9 +152,9 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
     String _digitoVerificador =
         Provider.of<EstruturaLevantamento>(context).getDigitoVerificador;
     _digitos = Provider.of<EstruturaLevantamento>(context).getDigitosLeitura;
-    Provider.of<DominioProvier>(context, listen: false).getDominiosMarca;
+    Provider.of<Inicializacao>(context, listen: false).getDominiosMarca;
     _dominiosInicial =
-        Provider.of<DominioProvier>(context, listen: false).getDominiosMarca;
+        Provider.of<Inicializacao>(context, listen: false).getDominiosMarca;
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -222,11 +221,11 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
                         displayClearIcon: false,
                         readOnly: _item.inventariado,
                         iconDisabledColor: Colors.black,
-                        value: Provider.of<DominioProvier>(context)
+                        value: Provider.of<Inicializacao>(context)
                             .getDominiosBens(_item.dominioSituacaoFisica.chave)
                             .firstWhere((element) =>
                                 element.id == _item.dominioSituacaoFisica.id),
-                        items: Provider.of<DominioProvier>(context)
+                        items: Provider.of<Inicializacao>(context)
                             .getDominiosDropdownBens(
                                 _item.dominioSituacaoFisica.chave),
                         onChanged: (novoItemSelecionado) {
@@ -259,11 +258,11 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
                         displayClearIcon: false,
                         readOnly: _item.inventariado,
                         iconDisabledColor: Colors.black,
-                        value: Provider.of<DominioProvier>(context)
+                        value: Provider.of<Inicializacao>(context)
                             .getDominiosBens(_item.dominioStatus.chave)
                             .firstWhere((element) =>
                                 element.id == _item.dominioStatus.id),
-                        items: Provider.of<DominioProvier>(context)
+                        items: Provider.of<Inicializacao>(context)
                             .getDominiosDropdownBens(_item.dominioStatus.chave),
                         onChanged: (novoItemSelecionado) {
                           setState(
@@ -378,7 +377,7 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
                             itemBuilder: (_, idx) {
                               List<DropdownMenuItem<Dominio>>
                                   _dominiosDropdownAtual =
-                                  Provider.of<DominioProvier>(context)
+                                  Provider.of<Inicializacao>(context)
                                       .getDominiosDropdownBens(_item
                                           .bemPatrimonial
                                           .caracteristicas[idx]
@@ -386,7 +385,7 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
                                           .caracteristica
                                           .chaveDominio);
                               Dominio itemAtual =
-                                  Provider.of<DominioProvier>(context)
+                                  Provider.of<Inicializacao>(context)
                                       .getDominiosBens(_item
                                           .bemPatrimonial
                                           .caracteristicas[idx]

@@ -1,5 +1,5 @@
 import 'package:app_inventario/customizacoes/bensPrevistos.dart';
-import 'package:app_inventario/models/dadosBensPatrimoniais.dart';
+import 'package:app_inventario/models/serialized/dadosBensPatrimoniais.dart';
 import 'package:app_inventario/screens/bens/ler_bens_geral_tela.dart';
 import 'package:flutter/material.dart';
 

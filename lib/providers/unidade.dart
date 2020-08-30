@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:app_inventario/helpers/helpers_unidade.dart';
-import 'package:app_inventario/models/estruturaInventario.dart';
+import 'package:app_inventario/models/serialized/estruturaInventario.dart';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';

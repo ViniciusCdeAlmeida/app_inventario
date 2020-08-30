@@ -1,20 +1,20 @@
 import 'dart:convert';
 
-import 'package:app_inventario/models/serialized/materialGnt.dart';
+import 'package:app_inventario/models/serialized/material.dart';
 import 'package:moor_flutter/moor_flutter.dart';
 
-class MaterialConverter extends TypeConverter<MaterialGnt, String> {
+class MaterialConverter extends TypeConverter<Material, String> {
   const MaterialConverter();
   @override
-  MaterialGnt mapToDart(String fromDb) {
+  Material mapToDart(String fromDb) {
     if (fromDb == null) {
       return null;
     }
-    return MaterialGnt.fromJson(json.decode(fromDb) as Map<String, dynamic>);
+    return Material.fromJson(json.decode(fromDb) as Map<String, dynamic>);
   }
 
   @override
-  String mapToSql(MaterialGnt value) {
+  String mapToSql(Material value) {
     if (value == null) {
       return null;
     }

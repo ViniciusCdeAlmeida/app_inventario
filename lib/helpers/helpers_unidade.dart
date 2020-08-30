@@ -1,4 +1,4 @@
-import 'package:app_inventario/models/estruturaInventario.dart';
+import 'package:app_inventario/models/serialized/estruturaInventario.dart';
 
 List<EstruturaInventario> helperEstruturaInventario(List listaUnidades) {
   return List<EstruturaInventario>.from(

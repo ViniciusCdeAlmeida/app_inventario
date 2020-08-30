@@ -1,13 +1,25 @@
+import 'package:moor_flutter/moor_flutter.dart';
+import 'package:app_inventario/models/database/daos/estruturaInventarioDao.dart';
+import 'package:app_inventario/models/database/daos/levantamentosDao.dart';
+import 'package:app_inventario/models/database/daos/unidadesGestorasDao.dart';
+
 import 'package:app_inventario/models/converters/caracteristicasConverter.dart';
+import 'package:app_inventario/models/converters/dadosBensPatrimoniaisConverter.dart';
 import 'package:app_inventario/models/converters/dominioConverter.dart';
 import 'package:app_inventario/models/converters/materialConverter.dart';
 import 'package:app_inventario/models/converters/organizacaoConverter.dart';
+import 'package:app_inventario/models/converters/inventarioBemPatrimonialConverter.dart';
 
-import 'package:app_inventario/models/serialized/materialGnt.dart';
-import 'package:app_inventario/models/serialized/organizacaoGnt.dart';
-import 'package:app_inventario/models/serialized/dominioGnt.dart';
-import 'package:app_inventario/models/serialized/caracteristicasGnt.dart';
-import 'package:moor_flutter/moor_flutter.dart';
+import 'package:app_inventario/models/database/daos/bemPatrimoniaisDao.dart';
+import 'package:app_inventario/models/database/daos/dominioDao.dart';
+import 'package:app_inventario/models/database/daos/dadosBemPatrimoniaisDao.dart';
+
+import 'package:app_inventario/models/serialized/material.dart';
+import 'package:app_inventario/models/serialized/organizacao.dart';
+import 'package:app_inventario/models/serialized/dominio.dart';
+import 'package:app_inventario/models/serialized/caracteristicas.dart';
+import 'package:app_inventario/models/serialized/dadosBensPatrimoniais.dart';
+import 'package:app_inventario/models/serialized/inventarioDadosBemPatrimonial.dart';
 
 part 'databaseMoor.g.dart';
 
@@ -17,6 +29,12 @@ class DominioDB extends Table {
   TextColumn get descricao => text()();
   TextColumn get chave => text()();
   IntColumn get codigo => integer()();
+}
+
+class UnidadesGestorasDB extends Table {
+  IntColumn get id => integer().nullable()();
+  TextColumn get organizacao =>
+      text().map(const OrganizacaoConverter()).nullable()();
 }
 
 class BensPatrimoniaisDB extends Table {
@@ -35,7 +53,78 @@ class BensPatrimoniaisDB extends Table {
       text().map(const OrganizacaoConverter()).nullable()();
 }
 
-@UseMoor(tables: [DominioDB, BensPatrimoniaisDB])
+class ConexaoDB extends Table {
+  IntColumn get id => integer()();
+  TextColumn get nome => text().nullable()();
+  TextColumn get url => text().nullable()();
+  BoolColumn get ativo => boolean().nullable()();
+}
+
+class LevantamentoDB extends Table {
+  IntColumn get id => integer()();
+  IntColumn get idOrganizacao => integer().nullable()();
+  TextColumn get nome => text().nullable()();
+  TextColumn get codigoENome => text().nullable()();
+  TextColumn get codigo => text().nullable()();
+  TextColumn get dominioTipoInventario =>
+      text().map(const DominioConverter()).nullable()();
+  TextColumn get dominioStatusInventario =>
+      text().map(const DominioConverter()).nullable()();
+  IntColumn get quantidadeEstruturas => integer().nullable()();
+  IntColumn get quantidadeTotalBens => integer().nullable()();
+  IntColumn get quantidadeTotalBensTratados => integer().nullable()();
+  IntColumn get quantidadeTotalBensEmInconsistencia => integer().nullable()();
+  IntColumn get quantidadeTotalBensSemInconsistencia => integer().nullable()();
+  IntColumn get quantidadeTotalBensBaixados => integer().nullable()();
+}
+
+class EstruturaInventarioDB extends Table {
+  IntColumn get id => integer()();
+  IntColumn get idInventario => integer().nullable()();
+  TextColumn get dominioStatusInventarioEstrutura =>
+      text().map(const DominioConverter()).nullable()();
+  TextColumn get estruturaOrganizacional =>
+      text().map(const OrganizacaoConverter()).nullable()();
+}
+
+class DadosBemPatrimoniaisDB extends Table {
+  IntColumn get id => integer()();
+  IntColumn get idInventario => integer().nullable()();
+  TextColumn get material => text().map(const MaterialConverter()).nullable()();
+  TextColumn get dominioSituacaoFisica =>
+      text().map(const DominioConverter()).nullable()();
+  TextColumn get dominioStatus =>
+      text().map(const DominioConverter()).nullable()();
+  TextColumn get dominioStatusInventarioBem =>
+      text().map(const DominioConverter()).nullable()();
+  TextColumn get estruturaOrganizacionalAtual =>
+      text().map(const OrganizacaoConverter()).nullable()();
+  TextColumn get inventarioBemPatrimonial =>
+      text().map(const InventarioBemPatrimonialConverter()).nullable()();
+  IntColumn get idEstruturaOrganizacional => integer().nullable()();
+  IntColumn get idBemPatrimonial => integer().nullable()();
+  TextColumn get numeroPatrimonialCompleto => text().nullable()();
+}
+
+@UseMoor(
+  tables: [
+    DominioDB,
+    BensPatrimoniaisDB,
+    EstruturaInventarioDB,
+    LevantamentoDB,
+    ConexaoDB,
+    UnidadesGestorasDB,
+    DadosBemPatrimoniaisDB,
+  ],
+  daos: [
+    DominioDao,
+    BemPatrimoniaisDao,
+    LevantamentosDao,
+    EstruturaInventarioDao,
+    UnidadesGestorasDao,
+    DadosBemPatrimoniaisDao,
+  ],
+)
 // _$AppDatabase is the name of the generated class
 class AppDatabase extends _$AppDatabase {
   AppDatabase()
@@ -50,111 +139,19 @@ class AppDatabase extends _$AppDatabase {
   // Bump this when changing tables and columns.
   // Migrations will be covered in the next part.
   @override
-  int get schemaVersion => 1;
+  int get schemaVersion => 7;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
         onCreate: (Migrator m) {
           return m.createAll();
         },
+        onUpgrade: (m, from, to) {
+          // m.createTable(unidadesGestorasDB);
+          // m.addColumn(dadosBemPatrimoniaisDB, dadosBemPatrimoniaisDB.inventarioBemPatrimonial);
+          return m.createTable(dadosBemPatrimoniaisDB);
+        },
       );
 
-  Future<List<DominioDBData>> getAllDominio() => select(dominioDB).get();
-
-  Future<List<BensPatrimoniaisDBData>> getAllBensPatrimoniais() =>
-      select(bensPatrimoniaisDB).get();
-
-  Future<List<DominioDBData>> getDominioBens(String chave) async {
-    return await (select(dominioDB)
-          ..where(
-            (tbl) => tbl.chave.equals(chave),
-          ))
-        .get();
-  }
-
-  Future<void> insertDominio(List dominio) async {
-    // delete(dominioDB).go();
-    await batch((l) {
-      l.insertAll(
-          dominioDB,
-          dominio
-              .map(
-                (e) => DominioDBCompanion(
-                  chave: Value(e['chave']),
-                  codigo: Value(e['codigo']),
-                  descricao: Value(e['descricao']),
-                  id: Value(e['id']),
-                  nome: Value(e['nome']),
-                ),
-              )
-              .toList());
-    });
-  }
-
   void deleteTable(TableInfo table) => delete(table).go();
-
-  Future<void> insertBensPatrimoniais(List bensPatrimoniais) async {
-    // print('gravou BENS');
-    await batch(
-      (l) {
-        l.insertAll(
-            bensPatrimoniaisDB,
-            bensPatrimoniais.map((e) {
-              List<CaracteristicasGnt> teste2 = (e['caracteristicas'] as List)
-                  .map((i) => CaracteristicasGnt.fromJson(i))
-                  .toList();
-              print(teste2.runtimeType);
-              return BensPatrimoniaisDBCompanion(
-                id: Value(e['id']),
-                numeroPatrimonial: Value(e['numeroPatrimonial']),
-                numeroPatrimonialCompleto:
-                    Value(e['numeroPatrimonialCompleto']),
-                numeroPatrimonialCompletoAntigo:
-                    Value(e['numeroPatrimonialCompletoAntigo']),
-                dominioSituacaoFisica: Value(
-                  DominioGnt.fromJson(e['dominioSituacaoFisica']),
-                ),
-                dominioStatus: Value(
-                  DominioGnt.fromJson(e['dominioStatus']),
-                ),
-                estruturaOrganizacionalAtual: Value(
-                  OrganizacaoGnt.fromJson(e['estruturaOrganizacionalAtual']),
-                ),
-                material: Value(
-                  MaterialGnt.fromJson(e['material']),
-                ),
-                caracteristicas: Value(teste2),
-              );
-            }).toList()
-            // BensPatrimoniaisDBCompanion(
-            //     id: Value(e['id']),
-            //     numeroPatrimonial: Value(e['numeroPatrimonial']),
-            //     numeroPatrimonialCompleto:
-            //         Value(e['numeroPatrimonialCompleto']),
-            //     numeroPatrimonialCompletoAntigo:
-            //         Value(e['numeroPatrimonialCompletoAntigo']),
-            //     dominioSituacaoFisica: Value(
-            //       DominioGnt.fromJson(e['dominioSituacaoFisica']),
-            //     ),
-            //     dominioStatus: Value(
-            //       DominioGnt.fromJson(e['dominioStatus']),
-            //     ),
-            //     estruturaOrganizacionalAtual: Value(
-            //       OrganizacaoGnt.fromJson(e['estruturaOrganizacionalAtual']),
-            //     ),
-            //     material: Value(
-            //       MaterialGnt.fromJson(e['material']),
-            //     ),
-            //     caracteristicas: Value(
-            //       (e['caracteristicas'] as List)
-            //           .map((f) => CaracteristicasGnt.fromJson(f))
-            //           .toList(),
-            //     ),
-            //   ),
-            // )
-            // .toList();
-            );
-      },
-    );
-  }
 }

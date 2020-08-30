@@ -1,5 +1,6 @@
+import 'package:app_inventario/models/database/databaseMoor.dart';
 import 'package:app_inventario/providers/bensProvider.dart';
-import 'package:app_inventario/providers/dominioProvider.dart';
+import 'package:app_inventario/providers/inicializacao.dart';
 import 'package:app_inventario/providers/estruturaLevantamento.dart';
 import 'package:app_inventario/providers/inventarioBemPatrimonial.dart';
 import 'package:app_inventario/providers/levantamentos.dart';
@@ -22,7 +23,10 @@ import 'screens/configuracao/configuracao_conexao_tela.dart';
 import 'package:app_inventario/providers/inventario.dart';
 import 'package:app_inventario/screens/organizacao/organizacao_tela.dart';
 
+AppDatabase db;
+
 void main() {
+  db = AppDatabase();
   runApp(MyApp());
 }
 
@@ -48,22 +52,19 @@ class MyApp extends StatelessWidget {
           create: (ctx) => BensProvier(),
         ),
         ChangeNotifierProvider(
-          create: (ctx) => DominioProvier(),
+          create: (ctx) => Inicializacao(),
         ),
         ChangeNotifierProvider(
           create: (ctx) => InventarioBemPatrimonialProvider(),
         ),
-        ChangeNotifierProxyProvider<DominioProvier, EstruturaLevantamento>(
+        ChangeNotifierProvider(
           create: (ctx) => EstruturaLevantamento(),
-          update: (ctx, dominio, estruturas) => EstruturaLevantamento(
-            listaDominios: dominio == null ? [] : dominio.getDominios,
-          ),
         ),
         ChangeNotifierProxyProvider<Autenticacao, Levantamentos>(
           create: (context) => Levantamentos(),
-          update: (ctx, autenticacao, levantamento) => Levantamentos(
-            levantamentos:
-                levantamento == null ? [] : levantamento.levantamentos,
+          update: (ctx, autenticacao, _) => Levantamentos(
+            // levantamentos:
+            //     levantamento == null ? [] : levantamento.getLevantamentos,
             idOrganizacao: autenticacao.idUnidade,
           ),
         ),

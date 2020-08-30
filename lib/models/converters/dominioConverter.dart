@@ -1,20 +1,20 @@
 import 'dart:convert';
 
-import 'package:app_inventario/models/serialized/dominioGnt.dart';
+import 'package:app_inventario/models/serialized/dominio.dart';
 import 'package:moor_flutter/moor_flutter.dart';
 
-class DominioConverter extends TypeConverter<DominioGnt, String> {
+class DominioConverter extends TypeConverter<Dominio, String> {
   const DominioConverter();
   @override
-  DominioGnt mapToDart(String fromDb) {
+  Dominio mapToDart(String fromDb) {
     if (fromDb == null) {
       return null;
     }
-    return DominioGnt.fromJson(json.decode(fromDb) as Map<String, dynamic>);
+    return Dominio.fromJson(json.decode(fromDb) as Map<String, dynamic>);
   }
 
   @override
-  String mapToSql(DominioGnt value) {
+  String mapToSql(Dominio value) {
     if (value == null) {
       return null;
     }

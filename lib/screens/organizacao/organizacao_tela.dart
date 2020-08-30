@@ -1,6 +1,5 @@
 import 'package:app_inventario/providers/autenticacao.dart';
-import 'package:app_inventario/providers/bensProvider.dart';
-import 'package:app_inventario/providers/dominioProvider.dart';
+import 'package:app_inventario/providers/inicializacao.dart';
 import 'package:app_inventario/widgets/cabecalho/app_cabecalho.dart';
 import 'package:app_inventario/widgets/organizacao/organizacao_item.dart';
 import 'package:flutter/material.dart';
@@ -20,16 +19,16 @@ class _OrganizacaoTelaState extends State<OrganizacaoTela> {
 
   @override
   void didChangeDependencies() {
-    final dominios = Provider.of<DominioProvier>(context);
-    final bensPatrimoniais = Provider.of<BensProvier>(context);
+    final inicializacao = Provider.of<Inicializacao>(context);
     final organizacoes = Provider.of<Autenticacao>(context);
+
     if (_isInit) {
       setState(() {
         _isLoading = true;
       });
-      if (organizacoes.lista2Organizacoes.isNotEmpty &&
-          dominios.getDominios.isNotEmpty &&
-          bensPatrimoniais.getBens.isNotEmpty)
+      if (organizacoes.getExisteOrganizacao &&
+          inicializacao.getExisteDominios &&
+          inicializacao.getExisteBens)
         setState(() {
           _isLoading = false;
           _isInit = false;
@@ -37,8 +36,7 @@ class _OrganizacaoTelaState extends State<OrganizacaoTela> {
     }
 
     setState(() {
-      if ((dominios.getDominios.isNotEmpty &&
-              bensPatrimoniais.getBens.isNotEmpty) &&
+      if ((inicializacao.getExisteDominios && inicializacao.getExisteBens) &&
           _scaffoldKey.currentState != null) {
         _scaffoldKey.currentState.showSnackBar(
           SnackBar(
@@ -57,10 +55,16 @@ class _OrganizacaoTelaState extends State<OrganizacaoTela> {
     Future.delayed(Duration.zero).then((_) async {
       final conexao =
           Provider.of<Autenticacao>(context, listen: false).atualConexao;
-      final dominios = Provider.of<DominioProvier>(context, listen: false);
-      final bensPatrimoniais = Provider.of<BensProvier>(context, listen: false);
-
-      if (dominios.getDominios.isEmpty && bensPatrimoniais.getBens.isEmpty) {
+      final inicializacao = Provider.of<Inicializacao>(context, listen: false);
+      final organizacoes = Provider.of<Autenticacao>(context, listen: false);
+      await organizacoes.getOrganizacoesDB();
+      if (!organizacoes.getExisteOrganizacao)
+        await organizacoes.getVerificaOrganizacaoDB();
+      if (!inicializacao.getExisteDominios)
+        await inicializacao.getVerificaDominioDB();
+      if (!inicializacao.getExisteBens)
+        await inicializacao.getVerificaBensPatrimoniaisDB();
+      if (!inicializacao.getExisteDominios && !inicializacao.getExisteBens) {
         _scaffoldKey.currentState.showSnackBar(
           SnackBar(
             content: Text('Carregando Dominios e Bens Patrimoniais'),
@@ -69,11 +73,14 @@ class _OrganizacaoTelaState extends State<OrganizacaoTela> {
         );
       }
 
-      if (dominios.getDominios.isEmpty) {
-        await dominios.buscaDominios(conexao);
+      // if (!organizacoes.getExisteOrganizacao) {
+      //   await organizacoes.getOrganizacoesDB();
+      // }
+      if (!inicializacao.getExisteDominios) {
+        await inicializacao.buscaDominioInicial(conexao);
       }
-      if (bensPatrimoniais.getBens.isEmpty) {
-        await bensPatrimoniais.buscaBens(conexao);
+      if (!inicializacao.getExisteBens) {
+        await inicializacao.buscaBemPatrimonialInicial(conexao);
       }
     });
     super.initState();
@@ -82,7 +89,7 @@ class _OrganizacaoTelaState extends State<OrganizacaoTela> {
   @override
   Widget build(BuildContext context) {
     final organizacoes = Provider.of<Autenticacao>(context);
-    final organizacoesLista = organizacoes.listaOrganizacoes();
+    final organizacoesLista = organizacoes.listaOrganizacoes;
 
     return Scaffold(
       key: _scaffoldKey,
@@ -101,8 +108,8 @@ class _OrganizacaoTelaState extends State<OrganizacaoTela> {
                 itemBuilder: (_, idx) => Column(
                   children: [
                     OrganizacaoItem(
-                      organizacoesLista[idx].id,
-                      organizacoesLista[idx].codigoENome,
+                      organizacoesLista[idx].organizacao.id,
+                      organizacoesLista[idx].organizacao.codigoENome,
                     ),
                     Divider(),
                   ],

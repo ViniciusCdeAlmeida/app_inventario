@@ -1,22 +1,22 @@
 import 'dart:convert';
 
-import 'package:app_inventario/models/serialized/materialCaracteristicaGnt.dart';
+import 'package:app_inventario/models/serialized/materialCaracteristica.dart';
 import 'package:moor_flutter/moor_flutter.dart';
 
 class MaterialCaracteristicaConverter
-    extends TypeConverter<MaterialCaracteristicaGnt, String> {
+    extends TypeConverter<MaterialCaracteristica, String> {
   const MaterialCaracteristicaConverter();
   @override
-  MaterialCaracteristicaGnt mapToDart(String fromDb) {
+  MaterialCaracteristica mapToDart(String fromDb) {
     if (fromDb == null) {
       return null;
     }
-    return MaterialCaracteristicaGnt.fromJson(
+    return MaterialCaracteristica.fromJson(
         json.decode(fromDb) as Map<String, dynamic>);
   }
 
   @override
-  String mapToSql(MaterialCaracteristicaGnt value) {
+  String mapToSql(MaterialCaracteristica value) {
     if (value == null) {
       return null;
     }

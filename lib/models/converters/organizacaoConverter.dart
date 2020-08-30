@@ -1,20 +1,20 @@
 import 'dart:convert';
 
-import 'package:app_inventario/models/serialized/organizacaoGnt.dart';
+import 'package:app_inventario/models/serialized/organizacao.dart';
 import 'package:moor_flutter/moor_flutter.dart';
 
-class OrganizacaoConverter extends TypeConverter<OrganizacaoGnt, String> {
+class OrganizacaoConverter extends TypeConverter<Organizacao, String> {
   const OrganizacaoConverter();
   @override
-  OrganizacaoGnt mapToDart(String fromDb) {
+  Organizacao mapToDart(String fromDb) {
     if (fromDb == null) {
       return null;
     }
-    return OrganizacaoGnt.fromJson(json.decode(fromDb) as Map<String, dynamic>);
+    return Organizacao.fromJson(json.decode(fromDb) as Map<String, dynamic>);
   }
 
   @override
-  String mapToSql(OrganizacaoGnt value) {
+  String mapToSql(Organizacao value) {
     if (value == null) {
       return null;
     }

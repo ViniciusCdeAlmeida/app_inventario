@@ -1,5 +1,6 @@
 import 'package:app_inventario/customizacoes/acoes.dart';
-import 'package:app_inventario/models/levantamento.dart';
+import 'package:app_inventario/main.dart';
+import 'package:app_inventario/models/serialized/levantamento.dart';
 import 'package:app_inventario/providers/autenticacao.dart';
 import 'package:app_inventario/providers/bensProvider.dart';
 import 'package:app_inventario/providers/estruturaLevantamento.dart';
@@ -8,6 +9,7 @@ import 'package:app_inventario/widgets/cabecalho/app_cabecalho.dart';
 import 'package:app_inventario/widgets/customizados/popupMenu_custom.dart';
 import 'package:app_inventario/widgets/inventario/levantamento_fisico_item.dart';
 import 'package:flutter/material.dart';
+import 'package:moor_db_viewer/moor_db_viewer.dart';
 import 'package:provider/provider.dart';
 
 class LevantamentoFisicoTela extends StatefulWidget {
@@ -19,6 +21,7 @@ class LevantamentoFisicoTela extends StatefulWidget {
 
 class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
+  List<Levantamento> listaAtual = [];
 
   @override
   void didChangeDependencies() {
@@ -34,6 +37,15 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
     }
   }
 
+  @override
+  void initState() {
+    Future.delayed(Duration.zero).then((_) async {
+      await Provider.of<Levantamentos>(context, listen: false)
+          .getVerificaInventariosDB();
+    });
+    super.initState();
+  }
+
   Future<void> _refreshProd2(String conexao, int id, Acoes acoes,
       List<Levantamento> listaLevantamento) async {
     switch (acoes) {
@@ -42,16 +54,18 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
             .buscaLevantamento(id, conexao);
         break;
       case Acoes.buscarLevantamento:
-        print('2');
+        await Provider.of<EstruturaLevantamento>(context).buscaEst(id);
         break;
       case Acoes.exluirLevantamentos:
         print('3');
+        Navigator.of(context)
+            .push(MaterialPageRoute(builder: (context) => MoorDbViewer(db)));
         break;
       case Acoes.exluirLevantamento:
         print('4');
         break;
       case Acoes.enviaLevantamento:
-        await Provider.of<EstruturaLevantamento>(context)
+        await Provider.of<EstruturaLevantamento>(context, listen: false)
             .buscaEstruturas(conexao, listaLevantamento);
         break;
       case Acoes.gerarArquivoBackup:
@@ -63,15 +77,17 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
 
   @override
   Widget build(BuildContext context) {
-    final conexao = Provider.of<Autenticacao>(context).atualConexao;
+    final conexao =
+        Provider.of<Autenticacao>(context, listen: false).atualConexao;
     final idOrganizacao = ModalRoute.of(context).settings.arguments;
-    final listaLevantamentos = Provider.of<Levantamentos>(context);
-    final listaAtual = listaLevantamentos.getLevantamentos;
+    final levantamentos = Provider.of<Levantamentos>(context);
+    listaAtual = levantamentos.getLevantamentos;
     final estruturas = Provider.of<EstruturaLevantamento>(context);
 
-    if (listaAtual == null && !listaLevantamentos.isLoading) {
-      listaLevantamentos.buscaLevantamento(idOrganizacao, conexao);
+    if (!levantamentos.getExisteInventarios && !levantamentos.isLoading) {
+      levantamentos.buscaLevantamento(idOrganizacao, conexao);
     }
+
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
@@ -124,7 +140,7 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
         ],
       ),
       drawer: AppDrawer(),
-      body: listaLevantamentos.isLoading || estruturas.isLoading
+      body: levantamentos.isLoading || estruturas.isLoading
           ? Stack(
               children: <Widget>[
                 Center(

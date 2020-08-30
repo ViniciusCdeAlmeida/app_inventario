@@ -42,8 +42,8 @@ class _LoginCardState extends State<LoginCard> {
   }
 
   Future<void> _submit() async {
-    var _conexoes = Provider.of<ConfiguracaoConexao>(context);
-    var _autenticacao = Provider.of<Autenticacao>(context);
+    var _conexoes = Provider.of<ConfiguracaoConexao>(context, listen: false);
+    var _autenticacao = Provider.of<Autenticacao>(context, listen: false);
     if (!_formKey.currentState.validate()) {
       return;
     }

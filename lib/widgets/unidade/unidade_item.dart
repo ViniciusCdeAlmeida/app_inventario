@@ -1,12 +1,12 @@
 import 'package:app_inventario/customizacoes/acoes.dart';
-import 'package:app_inventario/models/estruturaInventarioNew.dart';
+import 'package:app_inventario/models/serialized/estruturaInventario.dart';
 import 'package:app_inventario/screens/bens/previstos_bens_tela.dart';
 import 'package:app_inventario/widgets/bens/ler_bens_item.dart';
 import 'package:app_inventario/widgets/customizados/popupMenu_custom.dart';
 import 'package:flutter/material.dart';
 
 class UnidadeItem extends StatefulWidget {
-  final EstruturaInventarioNew unidade;
+  final EstruturaInventario unidade;
 
   UnidadeItem(this.unidade);
 
@@ -40,11 +40,11 @@ class _UnidadeItemState extends State<UnidadeItem> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
-        color: widget.unidade.dominioStatusInventarioEstrutura != null &&
-                widget.unidade.dominioStatusInventarioEstrutura.descricao ==
-                    "Tratada"
-            ? Colors.brown[200]
-            : Colors.white,
+        // color: widget.unidade.dominioStatusInventarioEstrutura != null &&
+        //         widget.unidade.dominioStatusInventarioEstrutura.descricao ==
+        //             "Tratada"
+        //     ? Colors.brown[200]
+        //     : Colors.white,
         margin: EdgeInsets.all(10),
         child: Column(
           children: <Widget>[
@@ -63,10 +63,10 @@ class _UnidadeItemState extends State<UnidadeItem> {
                                 Icons.more_vert,
                                 color: Colors.black,
                               ),
-                              onSelected: (value) {
-                                _redirecionamento(value,
-                                    widget.unidade.estruturaOrganizacional.id);
-                              },
+                              // onSelected: (value) {
+                              //   _redirecionamento(value,
+                              //       widget.unidade.estruturaOrganizacional.id);
+                              // },
                               offset: Offset(0, 100),
                               itemBuilder: (context) => <PopupMenuEntry<Acoes>>[
                                 PopupMenuItem<Acoes>(
@@ -88,12 +88,12 @@ class _UnidadeItemState extends State<UnidadeItem> {
                                 ),
                               ],
                             ),
-                            title: Text(
-                              widget
-                                  .unidade.estruturaOrganizacional.codigoENome,
-                              style:
-                                  TextStyle(fontSize: 14, color: Colors.black),
-                            ),
+                            // title: Text(
+                            //   widget
+                            //       .unidade.estruturaOrganizacional.codigoENome,
+                            //   style:
+                            //       TextStyle(fontSize: 14, color: Colors.black),
+                            // ),
                           ),
                         ],
                       ),

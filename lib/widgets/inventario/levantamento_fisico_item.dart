@@ -1,4 +1,4 @@
-import 'package:app_inventario/models/levantamento.dart';
+import 'package:app_inventario/models/serialized/levantamento.dart';
 import 'package:app_inventario/models/telaArgumentos.dart';
 import 'package:app_inventario/screens/unidade/unidade_tela.dart';
 import 'package:flutter/material.dart';

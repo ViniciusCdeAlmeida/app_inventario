@@ -28,8 +28,8 @@ class _UnidadeTelaState extends State<UnidadeTela> {
         Provider.of<Autenticacao>(context, listen: false).atualConexao;
     unidadeArgs = ModalRoute.of(context).settings.arguments;
     final unidades = Provider.of<Levantamentos>(context);
-    Provider.of<EstruturaLevantamento>(context)
-        .buscaPorEstrutura(unidadeArgs.id);
+    // Provider.of<EstruturaLevantamento>(context)
+    //     .buscaPorEstrutura(unidadeArgs.id);
 
     return Scaffold(
       appBar: AppBar(

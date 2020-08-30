@@ -1,21 +1,20 @@
 import 'dart:convert';
 
-import 'package:app_inventario/models/serialized/caracteristicaGnt.dart';
+import 'package:app_inventario/models/serialized/caracteristica.dart';
 import 'package:moor_flutter/moor_flutter.dart';
 
-class CaracteristicaConverter extends TypeConverter<CaracteristicaGnt, String> {
+class CaracteristicaConverter extends TypeConverter<Caracteristica, String> {
   const CaracteristicaConverter();
   @override
-  CaracteristicaGnt mapToDart(String fromDb) {
+  Caracteristica mapToDart(String fromDb) {
     if (fromDb == null) {
       return null;
     }
-    return CaracteristicaGnt.fromJson(
-        json.decode(fromDb) as Map<String, dynamic>);
+    return Caracteristica.fromJson(json.decode(fromDb) as Map<String, dynamic>);
   }
 
   @override
-  String mapToSql(CaracteristicaGnt value) {
+  String mapToSql(Caracteristica value) {
     if (value == null) {
       return null;
     }

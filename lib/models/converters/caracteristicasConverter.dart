@@ -1,41 +1,22 @@
 import 'dart:convert';
-
-import 'package:app_inventario/models/serialized/caracteristicasGnt.dart';
+import 'package:app_inventario/models/serialized/caracteristicas.dart';
 import 'package:moor_flutter/moor_flutter.dart';
 
 class CaracteristicasConverter
-    extends TypeConverter<List<CaracteristicasGnt>, String> {
+    extends TypeConverter<List<Caracteristicas>, String> {
   const CaracteristicasConverter();
   @override
-  // List<CaracteristicasGnt> mapToDart(String fromDb) {
-  //   if (fromDb == null) {
-  //     return null;
-  //   }
-  //   return CaracteristicasGnt.fromJson(
-  //     // json.decode(fromDb) as Map<String, dynamic>);
-
-  //     json.decode(fromDb),
-  //   );
-  // }
-
-  List<CaracteristicasGnt> mapToDart(String fromDb) {
+  List<Caracteristicas> mapToDart(String fromDb) {
     if (fromDb == null) return null;
     var caracteristicasJson = json.decode(fromDb);
 
     return (caracteristicasJson as List)
-        .map((i) => CaracteristicasGnt.fromJson(i))
+        .map((i) => Caracteristicas.fromJson(i))
         .toList();
   }
 
   @override
-  // String mapToSql(CaracteristicasGnt value) {
-  //   if (value == null) {
-  //     return null;
-  //   }
-
-  //   return json.encode(value.toJson());
-  // }
-  String mapToSql(List<CaracteristicasGnt> caracteristicasDetails) {
+  String mapToSql(List<Caracteristicas> caracteristicasDetails) {
     if (caracteristicasDetails.isEmpty) {
       return null;
     }
