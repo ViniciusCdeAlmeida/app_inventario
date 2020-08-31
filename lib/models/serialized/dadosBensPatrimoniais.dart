@@ -1,6 +1,6 @@
 import 'package:app_inventario/models/serialized/bemPatrimonial.dart';
 import 'package:app_inventario/models/serialized/dominio.dart';
-import 'package:app_inventario/models/serialized/inventarioBemPatrimonial.dart';
+import 'package:app_inventario/models/serialized/inventarioDadosBemPatrimonial.dart';
 import 'package:app_inventario/models/serialized/material.dart';
 import 'package:flutter/material.dart' as mat;
 import 'package:json_annotation/json_annotation.dart';
@@ -14,12 +14,15 @@ class DadosBensPatrimoniais with mat.ChangeNotifier {
   Dominio dominioSituacaoFisica;
   Dominio dominioStatus;
   final Dominio dominioStatusInventarioBem;
-  final BemPatrimonial bemPatrimonial;
+  BemPatrimonial bemPatrimonial;
   final int idInventario;
   final int idInventarioEstruturaOrganizacional;
   final Material material;
-  final InventarioBemPatrimonial inventarioBemPatrimonial;
+  InventarioDadosBemPatrimonial inventarioBemPatrimonial;
   bool inventariado;
+  final int idBemPatrimonial;
+  final String numeroPatrimonialCompleto;
+  final int idEstruturaOrganizacional;
 
   DadosBensPatrimoniais({
     this.id,
@@ -33,6 +36,9 @@ class DadosBensPatrimoniais with mat.ChangeNotifier {
     this.inventarioBemPatrimonial,
     this.numeroPatrimonial,
     this.inventariado,
+    this.numeroPatrimonialCompleto,
+    this.idEstruturaOrganizacional,
+    this.idBemPatrimonial,
   });
 
   factory DadosBensPatrimoniais.fromJson(Map<String, dynamic> json) =>

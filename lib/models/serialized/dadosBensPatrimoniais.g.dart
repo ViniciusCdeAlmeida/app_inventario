@@ -33,10 +33,13 @@ DadosBensPatrimoniais _$DadosBensPatrimoniaisFromJson(
         : Material.fromJson(json['material'] as Map<String, dynamic>),
     inventarioBemPatrimonial: json['inventarioBemPatrimonial'] == null
         ? null
-        : InventarioBemPatrimonial.fromJson(
+        : InventarioDadosBemPatrimonial.fromJson(
             json['inventarioBemPatrimonial'] as Map<String, dynamic>),
     numeroPatrimonial: json['numeroPatrimonial'] as String,
     inventariado: json['inventariado'] as bool,
+    numeroPatrimonialCompleto: json['numeroPatrimonialCompleto'] as String,
+    idEstruturaOrganizacional: json['idEstruturaOrganizacional'] as int,
+    idBemPatrimonial: json['idBemPatrimonial'] as int,
   );
 }
 
@@ -55,4 +58,7 @@ Map<String, dynamic> _$DadosBensPatrimoniaisToJson(
       'material': instance.material,
       'inventarioBemPatrimonial': instance.inventarioBemPatrimonial,
       'inventariado': instance.inventariado,
+      'idBemPatrimonial': instance.idBemPatrimonial,
+      'numeroPatrimonialCompleto': instance.numeroPatrimonialCompleto,
+      'idEstruturaOrganizacional': instance.idEstruturaOrganizacional,
     };

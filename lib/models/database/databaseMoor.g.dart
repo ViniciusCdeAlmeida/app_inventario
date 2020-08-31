@@ -2596,6 +2596,7 @@ class DadosBemPatrimoniaisDBData extends DataClass
   final Dominio dominioStatusInventarioBem;
   final Organizacao estruturaOrganizacionalAtual;
   final InventarioDadosBemPatrimonial inventarioBemPatrimonial;
+  BemPatrimonial bemPatrimonial;
   final int idEstruturaOrganizacional;
   final int idBemPatrimonial;
   final String numeroPatrimonialCompleto;
@@ -2608,6 +2609,7 @@ class DadosBemPatrimoniaisDBData extends DataClass
       this.dominioStatusInventarioBem,
       this.estruturaOrganizacionalAtual,
       this.inventarioBemPatrimonial,
+      this.bemPatrimonial,
       this.idEstruturaOrganizacional,
       this.idBemPatrimonial,
       this.numeroPatrimonialCompleto});
@@ -2638,6 +2640,9 @@ class DadosBemPatrimoniaisDBData extends DataClass
       inventarioBemPatrimonial: $DadosBemPatrimoniaisDBTable.$converter5
           .mapToDart(stringType.mapFromDatabaseResponse(
               data['${effectivePrefix}inventario_bem_patrimonial'])),
+      bemPatrimonial: $DadosBemPatrimoniaisDBTable.$converter6.mapToDart(
+          stringType.mapFromDatabaseResponse(
+              data['${effectivePrefix}bem_patrimonial'])),
       idEstruturaOrganizacional: intType.mapFromDatabaseResponse(
           data['${effectivePrefix}id_estrutura_organizacional']),
       idBemPatrimonial: intType.mapFromDatabaseResponse(
@@ -2684,6 +2689,11 @@ class DadosBemPatrimoniaisDBData extends DataClass
       map['inventario_bem_patrimonial'] =
           Variable<String>(converter.mapToSql(inventarioBemPatrimonial));
     }
+    if (!nullToAbsent || bemPatrimonial != null) {
+      final converter = $DadosBemPatrimoniaisDBTable.$converter6;
+      map['bem_patrimonial'] =
+          Variable<String>(converter.mapToSql(bemPatrimonial));
+    }
     if (!nullToAbsent || idEstruturaOrganizacional != null) {
       map['id_estrutura_organizacional'] =
           Variable<int>(idEstruturaOrganizacional);
@@ -2724,6 +2734,9 @@ class DadosBemPatrimoniaisDBData extends DataClass
       inventarioBemPatrimonial: inventarioBemPatrimonial == null && nullToAbsent
           ? const Value.absent()
           : Value(inventarioBemPatrimonial),
+      bemPatrimonial: bemPatrimonial == null && nullToAbsent
+          ? const Value.absent()
+          : Value(bemPatrimonial),
       idEstruturaOrganizacional:
           idEstruturaOrganizacional == null && nullToAbsent
               ? const Value.absent()
@@ -2755,6 +2768,8 @@ class DadosBemPatrimoniaisDBData extends DataClass
       inventarioBemPatrimonial:
           serializer.fromJson<InventarioDadosBemPatrimonial>(
               json['inventarioBemPatrimonial']),
+      bemPatrimonial:
+          serializer.fromJson<BemPatrimonial>(json['bemPatrimonial']),
       idEstruturaOrganizacional:
           serializer.fromJson<int>(json['idEstruturaOrganizacional']),
       idBemPatrimonial: serializer.fromJson<int>(json['idBemPatrimonial']),
@@ -2778,6 +2793,7 @@ class DadosBemPatrimoniaisDBData extends DataClass
           serializer.toJson<Organizacao>(estruturaOrganizacionalAtual),
       'inventarioBemPatrimonial': serializer
           .toJson<InventarioDadosBemPatrimonial>(inventarioBemPatrimonial),
+      'bemPatrimonial': serializer.toJson<BemPatrimonial>(bemPatrimonial),
       'idEstruturaOrganizacional':
           serializer.toJson<int>(idEstruturaOrganizacional),
       'idBemPatrimonial': serializer.toJson<int>(idBemPatrimonial),
@@ -2795,6 +2811,7 @@ class DadosBemPatrimoniaisDBData extends DataClass
           Dominio dominioStatusInventarioBem,
           Organizacao estruturaOrganizacionalAtual,
           InventarioDadosBemPatrimonial inventarioBemPatrimonial,
+          BemPatrimonial bemPatrimonial,
           int idEstruturaOrganizacional,
           int idBemPatrimonial,
           String numeroPatrimonialCompleto}) =>
@@ -2811,6 +2828,7 @@ class DadosBemPatrimoniaisDBData extends DataClass
             estruturaOrganizacionalAtual ?? this.estruturaOrganizacionalAtual,
         inventarioBemPatrimonial:
             inventarioBemPatrimonial ?? this.inventarioBemPatrimonial,
+        bemPatrimonial: bemPatrimonial ?? this.bemPatrimonial,
         idEstruturaOrganizacional:
             idEstruturaOrganizacional ?? this.idEstruturaOrganizacional,
         idBemPatrimonial: idBemPatrimonial ?? this.idBemPatrimonial,
@@ -2829,6 +2847,7 @@ class DadosBemPatrimoniaisDBData extends DataClass
           ..write(
               'estruturaOrganizacionalAtual: $estruturaOrganizacionalAtual, ')
           ..write('inventarioBemPatrimonial: $inventarioBemPatrimonial, ')
+          ..write('bemPatrimonial: $bemPatrimonial, ')
           ..write('idEstruturaOrganizacional: $idEstruturaOrganizacional, ')
           ..write('idBemPatrimonial: $idBemPatrimonial, ')
           ..write('numeroPatrimonialCompleto: $numeroPatrimonialCompleto')
@@ -2854,11 +2873,13 @@ class DadosBemPatrimoniaisDBData extends DataClass
                               $mrjc(
                                   inventarioBemPatrimonial.hashCode,
                                   $mrjc(
-                                      idEstruturaOrganizacional.hashCode,
+                                      bemPatrimonial.hashCode,
                                       $mrjc(
-                                          idBemPatrimonial.hashCode,
-                                          numeroPatrimonialCompleto
-                                              .hashCode)))))))))));
+                                          idEstruturaOrganizacional.hashCode,
+                                          $mrjc(
+                                              idBemPatrimonial.hashCode,
+                                              numeroPatrimonialCompleto
+                                                  .hashCode))))))))))));
   @override
   bool operator ==(dynamic other) =>
       identical(this, other) ||
@@ -2872,6 +2893,7 @@ class DadosBemPatrimoniaisDBData extends DataClass
           other.estruturaOrganizacionalAtual ==
               this.estruturaOrganizacionalAtual &&
           other.inventarioBemPatrimonial == this.inventarioBemPatrimonial &&
+          other.bemPatrimonial == this.bemPatrimonial &&
           other.idEstruturaOrganizacional == this.idEstruturaOrganizacional &&
           other.idBemPatrimonial == this.idBemPatrimonial &&
           other.numeroPatrimonialCompleto == this.numeroPatrimonialCompleto);
@@ -2887,6 +2909,7 @@ class DadosBemPatrimoniaisDBCompanion
   final Value<Dominio> dominioStatusInventarioBem;
   final Value<Organizacao> estruturaOrganizacionalAtual;
   final Value<InventarioDadosBemPatrimonial> inventarioBemPatrimonial;
+  final Value<BemPatrimonial> bemPatrimonial;
   final Value<int> idEstruturaOrganizacional;
   final Value<int> idBemPatrimonial;
   final Value<String> numeroPatrimonialCompleto;
@@ -2899,6 +2922,7 @@ class DadosBemPatrimoniaisDBCompanion
     this.dominioStatusInventarioBem = const Value.absent(),
     this.estruturaOrganizacionalAtual = const Value.absent(),
     this.inventarioBemPatrimonial = const Value.absent(),
+    this.bemPatrimonial = const Value.absent(),
     this.idEstruturaOrganizacional = const Value.absent(),
     this.idBemPatrimonial = const Value.absent(),
     this.numeroPatrimonialCompleto = const Value.absent(),
@@ -2912,6 +2936,7 @@ class DadosBemPatrimoniaisDBCompanion
     this.dominioStatusInventarioBem = const Value.absent(),
     this.estruturaOrganizacionalAtual = const Value.absent(),
     this.inventarioBemPatrimonial = const Value.absent(),
+    this.bemPatrimonial = const Value.absent(),
     this.idEstruturaOrganizacional = const Value.absent(),
     this.idBemPatrimonial = const Value.absent(),
     this.numeroPatrimonialCompleto = const Value.absent(),
@@ -2925,6 +2950,7 @@ class DadosBemPatrimoniaisDBCompanion
     Expression<String> dominioStatusInventarioBem,
     Expression<String> estruturaOrganizacionalAtual,
     Expression<String> inventarioBemPatrimonial,
+    Expression<String> bemPatrimonial,
     Expression<int> idEstruturaOrganizacional,
     Expression<int> idBemPatrimonial,
     Expression<String> numeroPatrimonialCompleto,
@@ -2942,6 +2968,7 @@ class DadosBemPatrimoniaisDBCompanion
         'estrutura_organizacional_atual': estruturaOrganizacionalAtual,
       if (inventarioBemPatrimonial != null)
         'inventario_bem_patrimonial': inventarioBemPatrimonial,
+      if (bemPatrimonial != null) 'bem_patrimonial': bemPatrimonial,
       if (idEstruturaOrganizacional != null)
         'id_estrutura_organizacional': idEstruturaOrganizacional,
       if (idBemPatrimonial != null) 'id_bem_patrimonial': idBemPatrimonial,
@@ -2959,6 +2986,7 @@ class DadosBemPatrimoniaisDBCompanion
       Value<Dominio> dominioStatusInventarioBem,
       Value<Organizacao> estruturaOrganizacionalAtual,
       Value<InventarioDadosBemPatrimonial> inventarioBemPatrimonial,
+      Value<BemPatrimonial> bemPatrimonial,
       Value<int> idEstruturaOrganizacional,
       Value<int> idBemPatrimonial,
       Value<String> numeroPatrimonialCompleto}) {
@@ -2975,6 +3003,7 @@ class DadosBemPatrimoniaisDBCompanion
           estruturaOrganizacionalAtual ?? this.estruturaOrganizacionalAtual,
       inventarioBemPatrimonial:
           inventarioBemPatrimonial ?? this.inventarioBemPatrimonial,
+      bemPatrimonial: bemPatrimonial ?? this.bemPatrimonial,
       idEstruturaOrganizacional:
           idEstruturaOrganizacional ?? this.idEstruturaOrganizacional,
       idBemPatrimonial: idBemPatrimonial ?? this.idBemPatrimonial,
@@ -3021,6 +3050,11 @@ class DadosBemPatrimoniaisDBCompanion
       map['inventario_bem_patrimonial'] =
           Variable<String>(converter.mapToSql(inventarioBemPatrimonial.value));
     }
+    if (bemPatrimonial.present) {
+      final converter = $DadosBemPatrimoniaisDBTable.$converter6;
+      map['bem_patrimonial'] =
+          Variable<String>(converter.mapToSql(bemPatrimonial.value));
+    }
     if (idEstruturaOrganizacional.present) {
       map['id_estrutura_organizacional'] =
           Variable<int>(idEstruturaOrganizacional.value);
@@ -3047,6 +3081,7 @@ class DadosBemPatrimoniaisDBCompanion
           ..write(
               'estruturaOrganizacionalAtual: $estruturaOrganizacionalAtual, ')
           ..write('inventarioBemPatrimonial: $inventarioBemPatrimonial, ')
+          ..write('bemPatrimonial: $bemPatrimonial, ')
           ..write('idEstruturaOrganizacional: $idEstruturaOrganizacional, ')
           ..write('idBemPatrimonial: $idBemPatrimonial, ')
           ..write('numeroPatrimonialCompleto: $numeroPatrimonialCompleto')
@@ -3169,6 +3204,20 @@ class $DadosBemPatrimoniaisDBTable extends DadosBemPatrimoniaisDB
     );
   }
 
+  final VerificationMeta _bemPatrimonialMeta =
+      const VerificationMeta('bemPatrimonial');
+  GeneratedTextColumn _bemPatrimonial;
+  @override
+  GeneratedTextColumn get bemPatrimonial =>
+      _bemPatrimonial ??= _constructBemPatrimonial();
+  GeneratedTextColumn _constructBemPatrimonial() {
+    return GeneratedTextColumn(
+      'bem_patrimonial',
+      $tableName,
+      true,
+    );
+  }
+
   final VerificationMeta _idEstruturaOrganizacionalMeta =
       const VerificationMeta('idEstruturaOrganizacional');
   GeneratedIntColumn _idEstruturaOrganizacional;
@@ -3221,6 +3270,7 @@ class $DadosBemPatrimoniaisDBTable extends DadosBemPatrimoniaisDB
         dominioStatusInventarioBem,
         estruturaOrganizacionalAtual,
         inventarioBemPatrimonial,
+        bemPatrimonial,
         idEstruturaOrganizacional,
         idBemPatrimonial,
         numeroPatrimonialCompleto
@@ -3258,6 +3308,7 @@ class $DadosBemPatrimoniaisDBTable extends DadosBemPatrimoniaisDB
         _estruturaOrganizacionalAtualMeta, const VerificationResult.success());
     context.handle(
         _inventarioBemPatrimonialMeta, const VerificationResult.success());
+    context.handle(_bemPatrimonialMeta, const VerificationResult.success());
     if (data.containsKey('id_estrutura_organizacional')) {
       context.handle(
           _idEstruturaOrganizacionalMeta,
@@ -3305,6 +3356,8 @@ class $DadosBemPatrimoniaisDBTable extends DadosBemPatrimoniaisDB
       const OrganizacaoConverter();
   static TypeConverter<InventarioDadosBemPatrimonial, String> $converter5 =
       const InventarioBemPatrimonialConverter();
+  static TypeConverter<BemPatrimonial, String> $converter6 =
+      const BemPatrimonialConverter();
 }
 
 abstract class _$AppDatabase extends GeneratedDatabase {

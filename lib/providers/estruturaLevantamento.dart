@@ -1,22 +1,24 @@
 import 'dart:io';
-
-import 'package:app_inventario/main.dart';
-import 'package:app_inventario/models/serialized/dadosBensPatrimoniais.dart';
-import 'package:app_inventario/models/serialized/estruturaInventario.dart';
-import 'package:app_inventario/models/serialized/levantamento.dart';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+
+import 'package:app_inventario/main.dart';
+
+import 'package:app_inventario/helpers/helper_dadosBemPatrimonial.dart';
+import 'package:app_inventario/helpers/helper_estruturaInventario.dart';
+
+import 'package:app_inventario/models/serialized/dadosBensPatrimoniais.dart';
+import 'package:app_inventario/models/serialized/estruturaInventario.dart';
+import 'package:app_inventario/models/serialized/levantamento.dart';
 
 class EstruturaLevantamento with ChangeNotifier {
   List<EstruturaInventario> _estruturas = [];
   List<EstruturaInventario> _levantamentosEstrutura = [];
   List<DadosBensPatrimoniais> _bensEstrutura = [];
+  DadosBensPatrimoniais _bemPatrimonial;
   String _quantidadeDigitos;
   String _digitoVerificador;
-  // final List<Dominio> listaDominios;
-
-  // EstruturaLevantamento({this.listaDominios});
 
   String _nomeEstrutura;
   bool _isLoading = false;
@@ -33,6 +35,10 @@ class EstruturaLevantamento with ChangeNotifier {
 
   List<DadosBensPatrimoniais> get getBensPorEstrutura {
     return [..._bensEstrutura];
+  }
+
+  DadosBensPatrimoniais get getBemPatrimonial {
+    return _bemPatrimonial;
   }
 
   String get getNomeEstrutura {
@@ -55,41 +61,28 @@ class EstruturaLevantamento with ChangeNotifier {
     _digitoVerificador = digito;
   }
 
-  // void buscaPorEstrutura(int id) {
-  //   List<EstruturaInventario> lista =
-  //       _estruturas.where((element) => element.id == id).toList();
-  //   if (lista.isNotEmpty) {
-  //     _levantamentosEstrutura = lista;
-  //   } else {
-  //     _levantamentosEstrutura.clear();
-  //   }
-  // }
+  Future<void> buscaBensPorEstrutura(int id) async {
+    _bensEstrutura = helperDadosBemPatrimonialLista(
+        await db.dadosBemPatrimoniaisDao.getAllDadosPorEstrutura(id));
 
-  // void buscaBensPorEstrutura(int id) {
-  //   _bensEstrutura.clear();
-  //   List<EstruturaInventario> lista = _levantamentosEstrutura
-  //       .where((element) => element.estruturaOrganizacional.id == id)
-  //       .toList();
+    notifyListeners();
+  }
 
-  //   if (lista.isNotEmpty) {
-  //     _bensEstrutura.addAll(lista
-  //         .map((e) => e.dadosBensPatrimoniais)
-  //         .expand((element) => element)
-  //         .toList());
-  //   } else {
-  //     _bensEstrutura.clear();
-  //   }
-  // }
+  Future<void> buscaPorEstrutura(int id) async {
+    _levantamentosEstrutura = helperEstruturaInventarioLista(
+        await db.estruturaInventarioDao.getAllEstruturasPorLevantamento(id));
 
-  // dynamic buscaBensPorid(String id) {
-  //   List<DadosBensPatrimoniais> listaBens = _estruturas
-  //       .map((e) => e.dadosBensPatrimoniais.whereType<DadosBensPatrimoniais>())
-  //       .expand((element) => element)
-  //       .toList();
-  //   return listaBens
-  //       .where((element) => element.bemPatrimonial.numeroPatrimonial == id)
-  //       .first;
-  // }
+    notifyListeners();
+  }
+
+  Future<DadosBensPatrimoniais> buscaBensPorId(int idBemPatrimonial) async {
+    _isLoading = false;
+    _bemPatrimonial = helperDadoBemPatrimonial2(
+        await db.dadosBemPatrimoniaisDao.getDadosInventariar(idBemPatrimonial));
+    _isLoading = true;
+    notifyListeners();
+    return _bemPatrimonial;
+  }
 
   Future<void> _getLevantamento(String conexao, int idLevantamento) async {
     Dio dio = new Dio()
@@ -124,8 +117,6 @@ class EstruturaLevantamento with ChangeNotifier {
       notifyListeners();
       await db.estruturaInventarioDao
           .insertEstruturaInventario((response.data["objects"] as List));
-      // _estruturas.addAll(
-      //     EstruturaInventario.fromJson(response.data["objects"]));
     } catch (error) {
       throw error;
     }
@@ -142,13 +133,6 @@ class EstruturaLevantamento with ChangeNotifier {
       _bensEstrutura[idx].inventariado = true;
       notifyListeners();
     }
-  }
-
-  Future<void> buscaEst(int idInventario) async {
-    // var teste1 =
-    //     await db.estruturaInventarioDao.getAllEstruturasPorLevantamento(65);
-    // var teste2 = await db.estruturaInventarioDao.getAllDadosPorEstrutura(2966);
-    // print('object');
   }
 
   Future<void> buscaEstruturas(

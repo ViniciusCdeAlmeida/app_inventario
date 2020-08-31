@@ -24,16 +24,8 @@ class _PrevistosBensItemState extends State<PrevistosBensItem> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  BensPrevistos(
-                      'Número Patrimonial: ',
-                      widget.bemInventario.bemPatrimonial != null &&
-                              widget.bemInventario.bemPatrimonial
-                                      .numeroPatrimonial !=
-                                  null
-                          ? widget
-                              .bemInventario.bemPatrimonial.numeroPatrimonial
-                          : widget.bemInventario.inventarioBemPatrimonial
-                              .numeroPatrimonial),
+                  BensPrevistos('Número Patrimonial: ',
+                      widget.bemInventario.numeroPatrimonial),
                   BensPrevistos('Descrição do material: ',
                       widget.bemInventario.material.codigoEDescricao),
                   BensPrevistos(
@@ -66,14 +58,14 @@ class _PrevistosBensItemState extends State<PrevistosBensItem> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       IconButton(
+                        // icon: Icon(Icons.content_paste)
                         icon: !widget.bemInventario.inventariado
                             ? Icon(Icons.content_paste)
                             : Icon(Icons.check),
                         onPressed: () {
                           Navigator.of(context).pushNamed(
                             LerBensGeralTela.routeName,
-                            arguments: widget
-                                .bemInventario.bemPatrimonial.numeroPatrimonial,
+                            arguments: widget.bemInventario.idBemPatrimonial,
                           );
                         },
                       ),

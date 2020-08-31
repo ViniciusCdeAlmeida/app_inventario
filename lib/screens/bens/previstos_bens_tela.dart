@@ -9,26 +9,28 @@ class PrevistosBensTela extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final idEstrutura = ModalRoute.of(context).settings.arguments;
-    // Provider.of<EstruturaLevantamento>(context)
-    //     .buscaBensPorEstrutura(idEstrutura);
-    final bens = Provider.of<EstruturaLevantamento>(context);
+    Provider.of<EstruturaLevantamento>(context, listen: false)
+        .buscaBensPorEstrutura(idEstrutura);
 
     return Scaffold(
       appBar: AppBar(
         title: Text('Bens Previstos'),
       ),
       drawer: AppDrawer(),
-      body: Padding(
-        padding: EdgeInsets.all(8),
-        child: ListView.builder(
-          itemCount: bens.getBensPorEstrutura.length,
-          itemBuilder: (_, idx) => Column(
-            children: [
-              PrevistosBensItem(
-                bemInventario: bens.getBensPorEstrutura[idx],
-              ),
-              Divider(),
-            ],
+      body: Consumer<EstruturaLevantamento>(
+        builder: (context, estruturaLevantamentoData, child) => Padding(
+          padding: EdgeInsets.all(8),
+          child: ListView.builder(
+            itemCount: estruturaLevantamentoData.getBensPorEstrutura.length,
+            itemBuilder: (_, idx) => Column(
+              children: [
+                PrevistosBensItem(
+                  bemInventario:
+                      estruturaLevantamentoData.getBensPorEstrutura[idx],
+                ),
+                Divider(),
+              ],
+            ),
           ),
         ),
       ),

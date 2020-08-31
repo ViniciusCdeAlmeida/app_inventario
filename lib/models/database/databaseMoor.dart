@@ -4,11 +4,11 @@ import 'package:app_inventario/models/database/daos/levantamentosDao.dart';
 import 'package:app_inventario/models/database/daos/unidadesGestorasDao.dart';
 
 import 'package:app_inventario/models/converters/caracteristicasConverter.dart';
-import 'package:app_inventario/models/converters/dadosBensPatrimoniaisConverter.dart';
 import 'package:app_inventario/models/converters/dominioConverter.dart';
 import 'package:app_inventario/models/converters/materialConverter.dart';
 import 'package:app_inventario/models/converters/organizacaoConverter.dart';
 import 'package:app_inventario/models/converters/inventarioBemPatrimonialConverter.dart';
+import 'package:app_inventario/models/converters/bemPatrimonialConverter.dart';
 
 import 'package:app_inventario/models/database/daos/bemPatrimoniaisDao.dart';
 import 'package:app_inventario/models/database/daos/dominioDao.dart';
@@ -18,8 +18,8 @@ import 'package:app_inventario/models/serialized/material.dart';
 import 'package:app_inventario/models/serialized/organizacao.dart';
 import 'package:app_inventario/models/serialized/dominio.dart';
 import 'package:app_inventario/models/serialized/caracteristicas.dart';
-import 'package:app_inventario/models/serialized/dadosBensPatrimoniais.dart';
 import 'package:app_inventario/models/serialized/inventarioDadosBemPatrimonial.dart';
+import 'package:app_inventario/models/serialized/bemPatrimonial.dart';
 
 part 'databaseMoor.g.dart';
 
@@ -101,6 +101,8 @@ class DadosBemPatrimoniaisDB extends Table {
       text().map(const OrganizacaoConverter()).nullable()();
   TextColumn get inventarioBemPatrimonial =>
       text().map(const InventarioBemPatrimonialConverter()).nullable()();
+  TextColumn get bemPatrimonial =>
+      text().map(const BemPatrimonialConverter()).nullable()();
   IntColumn get idEstruturaOrganizacional => integer().nullable()();
   IntColumn get idBemPatrimonial => integer().nullable()();
   TextColumn get numeroPatrimonialCompleto => text().nullable()();
@@ -139,7 +141,7 @@ class AppDatabase extends _$AppDatabase {
   // Bump this when changing tables and columns.
   // Migrations will be covered in the next part.
   @override
-  int get schemaVersion => 7;
+  int get schemaVersion => 8;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -149,7 +151,8 @@ class AppDatabase extends _$AppDatabase {
         onUpgrade: (m, from, to) {
           // m.createTable(unidadesGestorasDB);
           // m.addColumn(dadosBemPatrimoniaisDB, dadosBemPatrimoniaisDB.inventarioBemPatrimonial);
-          return m.createTable(dadosBemPatrimoniaisDB);
+          return m.addColumn(
+              dadosBemPatrimoniaisDB, dadosBemPatrimoniaisDB.bemPatrimonial);
         },
       );
 

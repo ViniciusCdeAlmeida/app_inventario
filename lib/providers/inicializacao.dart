@@ -76,14 +76,8 @@ class Inicializacao with ChangeNotifier {
   }
 
   List<DropdownMenuItem<Dominio>> getDominiosDropdownBens(String chave) {
-    List<Dominio> teste = [];
-    db.dominioDao.getAllDominio().then(
-      (value) {
-        teste = helperDominioLista(value);
-      },
-    );
     List<Dominio> dominioFiltrado = [
-      ...teste.where((element) => element.chave == chave)
+      ..._dominios.where((element) => element.chave == chave)
     ];
     return dominioFiltrado.map(
       (itens) {
@@ -105,6 +99,7 @@ class Inicializacao with ChangeNotifier {
   }
 
   bool get isLoading => _isLoading;
+
   Future<void> _getDominios(String conexao) async {
     Dio dio = new Dio()
       ..options.baseUrl =

@@ -17,9 +17,9 @@ class UnidadeTela extends StatefulWidget {
 class _UnidadeTelaState extends State<UnidadeTela> {
   TelaArgumentos unidadeArgs;
 
-  Future<void> _carregaUnidades(BuildContext context, String conexao) async {
-    // await Provider.of<EstruturaLevantamento>(context, listen: false)
-    //     .buscaPorEstrutura(unidadeArgs.id);
+  Future<void> _carregaUnidades(BuildContext context) async {
+    await Provider.of<EstruturaLevantamento>(context, listen: false)
+        .buscaPorEstrutura(unidadeArgs.id);
   }
 
   @override
@@ -27,9 +27,9 @@ class _UnidadeTelaState extends State<UnidadeTela> {
     final conexao =
         Provider.of<Autenticacao>(context, listen: false).atualConexao;
     unidadeArgs = ModalRoute.of(context).settings.arguments;
-    final unidades = Provider.of<Levantamentos>(context);
-    // Provider.of<EstruturaLevantamento>(context)
-    //     .buscaPorEstrutura(unidadeArgs.id);
+    final unidades = Provider.of<Levantamentos>(context, listen: false);
+    Provider.of<EstruturaLevantamento>(context, listen: false)
+        .buscaPorEstrutura(unidadeArgs.id);
 
     return Scaffold(
       appBar: AppBar(
@@ -41,7 +41,7 @@ class _UnidadeTelaState extends State<UnidadeTela> {
               child: CircularProgressIndicator(),
             )
           : RefreshIndicator(
-              onRefresh: () => _carregaUnidades(context, conexao),
+              onRefresh: () => _carregaUnidades(context),
               child: Consumer<EstruturaLevantamento>(
                 builder: (ctx, unidadesData, _) => Padding(
                   padding: EdgeInsets.all(8),

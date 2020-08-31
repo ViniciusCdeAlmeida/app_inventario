@@ -9,15 +9,15 @@ part 'bemPatrimonial.g.dart';
 
 @JsonSerializable()
 class BemPatrimonial with mat.ChangeNotifier {
-  final int id;
-  final String numeroPatrimonial;
-  final String numeroPatrimonialCompleto;
-  final String numeroPatrimonialCompletoAntigo;
-  final Dominio dominioSituacaoFisica;
-  final Dominio dominioStatus;
-  final Material material;
-  final List<Caracteristicas> caracteristicas;
-  final Organizacao estruturaOrganizacionalAtual;
+  int id;
+  String numeroPatrimonial;
+  String numeroPatrimonialCompleto;
+  String numeroPatrimonialCompletoAntigo;
+  Dominio dominioSituacaoFisica;
+  Dominio dominioStatus;
+  Material material;
+  List<Caracteristicas> caracteristicas;
+  Organizacao estruturaOrganizacionalAtual;
 
   BemPatrimonial({
     this.id,

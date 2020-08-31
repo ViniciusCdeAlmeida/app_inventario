@@ -54,7 +54,7 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
             .buscaLevantamento(id, conexao);
         break;
       case Acoes.buscarLevantamento:
-        await Provider.of<EstruturaLevantamento>(context).buscaEst(id);
+        // await Provider.of<EstruturaLevantamento>(context).buscaEst(id);
         break;
       case Acoes.exluirLevantamentos:
         print('3');

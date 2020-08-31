@@ -1,5 +1,8 @@
 import 'dart:convert';
 
+import 'package:app_inventario/helpers/helper_bemPatrimonial.dart';
+import 'package:app_inventario/models/serialized/bemPatrimonial.dart';
+import 'package:app_inventario/models/serialized/dadosBensPatrimoniais.dart';
 import 'package:moor_flutter/moor_flutter.dart';
 
 import 'package:app_inventario/models/database/databaseMoor.dart';
@@ -19,23 +22,27 @@ class DadosBemPatrimoniaisDao extends DatabaseAccessor<AppDatabase>
 
   DadosBemPatrimoniaisDao(this.db) : super(db);
 
-  // Future<List<Organizacao>> getAllEstruturasPorLevantamento(int idInventario) =>
-  //     (customSelect(
-  //             'SELECT estrutura_organizacional FROM ' +
-  //                 db.estruturaInventarioDB.actualTableName +
-  //                 ' where id_inventario = $idInventario ;',
-  //             readsFrom: {db.estruturaInventarioDB}).get().then(
-  //           (value) => value
-  //               .map((e) => Organizacao.fromJson(
-  //                   json.decode(e.data['estrutura_organizacional'])))
-  //               .toList(),
-  //         ));
-
   Future<List<DadosBemPatrimoniaisDBData>> getAllDadosPorEstrutura(
           int idEstrutura) =>
       (select(db.dadosBemPatrimoniaisDB)
             ..where((tbl) => tbl.idEstruturaOrganizacional.equals(idEstrutura)))
           .get();
+
+  Future<DadosBemPatrimoniaisDBData> getDadosBemPatrimonial(
+          int idBemPatrimonial) =>
+      (select(db.dadosBemPatrimoniaisDB)
+            ..where((tbl) => tbl.idBemPatrimonial.equals(idBemPatrimonial)))
+          .getSingle();
+
+  Future<DadosBemPatrimoniaisDBData> getDadosInventariar(
+      int idBemPatrimonial) async {
+    DadosBemPatrimoniaisDBData teste =
+        await getDadosBemPatrimonial(idBemPatrimonial);
+    BensPatrimoniaisDBData bemPatrimonial =
+        await db.bemPatrimoniaisDao.getBemPatrimonial(idBemPatrimonial);
+    teste.bemPatrimonial = helperBemPatrimonial(bemPatrimonial);
+    return teste;
+  }
 
   Future<void> insertDadosBensPatrimoniais(List dadosBemPatrimonial) async {
     await batch(
