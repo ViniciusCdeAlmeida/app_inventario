@@ -31,7 +31,6 @@ class Levantamentos with ChangeNotifier {
   }
 
   List<Levantamento> get getLevantamentos {
-    // getLevantamentosDB();
     return [..._levantamentos];
   }
 
@@ -46,7 +45,7 @@ class Levantamentos with ChangeNotifier {
   Future<void> getLevantamentosDB(int idOrganizacao) async {
     _levantamentos = helperLevantamentoList(
         await db.levantamentosDao.getAllLevantamentos(idOrganizacao));
-    // notifyListeners();
+    notifyListeners();
   }
 
   Future<void> _getLevantamento(int idOrganizacao, String conexao) async {

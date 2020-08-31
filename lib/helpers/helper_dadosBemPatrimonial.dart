@@ -1,46 +1,3 @@
-// import 'package:app_inventario/helpers/helper_bemPatrimonialEst.dart';
-// import 'package:app_inventario/helpers/helper_dominio.dart';
-// import 'package:app_inventario/helpers/helper_inventarioBemPatrimonial.dart';
-// import 'package:app_inventario/helpers/helper_materialEst.dart';
-// import 'package:app_inventario/models/serialized/dadosBensPatrimoniais.dart';
-// import 'package:app_inventario/models/dominio.dart';
-
-// DadosBensPatrimoniais helperDadosBensPatrimoniaisEst(
-//     dynamic listaDadosBemPatrimonial, List<Dominio> listaDominios) {
-//   return DadosBensPatrimoniais(
-//     id: listaDadosBemPatrimonial['id'],
-//     idInventario: listaDadosBemPatrimonial['idInventario'],
-//     numeroPatrimonial: listaDadosBemPatrimonial['numeroPatrimonial'],
-//     inventariado: listaDadosBemPatrimonial['inventarioBemPatrimonial'] == null
-//         ? false
-//         : true,
-//     idInventarioEstruturaOrganizacional:
-//         listaDadosBemPatrimonial['idInventarioEstruturaOrganizacional'],
-//     dominioSituacaoFisica:
-//         listaDadosBemPatrimonial['dominioSituacaoFisica'] != null
-//             ? helperDominio(listaDadosBemPatrimonial['dominioSituacaoFisica'])
-//             : null,
-//     dominioStatus: listaDadosBemPatrimonial['dominioStatus'] != null
-//         ? helperDominio(listaDadosBemPatrimonial['dominioStatus'])
-//         : null,
-//     dominioStatusInventarioBem:
-//         listaDadosBemPatrimonial['dominioStatusInventarioBem'] != null
-//             ? helperDominio(
-//                 listaDadosBemPatrimonial['dominioStatusInventarioBem'])
-//             : null,
-//     bemPatrimonial: helperBemPatrimonialEst(
-//         listaDadosBemPatrimonial['bemPatrimonial'], listaDominios),
-//     material: helperMaterial(
-//       listaDadosBemPatrimonial['material'],
-//     ),
-//     inventarioBemPatrimonial:
-//         listaDadosBemPatrimonial['inventarioBemPatrimonial'] != null
-//             ? helperInventarioBemPatrimonial(
-//                 listaDadosBemPatrimonial['inventarioBemPatrimonial'])
-//             : null,
-//   );
-// }
-
 import 'package:app_inventario/models/database/databaseMoor.dart';
 import 'package:app_inventario/models/serialized/dadosBensPatrimoniais.dart';
 
@@ -123,30 +80,3 @@ DadosBensPatrimoniais helperDadoBemPatrimonial2(
   } else
     return null;
 }
-
-// DadosBensPatrimoniais helperDadosBemPatrimonial(Map dadoBemPatrimonial) {
-//   return DadosBensPatrimoniais(
-//       id: dadoBemPatrimonial['id'],
-//       dominioStatusInventarioEstrutura: Dominio.fromJson(
-//         json.decode(estrutura['dominio_status_inventario_estrutura']),
-//       ),
-//       estruturaOrganizacional: Organizacao.fromJson(
-//         json.decode(dadoBemPatrimonial['estrutura_organizacional']),
-//       ),
-//       dominioStatusInventarioEstrutura: Dominio.fromJson(
-//         json.decode(estrutura['dominio_status_inventario_estrutura']),
-//       ),
-//       estruturaOrganizacional: Organizacao.fromJson(
-//         json.decode(dadoBemPatrimonial['estrutura_organizacional']),
-//       ),
-//       dominioStatusInventarioEstrutura: Dominio.fromJson(
-//         json.decode(estrutura['dominio_status_inventario_estrutura']),
-//       ),
-//       estruturaOrganizacional: Organizacao.fromJson(
-//         json.decode(dadoBemPatrimonial['estrutura_organizacional']),
-//       ),
-//       estruturaOrganizacional: Organizacao.fromJson(
-//         json.decode(dadoBemPatrimonial['estrutura_organizacional']),
-//       ),
-//       idInventario: dadoBemPatrimonial['id_inventario']);
-// }

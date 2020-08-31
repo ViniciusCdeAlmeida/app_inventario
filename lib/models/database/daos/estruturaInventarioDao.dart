@@ -1,12 +1,8 @@
-import 'dart:convert';
-
-import 'package:app_inventario/helpers/helper_estruturaInventario.dart';
-import 'package:app_inventario/models/database/databaseMoor.dart';
-import 'package:app_inventario/models/serialized/dadosBensPatrimoniais.dart';
-import 'package:app_inventario/models/serialized/dominio.dart';
-import 'package:app_inventario/models/serialized/estruturaInventario.dart';
-import 'package:app_inventario/models/serialized/organizacao.dart';
 import 'package:moor_flutter/moor_flutter.dart';
+
+import 'package:app_inventario/models/database/databaseMoor.dart';
+import 'package:app_inventario/models/serialized/dominio.dart';
+import 'package:app_inventario/models/serialized/organizacao.dart';
 
 part 'estruturaInventarioDao.g.dart';
 
@@ -25,30 +21,11 @@ class EstruturaInventarioDao extends DatabaseAccessor<AppDatabase>
         readsFrom: {db.estruturaInventarioDB}).get();
   }
 
-  // dynamic getAllEstruturasPorLevantamento(int idInventario) => (customSelect(
-  //         'SELECT * FROM ' +
-  //             db.estruturaInventarioDB.actualTableName +
-  //             ' where id_inventario = $idInventario ;',
-  //         readsFrom: {db.estruturaInventarioDB}).get().then(
-  //       (value) => value.map((e) => helperEstruturaInventario(e.data)).toList(),
-  //     ));
-
   Future<List<EstruturaInventarioDBData>> getAllEstruturasPorLevantamento(
           int idInventario) =>
       (select(db.estruturaInventarioDB)
             ..where((tbl) => tbl.idInventario.equals(idInventario)))
           .get();
-
-  // dynamic getAllDadosPorEstrutura(int idInventario) => (customSelect(
-  //         'SELECT dados_bens_patrimoniais FROM ' +
-  //             db.estruturaInventarioDB.actualTableName +
-  //             ' where estrutura_organizacional.id = $idInventario ;',
-  //         readsFrom: {db.estruturaInventarioDB}).get().then(
-  //       (value) => value
-  //           .map((e) => Organizacao.fromJson(
-  //               json.decode(e.data['estrutura_organizacional'])))
-  //           .toList(),
-  //     ));
 
   Future<EstruturaInventarioDBData> getVerificaEstruturasInventario() =>
       (select(db.estruturaInventarioDB)..limit(1)).getSingle();

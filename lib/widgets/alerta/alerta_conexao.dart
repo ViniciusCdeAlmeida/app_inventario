@@ -30,7 +30,6 @@ class _AlertaConexaoState extends State<AlertaConexao> {
       },
     );
 
-    // set up the AlertDialog
     AlertDialog alert = AlertDialog(
       title: Text("Atenção"),
       content: Text("Existe conexão ativa. Deseja ativar essa conexão?"),

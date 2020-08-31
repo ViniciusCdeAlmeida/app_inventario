@@ -39,7 +39,6 @@ class Inicializacao with ChangeNotifier {
   }
 
   List<Dominio> get getDominios {
-    // getDominiosDB();
     return [..._dominios];
   }
 
@@ -95,7 +94,6 @@ class Inicializacao with ChangeNotifier {
 
   void getDominiosBens2(String chave) {
     db.dominioDao.getDominioBens(chave);
-    // return [..._dominios.where((element) => element.chave == chave)];
   }
 
   bool get isLoading => _isLoading;

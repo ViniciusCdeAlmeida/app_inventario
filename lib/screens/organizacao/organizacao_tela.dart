@@ -73,9 +73,6 @@ class _OrganizacaoTelaState extends State<OrganizacaoTela> {
         );
       }
 
-      // if (!organizacoes.getExisteOrganizacao) {
-      //   await organizacoes.getOrganizacoesDB();
-      // }
       if (!inicializacao.getExisteDominios) {
         await inicializacao.buscaDominioInicial(conexao);
       }

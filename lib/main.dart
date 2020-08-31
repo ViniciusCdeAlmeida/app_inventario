@@ -4,7 +4,6 @@ import 'package:app_inventario/providers/inicializacao.dart';
 import 'package:app_inventario/providers/estruturaLevantamento.dart';
 import 'package:app_inventario/providers/inventarioBemPatrimonial.dart';
 import 'package:app_inventario/providers/levantamentos.dart';
-import 'package:app_inventario/providers/unidade.dart';
 import 'package:app_inventario/screens/bens/previstos_bens_tela.dart';
 import 'package:app_inventario/screens/inventario/inventario_geral_tela.dart';
 import 'package:app_inventario/screens/inventario/inventario_selecao_tela.dart';
@@ -31,7 +30,6 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -44,9 +42,6 @@ class MyApp extends StatelessWidget {
         ),
         ChangeNotifierProvider(
           create: (ctx) => Inventario(),
-        ),
-        ChangeNotifierProvider(
-          create: (ctx) => Unidades(),
         ),
         ChangeNotifierProvider(
           create: (ctx) => BensProvier(),
@@ -63,8 +58,6 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProxyProvider<Autenticacao, Levantamentos>(
           create: (context) => Levantamentos(),
           update: (ctx, autenticacao, _) => Levantamentos(
-            // levantamentos:
-            //     levantamento == null ? [] : levantamento.getLevantamentos,
             idOrganizacao: autenticacao.idUnidade,
           ),
         ),

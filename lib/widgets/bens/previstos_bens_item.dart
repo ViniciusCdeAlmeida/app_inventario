@@ -58,7 +58,6 @@ class _PrevistosBensItemState extends State<PrevistosBensItem> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       IconButton(
-                        // icon: Icon(Icons.content_paste)
                         icon: !widget.bemInventario.inventariado
                             ? Icon(Icons.content_paste)
                             : Icon(Icons.check),

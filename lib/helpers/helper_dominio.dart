@@ -14,18 +14,6 @@ Dominio helperDominio(dynamic dominio) {
     return null;
 }
 
-// Dominio helperDominioFromJson(Dominio dominio) {
-//   if (dominio != null) {
-//     return Dominio(
-//       id: dominio.id,
-//       nome: dominio.nome,
-//       chave: dominio.chave,
-//       codigo: dominio.codigo,
-//       descricao: dominio.descricao,
-//     );
-//   } else
-//     return null;
-// }
 List<Dominio> helperDominioLista(List<DominioDBData> listaDominios) {
   return List<Dominio>.from(
     (listaDominios).map(

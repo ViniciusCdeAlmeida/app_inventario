@@ -21,9 +21,11 @@ class EstruturaLevantamento with ChangeNotifier {
   String _digitoVerificador;
 
   String _nomeEstrutura;
-  bool _isLoading = false;
+  bool _isLoadingEstruturas = false;
+  bool _isLoadingBens = false;
 
-  bool get isLoading => _isLoading;
+  bool get isLoadingEstruturas => _isLoadingEstruturas;
+  bool get isLoadingBens => _isLoadingBens;
 
   List<EstruturaInventario> get getLevantamentos {
     return _estruturas;
@@ -76,10 +78,10 @@ class EstruturaLevantamento with ChangeNotifier {
   }
 
   Future<DadosBensPatrimoniais> buscaBensPorId(int idBemPatrimonial) async {
-    _isLoading = false;
+    _isLoadingBens = false;
     _bemPatrimonial = helperDadoBemPatrimonial2(
         await db.dadosBemPatrimoniaisDao.getDadosInventariar(idBemPatrimonial));
-    _isLoading = true;
+    _isLoadingBens = true;
     notifyListeners();
     return _bemPatrimonial;
   }
@@ -123,7 +125,7 @@ class EstruturaLevantamento with ChangeNotifier {
   }
 
   void markAsLoading() {
-    _isLoading = true;
+    _isLoadingEstruturas = true;
     notifyListeners();
   }
 
@@ -146,7 +148,7 @@ class EstruturaLevantamento with ChangeNotifier {
         .asyncMap((element) => _getLevantamento(conexao, element.id))
         .toList();
     _nomeEstrutura = null;
-    _isLoading = false;
+    _isLoadingEstruturas = false;
     notifyListeners();
   }
 }

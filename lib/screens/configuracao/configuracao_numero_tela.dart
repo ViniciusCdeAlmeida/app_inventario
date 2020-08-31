@@ -54,9 +54,6 @@ class _ConfiguracaoNumeroTelaState extends State<ConfiguracaoNumeroTela> {
                   key: Key('digitoText'),
                   initialValue: _valorInicial,
                   textInputAction: TextInputAction.done,
-                  // inputFormatters: [
-                  //   FilteringTextInputFormatter.allow(RegExp("[a-zA-Z]")),
-                  // ],
                   autofocus: true,
                   decoration: InputDecoration(
                     labelText: 'Letra do novo número patrimonial',
