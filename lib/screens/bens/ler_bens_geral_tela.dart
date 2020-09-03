@@ -174,7 +174,12 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
         _item = snapshot.data;
         if (_item != null) _atribuiValores();
         return snapshot.data == null
-            ? Center(child: CircularProgressIndicator())
+            ? Scaffold(
+                body: Center(
+                  child: CircularProgressIndicator(),
+                ),
+                drawer: AppDrawer(),
+              )
             : Scaffold(
                 appBar: AppBar(
                   title: Text(

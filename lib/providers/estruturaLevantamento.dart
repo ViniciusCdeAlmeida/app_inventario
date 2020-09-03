@@ -16,6 +16,7 @@ class EstruturaLevantamento with ChangeNotifier {
   List<EstruturaInventario> _estruturas = [];
   List<EstruturaInventario> _levantamentosEstrutura = [];
   List<DadosBensPatrimoniais> _bensEstrutura = [];
+  List<DadosBensPatrimoniais> _bensEstruturaFiltrado = [];
   DadosBensPatrimoniais _bemPatrimonial;
   String _quantidadeDigitos;
   String _digitoVerificador;
@@ -36,7 +37,10 @@ class EstruturaLevantamento with ChangeNotifier {
   }
 
   List<DadosBensPatrimoniais> get getBensPorEstrutura {
-    return [..._bensEstrutura];
+    return _bensEstruturaFiltrado.length != 0 &&
+            _bensEstruturaFiltrado.length < [..._bensEstrutura].length
+        ? _bensEstruturaFiltrado
+        : [..._bensEstrutura];
   }
 
   DadosBensPatrimoniais get getBemPatrimonial {
@@ -64,9 +68,24 @@ class EstruturaLevantamento with ChangeNotifier {
   }
 
   Future<void> buscaBensPorEstrutura(int id) async {
+    _isLoadingBens = false;
     _bensEstrutura = helperDadosBemPatrimonialLista(
         await db.dadosBemPatrimoniaisDao.getAllDadosPorEstrutura(id));
+    _isLoadingBens = true;
+    notifyListeners();
+  }
 
+  void limpaFiltrados() {
+    _bensEstruturaFiltrado.clear();
+
+    notifyListeners();
+  }
+
+  void filtraBens(String value) async {
+    _bensEstruturaFiltrado = _bensEstrutura
+        .where((element) => element.numeroPatrimonial.contains(value))
+        .toList();
+    // _bensEstrutura = teste;
     notifyListeners();
   }
 
