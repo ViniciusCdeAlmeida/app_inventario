@@ -1,3 +1,4 @@
+import 'package:app_inventario/models/serialized/estruturaInventario.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:searchable_dropdown/searchable_dropdown.dart';
@@ -13,8 +14,13 @@ import 'package:app_inventario/providers/inventarioBemPatrimonial.dart';
 
 import 'package:app_inventario/widgets/cabecalho/app_cabecalho.dart';
 
+// ignore: must_be_immutable
 class LerBensGeralTela extends StatefulWidget {
   static const routeName = '/LerBensGeralTela';
+  int id;
+  EstruturaInventario estrutura;
+
+  LerBensGeralTela({this.id, this.estrutura});
 
   @override
   _LerBensGeralTelaState createState() => _LerBensGeralTelaState();

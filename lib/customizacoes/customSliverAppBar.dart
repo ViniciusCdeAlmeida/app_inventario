@@ -47,6 +47,7 @@ class _MySliverAppBarState extends State<MySliverAppBar> {
                 onPressed: () {
                   Provider.of<EstruturaLevantamento>(context, listen: false)
                       .limpaFiltrados();
+                  _controller.text = '';
                   setState(() {
                     _search = false;
                   });
@@ -90,10 +91,14 @@ class _MySliverAppBarState extends State<MySliverAppBar> {
                       focusedErrorBorder: InputBorder.none,
                     ),
                     controller: _controller,
-                    onEditingComplete: () {
-                      Provider.of<EstruturaLevantamento>(context, listen: false)
-                          .filtraBens(_controller.text);
-                    },
+                    // onEditingComplete: () {
+                    // Provider.of<EstruturaLevantamento>(context, listen: false)
+                    //     .filtraBens(_controller.text);
+                    // },
+                    onChanged: (value) => Provider.of<EstruturaLevantamento>(
+                            context,
+                            listen: false)
+                        .filtraBens(_controller.text),
                   ),
                 ),
               )

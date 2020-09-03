@@ -64,7 +64,8 @@ class _PrevistosBensItemState extends State<PrevistosBensItem> {
                         onPressed: () {
                           Navigator.of(context).pushNamed(
                             LerBensGeralTela.routeName,
-                            arguments: widget.bemInventario.idBemPatrimonial,
+                            arguments:
+                                widget.bemInventario.numeroPatrimonialCompleto,
                           );
                         },
                       ),

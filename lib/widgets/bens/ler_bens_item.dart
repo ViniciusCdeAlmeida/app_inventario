@@ -1,3 +1,4 @@
+import 'package:app_inventario/screens/bens/ler_bens_geral_tela.dart';
 import 'package:app_inventario/widgets/cabecalho/app_cabecalho.dart';
 import 'package:flutter/material.dart';
 import 'package:barcode_scan/barcode_scan.dart';
@@ -11,6 +12,70 @@ class LerBensItens extends StatefulWidget {
 }
 
 class _LerBensItensState extends State<LerBensItens> {
+  TextEditingController _controller;
+  final _form = GlobalKey<FormState>();
+
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _buscaBemPatrimonial() {
+    Navigator.of(context).pushNamed(
+      LerBensGeralTela.routeName,
+      arguments: _controller.text,
+    );
+    _controller.text = '';
+  }
+
+  //006942
+
+  void _leituraBensManual(BuildContext ctx) {
+    showModalBottomSheet(
+      context: ctx,
+      builder: (bCtx) {
+        return SingleChildScrollView(
+          child: Card(
+            child: Container(
+              padding: EdgeInsets.only(
+                top: 10,
+                left: 10,
+                right: 10,
+                bottom: MediaQuery.of(context).viewInsets.bottom + 10,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: <Widget>[
+                  Form(
+                    key: _form,
+                    child: TextFormField(
+                      key: Key('numeroPatrimonialText'),
+                      // initialValue: _valorInicial,
+                      textInputAction: TextInputAction.done,
+                      autofocus: true,
+                      controller: _controller,
+                      decoration: InputDecoration(
+                        labelText: 'Número patrimonial',
+                        helperText: 'Informe o número patrimonial',
+                      ),
+                    ),
+                  ),
+                  FlatButton.icon(
+                    icon: Icon(Icons.search),
+                    onPressed: _buscaBemPatrimonial,
+                    label: Text('Pesquisar'),
+                    color: Theme.of(context).primaryColor,
+                    textColor: Theme.of(context).textTheme.button.color,
+                  )
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   //------------------CAMERA------------------//
   ScanResult scanResult;
   final _flashOnController = TextEditingController(text: "Flash on");
@@ -31,6 +96,7 @@ class _LerBensItensState extends State<LerBensItens> {
   @override
   // ignore: type_annotate_public_apis
   initState() {
+    _controller = TextEditingController();
     super.initState();
 
     Future.delayed(Duration.zero, () async {
@@ -86,6 +152,7 @@ class _LerBensItensState extends State<LerBensItens> {
 
   @override
   Widget build(BuildContext context) {
+    final idEstrutura = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       appBar: AppBar(
         title: Text('Leitura de Bens'),
@@ -111,7 +178,11 @@ class _LerBensItensState extends State<LerBensItens> {
               trailing: IconButton(
                 icon: Icon(Icons.content_paste),
                 color: Colors.black,
-                onPressed: () {},
+                onPressed: () {
+                  // Navigator.of(context).pushNamed(PrevistosBensTela.routeName,
+                  //     arguments: idEstrutura);
+                  _leituraBensManual(context);
+                },
               ),
               title: Text('Manual'),
             ),

@@ -83,9 +83,13 @@ class EstruturaLevantamento with ChangeNotifier {
 
   void filtraBens(String value) async {
     _bensEstruturaFiltrado = _bensEstrutura
-        .where((element) => element.numeroPatrimonial.contains(value))
+        .where(
+          (element) =>
+              element.numeroPatrimonial.contains(value) ||
+              element.material.descricao.contains(value.toUpperCase()) ||
+              element.material.codigoEDescricao.contains(value.toUpperCase()),
+        )
         .toList();
-    // _bensEstrutura = teste;
     notifyListeners();
   }
 
@@ -96,10 +100,11 @@ class EstruturaLevantamento with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<DadosBensPatrimoniais> buscaBensPorId(int idBemPatrimonial) async {
+  Future<DadosBensPatrimoniais> buscaBensPorId(
+      String numeroBemPatrimonial) async {
     _isLoadingBens = false;
-    _bemPatrimonial = helperDadoBemPatrimonial2(
-        await db.dadosBemPatrimoniaisDao.getDadosInventariar(idBemPatrimonial));
+    _bemPatrimonial = helperDadoBemPatrimonial2(await db.dadosBemPatrimoniaisDao
+        .getDadosInventariar(numeroBemPatrimonial));
     _isLoadingBens = true;
     notifyListeners();
     return _bemPatrimonial;

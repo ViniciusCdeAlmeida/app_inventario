@@ -70,9 +70,9 @@ class MyApp extends StatelessWidget {
         builder: (ctx, autenticacaoDados, _) => MaterialApp(
           title: 'APP inventario',
           theme: ThemeData(
-            primaryColor: const Color(0xFF72C70E),
-            toggleableActiveColor: Color(0xFF2247C7),
-            errorColor: Color(0xFF7A1C02),
+            primaryColor: Colors.yellow[800],
+            toggleableActiveColor: const Color(0xFF2247C7),
+            errorColor: const Color(0xFF7A1C02),
           ),
           home:
               autenticacaoDados.existeUsuario ? OrganizacaoTela() : LoginTela(),

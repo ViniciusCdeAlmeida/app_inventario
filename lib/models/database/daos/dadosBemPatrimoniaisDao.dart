@@ -29,17 +29,18 @@ class DadosBemPatrimoniaisDao extends DatabaseAccessor<AppDatabase>
           .get();
 
   Future<DadosBemPatrimoniaisDBData> getDadosBemPatrimonial(
-          int idBemPatrimonial) =>
+          String numeroBemPatrimonial) =>
       (select(db.dadosBemPatrimoniaisDB)
-            ..where((tbl) => tbl.idBemPatrimonial.equals(idBemPatrimonial)))
+            ..where((tbl) =>
+                tbl.numeroPatrimonialCompleto.equals(numeroBemPatrimonial)))
           .getSingle();
 
   Future<DadosBemPatrimoniaisDBData> getDadosInventariar(
-      int idBemPatrimonial) async {
+      String numeroBemPatrimonial) async {
     DadosBemPatrimoniaisDBData teste =
-        await getDadosBemPatrimonial(idBemPatrimonial);
+        await getDadosBemPatrimonial(numeroBemPatrimonial);
     BensPatrimoniaisDBData bemPatrimonial =
-        await db.bemPatrimoniaisDao.getBemPatrimonial(idBemPatrimonial);
+        await db.bemPatrimoniaisDao.getBemPatrimonial(numeroBemPatrimonial);
     teste.bemPatrimonial = helperBemPatrimonial(bemPatrimonial);
     return teste;
   }
