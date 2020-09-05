@@ -1,4 +1,4 @@
-# app_inventario
+# Inventario
 
 A new Flutter project.
 
