@@ -1,3 +1,4 @@
+import 'package:app_inventario/screens/bens/bens_inventariados_tela.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -90,6 +91,7 @@ class MyApp extends StatelessWidget {
             LerBensItens.routeName: (ctx) => LerBensItens(),
             PrevistosBensTela.routeName: (ctx) => PrevistosBensTela(),
             LerBensGeralTela.routeName: (ctx) => LerBensGeralTela(),
+            BensInventariadosTela.routeName: (ctx) => BensInventariadosTela(),
           },
         ),
       ),

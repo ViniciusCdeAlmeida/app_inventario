@@ -35,7 +35,7 @@ class Autenticacao with ChangeNotifier {
     return [..._organizacoes];
   }
 
-  get idUnidade {
+  int get idUnidade {
     return idOrganizacao;
   }
 

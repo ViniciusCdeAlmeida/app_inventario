@@ -1,3 +1,4 @@
+import 'package:app_inventario/models/telaArgumentos.dart';
 import 'package:app_inventario/providers/inventarioBemPatrimonial.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -42,6 +43,7 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
   BemPatrimonial _item;
   List<Dominio> _dominiosInicial = [];
   Future<BemPatrimonial> bemPatrimonial;
+  TelaArgumentos unidadeArgs;
 
   var _expanded = false;
   var _isLoading = false;
@@ -54,9 +56,10 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
 
   @override
   void didChangeDependencies() {
-    final idBem = ModalRoute.of(context).settings.arguments;
+    unidadeArgs = ModalRoute.of(context).settings.arguments;
+    // final idBem = ModalRoute.of(context).settings.arguments;
     bemPatrimonial = Provider.of<EstruturaLevantamento>(context, listen: false)
-        .buscaBensPorId(idBem);
+        .buscaBensPorId(unidadeArgs.arg1);
 
     super.didChangeDependencies();
   }
@@ -140,6 +143,7 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
   }
 
   void _atribuiValores() {
+    unidadeArgs = ModalRoute.of(context).settings.arguments;
     final usuarioColetante =
         Provider.of<Autenticacao>(context, listen: false).usuarioLogado;
 
@@ -157,10 +161,7 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
             ? _item.dadosBensPatrimoniais.dominioStatusInventarioBem
             : null;
     _edicaoBemInvent.idDadosBemPatrimonialMobile = _item.id;
-    _edicaoBemInvent.idInventarioEstruturaOrganizacionalMobile =
-        _item.dadosBensPatrimoniais != null
-            ? _item.dadosBensPatrimoniais.idInventarioEstruturaOrganizacional
-            : _item.estruturaOrganizacionalAtual.id;
+    _edicaoBemInvent.idInventarioEstruturaOrganizacionalMobile = unidadeArgs.id;
     _edicaoBemInvent.material = _item.material;
     _edicaoBemInvent.caracteristicas = _item.caracteristicas;
     _edicaoBemInvent.nomeUsuarioColeta = usuarioColetante;

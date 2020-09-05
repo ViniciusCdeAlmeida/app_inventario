@@ -12,12 +12,32 @@ class InventarioBemPatrimonialDao extends DatabaseAccessor<AppDatabase>
 
   InventarioBemPatrimonialDao(this.db) : super(db);
 
-  Future<List<InventarioBemPatrimonialDBData>> getInventariados(bool tipo) =>
+  Future<List<InventarioBemPatrimonialDBData>> getInventariados(
+          int idUnidade) =>
+      (select(db.inventarioBemPatrimonialDB)
+            ..where((tbl) => tbl.idUnidadeOrganizacional.equals(idUnidade)))
+          .get();
+
+  Future<List<InventarioBemPatrimonialDBData>> getInventariadosTipo(
+          bool tipo) =>
       (select(db.inventarioBemPatrimonialDB)
             ..where(
               (tbl) => tbl.enviado.equals(tipo),
             ))
           .get();
+
+  Future updateDadosInventariado(String numeroPatrimonialInventariado) {
+    return (update(inventarioBemPatrimonialDB)
+          ..where(
+            (tbl) =>
+                tbl.numeroPatrimonial.equals(numeroPatrimonialInventariado),
+          ))
+        .write(
+      InventarioBemPatrimonialDBCompanion(
+        enviado: Value(true),
+      ),
+    );
+  }
 
   Future<void> insertInventarioBensPatrimoniais(
       InventarioBemPatrimonial inventarioBemPatrimonial) async {
@@ -50,18 +70,6 @@ class InventarioBemPatrimonialDao extends DatabaseAccessor<AppDatabase>
                 ? Value(inventarioBemPatrimonial.dominioStatusInventarioBem)
                 : Value(null),
         material: Value(inventarioBemPatrimonial.material),
-      ),
-    );
-  }
-
-  Future updateDadosInventarido(String idInventarioBemPatrimonial) {
-    return (update(inventarioBemPatrimonialDB)
-          ..where(
-            (tbl) => tbl.numeroPatrimonial.equals(idInventarioBemPatrimonial),
-          ))
-        .write(
-      InventarioBemPatrimonialDBCompanion(
-        enviado: Value(true),
       ),
     );
   }

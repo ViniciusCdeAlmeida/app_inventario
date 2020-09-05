@@ -1,13 +1,15 @@
 import 'package:app_inventario/customizacoes/bensPrevistos.dart';
 import 'package:app_inventario/models/serialized/dadosBensPatrimoniais.dart';
+import 'package:app_inventario/models/telaArgumentos.dart';
 import 'package:app_inventario/screens/bens/ler_bens_geral_tela.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class PrevistosBensItem extends StatefulWidget {
   DadosBensPatrimoniais bemInventario;
+  String idInventarioEstrutura;
 
-  PrevistosBensItem({@required this.bemInventario});
+  PrevistosBensItem({@required this.bemInventario, this.idInventarioEstrutura});
 
   @override
   _PrevistosBensItemState createState() => _PrevistosBensItemState();
@@ -64,13 +66,17 @@ class _PrevistosBensItemState extends State<PrevistosBensItem> {
                         onPressed: () {
                           Navigator.of(context).pushNamed(
                             LerBensGeralTela.routeName,
-                            arguments:
-                                widget.bemInventario.numeroPatrimonialCompleto,
+                            arguments: TelaArgumentos(
+                              id: int.parse(widget.idInventarioEstrutura),
+                              arg1: widget
+                                  .bemInventario.numeroPatrimonialCompleto,
+                            ),
                           );
                         },
                       ),
                     ],
-                  )
+                  ),
+                  Divider(),
                 ],
               ),
             ),

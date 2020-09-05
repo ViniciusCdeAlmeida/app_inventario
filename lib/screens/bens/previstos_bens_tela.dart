@@ -1,5 +1,6 @@
 import 'package:app_inventario/customizacoes/customSliverAppBar.dart';
 import 'package:app_inventario/models/serialized/dadosBensPatrimoniais.dart';
+import 'package:app_inventario/models/telaArgumentos.dart';
 import 'package:app_inventario/providers/estruturaLevantamento.dart';
 import 'package:app_inventario/widgets/bens/previstos_bens_item.dart';
 import 'package:app_inventario/widgets/cabecalho/app_cabecalho.dart';
@@ -14,15 +15,16 @@ class PrevistosBensTela extends StatefulWidget {
 }
 
 class _PrevistosBensTelaState extends State<PrevistosBensTela> {
+  TelaArgumentos unidadeArgs;
   bool _isInit = true;
   List<DadosBensPatrimoniais> _dadosPatrimoniais = [];
 
   @override
   void didChangeDependencies() {
     if (_isInit) {
-      final idEstrutura = ModalRoute.of(context).settings.arguments;
+      unidadeArgs = ModalRoute.of(context).settings.arguments;
       Provider.of<EstruturaLevantamento>(context)
-          .buscaBensPorEstrutura(idEstrutura);
+          .buscaBensPorEstrutura(unidadeArgs.id);
     }
     _isInit = false;
     super.didChangeDependencies();
@@ -33,7 +35,7 @@ class _PrevistosBensTelaState extends State<PrevistosBensTela> {
     _dadosPatrimoniais =
         Provider.of<EstruturaLevantamento>(context, listen: false)
             .getBensPorEstrutura;
-
+    unidadeArgs = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -48,6 +50,7 @@ class _PrevistosBensTelaState extends State<PrevistosBensTela> {
                       padding: const EdgeInsets.all(8.0),
                       child: PrevistosBensItem(
                         bemInventario: item,
+                        idInventarioEstrutura: unidadeArgs.arg1,
                       ),
                     ),
                   )

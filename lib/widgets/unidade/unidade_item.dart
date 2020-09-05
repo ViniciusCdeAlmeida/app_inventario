@@ -1,5 +1,6 @@
 import 'package:app_inventario/customizacoes/acoes.dart';
 import 'package:app_inventario/models/serialized/estruturaInventario.dart';
+import 'package:app_inventario/models/telaArgumentos.dart';
 import 'package:app_inventario/screens/bens/previstos_bens_tela.dart';
 import 'package:app_inventario/widgets/bens/ler_bens_item.dart';
 import 'package:app_inventario/widgets/customizados/popupMenu_custom.dart';
@@ -22,8 +23,13 @@ class _UnidadeItemState extends State<UnidadeItem> {
             .pushNamed(LerBensItens.routeName, arguments: idEstrutura);
         break;
       case Acoes.bensPrevistos:
-        Navigator.of(context)
-            .pushNamed(PrevistosBensTela.routeName, arguments: idEstrutura);
+        Navigator.of(context).pushNamed(
+          PrevistosBensTela.routeName,
+          arguments: TelaArgumentos(
+            id: idEstrutura,
+            arg1: widget.unidade.id.toString(),
+          ),
+        );
         break;
       case Acoes.estatisticas:
         print(idEstrutura);

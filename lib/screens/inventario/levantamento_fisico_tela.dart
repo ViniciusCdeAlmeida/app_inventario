@@ -1,3 +1,4 @@
+import 'package:app_inventario/screens/bens/bens_inventariados_tela.dart';
 import 'package:flutter/material.dart';
 import 'package:moor_db_viewer/moor_db_viewer.dart';
 import 'package:provider/provider.dart';
@@ -59,10 +60,15 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
         break;
       case Acoes.buscarLevantamento:
         break;
-      case Acoes.exluirLevantamentos:
-        print('3');
+      case Acoes.acessarBanco:
         Navigator.of(context)
             .push(MaterialPageRoute(builder: (context) => MoorDbViewer(db)));
+        break;
+      case Acoes.itensInventariados:
+        Navigator.of(context).pushNamed(BensInventariadosTela.routeName);
+        break;
+      case Acoes.itensInventariados:
+        print('3');
         break;
       case Acoes.exluirLevantamento:
         print('4');
@@ -104,27 +110,26 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
               offset: Offset(0, 100),
               itemBuilder: (context) => <PopupMenuEntry<Acoes>>[
                 PopupMenuItem<Acoes>(
-                  child: PopupMenuCustom(
-                      'Carregar Levantamentos', Icons.cloud_download),
-                  value: Acoes.buscarLevantamentos,
-                ),
-                const PopupMenuDivider(),
-                PopupMenuItem<Acoes>(
-                  child:
-                      PopupMenuCustom('Carregar Levantamento', Icons.save_alt),
-                  value: Acoes.buscarLevantamento,
-                ),
-                const PopupMenuDivider(),
-                PopupMenuItem<Acoes>(
-                  child: PopupMenuCustom('Excluir Levantamentos', Icons.delete),
-                  value: Acoes.exluirLevantamentos,
+                  child: PopupMenuCustom('Itens inventariados', Icons.check),
+                  value: Acoes.itensInventariados,
                 ),
                 const PopupMenuDivider(),
                 PopupMenuItem<Acoes>(
                   child: PopupMenuCustom(
-                      'Excluir Levantamento', Icons.delete_outline),
-                  value: Acoes.exluirLevantamento,
+                      'Acessar banco de dados', Icons.description),
+                  value: Acoes.acessarBanco,
                 ),
+                // const PopupMenuDivider(),
+                // PopupMenuItem<Acoes>(
+                //   child: PopupMenuCustom('Excluir Levantamentos', Icons.delete),
+                //   value: Acoes.exluirLevantamentos,
+                // ),
+                // const PopupMenuDivider(),
+                // PopupMenuItem<Acoes>(
+                //   child: PopupMenuCustom(
+                //       'Excluir Levantamento', Icons.delete_outline),
+                //   value: Acoes.exluirLevantamento,
+                // ),
                 const PopupMenuDivider(),
                 PopupMenuItem<Acoes>(
                   child:
@@ -132,11 +137,11 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
                   value: Acoes.enviaLevantamento,
                 ),
                 const PopupMenuDivider(),
-                PopupMenuItem<Acoes>(
-                  child: PopupMenuCustom(
-                      'Gerar arquivo de backup', Icons.content_copy),
-                  value: Acoes.gerarArquivoBackup,
-                ),
+                // PopupMenuItem<Acoes>(
+                //   child: PopupMenuCustom(
+                //       'Gerar arquivo de backup', Icons.content_copy),
+                //   value: Acoes.gerarArquivoBackup,
+                // ),
               ],
             ),
           ),
