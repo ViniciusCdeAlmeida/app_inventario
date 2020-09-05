@@ -24,7 +24,8 @@ class _PrevistosBensTelaState extends State<PrevistosBensTela> {
     if (_isInit) {
       unidadeArgs = ModalRoute.of(context).settings.arguments;
       Provider.of<EstruturaLevantamento>(context)
-          .buscaBensPorEstrutura(unidadeArgs.id);
+          .buscaBensPorEstrutura(unidadeArgs.id, unidadeArgs.arg1);
+      Provider.of<EstruturaLevantamento>(context).setUlAtual(unidadeArgs.id);
     }
     _isInit = false;
     super.didChangeDependencies();

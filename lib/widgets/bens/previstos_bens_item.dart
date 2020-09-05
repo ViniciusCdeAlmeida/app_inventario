@@ -26,6 +26,25 @@ class _PrevistosBensItemState extends State<PrevistosBensItem> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
+                  if (widget.bemInventario.idInventario == null)
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 5.0),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.warning,
+                            color: Colors.red[800],
+                          ),
+                          Text(
+                            'O item foi inventariado fora do espelho do inventário.',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.red[800],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   BensPrevistos('Número Patrimonial: ',
                       widget.bemInventario.numeroPatrimonial),
                   BensPrevistos('Descrição do material: ',

@@ -24,8 +24,6 @@ class _UnidadeTelaState extends State<UnidadeTela> {
 
   @override
   Widget build(BuildContext context) {
-    final conexao =
-        Provider.of<Autenticacao>(context, listen: false).atualConexao;
     unidadeArgs = ModalRoute.of(context).settings.arguments;
     final unidades = Provider.of<Levantamentos>(context, listen: false);
     Provider.of<EstruturaLevantamento>(context, listen: false)

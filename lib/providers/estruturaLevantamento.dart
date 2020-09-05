@@ -77,10 +77,17 @@ class EstruturaLevantamento with ChangeNotifier {
     _digitoVerificador = digito;
   }
 
-  Future<void> buscaBensPorEstrutura(int id) async {
+  Future<void> buscaBensPorEstrutura(
+      int id, String idInventarioEstrutura) async {
     _isLoadingBens = false;
     _bensEstrutura = helperDadosBemPatrimonialLista(
         await db.dadosBemPatrimoniaisDao.getAllDadosPorEstrutura(id));
+    List<DadosBensPatrimoniais> inventariadoForaEspelho =
+        helperDadosBemPatrimonialForaEspelhoLista(
+            await db.inventarioBemPatrimonialDao
+                .getInventariadosForaEspelho(idInventarioEstrutura),
+            int.parse(idInventarioEstrutura));
+    _bensEstrutura.addAll(inventariadoForaEspelho);
     _isLoadingBens = true;
     notifyListeners();
   }

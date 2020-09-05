@@ -29,6 +29,31 @@ List<DadosBensPatrimoniais> helperDadosBemPatrimonialLista(
     return null;
 }
 
+List<DadosBensPatrimoniais> helperDadosBemPatrimonialForaEspelhoLista(
+    List<InventarioBemPatrimonialDBData> listaBemPatrimonial,
+    int idEstruturaOrganizacional) {
+  if (listaBemPatrimonial != null) {
+    return List<DadosBensPatrimoniais>.from(
+      (listaBemPatrimonial).map(
+        (item) => DadosBensPatrimoniais(
+          material: item.material,
+          dominioSituacaoFisica: item.dominioSituacaoFisica,
+          dominioStatus: item.dominioStatus,
+          dominioStatusInventarioBem: item.dominioStatusInventarioBem,
+          idInventarioEstruturaOrganizacional:
+              item.idInventarioEstruturaOrganizacionalMobile,
+          numeroPatrimonial: item.numeroPatrimonial,
+          idBemPatrimonial: item.idDadosBemPatrimonialMobile,
+          idEstruturaOrganizacional: idEstruturaOrganizacional,
+          numeroPatrimonialCompleto: item.numeroPatrimonial,
+          inventariado: true,
+        ),
+      ),
+    );
+  } else
+    return null;
+}
+
 DadosBensPatrimoniais helperDadoBemPatrimonial(
     DadosBemPatrimoniaisDBData dadosBemPatrimonial) {
   if (dadosBemPatrimonial != null) {

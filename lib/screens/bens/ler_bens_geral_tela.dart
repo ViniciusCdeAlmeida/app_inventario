@@ -88,8 +88,6 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
     String _digitoVerificador =
         Provider.of<EstruturaLevantamento>(context, listen: false)
             .getDigitoVerificador;
-    // String conexao =
-    //     Provider.of<Autenticacao>(context, listen: false).atualConexao;
     final isValid = _form.currentState.validate();
     if (!isValid) {
       return;
