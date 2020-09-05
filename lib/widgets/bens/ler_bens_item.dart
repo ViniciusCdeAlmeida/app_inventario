@@ -98,9 +98,13 @@ class _LerBensItensState extends State<LerBensItens> {
     if (!mounted) return;
 
     setState(() {
+      int idInventarioUnidade = ModalRoute.of(context).settings.arguments;
       Navigator.of(context).pushNamed(
         LerBensGeralTela.routeName,
-        arguments: barcodeScanRes,
+        arguments: TelaArgumentos(
+          id: idInventarioUnidade,
+          arg1: barcodeScanRes,
+        ),
       );
     });
   }
