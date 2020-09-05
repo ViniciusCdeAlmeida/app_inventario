@@ -89,8 +89,7 @@ class Autenticacao with ChangeNotifier {
     };
     try {
       Response response = await dio
-          // .get("usuarioValidoV2/?username=$userName&password=$password");
-          .get("usuarioValidoV2/?username=vinicius.correa&password=interno");
+          .get("usuarioValidoV2/?username=$userName&password=$password");
       if (!_existeOrganizacao) {
         await db.unidadesGestorasDao
             .insertUnidadeGestora(response.data['organizacoes'] as List)
