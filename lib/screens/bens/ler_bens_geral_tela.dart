@@ -1,5 +1,3 @@
-import 'package:app_inventario/models/telaArgumentos.dart';
-import 'package:app_inventario/providers/inventarioBemPatrimonial.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:searchable_dropdown/searchable_dropdown.dart';
@@ -8,7 +6,9 @@ import 'package:app_inventario/models/serialized/bemPatrimonial.dart';
 import 'package:app_inventario/models/serialized/estruturaInventario.dart';
 import 'package:app_inventario/models/serialized/dominio.dart';
 import 'package:app_inventario/models/serialized/inventarioBemPatrimonial.dart';
+import 'package:app_inventario/models/telaArgumentos.dart';
 
+import 'package:app_inventario/providers/inventarioBemPatrimonial.dart';
 import 'package:app_inventario/providers/autenticacao.dart';
 import 'package:app_inventario/providers/inicializacao.dart';
 import 'package:app_inventario/providers/estruturaLevantamento.dart';
@@ -40,6 +40,7 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
 
   bool _novoNumeroPatrimonial = false;
   String _digitos;
+  int _idUlAtual;
   BemPatrimonial _item;
   List<Dominio> _dominiosInicial = [];
   Future<BemPatrimonial> bemPatrimonial;
@@ -57,10 +58,8 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
   @override
   void didChangeDependencies() {
     unidadeArgs = ModalRoute.of(context).settings.arguments;
-    // final idBem = ModalRoute.of(context).settings.arguments;
     bemPatrimonial = Provider.of<EstruturaLevantamento>(context, listen: false)
         .buscaBensPorId(unidadeArgs.arg1);
-
     super.didChangeDependencies();
   }
 
@@ -171,7 +170,6 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
     _edicaoBemInvent.enviado = false;
   }
 
-//044652
   @override
   Widget build(BuildContext context) {
     String _digitoVerificador =
@@ -179,6 +177,8 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
             .getDigitoVerificador;
     _digitos = Provider.of<EstruturaLevantamento>(context, listen: false)
         .getDigitosLeitura;
+    _idUlAtual =
+        Provider.of<EstruturaLevantamento>(context, listen: false).getUlAtual;
 
     return FutureBuilder(
       future: bemPatrimonial,
@@ -201,7 +201,7 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
                   actions: [
                     if (snapshot.data.dadosBensPatrimoniais != null
                         ? !snapshot.data.dadosBensPatrimoniais.inventariado
-                        : snapshot.data.inventariado)
+                        : !snapshot.data.inventariado)
                       IconButton(
                         icon: Icon(
                           Icons.check,
@@ -219,11 +219,22 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
                     key: _form,
                     child: ListView(
                       children: <Widget>[
-                        Container(
+                        Padding(
                           padding: const EdgeInsets.all(10),
                           child: Text('Descrição: ' +
                               snapshot.data.material.codigoEDescricao),
                         ),
+                        if (_idUlAtual !=
+                            snapshot.data.estruturaOrganizacionalAtual.id)
+                          Padding(
+                            padding: const EdgeInsets.all(10),
+                            child: Text(
+                              'Bem pertence a U.L.: ' +
+                                  snapshot
+                                      .data.estruturaOrganizacionalAtual.nome,
+                              style: TextStyle(color: Colors.red[800]),
+                            ),
+                          ),
                         Container(
                           padding: const EdgeInsets.all(10),
                           child: TextFormField(

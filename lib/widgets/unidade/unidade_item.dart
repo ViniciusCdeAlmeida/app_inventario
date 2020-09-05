@@ -19,8 +19,10 @@ class _UnidadeItemState extends State<UnidadeItem> {
   void _redirecionamento(Acoes acoes, int idEstrutura) {
     switch (acoes) {
       case Acoes.lerBens:
-        Navigator.of(context)
-            .pushNamed(LerBensItens.routeName, arguments: idEstrutura);
+        Navigator.of(context).pushNamed(
+          LerBensItens.routeName,
+          arguments: widget.unidade.id,
+        );
         break;
       case Acoes.bensPrevistos:
         Navigator.of(context).pushNamed(

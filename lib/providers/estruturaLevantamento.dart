@@ -18,8 +18,8 @@ class EstruturaLevantamento with ChangeNotifier {
   List<EstruturaInventario> _levantamentosEstrutura = [];
   List<DadosBensPatrimoniais> _bensEstrutura = [];
   List<DadosBensPatrimoniais> _bensEstruturaFiltrado = [];
+  int _idUlAtual;
   BemPatrimonial _bemPatrimonial;
-  DadosBensPatrimoniais _dadosBemPatrimonial;
   String _quantidadeDigitos;
   String _digitoVerificador;
 
@@ -32,6 +32,10 @@ class EstruturaLevantamento with ChangeNotifier {
 
   List<EstruturaInventario> get getLevantamentos {
     return _estruturas;
+  }
+
+  int get getUlAtual {
+    return _idUlAtual;
   }
 
   List<EstruturaInventario> get getLevantamentosEstrutura {
@@ -61,6 +65,10 @@ class EstruturaLevantamento with ChangeNotifier {
     return _digitoVerificador;
   }
 
+  void setUlAtual(int id) {
+    _idUlAtual = id;
+  }
+
   void setDigitosLeitura(String digitos) {
     _quantidadeDigitos = digitos;
   }
@@ -79,7 +87,6 @@ class EstruturaLevantamento with ChangeNotifier {
 
   void limpaFiltrados() {
     _bensEstruturaFiltrado.clear();
-
     notifyListeners();
   }
 
@@ -104,11 +111,11 @@ class EstruturaLevantamento with ChangeNotifier {
 
   Future<BemPatrimonial> buscaBensPorId(String numeroBemPatrimonial) async {
     _isLoadingBens = false;
-    _bemPatrimonial = helperDadoBemPatrimonial2(
-        await db.bemPatrimoniaisDao.getBemPatrimonial(numeroBemPatrimonial));
+    _bemPatrimonial = helperDadoBemPatrimonial2(await db.bemPatrimoniaisDao
+        .getBemPatrimonial(numeroBemPatrimonial.toUpperCase()));
     _bemPatrimonial.dadosBensPatrimoniais = helperDadoBemPatrimonial(await db
         .dadosBemPatrimoniaisDao
-        .getDadosInventariar(numeroBemPatrimonial));
+        .getDadosInventariar(numeroBemPatrimonial.toUpperCase()));
     _isLoadingBens = true;
     notifyListeners();
     return _bemPatrimonial;
@@ -122,6 +129,12 @@ class EstruturaLevantamento with ChangeNotifier {
           .indexWhere((value) => value.idBemPatrimonial == id);
       if (idx >= 0) {
         _bensEstruturaFiltrado[idx].inventariado = true;
+      }
+    } else {
+      final idx =
+          _bensEstrutura.indexWhere((value) => value.idBemPatrimonial == id);
+      if (idx >= 0) {
+        _bensEstrutura[idx].inventariado = true;
       }
     }
     notifyListeners();

@@ -14,7 +14,7 @@ class LerBensItens extends StatefulWidget {
 }
 
 class _LerBensItensState extends State<LerBensItens> {
-  TextEditingController _controller;
+  final _controller = TextEditingController();
   final _form = GlobalKey<FormState>();
 
   void dispose() {
@@ -23,9 +23,13 @@ class _LerBensItensState extends State<LerBensItens> {
   }
 
   void _buscaBemPatrimonial() {
+    int idInventarioUnidade = ModalRoute.of(context).settings.arguments;
     Navigator.of(context).pushNamed(
       LerBensGeralTela.routeName,
-      arguments: _controller.text,
+      arguments: TelaArgumentos(
+        id: idInventarioUnidade,
+        arg1: _controller.text,
+      ),
     );
     _controller.text = '';
   }
