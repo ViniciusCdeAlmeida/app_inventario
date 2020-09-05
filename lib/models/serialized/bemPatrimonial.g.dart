@@ -32,6 +32,11 @@ BemPatrimonial _$BemPatrimonialFromJson(Map<String, dynamic> json) {
         ? null
         : Organizacao.fromJson(
             json['estruturaOrganizacionalAtual'] as Map<String, dynamic>),
+    dadosBensPatrimoniais: json['dadosBensPatrimoniais'] == null
+        ? null
+        : DadosBensPatrimoniais.fromJson(
+            json['dadosBensPatrimoniais'] as Map<String, dynamic>),
+    inventariado: json['inventariado'] as bool,
   );
 }
 
@@ -47,4 +52,6 @@ Map<String, dynamic> _$BemPatrimonialToJson(BemPatrimonial instance) =>
       'material': instance.material,
       'caracteristicas': instance.caracteristicas,
       'estruturaOrganizacionalAtual': instance.estruturaOrganizacionalAtual,
+      'dadosBensPatrimoniais': instance.dadosBensPatrimoniais,
+      'inventariado': instance.inventariado,
     };

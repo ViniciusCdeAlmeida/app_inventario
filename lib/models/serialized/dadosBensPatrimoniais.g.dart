@@ -21,10 +21,6 @@ DadosBensPatrimoniais _$DadosBensPatrimoniaisFromJson(
         ? null
         : Dominio.fromJson(
             json['dominioStatusInventarioBem'] as Map<String, dynamic>),
-    bemPatrimonial: json['bemPatrimonial'] == null
-        ? null
-        : BemPatrimonial.fromJson(
-            json['bemPatrimonial'] as Map<String, dynamic>),
     idInventario: json['idInventario'] as int,
     idInventarioEstruturaOrganizacional:
         json['idInventarioEstruturaOrganizacional'] as int,
@@ -51,7 +47,6 @@ Map<String, dynamic> _$DadosBensPatrimoniaisToJson(
       'dominioSituacaoFisica': instance.dominioSituacaoFisica,
       'dominioStatus': instance.dominioStatus,
       'dominioStatusInventarioBem': instance.dominioStatusInventarioBem,
-      'bemPatrimonial': instance.bemPatrimonial,
       'idInventario': instance.idInventario,
       'idInventarioEstruturaOrganizacional':
           instance.idInventarioEstruturaOrganizacional,

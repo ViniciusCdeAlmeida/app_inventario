@@ -11,19 +11,21 @@ class InventarioBemPatrimonial with mat.ChangeNotifier {
   int id;
   int idDadosBemPatrimonialMobile;
   int idInventarioEstruturaOrganizacionalMobile;
+  int idUnidadeOrganizacional;
   String numeroPatrimonial;
   String numeroPatrimonialAntigo;
   String numeroPatrimonialNovo;
+  String nomeUsuarioColeta;
+  String tipoMobile;
+  bool novoBemInvetariado;
+  bool enviado = false;
+  bool bemNaoEncontrado;
+  bool bemNaoInventariado;
   List<Caracteristicas> caracteristicas;
   Dominio dominioSituacaoFisica;
   Dominio dominioStatus;
-  bool bemNaoEncontrado;
-  bool bemNaoInventariado;
   Dominio dominioStatusInventarioBem;
   Material material;
-  String nomeUsuarioColeta;
-  bool novoBemInvetariado;
-  String tipoMobile;
 
   InventarioBemPatrimonial({
     this.id,
@@ -42,6 +44,8 @@ class InventarioBemPatrimonial with mat.ChangeNotifier {
     this.nomeUsuarioColeta,
     this.novoBemInvetariado,
     this.tipoMobile,
+    this.enviado,
+    this.idUnidadeOrganizacional,
   });
 
   factory InventarioBemPatrimonial.fromJson(Map<String, dynamic> json) =>

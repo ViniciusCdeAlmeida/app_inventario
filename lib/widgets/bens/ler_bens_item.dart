@@ -128,6 +128,10 @@ class _LerBensItensState extends State<LerBensItens> {
         scanResult = result;
         // Navigator.of(context)
         //     .popAndPushNamed(Teste.routeName, arguments: result.rawContent);
+        Navigator.of(context).pushNamed(
+          LerBensGeralTela.routeName,
+          arguments: result.rawContent,
+        );
       });
     } on PlatformException catch (e) {
       var result = ScanResult(
@@ -162,7 +166,7 @@ class _LerBensItensState extends State<LerBensItens> {
         child: Column(
           children: <Widget>[
             ListTile(
-              contentPadding: EdgeInsets.all(10),
+              contentPadding: const EdgeInsets.all(10),
               trailing: IconButton(
                 icon: Icon(Icons.camera_alt),
                 color: Colors.black,
@@ -174,7 +178,7 @@ class _LerBensItensState extends State<LerBensItens> {
             ),
             Divider(),
             ListTile(
-              contentPadding: EdgeInsets.all(10),
+              contentPadding: const EdgeInsets.all(10),
               trailing: IconButton(
                 icon: Icon(Icons.content_paste),
                 color: Colors.black,
@@ -188,7 +192,7 @@ class _LerBensItensState extends State<LerBensItens> {
             ),
             Divider(),
             ListTile(
-              contentPadding: EdgeInsets.all(10),
+              contentPadding: const EdgeInsets.all(10),
               trailing: IconButton(
                 icon: Icon(Icons.usb),
                 color: Colors.black,
@@ -198,7 +202,7 @@ class _LerBensItensState extends State<LerBensItens> {
             ),
             Divider(),
             ListTile(
-              contentPadding: EdgeInsets.all(10),
+              contentPadding: const EdgeInsets.all(10),
               trailing: IconButton(
                 icon: Icon(Icons.bluetooth),
                 color: Colors.black,

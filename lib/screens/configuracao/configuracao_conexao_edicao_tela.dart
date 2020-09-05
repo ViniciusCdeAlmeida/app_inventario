@@ -90,7 +90,7 @@ class _ConfiguracaoConexaoEdicaoTelaState
         ],
       ),
       body: Padding(
-        padding: EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(10.0),
         child: Form(
           child: ListView(
             children: <Widget>[

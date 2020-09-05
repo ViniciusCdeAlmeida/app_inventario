@@ -27,6 +27,17 @@ class BemPatrimoniaisDao extends DatabaseAccessor<AppDatabase>
   Future<BensPatrimoniaisDBData> getVerificaBensPatrimoniais() =>
       (select(db.bensPatrimoniaisDB)..limit(1)).getSingle();
 
+  Future<void> updateBemPatrimonial(int idBemPatrimonial) =>
+      (update(db.bensPatrimoniaisDB)
+            ..where(
+              (tbl) => tbl.id.equals(idBemPatrimonial),
+            ))
+          .write(
+        BensPatrimoniaisDBCompanion(
+          inventariado: Value(true),
+        ),
+      );
+
   Future<void> insertBensPatrimoniais(List bensPatrimoniais) async {
     await batch(
       (l) {

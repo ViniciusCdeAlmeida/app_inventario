@@ -68,7 +68,7 @@ class _MySliverAppBarState extends State<MySliverAppBar> {
                 padding: const EdgeInsets.only(bottom: 5.0),
                 child: Container(
                   height: 40,
-                  padding: EdgeInsets.only(left: 5),
+                  padding: const EdgeInsets.only(left: 5),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     border: Border.all(
@@ -103,7 +103,7 @@ class _MySliverAppBarState extends State<MySliverAppBar> {
                 ),
               )
             : null,
-        titlePadding: EdgeInsetsDirectional.only(
+        titlePadding: const EdgeInsetsDirectional.only(
           bottom: 3.3,
           start: 50,
           end: 50,

@@ -14,7 +14,6 @@ class DadosBensPatrimoniais with mat.ChangeNotifier {
   Dominio dominioSituacaoFisica;
   Dominio dominioStatus;
   final Dominio dominioStatusInventarioBem;
-  BemPatrimonial bemPatrimonial;
   final int idInventario;
   final int idInventarioEstruturaOrganizacional;
   final Material material;
@@ -29,7 +28,6 @@ class DadosBensPatrimoniais with mat.ChangeNotifier {
     this.dominioSituacaoFisica,
     this.dominioStatus,
     this.dominioStatusInventarioBem,
-    this.bemPatrimonial,
     this.idInventario,
     this.idInventarioEstruturaOrganizacional,
     this.material,

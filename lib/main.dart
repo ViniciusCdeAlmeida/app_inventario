@@ -54,7 +54,7 @@ class MyApp extends StatelessWidget {
           create: (ctx) => Inicializacao(),
         ),
         ChangeNotifierProvider(
-          create: (ctx) => InventarioBemPatrimonialProvider(),
+          create: (ctx) => InventarioBensPatrimoniais(),
         ),
         ChangeNotifierProvider(
           create: (ctx) => EstruturaLevantamento(),

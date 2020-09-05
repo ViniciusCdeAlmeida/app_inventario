@@ -40,6 +40,8 @@ InventarioBemPatrimonial _$InventarioBemPatrimonialFromJson(
     nomeUsuarioColeta: json['nomeUsuarioColeta'] as String,
     novoBemInvetariado: json['novoBemInvetariado'] as bool,
     tipoMobile: json['tipoMobile'] as String,
+    enviado: json['enviado'] as bool,
+    idUnidadeOrganizacional: json['idUnidadeOrganizacional'] as int,
   );
 }
 
@@ -50,17 +52,19 @@ Map<String, dynamic> _$InventarioBemPatrimonialToJson(
       'idDadosBemPatrimonialMobile': instance.idDadosBemPatrimonialMobile,
       'idInventarioEstruturaOrganizacionalMobile':
           instance.idInventarioEstruturaOrganizacionalMobile,
+      'idUnidadeOrganizacional': instance.idUnidadeOrganizacional,
       'numeroPatrimonial': instance.numeroPatrimonial,
       'numeroPatrimonialAntigo': instance.numeroPatrimonialAntigo,
       'numeroPatrimonialNovo': instance.numeroPatrimonialNovo,
+      'nomeUsuarioColeta': instance.nomeUsuarioColeta,
+      'tipoMobile': instance.tipoMobile,
+      'novoBemInvetariado': instance.novoBemInvetariado,
+      'enviado': instance.enviado,
+      'bemNaoEncontrado': instance.bemNaoEncontrado,
+      'bemNaoInventariado': instance.bemNaoInventariado,
       'caracteristicas': instance.caracteristicas,
       'dominioSituacaoFisica': instance.dominioSituacaoFisica,
       'dominioStatus': instance.dominioStatus,
-      'bemNaoEncontrado': instance.bemNaoEncontrado,
-      'bemNaoInventariado': instance.bemNaoInventariado,
       'dominioStatusInventarioBem': instance.dominioStatusInventarioBem,
       'material': instance.material,
-      'nomeUsuarioColeta': instance.nomeUsuarioColeta,
-      'novoBemInvetariado': instance.novoBemInvetariado,
-      'tipoMobile': instance.tipoMobile,
     };

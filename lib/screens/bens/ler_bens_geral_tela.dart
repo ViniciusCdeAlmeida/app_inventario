@@ -1,16 +1,16 @@
-import 'package:app_inventario/models/serialized/estruturaInventario.dart';
+import 'package:app_inventario/providers/inventarioBemPatrimonial.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:searchable_dropdown/searchable_dropdown.dart';
 
-import 'package:app_inventario/models/serialized/dadosBensPatrimoniais.dart';
+import 'package:app_inventario/models/serialized/bemPatrimonial.dart';
+import 'package:app_inventario/models/serialized/estruturaInventario.dart';
 import 'package:app_inventario/models/serialized/dominio.dart';
 import 'package:app_inventario/models/serialized/inventarioBemPatrimonial.dart';
 
 import 'package:app_inventario/providers/autenticacao.dart';
 import 'package:app_inventario/providers/inicializacao.dart';
 import 'package:app_inventario/providers/estruturaLevantamento.dart';
-import 'package:app_inventario/providers/inventarioBemPatrimonial.dart';
 
 import 'package:app_inventario/widgets/cabecalho/app_cabecalho.dart';
 
@@ -39,26 +39,14 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
 
   bool _novoNumeroPatrimonial = false;
   String _digitos;
-  DadosBensPatrimoniais _item;
+  BemPatrimonial _item;
   List<Dominio> _dominiosInicial = [];
-  Future<DadosBensPatrimoniais> bemPatrimonial;
+  Future<BemPatrimonial> bemPatrimonial;
 
   var _expanded = false;
   var _isLoading = false;
 
   var _edicaoBemInvent = InventarioBemPatrimonial(
-    caracteristicas: null,
-    dominioSituacaoFisica: null,
-    dominioStatus: null,
-    dominioStatusInventarioBem: null,
-    idDadosBemPatrimonialMobile: null,
-    idInventarioEstruturaOrganizacionalMobile: null,
-    material: null,
-    nomeUsuarioColeta: null,
-    novoBemInvetariado: false,
-    numeroPatrimonial: null,
-    numeroPatrimonialAntigo: null,
-    numeroPatrimonialNovo: null,
     tipoMobile: 'levantamentoFisico',
     bemNaoEncontrado: false,
     bemNaoInventariado: false,
@@ -96,8 +84,10 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
 
   Future<void> _saveForm() async {
     String _digitoVerificador =
-        Provider.of<EstruturaLevantamento>(context).getDigitoVerificador;
-    String conexao = Provider.of<Autenticacao>(context).atualConexao;
+        Provider.of<EstruturaLevantamento>(context, listen: false)
+            .getDigitoVerificador;
+    // String conexao =
+    //     Provider.of<Autenticacao>(context, listen: false).atualConexao;
     final isValid = _form.currentState.validate();
     if (!isValid) {
       return;
@@ -107,17 +97,24 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
       _isLoading = true;
     });
 
-    if (_edicaoBemInvent.numeroPatrimonialNovo == null) {
+    if (_edicaoBemInvent.numeroPatrimonialNovo == null &&
+        _digitoVerificador != null) {
       _edicaoBemInvent.numeroPatrimonialNovo =
           _digitoVerificador + _edicaoBemInvent.numeroPatrimonial;
+    } else {
+      _edicaoBemInvent.numeroPatrimonialNovo =
+          _edicaoBemInvent.numeroPatrimonial;
     }
     try {
-      await Provider.of<InventarioBemPatrimonialProvider>(
+      await Provider.of<InventarioBensPatrimoniais>(
         context,
         listen: false,
-      ).salvaDados(_edicaoBemInvent, conexao);
+      ).gravaDados(_edicaoBemInvent);
 
-      Provider.of<EstruturaLevantamento>(context).atualizaDados(_item);
+      await Provider.of<EstruturaLevantamento>(
+        context,
+        listen: false,
+      ).atualizaItemInventariado(_item.id);
     } catch (error) {
       await showDialog<Null>(
         context: context,
@@ -145,27 +142,35 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
   void _atribuiValores() {
     final usuarioColetante =
         Provider.of<Autenticacao>(context, listen: false).usuarioLogado;
-    if (_item.inventarioBemPatrimonial != null) {
-      _item.inventariado = true;
+
+    final idUnidade =
+        Provider.of<Autenticacao>(context, listen: false).idUnidade;
+    if (_item.dadosBensPatrimoniais != null &&
+        _item.dadosBensPatrimoniais.inventarioBemPatrimonial != null) {
+      _item.dadosBensPatrimoniais.inventariado = true;
     }
 
     _edicaoBemInvent.dominioSituacaoFisica = _item.dominioSituacaoFisica;
     _edicaoBemInvent.dominioStatus = _item.dominioStatus;
     _edicaoBemInvent.dominioStatusInventarioBem =
-        _item.dominioStatusInventarioBem;
+        _item.dadosBensPatrimoniais != null
+            ? _item.dadosBensPatrimoniais.dominioStatusInventarioBem
+            : null;
     _edicaoBemInvent.idDadosBemPatrimonialMobile = _item.id;
     _edicaoBemInvent.idInventarioEstruturaOrganizacionalMobile =
-        _item.idInventarioEstruturaOrganizacional;
+        _item.dadosBensPatrimoniais != null
+            ? _item.dadosBensPatrimoniais.idInventarioEstruturaOrganizacional
+            : _item.estruturaOrganizacionalAtual.id;
     _edicaoBemInvent.material = _item.material;
-    _edicaoBemInvent.caracteristicas = _item.bemPatrimonial.caracteristicas;
+    _edicaoBemInvent.caracteristicas = _item.caracteristicas;
     _edicaoBemInvent.nomeUsuarioColeta = usuarioColetante;
-    _edicaoBemInvent.numeroPatrimonial = _item.bemPatrimonial.numeroPatrimonial;
-    _edicaoBemInvent.numeroPatrimonialAntigo =
-        _item.bemPatrimonial.numeroPatrimonial;
-    _edicaoBemInvent.numeroPatrimonialAntigo =
-        _item.bemPatrimonial.numeroPatrimonial;
+    _edicaoBemInvent.numeroPatrimonial = _item.numeroPatrimonial;
+    _edicaoBemInvent.numeroPatrimonialAntigo = _item.numeroPatrimonial;
+    _edicaoBemInvent.idUnidadeOrganizacional = idUnidade;
+    _edicaoBemInvent.enviado = false;
   }
 
+//044652
   @override
   Widget build(BuildContext context) {
     String _digitoVerificador =
@@ -193,7 +198,9 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
                     style: TextStyle(fontSize: 15),
                   ),
                   actions: [
-                    if (!snapshot.data.inventariado)
+                    if (snapshot.data.dadosBensPatrimoniais != null
+                        ? !snapshot.data.dadosBensPatrimoniais.inventariado
+                        : snapshot.data.inventariado)
                       IconButton(
                         icon: Icon(
                           Icons.check,
@@ -206,23 +213,22 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
                 ),
                 drawer: AppDrawer(),
                 body: Padding(
-                  padding: EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.all(10.0),
                   child: Form(
                     key: _form,
                     child: ListView(
                       children: <Widget>[
                         Container(
-                          padding: EdgeInsets.all(10),
+                          padding: const EdgeInsets.all(10),
                           child: Text('Descrição: ' +
                               snapshot.data.material.codigoEDescricao),
                         ),
                         Container(
-                          padding: EdgeInsets.all(10),
+                          padding: const EdgeInsets.all(10),
                           child: TextFormField(
                             key: Key('numeroPatrimonialText'),
                             enabled: false,
-                            initialValue:
-                                snapshot.data.bemPatrimonial.numeroPatrimonial,
+                            initialValue: snapshot.data.numeroPatrimonial,
                             textAlignVertical: TextAlignVertical.bottom,
                             decoration: InputDecoration(
                               labelText: 'Numero Patrimonial',
@@ -238,7 +244,7 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
                         Column(
                           children: [
                             Padding(
-                              padding: EdgeInsets.all(10),
+                              padding: const EdgeInsets.all(10),
                               child: Container(
                                 padding: const EdgeInsets.all(10),
                                 decoration: BoxDecoration(
@@ -254,15 +260,38 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
                                   isExpanded: true,
                                   dialogBox: true,
                                   displayClearIcon: false,
-                                  readOnly: snapshot.data.inventariado,
+                                  readOnly:
+                                      snapshot.data.dadosBensPatrimoniais !=
+                                              null
+                                          ? snapshot.data.dadosBensPatrimoniais
+                                              .inventariado
+                                          : snapshot.data.inventariado,
                                   iconDisabledColor: Colors.black,
                                   value: Provider.of<Inicializacao>(context)
-                                      .getDominiosBens(snapshot
-                                          .data.dominioSituacaoFisica.chave)
-                                      .firstWhere((element) =>
-                                          element.id ==
-                                          snapshot
-                                              .data.dominioSituacaoFisica.id),
+                                      .getDominiosBens(
+                                          snapshot.data.dadosBensPatrimoniais !=
+                                                  null
+                                              ? snapshot
+                                                  .data
+                                                  .dadosBensPatrimoniais
+                                                  .dominioSituacaoFisica
+                                                  .chave
+                                              : snapshot.data
+                                                  .dominioSituacaoFisica.chave)
+                                      .firstWhere(
+                                        (element) =>
+                                            element.id ==
+                                            (snapshot.data
+                                                        .dadosBensPatrimoniais !=
+                                                    null
+                                                ? snapshot
+                                                    .data
+                                                    .dadosBensPatrimoniais
+                                                    .dominioSituacaoFisica
+                                                    .id
+                                                : snapshot.data
+                                                    .dominioSituacaoFisica.id),
+                                      ),
                                   items: Provider.of<Inicializacao>(context)
                                       .getDominiosDropdownBens(snapshot
                                           .data.dominioSituacaoFisica.chave),
@@ -273,6 +302,12 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
                                             novoItemSelecionado;
                                         snapshot.data.dominioSituacaoFisica =
                                             novoItemSelecionado;
+                                        if (snapshot
+                                                .data.dadosBensPatrimoniais !=
+                                            null)
+                                          snapshot.data.dadosBensPatrimoniais
+                                                  .dominioSituacaoFisica =
+                                              novoItemSelecionado;
                                       },
                                     );
                                   },
@@ -296,14 +331,34 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
                                   isExpanded: true,
                                   dialogBox: true,
                                   displayClearIcon: false,
-                                  readOnly: snapshot.data.inventariado,
+                                  readOnly:
+                                      snapshot.data.dadosBensPatrimoniais !=
+                                              null
+                                          ? snapshot.data.dadosBensPatrimoniais
+                                              .inventariado
+                                          : snapshot.data.inventariado,
                                   iconDisabledColor: Colors.black,
                                   value: Provider.of<Inicializacao>(context)
-                                      .getDominiosBens(
-                                          snapshot.data.dominioStatus.chave)
-                                      .firstWhere((element) =>
-                                          element.id ==
-                                          snapshot.data.dominioStatus.id),
+                                      .getDominiosBens(snapshot
+                                                  .data.dadosBensPatrimoniais !=
+                                              null
+                                          ? snapshot.data.dadosBensPatrimoniais
+                                              .dominioStatus.chave
+                                          : snapshot.data.dominioStatus.chave)
+                                      .firstWhere(
+                                        (element) =>
+                                            element.id ==
+                                            (snapshot.data
+                                                        .dadosBensPatrimoniais !=
+                                                    null
+                                                ? snapshot
+                                                    .data
+                                                    .dadosBensPatrimoniais
+                                                    .dominioStatus
+                                                    .id
+                                                : snapshot
+                                                    .data.dominioStatus.id),
+                                      ),
                                   items: Provider.of<Inicializacao>(context)
                                       .getDominiosDropdownBens(
                                           snapshot.data.dominioStatus.chave),
@@ -314,6 +369,12 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
                                             novoItemSelecionado;
                                         snapshot.data.dominioStatus =
                                             novoItemSelecionado;
+                                        if (snapshot
+                                                .data.dadosBensPatrimoniais !=
+                                            null)
+                                          snapshot.data.dadosBensPatrimoniais
+                                                  .dominioStatus =
+                                              novoItemSelecionado;
                                       },
                                     );
                                   },
@@ -420,8 +481,8 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
                                     child: ListView.builder(
                                       physics: NeverScrollableScrollPhysics(),
                                       shrinkWrap: true,
-                                      itemCount: snapshot.data.bemPatrimonial
-                                          .caracteristicas.length,
+                                      itemCount:
+                                          snapshot.data.caracteristicas.length,
                                       itemBuilder: (_, idx) {
                                         List<DropdownMenuItem<Dominio>>
                                             _dominiosDropdownAtual =
@@ -429,7 +490,6 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
                                                 .getDominiosDropdownBens(
                                                     snapshot
                                                         .data
-                                                        .bemPatrimonial
                                                         .caracteristicas[idx]
                                                         .materialCaracteristica
                                                         .caracteristica
@@ -438,7 +498,6 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
                                                 Inicializacao>(context)
                                             .getDominiosBens(snapshot
                                                 .data
-                                                .bemPatrimonial
                                                 .caracteristicas[idx]
                                                 .materialCaracteristica
                                                 .caracteristica
@@ -448,13 +507,11 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
                                                     element.id.toString() ==
                                                     snapshot
                                                         .data
-                                                        .bemPatrimonial
                                                         .caracteristicas[idx]
                                                         .valorMaterialCaracteristica,
                                                 orElse: () => null);
                                         return snapshot
                                                     .data
-                                                    .bemPatrimonial
                                                     .caracteristicas[idx]
                                                     .materialCaracteristica
                                                     .caracteristica
@@ -466,13 +523,20 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
                                                     const EdgeInsets.all(10.0),
                                                 child:
                                                     SearchableDropdown.single(
-                                                  readOnly: snapshot
-                                                      .data.inventariado,
+                                                  readOnly:
+                                                      snapshot.data
+                                                                  .dadosBensPatrimoniais !=
+                                                              null
+                                                          ? snapshot
+                                                              .data
+                                                              .dadosBensPatrimoniais
+                                                              .inventariado
+                                                          : snapshot.data
+                                                              .inventariado,
                                                   iconDisabledColor:
                                                       Colors.black,
                                                   label: snapshot
                                                       .data
-                                                      .bemPatrimonial
                                                       .caracteristicas[idx]
                                                       .materialCaracteristica
                                                       .caracteristica
@@ -515,7 +579,6 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
                                                   value: itemAtual,
                                                   hint: snapshot
                                                       .data
-                                                      .bemPatrimonial
                                                       .caracteristicas[idx]
                                                       .materialCaracteristica
                                                       .caracteristica
@@ -541,7 +604,6 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
                                               )
                                             : snapshot
                                                         .data
-                                                        .bemPatrimonial
                                                         .caracteristicas[idx]
                                                         .materialCaracteristica
                                                         .caracteristica
@@ -549,7 +611,9 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
                                                         .nome ==
                                                     'TEXT_FIELD'
                                                 ? Container(
-                                                    padding: EdgeInsets.all(10),
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            10),
                                                     child: TextFormField(
                                                       key: Key(
                                                           'numeroPatrimonialText'),
@@ -560,7 +624,6 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
                                                           : true,
                                                       initialValue: snapshot
                                                           .data
-                                                          .bemPatrimonial
                                                           .caracteristicas[idx]
                                                           .valorMaterialCaracteristica,
                                                       textAlignVertical:
@@ -570,7 +633,6 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
                                                           InputDecoration(
                                                         labelText: snapshot
                                                             .data
-                                                            .bemPatrimonial
                                                             .caracteristicas[
                                                                 idx]
                                                             .materialCaracteristica

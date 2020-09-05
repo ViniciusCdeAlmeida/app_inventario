@@ -18,7 +18,7 @@ class _LevantamentoFisicoItemState extends State<LevantamentoFisicoItem> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
       child: Column(
         children: <Widget>[
           ListTile(
@@ -48,7 +48,7 @@ class _LevantamentoFisicoItemState extends State<LevantamentoFisicoItem> {
           ),
           if (_expanded)
             Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               child: Row(
                 children: <Widget>[
                   Column(

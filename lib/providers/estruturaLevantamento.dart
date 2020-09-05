@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'package:app_inventario/models/serialized/bemPatrimonial.dart';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -17,7 +18,8 @@ class EstruturaLevantamento with ChangeNotifier {
   List<EstruturaInventario> _levantamentosEstrutura = [];
   List<DadosBensPatrimoniais> _bensEstrutura = [];
   List<DadosBensPatrimoniais> _bensEstruturaFiltrado = [];
-  DadosBensPatrimoniais _bemPatrimonial;
+  BemPatrimonial _bemPatrimonial;
+  DadosBensPatrimoniais _dadosBemPatrimonial;
   String _quantidadeDigitos;
   String _digitoVerificador;
 
@@ -43,7 +45,7 @@ class EstruturaLevantamento with ChangeNotifier {
         : [..._bensEstrutura];
   }
 
-  DadosBensPatrimoniais get getBemPatrimonial {
+  BemPatrimonial get getBemPatrimonial {
     return _bemPatrimonial;
   }
 
@@ -100,14 +102,29 @@ class EstruturaLevantamento with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<DadosBensPatrimoniais> buscaBensPorId(
-      String numeroBemPatrimonial) async {
+  Future<BemPatrimonial> buscaBensPorId(String numeroBemPatrimonial) async {
     _isLoadingBens = false;
-    _bemPatrimonial = helperDadoBemPatrimonial2(await db.dadosBemPatrimoniaisDao
+    _bemPatrimonial = helperDadoBemPatrimonial2(
+        await db.bemPatrimoniaisDao.getBemPatrimonial(numeroBemPatrimonial));
+    _bemPatrimonial.dadosBensPatrimoniais = helperDadoBemPatrimonial(await db
+        .dadosBemPatrimoniaisDao
         .getDadosInventariar(numeroBemPatrimonial));
     _isLoadingBens = true;
     notifyListeners();
     return _bemPatrimonial;
+  }
+
+  Future<void> atualizaItemInventariado(int id) async {
+    await db.dadosBemPatrimoniaisDao.updateDadosBemPatrimonial(id);
+    await db.bemPatrimoniaisDao.updateBemPatrimonial(id);
+    if (_bensEstruturaFiltrado.isNotEmpty) {
+      final idx = _bensEstruturaFiltrado
+          .indexWhere((value) => value.idBemPatrimonial == id);
+      if (idx >= 0) {
+        _bensEstruturaFiltrado[idx].inventariado = true;
+      }
+    }
+    notifyListeners();
   }
 
   Future<void> _getLevantamento(String conexao, int idLevantamento) async {
@@ -153,7 +170,7 @@ class EstruturaLevantamento with ChangeNotifier {
     notifyListeners();
   }
 
-  void atualizaDados(DadosBensPatrimoniais item) {
+  void atualizaDados(BemPatrimonial item) {
     final idx = _bensEstrutura.indexWhere((value) => value.id == item.id);
     if (idx >= 0) {
       _bensEstrutura[idx].inventariado = true;

@@ -21,10 +21,10 @@ class InventarioSelecaoTela extends StatelessWidget {
       ),
       drawer: AppDrawer(),
       body: Padding(
-        padding: EdgeInsets.all(8),
+        padding: const EdgeInsets.all(8),
         child: Column(children: <Widget>[
           Padding(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: Text(
               'Unidade selecionada: ' + unidadeDados.arg1,
               style: TextStyle(

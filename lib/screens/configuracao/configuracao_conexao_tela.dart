@@ -27,7 +27,7 @@ class ConfiguracaoConexaoTela extends StatelessWidget {
       ),
       drawer: MenuDrawer(),
       body: Padding(
-        padding: EdgeInsets.all(8),
+        padding: const EdgeInsets.all(8),
         child: ListView.builder(
           itemCount: conexoesDados.conexoes.length,
           itemBuilder: (_, i) => Column(

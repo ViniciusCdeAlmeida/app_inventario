@@ -14,6 +14,7 @@ BemPatrimonial helperBemPatrimonial(BensPatrimoniaisDBData bemPatrimonial) {
       dominioStatus: bemPatrimonial.dominioStatus,
       estruturaOrganizacionalAtual: bemPatrimonial.estruturaOrganizacionalAtual,
       caracteristicas: bemPatrimonial.caracteristicas,
+      inventariado: bemPatrimonial.inventariado,
     );
   } else
     return null;
@@ -34,6 +35,7 @@ List<BemPatrimonial> helperBemPatrimonialLista(
           dominioStatus: item.dominioStatus,
           estruturaOrganizacionalAtual: item.estruturaOrganizacionalAtual,
           caracteristicas: item.caracteristicas,
+          inventariado: item.inventariado,
         ),
       ),
     );

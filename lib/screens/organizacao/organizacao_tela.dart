@@ -99,7 +99,7 @@ class _OrganizacaoTelaState extends State<OrganizacaoTela> {
               child: CircularProgressIndicator(),
             )
           : Padding(
-              padding: EdgeInsets.all(8),
+              padding: const EdgeInsets.all(8),
               child: ListView.builder(
                 itemCount: organizacoesLista.length,
                 itemBuilder: (_, idx) => Column(

@@ -44,7 +44,7 @@ class _UnidadeTelaState extends State<UnidadeTela> {
               onRefresh: () => _carregaUnidades(context),
               child: Consumer<EstruturaLevantamento>(
                 builder: (ctx, unidadesData, _) => Padding(
-                  padding: EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(8),
                   child: ListView.builder(
                     itemBuilder: (_, idx) => Column(
                       children: [

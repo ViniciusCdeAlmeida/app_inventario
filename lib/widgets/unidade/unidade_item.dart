@@ -45,7 +45,7 @@ class _UnidadeItemState extends State<UnidadeItem> {
                     "Tratada"
             ? Colors.brown[200]
             : Colors.white,
-        margin: EdgeInsets.all(10),
+        margin: const EdgeInsets.all(10),
         child: Column(
           children: <Widget>[
             FittedBox(

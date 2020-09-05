@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:app_inventario/helpers/helper_bemPatrimonial.dart';
+import 'package:app_inventario/helpers/helper_dadosBemPatrimonial.dart';
 import 'package:app_inventario/models/serialized/bemPatrimonial.dart';
 import 'package:app_inventario/models/serialized/dadosBensPatrimoniais.dart';
 import 'package:moor_flutter/moor_flutter.dart';
@@ -37,13 +38,21 @@ class DadosBemPatrimoniaisDao extends DatabaseAccessor<AppDatabase>
 
   Future<DadosBemPatrimoniaisDBData> getDadosInventariar(
       String numeroBemPatrimonial) async {
-    DadosBemPatrimoniaisDBData teste =
+    DadosBemPatrimoniaisDBData dadosBemPatrimonial =
         await getDadosBemPatrimonial(numeroBemPatrimonial);
-    BensPatrimoniaisDBData bemPatrimonial =
-        await db.bemPatrimoniaisDao.getBemPatrimonial(numeroBemPatrimonial);
-    teste.bemPatrimonial = helperBemPatrimonial(bemPatrimonial);
-    return teste;
+    return dadosBemPatrimonial;
   }
+
+  Future<void> updateDadosBemPatrimonial(int idBemPatrimonial) =>
+      (update(db.dadosBemPatrimoniaisDB)
+            ..where(
+              (tbl) => tbl.idBemPatrimonial.equals(idBemPatrimonial),
+            ))
+          .write(
+        DadosBemPatrimoniaisDBCompanion(
+          inventariado: Value(true),
+        ),
+      );
 
   Future<void> insertDadosBensPatrimoniais(List dadosBemPatrimonial) async {
     await batch(
@@ -85,6 +94,9 @@ class DadosBemPatrimoniaisDao extends DatabaseAccessor<AppDatabase>
                   ? Value(InventarioDadosBemPatrimonial.fromJson(
                       e['inventarioBemPatrimonial']))
                   : Value(null),
+              inventariado: e['inventarioBemPatrimonial'] != null
+                  ? Value(true)
+                  : Value(false),
             );
           }).toList(),
         );

@@ -1,4 +1,5 @@
 import 'package:app_inventario/models/serialized/caracteristicas.dart';
+import 'package:app_inventario/models/serialized/dadosBensPatrimoniais.dart';
 import 'package:app_inventario/models/serialized/dominio.dart';
 import 'package:app_inventario/models/serialized/material.dart';
 import 'package:app_inventario/models/serialized/organizacao.dart';
@@ -18,6 +19,8 @@ class BemPatrimonial with mat.ChangeNotifier {
   Material material;
   List<Caracteristicas> caracteristicas;
   Organizacao estruturaOrganizacionalAtual;
+  DadosBensPatrimoniais dadosBensPatrimoniais;
+  bool inventariado;
 
   BemPatrimonial({
     this.id,
@@ -29,6 +32,8 @@ class BemPatrimonial with mat.ChangeNotifier {
     this.dominioSituacaoFisica,
     this.dominioStatus,
     this.estruturaOrganizacionalAtual,
+    this.dadosBensPatrimoniais,
+    this.inventariado,
   });
 
   factory BemPatrimonial.fromJson(Map<String, dynamic> json) =>

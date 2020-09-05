@@ -158,7 +158,7 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
                 Consumer<Levantamentos>(
                   builder: (context, levantamentoData, child) {
                     return Padding(
-                      padding: EdgeInsets.all(8),
+                      padding: const EdgeInsets.all(8),
                       child: ListView.builder(
                         itemCount: levantamentoData.getLevantamentos.length,
                         itemBuilder: (_, idx) => Column(

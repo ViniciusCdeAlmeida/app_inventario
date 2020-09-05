@@ -25,3 +25,25 @@ class DadosBensPatrimoniaisConverter
         dadosBensPatrimoniais.map((details) => details.toJson()).toList());
   }
 }
+
+class BemPatrimonialDadosConverter
+    extends TypeConverter<DadosBensPatrimoniais, String> {
+  const BemPatrimonialDadosConverter();
+  @override
+  DadosBensPatrimoniais mapToDart(String fromDb) {
+    if (fromDb == null) {
+      return null;
+    }
+    return DadosBensPatrimoniais.fromJson(
+        json.decode(fromDb) as Map<String, dynamic>);
+  }
+
+  @override
+  String mapToSql(DadosBensPatrimoniais value) {
+    if (value == null) {
+      return null;
+    }
+
+    return json.encode(value.toJson());
+  }
+}
