@@ -42,8 +42,8 @@ class _LoginCardState extends State<LoginCard> {
   }
 
   Future<void> _submit() async {
-    var _conexoes = Provider.of<ConfiguracaoConexao>(context);
-    var _autenticacao = Provider.of<Autenticacao>(context);
+    var _conexoes = Provider.of<ConfiguracaoConexao>(context, listen: false);
+    var _autenticacao = Provider.of<Autenticacao>(context, listen: false);
     if (!_formKey.currentState.validate()) {
       return;
     }
@@ -77,7 +77,7 @@ class _LoginCardState extends State<LoginCard> {
       child: Container(
         height: deviceSize.height,
         width: deviceSize.width,
-        padding: EdgeInsets.all(15.0),
+        padding: const EdgeInsets.all(15.0),
         child: Form(
           key: _formKey,
           child: SingleChildScrollView(
@@ -109,7 +109,7 @@ class _LoginCardState extends State<LoginCard> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
                     ),
-                    padding: EdgeInsets.symmetric(
+                    padding: const EdgeInsets.symmetric(
                       horizontal: 30.0,
                       vertical: 8.0,
                     ),

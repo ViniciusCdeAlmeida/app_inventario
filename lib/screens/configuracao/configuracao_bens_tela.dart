@@ -1,4 +1,6 @@
+import 'package:app_inventario/providers/estruturaLevantamento.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ConfiguracaoBensTela extends StatefulWidget {
   @override
@@ -6,14 +8,34 @@ class ConfiguracaoBensTela extends StatefulWidget {
 }
 
 class _ConfiguracaoBensTelaState extends State<ConfiguracaoBensTela> {
-  final _bensControler = TextEditingController();
+  final _form = GlobalKey<FormState>();
+  String _valorInicial;
+  String _valorFinal;
 
   void _adicionarDigitosBens() {
-    final entradaQtde = _bensControler.text;
+    final isValid = _form.currentState.validate();
+    if (!isValid) {
+      return;
+    }
 
-    if (entradaQtde.length > 15 || entradaQtde.length < 6) return;
+    _form.currentState.save();
+
+    if (_valorFinal == null) {
+      Provider.of<EstruturaLevantamento>(context)
+          .setDigitosLeitura(_valorInicial);
+    } else {
+      Provider.of<EstruturaLevantamento>(context)
+          .setDigitosLeitura(_valorFinal);
+    }
 
     Navigator.of(context).pop();
+  }
+
+  @override
+  void didChangeDependencies() {
+    _valorInicial =
+        Provider.of<EstruturaLevantamento>(context).getDigitosLeitura;
+    super.didChangeDependencies();
   }
 
   @override
@@ -31,15 +53,31 @@ class _ConfiguracaoBensTelaState extends State<ConfiguracaoBensTela> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: <Widget>[
-              TextField(
-                keyboardType: TextInputType.number,
-                autofocus: true,
-                decoration: InputDecoration(
-                  labelText: 'Quantidade de digitos considerados na leitura',
-                  helperText: 'Informe os digitos(min 6, max 15) Ex.: 999999',
+              Form(
+                key: _form,
+                child: TextFormField(
+                  key: Key('digitosText'),
+                  initialValue: _valorInicial,
+                  keyboardType: TextInputType.number,
+                  autofocus: true,
+                  decoration: InputDecoration(
+                    labelText: 'Quantidade de digitos considerados na leitura',
+                    helperText: 'Informe os digitos(min 6, max 15) Ex.: 999999',
+                  ),
+                  onChanged: (value) {
+                    _valorFinal = value;
+                  },
+                  textInputAction: TextInputAction.done,
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Insira um valor.';
+                    }
+                    if (value.length < 5 || value.length > 16) {
+                      return 'Valor inserido não está entre 6 e 15.';
+                    }
+                    return null;
+                  },
                 ),
-                controller: _bensControler,
-                onSubmitted: null,
               ),
               FlatButton.icon(
                 icon: Icon(Icons.save),

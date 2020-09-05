@@ -1,13 +1,21 @@
 import 'package:app_inventario/customizacoes/bensPrevistos.dart';
-import 'package:app_inventario/models/dadosBensPatrimoniais.dart';
-import 'package:app_inventario/widgets/bens/ler_bens_geral_item.dart';
+import 'package:app_inventario/models/serialized/dadosBensPatrimoniais.dart';
+import 'package:app_inventario/models/telaArgumentos.dart';
+import 'package:app_inventario/screens/bens/ler_bens_geral_tela.dart';
 import 'package:flutter/material.dart';
 
-class PrevistosBensItem extends StatelessWidget {
-  final DadosBensPatrimoniais bensLista;
+// ignore: must_be_immutable
+class PrevistosBensItem extends StatefulWidget {
+  DadosBensPatrimoniais bemInventario;
+  String idInventarioEstrutura;
 
-  PrevistosBensItem(this.bensLista);
+  PrevistosBensItem({@required this.bemInventario, this.idInventarioEstrutura});
 
+  @override
+  _PrevistosBensItemState createState() => _PrevistosBensItemState();
+}
+
+class _PrevistosBensItemState extends State<PrevistosBensItem> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -18,57 +26,76 @@ class PrevistosBensItem extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  BensPrevistos(
-                      'Número Patrimonial: ',
-                      bensLista.bemPatrimonial != null &&
-                              bensLista.bemPatrimonial.numeroPatrimonial != null
-                          ? bensLista.bemPatrimonial.numeroPatrimonial
-                          : bensLista
-                              .inventarioBemPatrimonial.numeroPatrimonial),
+                  if (widget.bemInventario.idInventario == null)
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 5.0),
+                      child: Row(
+                        children: [
+                          Icon(
+                            Icons.warning,
+                            color: Colors.red[800],
+                          ),
+                          Text(
+                            'O item foi inventariado fora do espelho do inventário.',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.red[800],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  BensPrevistos('Número Patrimonial: ',
+                      widget.bemInventario.numeroPatrimonial),
                   BensPrevistos('Descrição do material: ',
-                      bensLista.material.codigoEDescricao),
+                      widget.bemInventario.material.codigoEDescricao),
                   BensPrevistos(
                       'Situação fisica: ',
-                      bensLista.dominioSituacaoFisica != null
-                          ? bensLista.dominioSituacaoFisica.descricao
-                          : bensLista.inventarioBemPatrimonial
+                      widget.bemInventario.dominioSituacaoFisica != null
+                          ? widget.bemInventario.dominioSituacaoFisica.descricao
+                          : widget.bemInventario.inventarioBemPatrimonial
                                       .dominioSituacaoFisica !=
                                   null
-                              ? bensLista.inventarioBemPatrimonial
+                              ? widget.bemInventario.inventarioBemPatrimonial
                                   .dominioSituacaoFisica.descricao
                               : 'Não contem'),
                   BensPrevistos(
                       'Status do bem: ',
-                      bensLista.dominioStatus != null
-                          ? bensLista.dominioStatus.descricao
-                          : bensLista.inventarioBemPatrimonial.dominioStatus !=
+                      widget.bemInventario.dominioStatus != null
+                          ? widget.bemInventario.dominioStatus.descricao
+                          : widget.bemInventario.inventarioBemPatrimonial
+                                      .dominioStatus !=
                                   null
-                              ? bensLista.inventarioBemPatrimonial.dominioStatus
-                                  .descricao
+                              ? widget.bemInventario.inventarioBemPatrimonial
+                                  .dominioStatus.descricao
                               : 'Não contem'),
                   BensPrevistos(
                       'Status no Inventario: ',
-                      bensLista.dominioStatusInventarioBem != null
-                          ? bensLista.dominioStatusInventarioBem.descricao
+                      widget.bemInventario.dominioStatusInventarioBem != null
+                          ? widget.bemInventario.dominioStatusInventarioBem
+                              .descricao
                           : null),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       IconButton(
-                        icon: bensLista.inventarioBemPatrimonial == null
+                        icon: !widget.bemInventario.inventariado
                             ? Icon(Icons.content_paste)
                             : Icon(Icons.check),
                         onPressed: () {
-                          Navigator.pushNamed(
-                            context,
+                          Navigator.of(context).pushNamed(
                             LerBensGeralTela.routeName,
-                            arguments:
-                                bensLista.bemPatrimonial.numeroPatrimonial,
+                            arguments: TelaArgumentos(
+                              id: int.parse(widget.idInventarioEstrutura),
+                              arg1: widget
+                                  .bemInventario.numeroPatrimonialCompleto,
+                            ),
                           );
                         },
                       ),
                     ],
-                  )
+                  ),
+                  Divider(),
                 ],
               ),
             ),

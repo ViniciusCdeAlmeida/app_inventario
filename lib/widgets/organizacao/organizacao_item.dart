@@ -30,8 +30,7 @@ class _OrganizacaoItemState extends State<OrganizacaoItem> {
               IconButton(
                 icon: Icon(Icons.chevron_right),
                 onPressed: () {
-                  Navigator.pushNamed(
-                    context,
+                  Navigator.of(context).pushNamed(
                     InventarioSelecaoTela.routeName,
                     arguments: TelaArgumentos(
                       id: widget.id,

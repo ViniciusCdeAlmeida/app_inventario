@@ -10,20 +10,21 @@ class InventarioSelecaoTela extends StatelessWidget {
   static const routeName = '/inventarioSelecaoTela';
   @override
   Widget build(BuildContext context) {
-    final inventario = Provider.of<Inventario>(context);
+    final inventario = Provider.of<Inventario>(context, listen: false);
     final TelaArgumentos unidadeDados =
         ModalRoute.of(context).settings.arguments;
-    Provider.of<Autenticacao>(context).idUnidade = unidadeDados.id;
+    Provider.of<Autenticacao>(context, listen: false).idUnidade =
+        unidadeDados.id;
     return Scaffold(
       appBar: AppBar(
         title: Text('Selecione um tipo de inventario'),
       ),
       drawer: AppDrawer(),
       body: Padding(
-        padding: EdgeInsets.all(8),
+        padding: const EdgeInsets.all(8),
         child: Column(children: <Widget>[
           Padding(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: Text(
               'Unidade selecionada: ' + unidadeDados.arg1,
               style: TextStyle(

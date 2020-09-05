@@ -1,7 +1,8 @@
-import '../../widgets/login/login_card.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
-import '../../widgets/cabecalho/menu_cabecalho.dart';
+
+import 'package:app_inventario/widgets/login/login_card.dart';
+import 'package:app_inventario/widgets/cabecalho/menu_cabecalho.dart';
 
 class LoginTela extends StatelessWidget {
   static const routeName = '/home';
@@ -10,7 +11,7 @@ class LoginTela extends StatelessWidget {
     final deviceSize = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('CITSmart - Inventário'),
+        title: const Text('Inventário - GRP'),
       ),
       drawer: MenuDrawer(),
       body: Stack(
@@ -38,9 +39,9 @@ class LoginTela extends StatelessWidget {
                 children: <Widget>[
                   Flexible(
                     child: Container(
-                      margin: EdgeInsets.only(bottom: 20.0),
-                      padding:
-                          EdgeInsets.symmetric(vertical: 8.0, horizontal: 94.0),
+                      margin: const EdgeInsets.only(bottom: 20.0),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 8.0, horizontal: 94.0),
                       transform: Matrix4.rotationZ(-8 * pi / 180)
                         ..translate(-10.0),
                       decoration: BoxDecoration(
@@ -54,14 +55,14 @@ class LoginTela extends StatelessWidget {
                           ),
                         ],
                       ),
-                      child: Text(
+                      child: const Text(
                         'App Inventario',
                       ),
                     ),
                   ),
                   Flexible(
-                    flex: deviceSize.width > 600 ? 2 : 1, child: LoginCard(),
-                    // AuthCard(),
+                    flex: deviceSize.width > 600 ? 2 : 1,
+                    child: LoginCard(),
                   ),
                 ],
               ),

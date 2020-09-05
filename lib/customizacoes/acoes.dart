@@ -10,7 +10,9 @@ enum Acoes {
   exluirInventario,
   enviaInventario,
   gerarArquivoBackup,
+  itensInventariados,
   lerBens,
   bensPrevistos,
   estatisticas,
+  acessarBanco,
 }

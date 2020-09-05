@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../models/conexao.dart';
+import '../models/serialized/conexao.dart';
 
 class ConfiguracaoConexao with ChangeNotifier {
   List<Conexao> _conexao = [

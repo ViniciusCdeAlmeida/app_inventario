@@ -1,4 +1,4 @@
-import 'package:app_inventario/models/levantamento.dart';
+import 'package:app_inventario/models/serialized/levantamento.dart';
 import 'package:app_inventario/models/telaArgumentos.dart';
 import 'package:app_inventario/screens/unidade/unidade_tela.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +18,7 @@ class _LevantamentoFisicoItemState extends State<LevantamentoFisicoItem> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.all(10),
+      margin: const EdgeInsets.all(10),
       child: Column(
         children: <Widget>[
           ListTile(
@@ -36,8 +36,7 @@ class _LevantamentoFisicoItemState extends State<LevantamentoFisicoItem> {
             trailing: IconButton(
               icon: Icon(Icons.arrow_forward, color: Colors.black),
               onPressed: () {
-                Navigator.pushNamed(
-                  context,
+                Navigator.of(context).pushNamed(
                   UnidadeTela.routeName,
                   arguments: TelaArgumentos(
                     id: widget.levantamento.id,
@@ -49,7 +48,7 @@ class _LevantamentoFisicoItemState extends State<LevantamentoFisicoItem> {
           ),
           if (_expanded)
             Container(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               child: Row(
                 children: <Widget>[
                   Column(

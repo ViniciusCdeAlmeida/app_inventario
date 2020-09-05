@@ -16,7 +16,7 @@ class PopupMenuCustom extends StatelessWidget {
             color: Colors.black,
           ),
           Padding(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: Text(texto),
           ),
         ],

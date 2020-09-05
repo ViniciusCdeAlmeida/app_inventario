@@ -1,9 +1,10 @@
 import 'dart:async';
 import 'dart:io';
-import 'package:app_inventario/helpers/helper_usuario.dart';
-import 'package:app_inventario/models/conexao.dart';
-import 'package:app_inventario/models/login.dart';
-import 'package:app_inventario/models/organizacao.dart';
+import 'package:app_inventario/helpers/helper_organizacoes.dart';
+import 'package:app_inventario/main.dart';
+import 'package:app_inventario/models/serialized/conexao.dart';
+import 'package:app_inventario/models/serialized/login.dart';
+import 'package:app_inventario/models/serialized/organizacoes.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:dio/adapter.dart';
@@ -15,6 +16,8 @@ class Autenticacao with ChangeNotifier {
   Login _usrLogado;
   Conexao _conexaoAtual;
   int idOrganizacao;
+  List<Organizacoes> _organizacoes = [];
+  bool _existeOrganizacao = false;
   // String _token;
   // String _userId;
 
@@ -24,28 +27,50 @@ class Autenticacao with ChangeNotifier {
     return _usrLogado != null;
   }
 
-  List<Organizacao> listaOrganizacoes() {
-    return _usrLogado.organizacao;
-  }
-
   String get usuarioLogado {
-    return _usrLogado.userName;
+    return _usrLogado.username;
   }
 
-  List<Organizacao> get lista2Organizacoes {
-    return [..._usrLogado.organizacao];
+  List<Organizacoes> get listaOrganizacoes {
+    return [..._organizacoes];
   }
 
-  get idUnidade {
+  int get idUnidade {
     return idOrganizacao;
+  }
+
+  bool get getExisteOrganizacao {
+    if (!_existeOrganizacao) {
+      return false;
+    } else
+      return true;
+  }
+
+  String get atualConexao {
+    return _conexaoAtual.url;
   }
 
   set idUnidade(int idOrganizacao) {
     this.idOrganizacao = idOrganizacao;
   }
 
-  String get atualConexao {
-    return _conexaoAtual.url;
+  Future<void> getVerificaOrganizacaoDB() async {
+    if (helperOrganizacoes(
+            await db.unidadesGestorasDao.getVerificaUnidades()) !=
+        null) {
+      _existeOrganizacao = true;
+    }
+  }
+
+  Future<void> getOrganizacoesDB() async {
+    _organizacoes =
+        helperOrganizacoesLista(await db.unidadesGestorasDao.getAllUnidades());
+    notifyListeners();
+  }
+
+  Future<List<Organizacoes>> listaUnidades() async {
+    return helperOrganizacoesLista(
+        await db.unidadesGestorasDao.getAllUnidades());
   }
 
   Future<void> _authenticate(String userName, String password) async {
@@ -65,7 +90,12 @@ class Autenticacao with ChangeNotifier {
     try {
       Response response = await dio
           .get("usuarioValidoV2/?username=$userName&password=$password");
-      _usrLogado = helperLogin(response.data);
+      if (!_existeOrganizacao) {
+        await db.unidadesGestorasDao
+            .insertUnidadeGestora(response.data['organizacoes'] as List)
+            .whenComplete(() => _existeOrganizacao = true);
+      }
+      _usrLogado = Login.fromJson(response.data);
     } catch (error) {
       throw error;
     }
@@ -73,7 +103,9 @@ class Autenticacao with ChangeNotifier {
   }
 
   Future<void> login(String userName, String password) async {
-    return _authenticate(userName, password);
+    await getVerificaOrganizacaoDB();
+    // db.deleteTable(db.unidadesGestorasDB);
+    await _authenticate(userName, password);
   }
 
   Future<void> sair() async {

@@ -1,7 +1,10 @@
-import 'package:app_inventario/widgets/cabecalho/app_cabecalho.dart';
+import 'package:app_inventario/models/telaArgumentos.dart';
 import 'package:flutter/material.dart';
-import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+
+import 'package:app_inventario/screens/bens/ler_bens_geral_tela.dart';
+import 'package:app_inventario/widgets/cabecalho/app_cabecalho.dart';
 
 class LerBensItens extends StatefulWidget {
   static const routeName = '/lerBens';
@@ -11,75 +14,99 @@ class LerBensItens extends StatefulWidget {
 }
 
 class _LerBensItensState extends State<LerBensItens> {
-  //------------------CAMERA------------------//
-  ScanResult scanResult;
-  final _flashOnController = TextEditingController(text: "Flash on");
-  final _flashOffController = TextEditingController(text: "Flash off");
-  final _cancelController = TextEditingController(text: "Cancel");
+  final _controller = TextEditingController();
+  final _form = GlobalKey<FormState>();
 
-  var _aspectTolerance = 0.00;
-  var _numberOfCameras = 0;
-  var _selectedCamera = -1;
-  var _useAutoFocus = true;
-  var _autoEnableFlash = false;
-
-  static final _possibleFormats = BarcodeFormat.values.toList()
-    ..removeWhere((e) => e == BarcodeFormat.unknown);
-
-  List<BarcodeFormat> selectedFormats = [..._possibleFormats];
-
-  @override
-  // ignore: type_annotate_public_apis
-  initState() {
-    super.initState();
-
-    Future.delayed(Duration.zero, () async {
-      _numberOfCameras = await BarcodeScanner.numberOfCameras;
-      setState(() {});
-    });
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
   }
 
-  Future scan() async {
+  void _buscaBemPatrimonial() {
+    int idInventarioUnidade = ModalRoute.of(context).settings.arguments;
+    Navigator.of(context).pushNamed(
+      LerBensGeralTela.routeName,
+      arguments: TelaArgumentos(
+        id: idInventarioUnidade,
+        arg1: _controller.text,
+      ),
+    );
+    _controller.text = '';
+  }
+
+  void _leituraBensManual(BuildContext ctx) {
+    showModalBottomSheet(
+      context: ctx,
+      builder: (bCtx) {
+        return SingleChildScrollView(
+          child: Card(
+            child: Container(
+              padding: EdgeInsets.only(
+                top: 10,
+                left: 10,
+                right: 10,
+                bottom: MediaQuery.of(context).viewInsets.bottom + 10,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: <Widget>[
+                  Form(
+                    key: _form,
+                    child: TextFormField(
+                      key: Key('numeroPatrimonialText'),
+                      // initialValue: _valorInicial,
+                      textInputAction: TextInputAction.done,
+                      autofocus: true,
+                      controller: _controller,
+                      decoration: InputDecoration(
+                        labelText: 'Número patrimonial',
+                        helperText: 'Informe o número patrimonial',
+                      ),
+                    ),
+                  ),
+                  FlatButton.icon(
+                    icon: Icon(Icons.search),
+                    onPressed: _buscaBemPatrimonial,
+                    label: Text('Pesquisar'),
+                    color: Theme.of(context).primaryColor,
+                    textColor: Theme.of(context).textTheme.button.color,
+                  )
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  //------------------CAMERA------------------//
+
+  Future<void> scanBarcodeNormal() async {
+    String barcodeScanRes;
+    // Platform messages may fail, so we use a try/catch PlatformException.
     try {
-      var options = ScanOptions(
-        strings: {
-          "cancel": _cancelController.text,
-          "flash_on": _flashOnController.text,
-          "flash_off": _flashOffController.text,
-        },
-        restrictFormat: selectedFormats,
-        useCamera: _selectedCamera,
-        autoEnableFlash: _autoEnableFlash,
-        android: AndroidOptions(
-          aspectTolerance: _aspectTolerance,
-          useAutoFocus: _useAutoFocus,
+      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
+          "#ff6666", "Cancel", true, ScanMode.BARCODE);
+    } on PlatformException {
+      barcodeScanRes = 'Failed to get platform version.';
+    }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) return;
+
+    setState(() {
+      int idInventarioUnidade = ModalRoute.of(context).settings.arguments;
+      Navigator.of(context).pushNamed(
+        LerBensGeralTela.routeName,
+        arguments: TelaArgumentos(
+          id: idInventarioUnidade,
+          arg1: barcodeScanRes,
         ),
       );
-
-      var result = await BarcodeScanner.scan(options: options);
-
-      setState(() {
-        scanResult = result;
-        // Navigator.of(context)
-        //     .popAndPushNamed(Teste.routeName, arguments: result.rawContent);
-      });
-    } on PlatformException catch (e) {
-      var result = ScanResult(
-        type: ResultType.Error,
-        format: BarcodeFormat.unknown,
-      );
-
-      if (e.code == BarcodeScanner.cameraAccessDenied) {
-        setState(() {
-          result.rawContent = 'The user did not grant the camera permission!';
-        });
-      } else {
-        result.rawContent = 'Unknown error: $e';
-      }
-      setState(() {
-        scanResult = result;
-      });
-    }
+    });
   }
 
   //------------------CAMERA------------------//
@@ -95,29 +122,31 @@ class _LerBensItensState extends State<LerBensItens> {
         child: Column(
           children: <Widget>[
             ListTile(
-              contentPadding: EdgeInsets.all(10),
+              contentPadding: const EdgeInsets.all(10),
               trailing: IconButton(
                 icon: Icon(Icons.camera_alt),
                 color: Colors.black,
                 onPressed: () {
-                  scan();
+                  scanBarcodeNormal();
                 },
               ),
               title: Text('Camera'),
             ),
             Divider(),
             ListTile(
-              contentPadding: EdgeInsets.all(10),
+              contentPadding: const EdgeInsets.all(10),
               trailing: IconButton(
                 icon: Icon(Icons.content_paste),
                 color: Colors.black,
-                onPressed: () {},
+                onPressed: () {
+                  _leituraBensManual(context);
+                },
               ),
               title: Text('Manual'),
             ),
             Divider(),
             ListTile(
-              contentPadding: EdgeInsets.all(10),
+              contentPadding: const EdgeInsets.all(10),
               trailing: IconButton(
                 icon: Icon(Icons.usb),
                 color: Colors.black,
@@ -127,7 +156,7 @@ class _LerBensItensState extends State<LerBensItens> {
             ),
             Divider(),
             ListTile(
-              contentPadding: EdgeInsets.all(10),
+              contentPadding: const EdgeInsets.all(10),
               trailing: IconButton(
                 icon: Icon(Icons.bluetooth),
                 color: Colors.black,

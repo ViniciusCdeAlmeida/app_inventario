@@ -1,12 +1,13 @@
 import 'package:app_inventario/customizacoes/acoes.dart';
-import 'package:app_inventario/models/estruturaInventarioNew.dart';
+import 'package:app_inventario/models/serialized/estruturaInventario.dart';
+import 'package:app_inventario/models/telaArgumentos.dart';
 import 'package:app_inventario/screens/bens/previstos_bens_tela.dart';
 import 'package:app_inventario/widgets/bens/ler_bens_item.dart';
 import 'package:app_inventario/widgets/customizados/popupMenu_custom.dart';
 import 'package:flutter/material.dart';
 
 class UnidadeItem extends StatefulWidget {
-  final EstruturaInventarioNew unidade;
+  final EstruturaInventario unidade;
 
   UnidadeItem(this.unidade);
 
@@ -18,12 +19,19 @@ class _UnidadeItemState extends State<UnidadeItem> {
   void _redirecionamento(Acoes acoes, int idEstrutura) {
     switch (acoes) {
       case Acoes.lerBens:
-        Navigator.of(context)
-            .pushNamed(LerBensItens.routeName, arguments: idEstrutura);
+        Navigator.of(context).pushNamed(
+          LerBensItens.routeName,
+          arguments: widget.unidade.id,
+        );
         break;
       case Acoes.bensPrevistos:
-        Navigator.of(context)
-            .pushNamed(PrevistosBensTela.routeName, arguments: idEstrutura);
+        Navigator.of(context).pushNamed(
+          PrevistosBensTela.routeName,
+          arguments: TelaArgumentos(
+            id: idEstrutura,
+            arg1: widget.unidade.id.toString(),
+          ),
+        );
         break;
       case Acoes.estatisticas:
         print(idEstrutura);
@@ -45,7 +53,7 @@ class _UnidadeItemState extends State<UnidadeItem> {
                     "Tratada"
             ? Colors.brown[200]
             : Colors.white,
-        margin: EdgeInsets.all(10),
+        margin: const EdgeInsets.all(10),
         child: Column(
           children: <Widget>[
             FittedBox(

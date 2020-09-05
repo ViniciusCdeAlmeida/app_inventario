@@ -16,7 +16,7 @@ class InventarioSelecaoItem extends StatelessWidget {
         ListTileTheme(
           dense: false,
           child: ListTile(
-            contentPadding: EdgeInsets.only(top: 5, left: 10, right: 5),
+            contentPadding: const EdgeInsets.only(top: 5, left: 10, right: 5),
             title: Text(nome),
             leading: Container(
               child: Icon(

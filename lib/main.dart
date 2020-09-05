@@ -1,33 +1,40 @@
+import 'package:app_inventario/screens/bens/bens_inventariados_tela.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'package:app_inventario/models/database/databaseMoor.dart';
+
 import 'package:app_inventario/providers/bensProvider.dart';
-import 'package:app_inventario/providers/dominioProvider.dart';
+import 'package:app_inventario/providers/inicializacao.dart';
 import 'package:app_inventario/providers/estruturaLevantamento.dart';
 import 'package:app_inventario/providers/inventarioBemPatrimonial.dart';
 import 'package:app_inventario/providers/levantamentos.dart';
-import 'package:app_inventario/providers/unidade.dart';
-import 'package:app_inventario/screens/bens/previstos_bens_tela.dart';
+import 'package:app_inventario/providers/configuracao_conexao.dart';
+import 'package:app_inventario/providers/autenticacao.dart';
+import 'package:app_inventario/providers/inventario.dart';
+
 import 'package:app_inventario/screens/inventario/inventario_geral_tela.dart';
 import 'package:app_inventario/screens/inventario/inventario_selecao_tela.dart';
 import 'package:app_inventario/screens/inventario/levantamento_fisico_tela.dart';
 import 'package:app_inventario/screens/unidade/unidade_tela.dart';
-import 'package:app_inventario/widgets/bens/ler_bens_geral_item.dart';
-import 'package:app_inventario/widgets/bens/ler_bens_item.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import 'providers/configuracao_conexao.dart';
-import 'screens/configuracao/configuracao_conexao_edicao_tela.dart';
-import 'screens/login/login_tela.dart';
-import 'providers/autenticacao.dart';
-import 'screens/configuracao/configuracao_conexao_tela.dart';
-import 'package:app_inventario/providers/inventario.dart';
+import 'package:app_inventario/screens/bens/previstos_bens_tela.dart';
+import 'package:app_inventario/screens/bens/ler_bens_geral_tela.dart';
+import 'package:app_inventario/screens/configuracao/configuracao_conexao_edicao_tela.dart';
+import 'package:app_inventario/screens/login/login_tela.dart';
 import 'package:app_inventario/screens/organizacao/organizacao_tela.dart';
 
+import 'package:app_inventario/widgets/bens/ler_bens_item.dart';
+
+import 'package:app_inventario/screens/configuracao/configuracao_conexao_tela.dart';
+
+AppDatabase db;
+
 void main() {
+  db = AppDatabase();
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
@@ -42,28 +49,20 @@ class MyApp extends StatelessWidget {
           create: (ctx) => Inventario(),
         ),
         ChangeNotifierProvider(
-          create: (ctx) => Unidades(),
-        ),
-        ChangeNotifierProvider(
           create: (ctx) => BensProvier(),
         ),
         ChangeNotifierProvider(
-          create: (ctx) => DominioProvier(),
+          create: (ctx) => Inicializacao(),
         ),
         ChangeNotifierProvider(
-          create: (ctx) => InventarioBemPatrimonialProvider(),
+          create: (ctx) => InventarioBensPatrimoniais(),
         ),
-        ChangeNotifierProxyProvider<DominioProvier, EstruturaLevantamento>(
+        ChangeNotifierProvider(
           create: (ctx) => EstruturaLevantamento(),
-          update: (ctx, dominio, estruturas) => EstruturaLevantamento(
-            listaDominios: dominio == null ? [] : dominio.getDominios,
-          ),
         ),
         ChangeNotifierProxyProvider<Autenticacao, Levantamentos>(
           create: (context) => Levantamentos(),
-          update: (ctx, autenticacao, levantamento) => Levantamentos(
-            levantamentos:
-                levantamento == null ? [] : levantamento.levantamentos,
+          update: (ctx, autenticacao, _) => Levantamentos(
             idOrganizacao: autenticacao.idUnidade,
           ),
         ),
@@ -72,9 +71,9 @@ class MyApp extends StatelessWidget {
         builder: (ctx, autenticacaoDados, _) => MaterialApp(
           title: 'APP inventario',
           theme: ThemeData(
-            primaryColor: const Color(0xFF72C70E),
-            toggleableActiveColor: Color(0xFF2247C7),
-            errorColor: Color(0xFF7A1C02),
+            primaryColor: Colors.yellow[800],
+            toggleableActiveColor: const Color(0xFF2247C7),
+            errorColor: const Color(0xFF7A1C02),
           ),
           home:
               autenticacaoDados.existeUsuario ? OrganizacaoTela() : LoginTela(),
@@ -92,6 +91,7 @@ class MyApp extends StatelessWidget {
             LerBensItens.routeName: (ctx) => LerBensItens(),
             PrevistosBensTela.routeName: (ctx) => PrevistosBensTela(),
             LerBensGeralTela.routeName: (ctx) => LerBensGeralTela(),
+            BensInventariadosTela.routeName: (ctx) => BensInventariadosTela(),
           },
         ),
       ),

@@ -1,4 +1,4 @@
-import 'package:app_inventario/models/conexao.dart';
+import 'package:app_inventario/models/serialized/conexao.dart';
 import 'package:app_inventario/providers/configuracao_conexao.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -90,7 +90,7 @@ class _ConfiguracaoConexaoEdicaoTelaState
         ],
       ),
       body: Padding(
-        padding: EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(10.0),
         child: Form(
           child: ListView(
             children: <Widget>[
