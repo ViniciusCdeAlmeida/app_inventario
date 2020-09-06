@@ -3467,6 +3467,11 @@ class InventarioBemPatrimonialDBData extends DataClass
   final int idDadosBemPatrimonialMobile;
   final int idInventarioEstruturaOrganizacionalMobile;
   final int idUnidadeOrganizacional;
+  final int idDominioSituacaoFisica;
+  final int idDominioStatus;
+  final int identificaoPatrimonial;
+  final int idEstruturaOrganizacionalAtual;
+  final int idMaterial;
   final String numeroPatrimonial;
   final String numeroPatrimonialAntigo;
   final String numeroPatrimonialNovo;
@@ -3486,6 +3491,11 @@ class InventarioBemPatrimonialDBData extends DataClass
       this.idDadosBemPatrimonialMobile,
       this.idInventarioEstruturaOrganizacionalMobile,
       this.idUnidadeOrganizacional,
+      this.idDominioSituacaoFisica,
+      this.idDominioStatus,
+      this.identificaoPatrimonial,
+      this.idEstruturaOrganizacionalAtual,
+      this.idMaterial,
       this.numeroPatrimonial,
       this.numeroPatrimonialAntigo,
       this.numeroPatrimonialNovo,
@@ -3516,6 +3526,16 @@ class InventarioBemPatrimonialDBData extends DataClass
               '${effectivePrefix}id_inventario_estrutura_organizacional_mobile']),
       idUnidadeOrganizacional: intType.mapFromDatabaseResponse(
           data['${effectivePrefix}id_unidade_organizacional']),
+      idDominioSituacaoFisica: intType.mapFromDatabaseResponse(
+          data['${effectivePrefix}id_dominio_situacao_fisica']),
+      idDominioStatus: intType
+          .mapFromDatabaseResponse(data['${effectivePrefix}id_dominio_status']),
+      identificaoPatrimonial: intType.mapFromDatabaseResponse(
+          data['${effectivePrefix}identificao_patrimonial']),
+      idEstruturaOrganizacionalAtual: intType.mapFromDatabaseResponse(
+          data['${effectivePrefix}id_estrutura_organizacional_atual']),
+      idMaterial: intType
+          .mapFromDatabaseResponse(data['${effectivePrefix}id_material']),
       numeroPatrimonial: stringType.mapFromDatabaseResponse(
           data['${effectivePrefix}numero_patrimonial']),
       numeroPatrimonialAntigo: stringType.mapFromDatabaseResponse(
@@ -3567,6 +3587,23 @@ class InventarioBemPatrimonialDBData extends DataClass
     }
     if (!nullToAbsent || idUnidadeOrganizacional != null) {
       map['id_unidade_organizacional'] = Variable<int>(idUnidadeOrganizacional);
+    }
+    if (!nullToAbsent || idDominioSituacaoFisica != null) {
+      map['id_dominio_situacao_fisica'] =
+          Variable<int>(idDominioSituacaoFisica);
+    }
+    if (!nullToAbsent || idDominioStatus != null) {
+      map['id_dominio_status'] = Variable<int>(idDominioStatus);
+    }
+    if (!nullToAbsent || identificaoPatrimonial != null) {
+      map['identificao_patrimonial'] = Variable<int>(identificaoPatrimonial);
+    }
+    if (!nullToAbsent || idEstruturaOrganizacionalAtual != null) {
+      map['id_estrutura_organizacional_atual'] =
+          Variable<int>(idEstruturaOrganizacionalAtual);
+    }
+    if (!nullToAbsent || idMaterial != null) {
+      map['id_material'] = Variable<int>(idMaterial);
     }
     if (!nullToAbsent || numeroPatrimonial != null) {
       map['numero_patrimonial'] = Variable<String>(numeroPatrimonial);
@@ -3637,6 +3674,22 @@ class InventarioBemPatrimonialDBData extends DataClass
       idUnidadeOrganizacional: idUnidadeOrganizacional == null && nullToAbsent
           ? const Value.absent()
           : Value(idUnidadeOrganizacional),
+      idDominioSituacaoFisica: idDominioSituacaoFisica == null && nullToAbsent
+          ? const Value.absent()
+          : Value(idDominioSituacaoFisica),
+      idDominioStatus: idDominioStatus == null && nullToAbsent
+          ? const Value.absent()
+          : Value(idDominioStatus),
+      identificaoPatrimonial: identificaoPatrimonial == null && nullToAbsent
+          ? const Value.absent()
+          : Value(identificaoPatrimonial),
+      idEstruturaOrganizacionalAtual:
+          idEstruturaOrganizacionalAtual == null && nullToAbsent
+              ? const Value.absent()
+              : Value(idEstruturaOrganizacionalAtual),
+      idMaterial: idMaterial == null && nullToAbsent
+          ? const Value.absent()
+          : Value(idMaterial),
       numeroPatrimonial: numeroPatrimonial == null && nullToAbsent
           ? const Value.absent()
           : Value(numeroPatrimonial),
@@ -3694,6 +3747,14 @@ class InventarioBemPatrimonialDBData extends DataClass
           .fromJson<int>(json['idInventarioEstruturaOrganizacionalMobile']),
       idUnidadeOrganizacional:
           serializer.fromJson<int>(json['idUnidadeOrganizacional']),
+      idDominioSituacaoFisica:
+          serializer.fromJson<int>(json['idDominioSituacaoFisica']),
+      idDominioStatus: serializer.fromJson<int>(json['idDominioStatus']),
+      identificaoPatrimonial:
+          serializer.fromJson<int>(json['identificaoPatrimonial']),
+      idEstruturaOrganizacionalAtual:
+          serializer.fromJson<int>(json['idEstruturaOrganizacionalAtual']),
+      idMaterial: serializer.fromJson<int>(json['idMaterial']),
       numeroPatrimonial: serializer.fromJson<String>(json['numeroPatrimonial']),
       numeroPatrimonialAntigo:
           serializer.fromJson<String>(json['numeroPatrimonialAntigo']),
@@ -3726,6 +3787,13 @@ class InventarioBemPatrimonialDBData extends DataClass
           serializer.toJson<int>(idInventarioEstruturaOrganizacionalMobile),
       'idUnidadeOrganizacional':
           serializer.toJson<int>(idUnidadeOrganizacional),
+      'idDominioSituacaoFisica':
+          serializer.toJson<int>(idDominioSituacaoFisica),
+      'idDominioStatus': serializer.toJson<int>(idDominioStatus),
+      'identificaoPatrimonial': serializer.toJson<int>(identificaoPatrimonial),
+      'idEstruturaOrganizacionalAtual':
+          serializer.toJson<int>(idEstruturaOrganizacionalAtual),
+      'idMaterial': serializer.toJson<int>(idMaterial),
       'numeroPatrimonial': serializer.toJson<String>(numeroPatrimonial),
       'numeroPatrimonialAntigo':
           serializer.toJson<String>(numeroPatrimonialAntigo),
@@ -3752,6 +3820,11 @@ class InventarioBemPatrimonialDBData extends DataClass
           int idDadosBemPatrimonialMobile,
           int idInventarioEstruturaOrganizacionalMobile,
           int idUnidadeOrganizacional,
+          int idDominioSituacaoFisica,
+          int idDominioStatus,
+          int identificaoPatrimonial,
+          int idEstruturaOrganizacionalAtual,
+          int idMaterial,
           String numeroPatrimonial,
           String numeroPatrimonialAntigo,
           String numeroPatrimonialNovo,
@@ -3775,6 +3848,14 @@ class InventarioBemPatrimonialDBData extends DataClass
                 this.idInventarioEstruturaOrganizacionalMobile,
         idUnidadeOrganizacional:
             idUnidadeOrganizacional ?? this.idUnidadeOrganizacional,
+        idDominioSituacaoFisica:
+            idDominioSituacaoFisica ?? this.idDominioSituacaoFisica,
+        idDominioStatus: idDominioStatus ?? this.idDominioStatus,
+        identificaoPatrimonial:
+            identificaoPatrimonial ?? this.identificaoPatrimonial,
+        idEstruturaOrganizacionalAtual: idEstruturaOrganizacionalAtual ??
+            this.idEstruturaOrganizacionalAtual,
+        idMaterial: idMaterial ?? this.idMaterial,
         numeroPatrimonial: numeroPatrimonial ?? this.numeroPatrimonial,
         numeroPatrimonialAntigo:
             numeroPatrimonialAntigo ?? this.numeroPatrimonialAntigo,
@@ -3802,6 +3883,12 @@ class InventarioBemPatrimonialDBData extends DataClass
           ..write(
               'idInventarioEstruturaOrganizacionalMobile: $idInventarioEstruturaOrganizacionalMobile, ')
           ..write('idUnidadeOrganizacional: $idUnidadeOrganizacional, ')
+          ..write('idDominioSituacaoFisica: $idDominioSituacaoFisica, ')
+          ..write('idDominioStatus: $idDominioStatus, ')
+          ..write('identificaoPatrimonial: $identificaoPatrimonial, ')
+          ..write(
+              'idEstruturaOrganizacionalAtual: $idEstruturaOrganizacionalAtual, ')
+          ..write('idMaterial: $idMaterial, ')
           ..write('numeroPatrimonial: $numeroPatrimonial, ')
           ..write('numeroPatrimonialAntigo: $numeroPatrimonialAntigo, ')
           ..write('numeroPatrimonialNovo: $numeroPatrimonialNovo, ')
@@ -3830,37 +3917,42 @@ class InventarioBemPatrimonialDBData extends DataClass
               $mrjc(
                   idUnidadeOrganizacional.hashCode,
                   $mrjc(
-                      numeroPatrimonial.hashCode,
+                      idDominioSituacaoFisica.hashCode,
                       $mrjc(
-                          numeroPatrimonialAntigo.hashCode,
+                          idDominioStatus.hashCode,
                           $mrjc(
-                              numeroPatrimonialNovo.hashCode,
+                              identificaoPatrimonial.hashCode,
                               $mrjc(
-                                  nomeUsuarioColeta.hashCode,
+                                  idEstruturaOrganizacionalAtual.hashCode,
                                   $mrjc(
-                                      tipoMobile.hashCode,
+                                      idMaterial.hashCode,
                                       $mrjc(
-                                          novoBemInvetariado.hashCode,
+                                          numeroPatrimonial.hashCode,
                                           $mrjc(
-                                              enviado.hashCode,
+                                              numeroPatrimonialAntigo.hashCode,
                                               $mrjc(
-                                                  bemNaoEncontrado.hashCode,
+                                                  numeroPatrimonialNovo
+                                                      .hashCode,
                                                   $mrjc(
-                                                      bemNaoInventariado
+                                                      nomeUsuarioColeta
                                                           .hashCode,
                                                       $mrjc(
-                                                          caracteristicas
-                                                              .hashCode,
+                                                          tipoMobile.hashCode,
                                                           $mrjc(
-                                                              material.hashCode,
+                                                              novoBemInvetariado
+                                                                  .hashCode,
                                                               $mrjc(
-                                                                  dominioSituacaoFisica
+                                                                  enviado
                                                                       .hashCode,
                                                                   $mrjc(
-                                                                      dominioStatus
+                                                                      bemNaoEncontrado
                                                                           .hashCode,
-                                                                      dominioStatusInventarioBem
-                                                                          .hashCode))))))))))))))))));
+                                                                      $mrjc(
+                                                                          bemNaoInventariado
+                                                                              .hashCode,
+                                                                          $mrjc(
+                                                                              caracteristicas.hashCode,
+                                                                              $mrjc(material.hashCode, $mrjc(dominioSituacaoFisica.hashCode, $mrjc(dominioStatus.hashCode, dominioStatusInventarioBem.hashCode)))))))))))))))))))))));
   @override
   bool operator ==(dynamic other) =>
       identical(this, other) ||
@@ -3871,6 +3963,12 @@ class InventarioBemPatrimonialDBData extends DataClass
           other.idInventarioEstruturaOrganizacionalMobile ==
               this.idInventarioEstruturaOrganizacionalMobile &&
           other.idUnidadeOrganizacional == this.idUnidadeOrganizacional &&
+          other.idDominioSituacaoFisica == this.idDominioSituacaoFisica &&
+          other.idDominioStatus == this.idDominioStatus &&
+          other.identificaoPatrimonial == this.identificaoPatrimonial &&
+          other.idEstruturaOrganizacionalAtual ==
+              this.idEstruturaOrganizacionalAtual &&
+          other.idMaterial == this.idMaterial &&
           other.numeroPatrimonial == this.numeroPatrimonial &&
           other.numeroPatrimonialAntigo == this.numeroPatrimonialAntigo &&
           other.numeroPatrimonialNovo == this.numeroPatrimonialNovo &&
@@ -3893,6 +3991,11 @@ class InventarioBemPatrimonialDBCompanion
   final Value<int> idDadosBemPatrimonialMobile;
   final Value<int> idInventarioEstruturaOrganizacionalMobile;
   final Value<int> idUnidadeOrganizacional;
+  final Value<int> idDominioSituacaoFisica;
+  final Value<int> idDominioStatus;
+  final Value<int> identificaoPatrimonial;
+  final Value<int> idEstruturaOrganizacionalAtual;
+  final Value<int> idMaterial;
   final Value<String> numeroPatrimonial;
   final Value<String> numeroPatrimonialAntigo;
   final Value<String> numeroPatrimonialNovo;
@@ -3912,6 +4015,11 @@ class InventarioBemPatrimonialDBCompanion
     this.idDadosBemPatrimonialMobile = const Value.absent(),
     this.idInventarioEstruturaOrganizacionalMobile = const Value.absent(),
     this.idUnidadeOrganizacional = const Value.absent(),
+    this.idDominioSituacaoFisica = const Value.absent(),
+    this.idDominioStatus = const Value.absent(),
+    this.identificaoPatrimonial = const Value.absent(),
+    this.idEstruturaOrganizacionalAtual = const Value.absent(),
+    this.idMaterial = const Value.absent(),
     this.numeroPatrimonial = const Value.absent(),
     this.numeroPatrimonialAntigo = const Value.absent(),
     this.numeroPatrimonialNovo = const Value.absent(),
@@ -3932,6 +4040,11 @@ class InventarioBemPatrimonialDBCompanion
     this.idDadosBemPatrimonialMobile = const Value.absent(),
     this.idInventarioEstruturaOrganizacionalMobile = const Value.absent(),
     this.idUnidadeOrganizacional = const Value.absent(),
+    this.idDominioSituacaoFisica = const Value.absent(),
+    this.idDominioStatus = const Value.absent(),
+    this.identificaoPatrimonial = const Value.absent(),
+    this.idEstruturaOrganizacionalAtual = const Value.absent(),
+    this.idMaterial = const Value.absent(),
     this.numeroPatrimonial = const Value.absent(),
     this.numeroPatrimonialAntigo = const Value.absent(),
     this.numeroPatrimonialNovo = const Value.absent(),
@@ -3952,6 +4065,11 @@ class InventarioBemPatrimonialDBCompanion
     Expression<int> idDadosBemPatrimonialMobile,
     Expression<int> idInventarioEstruturaOrganizacionalMobile,
     Expression<int> idUnidadeOrganizacional,
+    Expression<int> idDominioSituacaoFisica,
+    Expression<int> idDominioStatus,
+    Expression<int> identificaoPatrimonial,
+    Expression<int> idEstruturaOrganizacionalAtual,
+    Expression<int> idMaterial,
     Expression<String> numeroPatrimonial,
     Expression<String> numeroPatrimonialAntigo,
     Expression<String> numeroPatrimonialNovo,
@@ -3976,6 +4094,14 @@ class InventarioBemPatrimonialDBCompanion
             idInventarioEstruturaOrganizacionalMobile,
       if (idUnidadeOrganizacional != null)
         'id_unidade_organizacional': idUnidadeOrganizacional,
+      if (idDominioSituacaoFisica != null)
+        'id_dominio_situacao_fisica': idDominioSituacaoFisica,
+      if (idDominioStatus != null) 'id_dominio_status': idDominioStatus,
+      if (identificaoPatrimonial != null)
+        'identificao_patrimonial': identificaoPatrimonial,
+      if (idEstruturaOrganizacionalAtual != null)
+        'id_estrutura_organizacional_atual': idEstruturaOrganizacionalAtual,
+      if (idMaterial != null) 'id_material': idMaterial,
       if (numeroPatrimonial != null) 'numero_patrimonial': numeroPatrimonial,
       if (numeroPatrimonialAntigo != null)
         'numero_patrimonial_antigo': numeroPatrimonialAntigo,
@@ -4004,6 +4130,11 @@ class InventarioBemPatrimonialDBCompanion
       Value<int> idDadosBemPatrimonialMobile,
       Value<int> idInventarioEstruturaOrganizacionalMobile,
       Value<int> idUnidadeOrganizacional,
+      Value<int> idDominioSituacaoFisica,
+      Value<int> idDominioStatus,
+      Value<int> identificaoPatrimonial,
+      Value<int> idEstruturaOrganizacionalAtual,
+      Value<int> idMaterial,
       Value<String> numeroPatrimonial,
       Value<String> numeroPatrimonialAntigo,
       Value<String> numeroPatrimonialNovo,
@@ -4027,6 +4158,14 @@ class InventarioBemPatrimonialDBCompanion
               this.idInventarioEstruturaOrganizacionalMobile,
       idUnidadeOrganizacional:
           idUnidadeOrganizacional ?? this.idUnidadeOrganizacional,
+      idDominioSituacaoFisica:
+          idDominioSituacaoFisica ?? this.idDominioSituacaoFisica,
+      idDominioStatus: idDominioStatus ?? this.idDominioStatus,
+      identificaoPatrimonial:
+          identificaoPatrimonial ?? this.identificaoPatrimonial,
+      idEstruturaOrganizacionalAtual:
+          idEstruturaOrganizacionalAtual ?? this.idEstruturaOrganizacionalAtual,
+      idMaterial: idMaterial ?? this.idMaterial,
       numeroPatrimonial: numeroPatrimonial ?? this.numeroPatrimonial,
       numeroPatrimonialAntigo:
           numeroPatrimonialAntigo ?? this.numeroPatrimonialAntigo,
@@ -4065,6 +4204,24 @@ class InventarioBemPatrimonialDBCompanion
     if (idUnidadeOrganizacional.present) {
       map['id_unidade_organizacional'] =
           Variable<int>(idUnidadeOrganizacional.value);
+    }
+    if (idDominioSituacaoFisica.present) {
+      map['id_dominio_situacao_fisica'] =
+          Variable<int>(idDominioSituacaoFisica.value);
+    }
+    if (idDominioStatus.present) {
+      map['id_dominio_status'] = Variable<int>(idDominioStatus.value);
+    }
+    if (identificaoPatrimonial.present) {
+      map['identificao_patrimonial'] =
+          Variable<int>(identificaoPatrimonial.value);
+    }
+    if (idEstruturaOrganizacionalAtual.present) {
+      map['id_estrutura_organizacional_atual'] =
+          Variable<int>(idEstruturaOrganizacionalAtual.value);
+    }
+    if (idMaterial.present) {
+      map['id_material'] = Variable<int>(idMaterial.value);
     }
     if (numeroPatrimonial.present) {
       map['numero_patrimonial'] = Variable<String>(numeroPatrimonial.value);
@@ -4130,6 +4287,12 @@ class InventarioBemPatrimonialDBCompanion
           ..write(
               'idInventarioEstruturaOrganizacionalMobile: $idInventarioEstruturaOrganizacionalMobile, ')
           ..write('idUnidadeOrganizacional: $idUnidadeOrganizacional, ')
+          ..write('idDominioSituacaoFisica: $idDominioSituacaoFisica, ')
+          ..write('idDominioStatus: $idDominioStatus, ')
+          ..write('identificaoPatrimonial: $identificaoPatrimonial, ')
+          ..write(
+              'idEstruturaOrganizacionalAtual: $idEstruturaOrganizacionalAtual, ')
+          ..write('idMaterial: $idMaterial, ')
           ..write('numeroPatrimonial: $numeroPatrimonial, ')
           ..write('numeroPatrimonialAntigo: $numeroPatrimonialAntigo, ')
           ..write('numeroPatrimonialNovo: $numeroPatrimonialNovo, ')
@@ -4206,6 +4369,75 @@ class $InventarioBemPatrimonialDBTable extends InventarioBemPatrimonialDB
   GeneratedIntColumn _constructIdUnidadeOrganizacional() {
     return GeneratedIntColumn(
       'id_unidade_organizacional',
+      $tableName,
+      true,
+    );
+  }
+
+  final VerificationMeta _idDominioSituacaoFisicaMeta =
+      const VerificationMeta('idDominioSituacaoFisica');
+  GeneratedIntColumn _idDominioSituacaoFisica;
+  @override
+  GeneratedIntColumn get idDominioSituacaoFisica =>
+      _idDominioSituacaoFisica ??= _constructIdDominioSituacaoFisica();
+  GeneratedIntColumn _constructIdDominioSituacaoFisica() {
+    return GeneratedIntColumn(
+      'id_dominio_situacao_fisica',
+      $tableName,
+      true,
+    );
+  }
+
+  final VerificationMeta _idDominioStatusMeta =
+      const VerificationMeta('idDominioStatus');
+  GeneratedIntColumn _idDominioStatus;
+  @override
+  GeneratedIntColumn get idDominioStatus =>
+      _idDominioStatus ??= _constructIdDominioStatus();
+  GeneratedIntColumn _constructIdDominioStatus() {
+    return GeneratedIntColumn(
+      'id_dominio_status',
+      $tableName,
+      true,
+    );
+  }
+
+  final VerificationMeta _identificaoPatrimonialMeta =
+      const VerificationMeta('identificaoPatrimonial');
+  GeneratedIntColumn _identificaoPatrimonial;
+  @override
+  GeneratedIntColumn get identificaoPatrimonial =>
+      _identificaoPatrimonial ??= _constructIdentificaoPatrimonial();
+  GeneratedIntColumn _constructIdentificaoPatrimonial() {
+    return GeneratedIntColumn(
+      'identificao_patrimonial',
+      $tableName,
+      true,
+    );
+  }
+
+  final VerificationMeta _idEstruturaOrganizacionalAtualMeta =
+      const VerificationMeta('idEstruturaOrganizacionalAtual');
+  GeneratedIntColumn _idEstruturaOrganizacionalAtual;
+  @override
+  GeneratedIntColumn get idEstruturaOrganizacionalAtual =>
+      _idEstruturaOrganizacionalAtual ??=
+          _constructIdEstruturaOrganizacionalAtual();
+  GeneratedIntColumn _constructIdEstruturaOrganizacionalAtual() {
+    return GeneratedIntColumn(
+      'id_estrutura_organizacional_atual',
+      $tableName,
+      true,
+    );
+  }
+
+  final VerificationMeta _idMaterialMeta = const VerificationMeta('idMaterial');
+  GeneratedIntColumn _idMaterial;
+  @override
+  GeneratedIntColumn get idMaterial => _idMaterial ??= _constructIdMaterial();
+  GeneratedIntColumn _constructIdMaterial() {
+    return GeneratedIntColumn(
+      'id_material',
       $tableName,
       true,
     );
@@ -4407,6 +4639,11 @@ class $InventarioBemPatrimonialDBTable extends InventarioBemPatrimonialDB
         idDadosBemPatrimonialMobile,
         idInventarioEstruturaOrganizacionalMobile,
         idUnidadeOrganizacional,
+        idDominioSituacaoFisica,
+        idDominioStatus,
+        identificaoPatrimonial,
+        idEstruturaOrganizacionalAtual,
+        idMaterial,
         numeroPatrimonial,
         numeroPatrimonialAntigo,
         numeroPatrimonialNovo,
@@ -4456,6 +4693,38 @@ class $InventarioBemPatrimonialDBTable extends InventarioBemPatrimonialDB
           _idUnidadeOrganizacionalMeta,
           idUnidadeOrganizacional.isAcceptableOrUnknown(
               data['id_unidade_organizacional'], _idUnidadeOrganizacionalMeta));
+    }
+    if (data.containsKey('id_dominio_situacao_fisica')) {
+      context.handle(
+          _idDominioSituacaoFisicaMeta,
+          idDominioSituacaoFisica.isAcceptableOrUnknown(
+              data['id_dominio_situacao_fisica'],
+              _idDominioSituacaoFisicaMeta));
+    }
+    if (data.containsKey('id_dominio_status')) {
+      context.handle(
+          _idDominioStatusMeta,
+          idDominioStatus.isAcceptableOrUnknown(
+              data['id_dominio_status'], _idDominioStatusMeta));
+    }
+    if (data.containsKey('identificao_patrimonial')) {
+      context.handle(
+          _identificaoPatrimonialMeta,
+          identificaoPatrimonial.isAcceptableOrUnknown(
+              data['identificao_patrimonial'], _identificaoPatrimonialMeta));
+    }
+    if (data.containsKey('id_estrutura_organizacional_atual')) {
+      context.handle(
+          _idEstruturaOrganizacionalAtualMeta,
+          idEstruturaOrganizacionalAtual.isAcceptableOrUnknown(
+              data['id_estrutura_organizacional_atual'],
+              _idEstruturaOrganizacionalAtualMeta));
+    }
+    if (data.containsKey('id_material')) {
+      context.handle(
+          _idMaterialMeta,
+          idMaterial.isAcceptableOrUnknown(
+              data['id_material'], _idMaterialMeta));
     }
     if (data.containsKey('numero_patrimonial')) {
       context.handle(

@@ -27,6 +27,11 @@ List<InventarioBemPatrimonial> helperInventarioBemPatrimonialLista(
           numeroPatrimonialAntigo: item.numeroPatrimonialAntigo,
           numeroPatrimonialNovo: item.numeroPatrimonialNovo,
           tipoMobile: item.tipoMobile,
+          idDominioSituacaoFisica: item.idDominioSituacaoFisica,
+          idDominioStatus: item.idDominioStatus,
+          idEstruturaOrganizacionalAtual: item.idEstruturaOrganizacionalAtual,
+          idMaterial: item.idMaterial,
+          identificaoPatrimonial: item.identificaoPatrimonial,
         ),
       ),
     );

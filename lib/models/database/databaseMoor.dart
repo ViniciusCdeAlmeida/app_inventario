@@ -63,6 +63,11 @@ class InventarioBemPatrimonialDB extends Table {
   IntColumn get idInventarioEstruturaOrganizacionalMobile =>
       integer().nullable()();
   IntColumn get idUnidadeOrganizacional => integer().nullable()();
+  IntColumn get idDominioSituacaoFisica => integer().nullable()();
+  IntColumn get idDominioStatus => integer().nullable()();
+  IntColumn get identificaoPatrimonial => integer().nullable()();
+  IntColumn get idEstruturaOrganizacionalAtual => integer().nullable()();
+  IntColumn get idMaterial => integer().nullable()();
   TextColumn get numeroPatrimonial => text().nullable()();
   TextColumn get numeroPatrimonialAntigo => text().nullable()();
   TextColumn get numeroPatrimonialNovo => text().nullable()();
@@ -175,7 +180,7 @@ class AppDatabase extends _$AppDatabase {
   // Bump this when changing tables and columns.
   // Migrations will be covered in the next part.
   @override
-  int get schemaVersion => 13;
+  int get schemaVersion => 14;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -186,8 +191,16 @@ class AppDatabase extends _$AppDatabase {
           // m.createTable(unidadesGestorasDB);
           // m.addColumn(dadosBemPatrimoniaisDB, dadosBemPatrimoniaisDB.inventarioBemPatrimonial);inventariado
           // m.drop(inventarioBemPatrimonialDB);
-          return m.addColumn(
-              dadosBemPatrimoniaisDB, dadosBemPatrimoniaisDB.inventariado);
+          m.addColumn(inventarioBemPatrimonialDB,
+              inventarioBemPatrimonialDB.idDominioSituacaoFisica);
+          m.addColumn(inventarioBemPatrimonialDB,
+              inventarioBemPatrimonialDB.idDominioStatus);
+          m.addColumn(inventarioBemPatrimonialDB,
+              inventarioBemPatrimonialDB.idMaterial);
+          m.addColumn(inventarioBemPatrimonialDB,
+              inventarioBemPatrimonialDB.idEstruturaOrganizacionalAtual);
+          return m.addColumn(inventarioBemPatrimonialDB,
+              inventarioBemPatrimonialDB.identificaoPatrimonial);
         },
       );
 

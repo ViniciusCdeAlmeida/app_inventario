@@ -12,6 +12,11 @@ class InventarioBemPatrimonial with mat.ChangeNotifier {
   int idDadosBemPatrimonialMobile;
   int idInventarioEstruturaOrganizacionalMobile;
   int idUnidadeOrganizacional;
+  int idDominioSituacaoFisica;
+  int idDominioStatus;
+  int identificaoPatrimonial;
+  int idEstruturaOrganizacionalAtual;
+  int idMaterial;
   String numeroPatrimonial;
   String numeroPatrimonialAntigo;
   String numeroPatrimonialNovo;
@@ -46,6 +51,11 @@ class InventarioBemPatrimonial with mat.ChangeNotifier {
     this.tipoMobile,
     this.enviado,
     this.idUnidadeOrganizacional,
+    this.idDominioSituacaoFisica,
+    this.idDominioStatus,
+    this.identificaoPatrimonial,
+    this.idEstruturaOrganizacionalAtual,
+    this.idMaterial,
   });
 
   factory InventarioBemPatrimonial.fromJson(Map<String, dynamic> json) =>

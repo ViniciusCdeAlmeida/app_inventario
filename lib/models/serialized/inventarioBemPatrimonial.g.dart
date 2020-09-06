@@ -42,6 +42,12 @@ InventarioBemPatrimonial _$InventarioBemPatrimonialFromJson(
     tipoMobile: json['tipoMobile'] as String,
     enviado: json['enviado'] as bool,
     idUnidadeOrganizacional: json['idUnidadeOrganizacional'] as int,
+    idDominioSituacaoFisica: json['idDominioSituacaoFisica'] as int,
+    idDominioStatus: json['idDominioStatus'] as int,
+    identificaoPatrimonial: json['identificaoPatrimonial'] as int,
+    idEstruturaOrganizacionalAtual:
+        json['idEstruturaOrganizacionalAtual'] as int,
+    idMaterial: json['idMaterial'] as int,
   );
 }
 
@@ -53,6 +59,11 @@ Map<String, dynamic> _$InventarioBemPatrimonialToJson(
       'idInventarioEstruturaOrganizacionalMobile':
           instance.idInventarioEstruturaOrganizacionalMobile,
       'idUnidadeOrganizacional': instance.idUnidadeOrganizacional,
+      'idDominioSituacaoFisica': instance.idDominioSituacaoFisica,
+      'idDominioStatus': instance.idDominioStatus,
+      'identificaoPatrimonial': instance.identificaoPatrimonial,
+      'idEstruturaOrganizacionalAtual': instance.idEstruturaOrganizacionalAtual,
+      'idMaterial': instance.idMaterial,
       'numeroPatrimonial': instance.numeroPatrimonial,
       'numeroPatrimonialAntigo': instance.numeroPatrimonialAntigo,
       'numeroPatrimonialNovo': instance.numeroPatrimonialNovo,

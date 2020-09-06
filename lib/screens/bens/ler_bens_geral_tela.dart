@@ -165,6 +165,12 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
     _edicaoBemInvent.numeroPatrimonial = _item.numeroPatrimonial;
     _edicaoBemInvent.numeroPatrimonialAntigo = _item.numeroPatrimonial;
     _edicaoBemInvent.idUnidadeOrganizacional = idUnidade;
+    _edicaoBemInvent.idDominioSituacaoFisica = _item.dominioSituacaoFisica.id;
+    _edicaoBemInvent.idDominioStatus = _item.dominioStatus.id;
+    _edicaoBemInvent.idEstruturaOrganizacionalAtual =
+        _item.estruturaOrganizacionalAtual.id;
+    _edicaoBemInvent.idMaterial = _item.material.id;
+
     _edicaoBemInvent.enviado = false;
   }
 
@@ -278,22 +284,29 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
                                           : snapshot.data.inventariado,
                                   iconDisabledColor: Colors.black,
                                   value: Provider.of<Inicializacao>(context)
-                                      .getDominiosBens(
-                                          snapshot.data.dadosBensPatrimoniais !=
+                                      .getDominiosBens(snapshot.data
+                                                      .dadosBensPatrimoniais !=
+                                                  null &&
+                                              snapshot
+                                                      .data
+                                                      .dadosBensPatrimoniais
+                                                      .dominioSituacaoFisica !=
                                                   null
-                                              ? snapshot
-                                                  .data
-                                                  .dadosBensPatrimoniais
-                                                  .dominioSituacaoFisica
-                                                  .chave
-                                              : snapshot.data
-                                                  .dominioSituacaoFisica.chave)
+                                          ? snapshot.data.dadosBensPatrimoniais
+                                              .dominioSituacaoFisica.chave
+                                          : snapshot
+                                              .data.dominioSituacaoFisica.chave)
                                       .firstWhere(
                                         (element) =>
-                                            element.id ==
-                                            (snapshot.data
-                                                        .dadosBensPatrimoniais !=
-                                                    null
+                                            element
+                                                .id ==
+                                            (snapshot.data.dadosBensPatrimoniais !=
+                                                        null &&
+                                                    snapshot
+                                                            .data
+                                                            .dadosBensPatrimoniais
+                                                            .dominioSituacaoFisica !=
+                                                        null
                                                 ? snapshot
                                                     .data
                                                     .dadosBensPatrimoniais
@@ -310,6 +323,9 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
                                       () {
                                         _edicaoBemInvent.dominioSituacaoFisica =
                                             novoItemSelecionado;
+                                        _edicaoBemInvent
+                                                .idDominioSituacaoFisica =
+                                            novoItemSelecionado.id;
                                         snapshot.data.dominioSituacaoFisica =
                                             novoItemSelecionado;
                                         if (snapshot
@@ -349,9 +365,14 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
                                           : snapshot.data.inventariado,
                                   iconDisabledColor: Colors.black,
                                   value: Provider.of<Inicializacao>(context)
-                                      .getDominiosBens(snapshot
-                                                  .data.dadosBensPatrimoniais !=
-                                              null
+                                      .getDominiosBens(snapshot.data
+                                                      .dadosBensPatrimoniais !=
+                                                  null &&
+                                              snapshot
+                                                      .data
+                                                      .dadosBensPatrimoniais
+                                                      .dominioStatus !=
+                                                  null
                                           ? snapshot.data.dadosBensPatrimoniais
                                               .dominioStatus.chave
                                           : snapshot.data.dominioStatus.chave)
@@ -359,8 +380,13 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
                                         (element) =>
                                             element.id ==
                                             (snapshot.data
-                                                        .dadosBensPatrimoniais !=
-                                                    null
+                                                            .dadosBensPatrimoniais !=
+                                                        null &&
+                                                    snapshot
+                                                            .data
+                                                            .dadosBensPatrimoniais
+                                                            .dominioStatus !=
+                                                        null
                                                 ? snapshot
                                                     .data
                                                     .dadosBensPatrimoniais
@@ -377,6 +403,8 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
                                       () {
                                         _edicaoBemInvent.dominioStatus =
                                             novoItemSelecionado;
+                                        _edicaoBemInvent.idDominioStatus =
+                                            novoItemSelecionado.id;
                                         snapshot.data.dominioStatus =
                                             novoItemSelecionado;
                                         if (snapshot
