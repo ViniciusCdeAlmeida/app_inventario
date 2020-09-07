@@ -98,12 +98,28 @@ class EstruturaLevantamento with ChangeNotifier {
   }
 
   void filtraBens(String value) async {
-    _bensEstruturaFiltrado = _bensEstrutura.where((element) {
-      print(element.numeroPatrimonial);
-      return element.numeroPatrimonial.contains(value) ||
-          element.material.descricao.contains(value.toUpperCase()) ||
-          element.material.codigoEDescricao.contains(value.toUpperCase());
-    }).toList();
+    _bensEstruturaFiltrado = _bensEstrutura.where(
+      (element) {
+        if (element.numeroPatrimonial != null && element.material != null) {
+          return element.numeroPatrimonial.contains(value.toUpperCase()) ||
+              element.material.descricao.contains(value.toUpperCase()) ||
+              element.material.codigoEDescricao.contains(value.toUpperCase());
+        } else if (element.numeroPatrimonial == null &&
+            element.material != null) {
+          return element.material.descricao.contains(value.toUpperCase()) ||
+              element.material.codigoEDescricao.contains(value.toUpperCase()) ||
+              element.inventarioBemPatrimonial.numeroPatrimonial
+                  .contains(value.toUpperCase());
+        } else if (element.numeroPatrimonial != null &&
+            element.material == null) {
+          return element.numeroPatrimonial.contains(value.toUpperCase());
+        } else if (element.numeroPatrimonial == null &&
+            element.material != null) {
+          return element.numeroPatrimonialCompleto
+              .contains(value.toUpperCase());
+        }
+      },
+    ).toList();
     notifyListeners();
   }
 

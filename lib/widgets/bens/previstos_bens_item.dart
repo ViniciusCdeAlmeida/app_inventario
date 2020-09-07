@@ -45,10 +45,19 @@ class _PrevistosBensItemState extends State<PrevistosBensItem> {
                         ],
                       ),
                     ),
-                  BensPrevistos('Número Patrimonial: ',
-                      widget.bemInventario.numeroPatrimonial),
-                  BensPrevistos('Descrição do material: ',
-                      widget.bemInventario.material.codigoEDescricao),
+                  BensPrevistos(
+                    'Número Patrimonial: ',
+                    widget.bemInventario.numeroPatrimonial != null
+                        ? widget.bemInventario.numeroPatrimonial
+                        : widget.bemInventario.inventarioBemPatrimonial
+                            .numeroPatrimonial,
+                  ),
+                  BensPrevistos(
+                    'Descrição do material: ',
+                    widget.bemInventario.material != null
+                        ? widget.bemInventario.material.codigoEDescricao
+                        : null,
+                  ),
                   BensPrevistos(
                       'Situação fisica: ',
                       widget.bemInventario.dominioSituacaoFisica != null
@@ -87,8 +96,15 @@ class _PrevistosBensItemState extends State<PrevistosBensItem> {
                             LerBensGeralTela.routeName,
                             arguments: TelaArgumentos(
                               id: int.parse(widget.idInventarioEstrutura),
-                              arg1: widget
-                                  .bemInventario.numeroPatrimonialCompleto,
+                              arg1: widget.bemInventario
+                                          .numeroPatrimonialCompleto !=
+                                      null
+                                  ? widget
+                                      .bemInventario.numeroPatrimonialCompleto
+                                  : widget
+                                      .bemInventario
+                                      .inventarioBemPatrimonial
+                                      .numeroPatrimonial,
                             ),
                           );
                         },
