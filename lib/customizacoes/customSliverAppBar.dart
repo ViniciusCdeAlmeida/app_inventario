@@ -130,9 +130,20 @@ class _MySliverAppBarState extends State<MySliverAppBar>
                           fontWeight: FontWeight.bold,
                         ),
                         decoration: InputDecoration(
+                          suffixIcon: IconButton(
+                            icon: Icon(
+                              Icons.clear_all,
+                              color: Colors.red,
+                            ),
+                            onPressed: () {
+                              Provider.of<EstruturaLevantamento>(context,
+                                      listen: false)
+                                  .limpaFiltrados();
+                              _controller.text = '';
+                            },
+                          ),
                           icon: Icon(Icons.search),
-                          contentPadding:
-                              const EdgeInsets.only(left: 5, bottom: 8),
+                          contentPadding: const EdgeInsets.only(top: 5),
                           enabledBorder: InputBorder.none,
                           border: InputBorder.none,
                           focusedErrorBorder: InputBorder.none,
