@@ -6,14 +6,26 @@ import 'package:flutter/material.dart';
 class LevantamentoFisicoItem extends StatefulWidget {
   final Levantamento levantamento;
 
-  LevantamentoFisicoItem(
-    this.levantamento,
-  );
+  LevantamentoFisicoItem(this.levantamento);
   @override
   _LevantamentoFisicoItemState createState() => _LevantamentoFisicoItemState();
 }
 
-class _LevantamentoFisicoItemState extends State<LevantamentoFisicoItem> {
+class _LevantamentoFisicoItemState extends State<LevantamentoFisicoItem>
+    with SingleTickerProviderStateMixin {
+  AnimationController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: Duration(
+        milliseconds: 300,
+      ),
+    );
+  }
+
   var _expanded = false;
   @override
   Widget build(BuildContext context) {
@@ -23,8 +35,10 @@ class _LevantamentoFisicoItemState extends State<LevantamentoFisicoItem> {
         children: <Widget>[
           ListTile(
             leading: IconButton(
-              icon: Icon((_expanded ? Icons.expand_less : Icons.expand_more),
-                  color: Colors.black),
+              icon: Icon(
+                (_expanded ? Icons.expand_less : Icons.expand_more),
+                color: Colors.black,
+              ),
               onPressed: () {
                 setState(() {
                   _expanded = !_expanded;
@@ -46,12 +60,16 @@ class _LevantamentoFisicoItemState extends State<LevantamentoFisicoItem> {
               },
             ),
           ),
-          if (_expanded)
-            Container(
-              padding: const EdgeInsets.all(20),
-              child: Row(
-                children: <Widget>[
-                  Column(
+          AnimatedContainer(
+            duration: Duration(milliseconds: 300),
+            curve: Curves.easeIn,
+            height: _expanded ? 168 : 0,
+            padding: const EdgeInsets.all(20),
+            child: Row(
+              children: <Widget>[
+                SingleChildScrollView(
+                  physics: NeverScrollableScrollPhysics(),
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(widget
@@ -72,9 +90,10 @@ class _LevantamentoFisicoItemState extends State<LevantamentoFisicoItem> {
                           'Qtde. bens Baixados: ${widget.levantamento.quantidadeTotalBensBaixados}'),
                     ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
+          ),
         ],
       ),
     );

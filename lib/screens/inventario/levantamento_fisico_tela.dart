@@ -29,9 +29,9 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
 
   @override
   void didChangeDependencies() {
+    super.didChangeDependencies();
     final nomeEstrutura = Provider.of<EstruturaLevantamento>(context);
     nomeEstrutura.getNomeEstrutura;
-    super.didChangeDependencies();
     if (nomeEstrutura.getNomeEstrutura != null) {
       _scaffoldKey.currentState.showSnackBar(
         SnackBar(
@@ -148,38 +148,35 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
         ],
       ),
       drawer: AppDrawer(),
-      body: levantamentos.isLoading || estruturas.isLoadingEstruturas
-          ? Stack(
-              children: <Widget>[
-                Center(
-                  child: CircularProgressIndicator(
-                    backgroundColor: Colors.white,
-                  ),
+      body: AnimatedSwitcher(
+        duration: Duration(milliseconds: 300),
+        child: levantamentos.isLoading || estruturas.isLoadingEstruturas
+            ? Center(
+                key: UniqueKey(),
+                child: CircularProgressIndicator(
+                  backgroundColor: Colors.white,
                 ),
-              ],
-            )
-          : Stack(
-              children: <Widget>[
-                Consumer<Levantamentos>(
-                  builder: (context, levantamentoData, child) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8),
-                      child: ListView.builder(
-                        itemCount: levantamentoData.getLevantamentos.length,
-                        itemBuilder: (_, idx) => Column(
-                          children: [
-                            LevantamentoFisicoItem(
-                              levantamentoData.getLevantamentos[idx],
-                            ),
-                            Divider(),
-                          ],
-                        ),
+              )
+            : Consumer<Levantamentos>(
+                key: UniqueKey(),
+                builder: (context, levantamentoData, child) {
+                  return Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: ListView.builder(
+                      itemCount: levantamentoData.getLevantamentos.length,
+                      itemBuilder: (_, idx) => Column(
+                        children: [
+                          LevantamentoFisicoItem(
+                            levantamentoData.getLevantamentos[idx],
+                          ),
+                          Divider(),
+                        ],
                       ),
-                    );
-                  },
-                ),
-              ],
-            ),
+                    ),
+                  );
+                },
+              ),
+      ),
     );
   }
 }

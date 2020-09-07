@@ -1,3 +1,4 @@
+import 'package:app_inventario/customizacoes/custom_route.dart';
 import 'package:app_inventario/screens/bens/bens_inventariados_tela.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -74,7 +75,14 @@ class MyApp extends StatelessWidget {
             primaryColor: Colors.yellow[800],
             toggleableActiveColor: const Color(0xFF2247C7),
             errorColor: const Color(0xFF7A1C02),
+            pageTransitionsTheme: PageTransitionsTheme(
+              builders: {
+                TargetPlatform.android: CustomPageTransitionBuilder(),
+                TargetPlatform.iOS: CustomPageTransitionBuilder(),
+              },
+            ),
           ),
+          initialRoute: '/',
           home:
               autenticacaoDados.existeUsuario ? OrganizacaoTela() : LoginTela(),
           routes: {

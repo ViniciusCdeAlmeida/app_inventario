@@ -94,25 +94,28 @@ class _OrganizacaoTelaState extends State<OrganizacaoTela> {
         title: Text('Selecione a Unidade Organizacional'),
       ),
       drawer: AppDrawer(),
-      body: _isLoading
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
-          : Padding(
-              padding: const EdgeInsets.all(8),
-              child: ListView.builder(
-                itemCount: organizacoesLista.length,
-                itemBuilder: (_, idx) => Column(
-                  children: [
-                    OrganizacaoItem(
-                      organizacoesLista[idx].organizacao.id,
-                      organizacoesLista[idx].organizacao.codigoENome,
-                    ),
-                    Divider(),
-                  ],
+      body: AnimatedSwitcher(
+        duration: Duration(milliseconds: 300),
+        child: _isLoading
+            ? Center(
+                child: CircularProgressIndicator(),
+              )
+            : Padding(
+                padding: const EdgeInsets.all(8),
+                child: ListView.builder(
+                  itemCount: organizacoesLista.length,
+                  itemBuilder: (_, idx) => Column(
+                    children: [
+                      OrganizacaoItem(
+                        organizacoesLista[idx].organizacao.id,
+                        organizacoesLista[idx].organizacao.codigoENome,
+                      ),
+                      Divider(),
+                    ],
+                  ),
                 ),
               ),
-            ),
+      ),
     );
   }
 }

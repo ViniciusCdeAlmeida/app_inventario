@@ -85,7 +85,7 @@ class _UnidadeItemState extends State<UnidadeItem> {
                                 const PopupMenuDivider(),
                                 PopupMenuItem<Acoes>(
                                   child: PopupMenuCustom(
-                                      'Bens Previstos', Icons.content_paste),
+                                      'Bens', Icons.content_paste),
                                   value: Acoes.bensPrevistos,
                                 ),
                                 const PopupMenuDivider(),

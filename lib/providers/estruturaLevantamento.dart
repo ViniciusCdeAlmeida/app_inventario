@@ -98,14 +98,12 @@ class EstruturaLevantamento with ChangeNotifier {
   }
 
   void filtraBens(String value) async {
-    _bensEstruturaFiltrado = _bensEstrutura
-        .where(
-          (element) =>
-              element.numeroPatrimonial.contains(value) ||
-              element.material.descricao.contains(value.toUpperCase()) ||
-              element.material.codigoEDescricao.contains(value.toUpperCase()),
-        )
-        .toList();
+    _bensEstruturaFiltrado = _bensEstrutura.where((element) {
+      print(element.numeroPatrimonial);
+      return element.numeroPatrimonial.contains(value) ||
+          element.material.descricao.contains(value.toUpperCase()) ||
+          element.material.codigoEDescricao.contains(value.toUpperCase());
+    }).toList();
     notifyListeners();
   }
 
@@ -207,9 +205,13 @@ class EstruturaLevantamento with ChangeNotifier {
     db.deleteTable(db.dadosBemPatrimoniaisDB);
     await Stream.fromIterable(listLevantamento)
         .asyncMap((element) => _getLevantamento(conexao, element.id))
-        .toList();
-    _nomeEstrutura = null;
-    _isLoadingEstruturas = false;
-    notifyListeners();
+        .toList()
+        .whenComplete(
+      () {
+        _nomeEstrutura = null;
+        _isLoadingEstruturas = false;
+        notifyListeners();
+      },
+    );
   }
 }

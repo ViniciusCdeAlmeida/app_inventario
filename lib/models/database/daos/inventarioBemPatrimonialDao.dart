@@ -54,42 +54,40 @@ class InventarioBemPatrimonialDao extends DatabaseAccessor<AppDatabase>
       InventarioBemPatrimonial inventarioBemPatrimonial) async {
     into(inventarioBemPatrimonialDB).insert(
       InventarioBemPatrimonialDBCompanion(
-          id: Value(inventarioBemPatrimonial.id),
-          bemNaoEncontrado: Value(inventarioBemPatrimonial.bemNaoEncontrado),
-          bemNaoInventariado:
-              Value(inventarioBemPatrimonial.bemNaoInventariado),
-          enviado: Value(inventarioBemPatrimonial.enviado),
-          idDadosBemPatrimonialMobile:
-              Value(inventarioBemPatrimonial.idDadosBemPatrimonialMobile),
-          idInventarioEstruturaOrganizacionalMobile: Value(
-              inventarioBemPatrimonial
-                  .idInventarioEstruturaOrganizacionalMobile),
-          nomeUsuarioColeta: Value(inventarioBemPatrimonial.nomeUsuarioColeta),
-          novoBemInvetariado:
-              Value(inventarioBemPatrimonial.novoBemInvetariado),
-          numeroPatrimonial: Value(inventarioBemPatrimonial.numeroPatrimonial),
-          numeroPatrimonialAntigo:
-              Value(inventarioBemPatrimonial.numeroPatrimonialAntigo),
-          numeroPatrimonialNovo:
-              Value(inventarioBemPatrimonial.numeroPatrimonialNovo),
-          tipoMobile: Value(inventarioBemPatrimonial.tipoMobile),
-          idUnidadeOrganizacional:
-              Value(inventarioBemPatrimonial.idUnidadeOrganizacional),
-          caracteristicas: Value(inventarioBemPatrimonial.caracteristicas),
-          dominioSituacaoFisica:
-              Value(inventarioBemPatrimonial.dominioSituacaoFisica),
-          dominioStatus: Value(inventarioBemPatrimonial.dominioStatus),
-          dominioStatusInventarioBem:
-              inventarioBemPatrimonial.dominioStatusInventarioBem != null
-                  ? Value(inventarioBemPatrimonial.dominioStatusInventarioBem)
-                  : Value(null),
-          material: Value(inventarioBemPatrimonial.material),
-          idDominioSituacaoFisica:
-              Value(inventarioBemPatrimonial.idDominioSituacaoFisica),
-          idDominioStatus: Value(inventarioBemPatrimonial.idDominioStatus),
-          idEstruturaOrganizacionalAtual:
-              Value(inventarioBemPatrimonial.idEstruturaOrganizacionalAtual),
-          idMaterial: Value(inventarioBemPatrimonial.idMaterial)),
+        id: Value(inventarioBemPatrimonial.id),
+        bemNaoEncontrado: Value(inventarioBemPatrimonial.bemNaoEncontrado),
+        bemNaoInventariado: Value(inventarioBemPatrimonial.bemNaoInventariado),
+        enviado: Value(inventarioBemPatrimonial.enviado),
+        idDadosBemPatrimonialMobile:
+            Value(inventarioBemPatrimonial.idDadosBemPatrimonialMobile),
+        idInventarioEstruturaOrganizacionalMobile: Value(
+            inventarioBemPatrimonial.idInventarioEstruturaOrganizacionalMobile),
+        nomeUsuarioColeta: Value(inventarioBemPatrimonial.nomeUsuarioColeta),
+        novoBemInvetariado: Value(inventarioBemPatrimonial.novoBemInvetariado),
+        numeroPatrimonial: Value(inventarioBemPatrimonial.numeroPatrimonial),
+        numeroPatrimonialAntigo:
+            Value(inventarioBemPatrimonial.numeroPatrimonialAntigo),
+        numeroPatrimonialNovo:
+            Value(inventarioBemPatrimonial.numeroPatrimonialNovo),
+        tipoMobile: Value(inventarioBemPatrimonial.tipoMobile),
+        idUnidadeOrganizacional:
+            Value(inventarioBemPatrimonial.idUnidadeOrganizacional),
+        caracteristicas: Value(inventarioBemPatrimonial.caracteristicas),
+        dominioSituacaoFisica:
+            Value(inventarioBemPatrimonial.dominioSituacaoFisica),
+        dominioStatus: Value(inventarioBemPatrimonial.dominioStatus),
+        dominioStatusInventarioBem:
+            inventarioBemPatrimonial.dominioStatusInventarioBem != null
+                ? Value(inventarioBemPatrimonial.dominioStatusInventarioBem)
+                : Value(null),
+        material: Value(inventarioBemPatrimonial.material),
+        idDominioSituacaoFisica:
+            Value(inventarioBemPatrimonial.idDominioSituacaoFisica),
+        idDominioStatus: Value(inventarioBemPatrimonial.idDominioStatus),
+        idEstruturaOrganizacionalAtual:
+            Value(inventarioBemPatrimonial.idEstruturaOrganizacionalAtual),
+        idMaterial: Value(inventarioBemPatrimonial.idMaterial),
+      ),
     );
   }
 }

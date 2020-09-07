@@ -41,7 +41,7 @@ class _PrevistosBensTelaState extends State<PrevistosBensTela> {
       body: CustomScrollView(
         slivers: [
           MySliverAppBar(
-            titulo: 'Bens Previstos',
+            titulo: 'Bens',
           ),
           SliverList(
             delegate: SliverChildListDelegate(
