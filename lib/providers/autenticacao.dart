@@ -90,11 +90,22 @@ class Autenticacao with ChangeNotifier {
     try {
       Response response = await dio
           // .get("usuarioValidoV2/?username=$userName&password=$password");
-          .get("usuarioValidoV2/?username=vinicius.correa&password=interno");
+          .get("usuarioValidoV2/?username=vinicius.correa&password=interno")
+          .timeout(
+            Duration(seconds: 50),
+          )
+          .catchError((error) {
+        throw error;
+      });
       if (!_existeOrganizacao) {
         await db.unidadesGestorasDao
             .insertUnidadeGestora(response.data['organizacoes'] as List)
-            .whenComplete(() => _existeOrganizacao = true);
+            .then((_) => _existeOrganizacao = true)
+            .catchError(
+          (error) {
+            throw error;
+          },
+        );
       }
       _usrLogado = Login.fromJson(response.data);
     } catch (error) {

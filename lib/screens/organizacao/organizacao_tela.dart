@@ -77,7 +77,25 @@ class _OrganizacaoTelaState extends State<OrganizacaoTela> {
         await inicializacao.buscaDominioInicial(conexao);
       }
       if (!inicializacao.getExisteBens) {
-        await inicializacao.buscaBemPatrimonialInicial(conexao);
+        await inicializacao
+            .buscaBemPatrimonialInicial(conexao)
+            .catchError((error) async {
+          await showDialog<Null>(
+            context: context,
+            builder: (ctx) => AlertDialog(
+              title: const Text('Ocorreu um erro :('),
+              content: Text(error.toString()),
+              actions: <Widget>[
+                FlatButton(
+                  onPressed: () {
+                    Navigator.of(ctx).pop();
+                  },
+                  child: Text('OK'),
+                )
+              ],
+            ),
+          );
+        });
       }
     });
     super.initState();

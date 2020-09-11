@@ -2,11 +2,9 @@ import 'package:app_inventario/widgets/bens/bens_inventariados_item.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:app_inventario/customizacoes/customSliverAppBar.dart';
 import 'package:app_inventario/models/serialized/inventarioBemPatrimonial.dart';
 import 'package:app_inventario/providers/autenticacao.dart';
 import 'package:app_inventario/providers/inventarioBemPatrimonial.dart';
-import 'package:app_inventario/widgets/cabecalho/app_cabecalho.dart';
 
 class BensInventariadosTela extends StatefulWidget {
   static const routeName = '/bensInventariadosTela';
@@ -61,7 +59,23 @@ class _BensInventariadosTelaState extends State<BensInventariadosTela> {
                   Provider.of<InventarioBensPatrimoniais>(context,
                           listen: false)
                       .enviaDados(conexao)
-                      .whenComplete(() => _isInit = true);
+                      .catchError((error) async {
+                    await showDialog<Null>(
+                      context: context,
+                      builder: (ctx) => AlertDialog(
+                        title: const Text('Ocorreu um erro :( '),
+                        content: Text(error.toString()),
+                        actions: <Widget>[
+                          FlatButton(
+                            onPressed: () {
+                              Navigator.of(ctx).pop();
+                            },
+                            child: Text('OK'),
+                          )
+                        ],
+                      ),
+                    );
+                  }).whenComplete(() => _isInit = true);
                 },
               ),
             ],

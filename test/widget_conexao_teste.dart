@@ -26,7 +26,7 @@ void main() {
           ativo: false,
           id: '1'),
       Conexao(
-          url: 'https://https://192.168.15.2:8443/',
+          url: 'https://https://192.168.15.8:8443/',
           nome: 'url 2',
           ativo: true,
           id: '2')

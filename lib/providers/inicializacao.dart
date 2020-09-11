@@ -108,7 +108,14 @@ class Inicializacao with ChangeNotifier {
           (X509Certificate cert, String host, int port) => true;
     };
     try {
-      Response response = await dio.get("obterDominiosInventario.json");
+      Response response = await dio
+          .get("obterDominiosInventario.json")
+          .timeout(
+            Duration(seconds: 50),
+          )
+          .catchError((error) {
+        throw error;
+      });
 
       await db.dominioDao
           .insertDominio(response.data["payload"] as List)
@@ -130,15 +137,26 @@ class Inicializacao with ChangeNotifier {
     try {
       if (_startFilter != 0 && filter['start'] < _startFilter) {
         filter['start'] = itemAtual;
-        Response response =
-            await dio.post("obterBensPatrimoniaisDemandaV2.json", data: filter);
+        Response response = await dio
+            .post("obterBensPatrimoniaisDemandaV2.json", data: filter)
+            .timeout(
+              Duration(seconds: 50),
+            )
+            .catchError((error) {
+          throw error;
+        });
 
         await db.bemPatrimoniaisDao
             .insertBensPatrimoniais(response.data["objects"] as List);
       } else {
         final response = await dio
             .post("obterBensPatrimoniaisDemandaV2.json", data: filter)
-            .then(
+            .timeout(Duration(seconds: 50))
+            .catchError(
+          (error) {
+            throw error;
+          },
+        ).then(
           (value) {
             _startFilter = value.data['totalPages'];
           },

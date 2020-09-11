@@ -119,7 +119,7 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
       await showDialog<Null>(
         context: context,
         builder: (ctx) => AlertDialog(
-          title: Text('Error!!!!'),
+          title: Text('Ocorreu um erro. :('),
           content: Text(error.toString()),
           actions: <Widget>[
             FlatButton(

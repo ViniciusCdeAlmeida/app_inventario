@@ -1,10 +1,10 @@
 import 'package:app_inventario/providers/configuracao_conexao.dart';
 
-import '../../providers/autenticacao.dart';
+import 'package:app_inventario/providers/autenticacao.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../models/http_exception.dart';
+import 'package:app_inventario/models/http_exception.dart';
 
 class LoginCard extends StatefulWidget {
   LoginCard({Key key}) : super(key: key);
@@ -57,8 +57,23 @@ class _LoginCardState extends State<LoginCard> {
         _loginData['userName'],
         _loginData['password'],
       );
-    } on HttpException catch (error) {
-      print(error);
+    } catch (error) {
+      await showDialog<Null>(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: const Text('Não foi possivel realizar o login.'),
+          content: const Text(
+              'A conexão é invalida ou o servidor está fora de alcance.'),
+          actions: <Widget>[
+            FlatButton(
+              onPressed: () {
+                Navigator.of(ctx).pop();
+              },
+              child: Text('OK'),
+            )
+          ],
+        ),
+      );
     }
 
     setState(() {

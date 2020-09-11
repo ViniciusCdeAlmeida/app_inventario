@@ -1,5 +1,3 @@
-import 'package:app_inventario/customizacoes/custom_route.dart';
-import 'package:app_inventario/screens/bens/bens_inventariados_tela.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -23,10 +21,13 @@ import 'package:app_inventario/screens/bens/ler_bens_geral_tela.dart';
 import 'package:app_inventario/screens/configuracao/configuracao_conexao_edicao_tela.dart';
 import 'package:app_inventario/screens/login/login_tela.dart';
 import 'package:app_inventario/screens/organizacao/organizacao_tela.dart';
+import 'package:app_inventario/screens/bens/bens_inventariados_tela.dart';
 
 import 'package:app_inventario/widgets/bens/ler_bens_item.dart';
 
 import 'package:app_inventario/screens/configuracao/configuracao_conexao_tela.dart';
+
+import 'package:app_inventario/custom/custom_route.dart';
 
 AppDatabase db;
 

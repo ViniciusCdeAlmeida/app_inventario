@@ -1,4 +1,4 @@
-import 'package:app_inventario/customizacoes/acoes.dart';
+import 'package:app_inventario/custom/acoes.dart';
 import 'package:app_inventario/models/serialized/estruturaInventario.dart';
 import 'package:app_inventario/models/telaArgumentos.dart';
 import 'package:app_inventario/screens/bens/previstos_bens_tela.dart';

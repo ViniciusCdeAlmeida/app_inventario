@@ -40,7 +40,14 @@ class InventarioBensPatrimoniais with ChangeNotifier {
           (X509Certificate cert, String host, int port) => true;
     };
     try {
-      await dio.post("saveInventarioBemPatrimonialMobile.json", data: itens);
+      await dio
+          .post("saveInventarioBemPatrimonialMobile.json", data: itens)
+          .timeout(
+            Duration(seconds: 50),
+          )
+          .catchError((error) {
+        throw error;
+      });
       itens
           .map((e) async => await db.inventarioBemPatrimonialDao
               .updateDadosInventariado(e['numeroPatrimonial']))

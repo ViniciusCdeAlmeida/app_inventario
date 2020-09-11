@@ -59,7 +59,14 @@ class Levantamentos with ChangeNotifier {
     };
     try {
       Response response = await dio
-          .get("obterLevantamentosPorUGV3.json?idOrganizacao=$idOrganizacao");
+          .get("obterLevantamentosPorUGV3.json?idOrganizacao=$idOrganizacao")
+          .timeout(
+            Duration(seconds: 50),
+          )
+          .catchError((error) {
+        throw error;
+      });
+
       await db.levantamentosDao
           .insertLevantamentos(response.data["payload"] as List);
       await getLevantamentosDB(idOrganizacao);

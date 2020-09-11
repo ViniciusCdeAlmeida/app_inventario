@@ -2,7 +2,7 @@ import 'package:app_inventario/screens/bens/bens_inventariados_tela.dart';
 import 'package:flutter/material.dart';
 import 'package:moor_db_viewer/moor_db_viewer.dart';
 import 'package:provider/provider.dart';
-import 'package:app_inventario/customizacoes/acoes.dart';
+import 'package:app_inventario/custom/acoes.dart';
 
 import 'package:app_inventario/main.dart';
 import 'package:app_inventario/models/serialized/levantamento.dart';
@@ -55,8 +55,26 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
       List<Levantamento> listaLevantamento) async {
     switch (acoes) {
       case Acoes.buscarLevantamentos:
-        await Provider.of<Levantamentos>(context)
-            .buscaLevantamento(id, conexao);
+        try {
+          await Provider.of<Levantamentos>(context)
+              .buscaLevantamento(id, conexao);
+        } catch (error) {
+          await showDialog<Null>(
+            context: context,
+            builder: (ctx) => AlertDialog(
+              title: const Text('Ocorreu um erro. :( '),
+              content: Text(error.toString()),
+              actions: <Widget>[
+                FlatButton(
+                  onPressed: () {
+                    Navigator.of(ctx).pop();
+                  },
+                  child: Text('OK'),
+                )
+              ],
+            ),
+          );
+        }
         break;
       case Acoes.buscarLevantamento:
         break;
@@ -74,8 +92,26 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
         print('4');
         break;
       case Acoes.enviaLevantamento:
-        await Provider.of<EstruturaLevantamento>(context, listen: false)
-            .buscaEstruturas(conexao, listaLevantamento);
+        try {
+          await Provider.of<EstruturaLevantamento>(context, listen: false)
+              .buscaEstruturas(conexao, listaLevantamento);
+        } catch (error) {
+          await showDialog<Null>(
+            context: context,
+            builder: (ctx) => AlertDialog(
+              title: const Text('Ocorreu um erro. :( '),
+              content: Text(error.toString()),
+              actions: <Widget>[
+                FlatButton(
+                  onPressed: () {
+                    Navigator.of(ctx).pop();
+                  },
+                  child: Text('OK'),
+                )
+              ],
+            ),
+          );
+        }
         break;
       case Acoes.gerarArquivoBackup:
         print('11');
@@ -94,7 +130,25 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
     final estruturas = Provider.of<EstruturaLevantamento>(context);
 
     if (!levantamentos.getExisteInventarios && !levantamentos.isLoading) {
-      levantamentos.buscaLevantamento(idOrganizacao, conexao);
+      levantamentos
+          .buscaLevantamento(idOrganizacao, conexao)
+          .catchError((error) async {
+        await showDialog<Null>(
+          context: context,
+          builder: (ctx) => AlertDialog(
+            title: const Text('Ocorreu um erro. :( '),
+            content: Text(error.toString()),
+            actions: <Widget>[
+              FlatButton(
+                onPressed: () {
+                  Navigator.of(ctx).pop();
+                },
+                child: Text('OK'),
+              )
+            ],
+          ),
+        );
+      });
     }
 
     return Scaffold(

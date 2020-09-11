@@ -1,11 +1,15 @@
-import 'package:app_inventario/customizacoes/customSliverAppBar.dart';
-import 'package:app_inventario/models/serialized/dadosBensPatrimoniais.dart';
-import 'package:app_inventario/models/telaArgumentos.dart';
-import 'package:app_inventario/providers/estruturaLevantamento.dart';
-import 'package:app_inventario/widgets/bens/previstos_bens_item.dart';
-import 'package:app_inventario/widgets/cabecalho/app_cabecalho.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import 'package:app_inventario/custom/customSliverAppBar.dart';
+
+import 'package:app_inventario/models/serialized/dadosBensPatrimoniais.dart';
+import 'package:app_inventario/models/telaArgumentos.dart';
+
+import 'package:app_inventario/providers/estruturaLevantamento.dart';
+
+import 'package:app_inventario/widgets/bens/previstos_bens_item.dart';
+import 'package:app_inventario/widgets/cabecalho/app_cabecalho.dart';
 
 class PrevistosBensTela extends StatefulWidget {
   static const routeName = '/bensPrevistosTela';

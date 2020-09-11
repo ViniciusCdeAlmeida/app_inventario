@@ -184,13 +184,19 @@ class EstruturaLevantamento with ChangeNotifier {
           },
         ],
       };
-      Response response = await dio.post(
-          "obterInventarioEstruturaOrganizacionalPorDemandaV2.json",
-          data: filter);
+      Response response = await dio
+          .post("obterInventarioEstruturaOrganizacionalPorDemandaV2.json",
+              data: filter)
+          .timeout(
+            Duration(seconds: 50),
+          )
+          .catchError((error) {
+        throw error;
+      });
+
       _nomeEstrutura = (response.data["objects"] as List<dynamic>)
           .first["inventario"]["codigoENome"];
-      print((response.data["objects"] as List<dynamic>).first["inventario"]
-          ["codigoENome"]);
+
       notifyListeners();
       await db.estruturaInventarioDao
           .insertEstruturaInventario((response.data["objects"] as List));
