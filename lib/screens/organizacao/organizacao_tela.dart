@@ -83,7 +83,7 @@ class _OrganizacaoTelaState extends State<OrganizacaoTela> {
           await showDialog<Null>(
             context: context,
             builder: (ctx) => AlertDialog(
-              title: const Text('Ocorreu um erro :('),
+              title: const Text('Ocorreu um erro .'),
               content: Text(error.toString()),
               actions: <Widget>[
                 FlatButton(

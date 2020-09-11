@@ -62,7 +62,7 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
           await showDialog<Null>(
             context: context,
             builder: (ctx) => AlertDialog(
-              title: const Text('Ocorreu um erro. :( '),
+              title: const Text('Ocorreu um erro. . '),
               content: Text(error.toString()),
               actions: <Widget>[
                 FlatButton(
@@ -99,8 +99,8 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
           await showDialog<Null>(
             context: context,
             builder: (ctx) => AlertDialog(
-              title: const Text('Ocorreu um erro. :( '),
-              content: Text(error.toString()),
+              title: const Text('Ocorreu um erro.'),
+              content: Text(error),
               actions: <Widget>[
                 FlatButton(
                   onPressed: () {
@@ -136,7 +136,7 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
         await showDialog<Null>(
           context: context,
           builder: (ctx) => AlertDialog(
-            title: const Text('Ocorreu um erro. :( '),
+            title: const Text('Ocorreu um erro. . '),
             content: Text(error.toString()),
             actions: <Widget>[
               FlatButton(

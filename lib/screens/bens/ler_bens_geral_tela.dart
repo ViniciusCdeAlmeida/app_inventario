@@ -119,7 +119,7 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
       await showDialog<Null>(
         context: context,
         builder: (ctx) => AlertDialog(
-          title: Text('Ocorreu um erro. :('),
+          title: Text('Ocorreu um erro. .'),
           content: Text(error.toString()),
           actions: <Widget>[
             FlatButton(
@@ -192,7 +192,21 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
         return snapshot.data == null
             ? Scaffold(
                 body: Center(
-                  child: CircularProgressIndicator(),
+                  child: Container(
+                    height: 70,
+                    child: Column(
+                      children: [
+                        const Text(
+                          'Carregando...',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 8.0),
+                          child: CircularProgressIndicator(),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
                 drawer: AppDrawer(),
               )

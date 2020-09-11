@@ -46,7 +46,9 @@ class InventarioBensPatrimoniais with ChangeNotifier {
             Duration(seconds: 50),
           )
           .catchError((error) {
-        throw error;
+        throw error.error.message == "Connection failed"
+            ? "Falha de conexão."
+            : error.error.message;
       });
       itens
           .map((e) async => await db.inventarioBemPatrimonialDao

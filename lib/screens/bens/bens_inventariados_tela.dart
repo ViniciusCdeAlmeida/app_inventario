@@ -33,6 +33,8 @@ class _BensInventariadosTelaState extends State<BensInventariadosTela> {
     _bensInventariados =
         Provider.of<InventarioBensPatrimoniais>(context, listen: false)
             .getInventariados;
+    final conexao =
+        Provider.of<Autenticacao>(context, listen: false).atualConexao;
 
     return Scaffold(
       body: CustomScrollView(
@@ -53,18 +55,36 @@ class _BensInventariadosTelaState extends State<BensInventariadosTela> {
               IconButton(
                 icon: Icon(Icons.cloud_upload),
                 onPressed: () {
-                  final conexao =
-                      Provider.of<Autenticacao>(context, listen: false)
-                          .atualConexao;
-                  Provider.of<InventarioBensPatrimoniais>(context,
-                          listen: false)
-                      .enviaDados(conexao)
-                      .catchError((error) async {
-                    await showDialog<Null>(
+                  if (_bensInventariados
+                      .where((element) => element.enviado == false)
+                      .toList()
+                      .isNotEmpty) {
+                    Provider.of<InventarioBensPatrimoniais>(context,
+                            listen: false)
+                        .enviaDados(conexao)
+                        .catchError((error) async {
+                      await showDialog<Null>(
+                        context: context,
+                        builder: (ctx) => AlertDialog(
+                          title: const Text('Ocorreu um erro.'),
+                          content: Text(error.toString()),
+                          actions: <Widget>[
+                            FlatButton(
+                              onPressed: () {
+                                Navigator.of(ctx).pop();
+                              },
+                              child: Text('OK'),
+                            )
+                          ],
+                        ),
+                      );
+                    }).whenComplete(() => _isInit = true);
+                  } else
+                    return showDialog<Null>(
                       context: context,
                       builder: (ctx) => AlertDialog(
-                        title: const Text('Ocorreu um erro :( '),
-                        content: Text(error.toString()),
+                        title:
+                            const Text('Não existe itens para serem enviados.'),
                         actions: <Widget>[
                           FlatButton(
                             onPressed: () {
@@ -75,7 +95,6 @@ class _BensInventariadosTelaState extends State<BensInventariadosTela> {
                         ],
                       ),
                     );
-                  }).whenComplete(() => _isInit = true);
                 },
               ),
             ],
