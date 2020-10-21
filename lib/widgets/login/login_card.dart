@@ -14,6 +14,7 @@ class LoginCard extends StatefulWidget {
 }
 
 class _LoginCardState extends State<LoginCard> {
+  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
   final GlobalKey<FormState> _formKey = GlobalKey();
   Map<String, String> _loginData = {
     'user': '',
@@ -51,8 +52,8 @@ class _LoginCardState extends State<LoginCard> {
     setState(() {
       _isLoading = true;
     });
-    _autenticacao.conexaoAtual(_conexoes.conexoes);
     try {
+      _autenticacao.conexaoAtual(_conexoes.conexoes);
       await Provider.of<Autenticacao>(context, listen: false).login(
         _loginData['userName'],
         _loginData['password'],
@@ -85,6 +86,7 @@ class _LoginCardState extends State<LoginCard> {
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
     return Card(
+      key: _scaffoldKey,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10.0),
       ),
@@ -115,24 +117,29 @@ class _LoginCardState extends State<LoginCard> {
                 SizedBox(
                   height: 20,
                 ),
-                if (_isLoading)
-                  CircularProgressIndicator()
-                else
-                  RaisedButton(
-                    onPressed: _submit,
-                    child: Text('Logar'),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 30.0,
-                      vertical: 8.0,
-                    ),
-                  ),
+                if (_isLoading) loading() else showButton()
               ],
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  Widget loading() {
+    return CircularProgressIndicator();
+  }
+
+  Widget showButton() {
+    return RaisedButton(
+      onPressed: _submit,
+      child: Text('Logar'),
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(30),
+      ),
+      padding: const EdgeInsets.symmetric(
+        horizontal: 30.0,
+        vertical: 8.0,
       ),
     );
   }

@@ -188,7 +188,7 @@ class EstruturaLevantamento with ChangeNotifier {
           .post("obterInventarioEstruturaOrganizacionalPorDemandaV2.json",
               data: filter)
           .timeout(
-            Duration(seconds: 50),
+            Duration(minutes: 5),
           )
           .catchError((error) {
         throw error.error.message == "Connection failed"

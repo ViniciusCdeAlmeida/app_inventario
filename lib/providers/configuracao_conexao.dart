@@ -5,10 +5,10 @@ import '../models/serialized/conexao.dart';
 class ConfiguracaoConexao with ChangeNotifier {
   List<Conexao> _conexao = [
     Conexao(
-      url: 'https://192.168.15.8:8443/',
-      nome: 'url 2',
+      url: 'https://192.168.15.2:8443',
+      nome: 'Teste App',
       ativo: true,
-      id: '2',
+      id: '1',
     )
   ];
 

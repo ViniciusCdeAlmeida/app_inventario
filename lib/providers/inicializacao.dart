@@ -28,6 +28,8 @@ class Inicializacao with ChangeNotifier {
 
   bool get loading => loading;
 
+  bool get isLoading => _isLoading;
+
   bool get getExisteDominios {
     // db.deleteTable(db.dominioDB);
     return _existeDominios;
@@ -42,15 +44,18 @@ class Inicializacao with ChangeNotifier {
     return [..._dominios];
   }
 
+  List<Dominio> get getDominiosMarca {
+    return [
+      ...(db.dominioDao.getAllDominio() as List<Dominio>)
+          .where((element) => element.chave == 'tipoCaractMarca')
+    ];
+  }
+
   Future<void> getVerificaDominioDB() async {
     await db.dominioDao.getVerificaDominios().then((value) {
       if (value != null) _existeDominios = true;
       notifyListeners();
     });
-  }
-
-  Future<void> getDominiosDB() async {
-    _dominios = helperDominioLista(await db.dominioDao.getAllDominio());
   }
 
   Future<void> getVerificaBensPatrimoniaisDB() async {
@@ -62,16 +67,29 @@ class Inicializacao with ChangeNotifier {
     }
   }
 
+  Future<bool> getVerificaDominio2DB() async {
+    if (helperDominio(await db.dominioDao.getVerificaDominios()) != null) {
+      return true;
+    } else
+      return false;
+  }
+
+  Future<bool> getVerificaBensPatrimoniais2DB() async {
+    if (helperBemPatrimonial(
+            await db.bemPatrimoniaisDao.getVerificaBensPatrimoniais()) !=
+        null) {
+      return true;
+    } else
+      return false;
+  }
+
+  Future<void> getDominiosDB() async {
+    _dominios = helperDominioLista(await db.dominioDao.getAllDominio());
+  }
+
   Future<void> getBensPatrimoniaisDB() async {
     _bensDemanda = helperBemPatrimonialLista(
         await db.bemPatrimoniaisDao.getAllBensPatrimoniais());
-  }
-
-  List<Dominio> get getDominiosMarca {
-    return [
-      ...(db.dominioDao.getAllDominio() as List<Dominio>)
-          .where((element) => element.chave == 'tipoCaractMarca')
-    ];
   }
 
   List<DropdownMenuItem<Dominio>> getDominiosDropdownBens(String chave) {
@@ -96,8 +114,6 @@ class Inicializacao with ChangeNotifier {
     db.dominioDao.getDominioBens(chave);
   }
 
-  bool get isLoading => _isLoading;
-
   Future<void> _getDominios(String conexao) async {
     Dio dio = new Dio()
       ..options.baseUrl =
@@ -111,7 +127,7 @@ class Inicializacao with ChangeNotifier {
       Response response = await dio
           .get("obterDominiosInventario.json")
           .timeout(
-            Duration(seconds: 50),
+            Duration(minutes: 2),
           )
           .catchError((error) {
         throw error;
@@ -120,6 +136,31 @@ class Inicializacao with ChangeNotifier {
       await db.dominioDao
           .insertDominio(response.data["payload"] as List)
           .whenComplete(() => _existeDominios = true);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  Future<void> _getDominios2(String conexao) async {
+    Dio dio = new Dio()
+      ..options.baseUrl =
+          conexao + "/citgrp-patrimonio-web/rest/inventarioMobile/";
+    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+        (client) {
+      client.badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+    };
+    try {
+      Response response = await dio
+          .get("obterDominiosInventario.json")
+          .timeout(
+            Duration(minutes: 2),
+          )
+          .catchError((error) {
+        throw error;
+      });
+
+      await db.dominioDao.insertDominio(response.data["payload"] as List);
     } catch (error) {
       throw error;
     }
@@ -140,7 +181,7 @@ class Inicializacao with ChangeNotifier {
         Response response = await dio
             .post("obterBensPatrimoniaisDemandaV2.json", data: filter)
             .timeout(
-              Duration(seconds: 50),
+              Duration(minutes: 2),
             )
             .catchError((error) {
           throw error;
@@ -151,7 +192,7 @@ class Inicializacao with ChangeNotifier {
       } else {
         final response = await dio
             .post("obterBensPatrimoniaisDemandaV2.json", data: filter)
-            .timeout(Duration(seconds: 50))
+            .timeout(Duration(minutes: 2))
             .catchError(
           (error) {
             throw error;
@@ -185,6 +226,19 @@ class Inicializacao with ChangeNotifier {
     }
   }
 
+  Future buscaDominioInicial2(String conexao) async {
+    // markAsLoading();
+    // db.deleteTable(db.dominioDB);
+
+    await _getDominios2(conexao);
+    // if (!_existeDominios) {
+    // await getVerificaDominioDB();
+    // } else {
+    //   _isLoading = false;
+    //   notifyListeners();
+    // }
+  }
+
   Future<void> buscaBemPatrimonialInicial(String conexao) async {
     markAsLoading();
     // db.deleteTable(db.bensPatrimoniaisDB);
@@ -210,6 +264,26 @@ class Inicializacao with ChangeNotifier {
         notifyListeners();
         return;
       }
+    }
+  }
+
+  Future buscaBemPatrimonialInicial2(String conexao) async {
+    // markAsLoading();
+    // db.deleteTable(db.bensPatrimoniaisDB);
+
+    await _getBensDemanda(conexao: conexao);
+    if (_startFilter != 0) {
+      List<dynamic> maximo = [];
+      for (var i = 0; i < _startFilter; i++) {
+        maximo.insert(i, i + 1);
+      }
+      await Stream.fromIterable(maximo)
+          .asyncMap(
+            (element) => _getBensDemanda(conexao: conexao, itemAtual: element),
+          )
+          .toList();
+    } else {
+      return;
     }
   }
 }

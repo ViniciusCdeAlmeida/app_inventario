@@ -1,3 +1,4 @@
+import 'package:app_inventario/stores/inicializacao_store.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -67,6 +68,9 @@ class MyApp extends StatelessWidget {
           update: (ctx, autenticacao, _) => Levantamentos(
             idOrganizacao: autenticacao.idUnidade,
           ),
+        ),
+        Provider(
+          create: (ctx) => InicializacaoStore(Inicializacao(), Autenticacao()),
         ),
       ],
       child: Consumer<Autenticacao>(

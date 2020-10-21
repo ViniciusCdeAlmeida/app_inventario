@@ -114,7 +114,7 @@ class _MySliverAppBarState extends State<MySliverAppBar>
                     padding: const EdgeInsets.only(bottom: 5.0),
                     child: Container(
                       height: 40,
-                      padding: const EdgeInsets.only(left: 5),
+                      padding: const EdgeInsets.only(left: 5.0),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         border: Border.all(

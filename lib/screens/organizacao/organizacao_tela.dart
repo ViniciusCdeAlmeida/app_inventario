@@ -1,8 +1,11 @@
 import 'package:app_inventario/providers/autenticacao.dart';
 import 'package:app_inventario/providers/inicializacao.dart';
+import 'package:app_inventario/stores/inicializacao_store.dart';
 import 'package:app_inventario/widgets/cabecalho/app_cabecalho.dart';
 import 'package:app_inventario/widgets/organizacao/organizacao_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:mobx/mobx.dart';
 import 'package:provider/provider.dart';
 
 class OrganizacaoTela extends StatefulWidget {
@@ -14,96 +17,36 @@ class OrganizacaoTela extends StatefulWidget {
 
 class _OrganizacaoTelaState extends State<OrganizacaoTela> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
-  var _isInit = true;
-  var _isLoading = false;
+  InicializacaoStore _inicializacaoStore;
+  // List<ReactionDisposer> _disposers;
+  List<ReactionDisposer> _disposers;
 
   @override
   void didChangeDependencies() {
-    final inicializacao = Provider.of<Inicializacao>(context);
-    final organizacoes = Provider.of<Autenticacao>(context);
+    final conexao =
+        Provider.of<Autenticacao>(context, listen: false).atualConexao;
+    _inicializacaoStore =
+        Provider.of<InicializacaoStore>(context, listen: false);
+    final organizacoes = Provider.of<Autenticacao>(context, listen: false);
+    organizacoes.getOrganizacoesDB();
 
-    if (_isInit) {
-      setState(() {
-        _isLoading = true;
-      });
-      if (organizacoes.getExisteOrganizacao &&
-          inicializacao.getExisteDominios &&
-          inicializacao.getExisteBens)
-        setState(() {
-          _isLoading = false;
-          _isInit = false;
-        });
-    }
+    _inicializacaoStore.verificaInicializacao(conexao);
 
-    setState(() {
-      if ((inicializacao.getExisteDominios && inicializacao.getExisteBens) &&
-          _scaffoldKey.currentState != null) {
-        _scaffoldKey.currentState.showSnackBar(
-          SnackBar(
-            content: Text('Dominios e Bens Patrimoniais Carregados'),
-            duration: Duration(seconds: 1),
-          ),
-        );
-      }
-    });
-
+    // _disposers ??= [
+    //   autorun((_) => _inicializacaoStore.verificaInicializacao(conexao)),
+    // ];
     super.didChangeDependencies();
   }
 
   @override
-  void initState() {
-    Future.delayed(Duration.zero).then((_) async {
-      final conexao =
-          Provider.of<Autenticacao>(context, listen: false).atualConexao;
-      final inicializacao = Provider.of<Inicializacao>(context, listen: false);
-      final organizacoes = Provider.of<Autenticacao>(context, listen: false);
-      await organizacoes.getOrganizacoesDB();
-      if (!organizacoes.getExisteOrganizacao)
-        await organizacoes.getVerificaOrganizacaoDB();
-      if (!inicializacao.getExisteDominios)
-        await inicializacao.getVerificaDominioDB();
-      if (!inicializacao.getExisteBens)
-        await inicializacao.getVerificaBensPatrimoniaisDB();
-      if (!inicializacao.getExisteDominios && !inicializacao.getExisteBens) {
-        _scaffoldKey.currentState.showSnackBar(
-          SnackBar(
-            content: Text('Carregando Dominios e Bens Patrimoniais'),
-            duration: Duration(seconds: 1),
-          ),
-        );
-      }
-
-      if (!inicializacao.getExisteDominios) {
-        await inicializacao.buscaDominioInicial(conexao);
-      }
-      if (!inicializacao.getExisteBens) {
-        await inicializacao
-            .buscaBemPatrimonialInicial(conexao)
-            .catchError((error) async {
-          await showDialog<Null>(
-            context: context,
-            builder: (ctx) => AlertDialog(
-              title: const Text('Ocorreu um erro .'),
-              content: Text(error.toString()),
-              actions: <Widget>[
-                FlatButton(
-                  onPressed: () {
-                    Navigator.of(ctx).pop();
-                  },
-                  child: Text('OK'),
-                )
-              ],
-            ),
-          );
-        });
-      }
-    });
-    super.initState();
+  void dispose() {
+    _disposers.forEach((d) => d());
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final organizacoes = Provider.of<Autenticacao>(context);
+    final organizacoes = Provider.of<Autenticacao>(context, listen: false);
     final organizacoesLista = organizacoes.listaOrganizacoes;
 
     return Scaffold(
@@ -113,27 +56,75 @@ class _OrganizacaoTelaState extends State<OrganizacaoTela> {
       ),
       drawer: AppDrawer(),
       body: AnimatedSwitcher(
-        duration: Duration(milliseconds: 300),
-        child: _isLoading
-            ? Center(
-                child: CircularProgressIndicator(),
-              )
-            : Padding(
-                padding: const EdgeInsets.all(8),
-                child: ListView.builder(
-                  itemCount: organizacoesLista.length,
-                  itemBuilder: (_, idx) => Column(
-                    children: [
-                      OrganizacaoItem(
-                        organizacoesLista[idx].organizacao.id,
-                        organizacoesLista[idx].organizacao.codigoENome,
+          duration: Duration(milliseconds: 300),
+          child: Observer(
+            builder: (_) {
+              switch (_inicializacaoStore.inicializacaoState) {
+                case InicializacaoState.inicial:
+                case InicializacaoState.carregandoBensPatrimonias:
+                case InicializacaoState.carregandoDominio:
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
+                case InicializacaoState.carregadoBensPatrimonias:
+                case InicializacaoState.carregadoDominio:
+                case InicializacaoState.carregadoInicializacao:
+                  return Padding(
+                    padding: const EdgeInsets.all(8),
+                    child: ListView.builder(
+                      itemCount: organizacoesLista.length,
+                      itemBuilder: (_, idx) => Column(
+                        children: [
+                          OrganizacaoItem(
+                            organizacoesLista[idx].organizacao.id,
+                            organizacoesLista[idx].organizacao.codigoENome,
+                          ),
+                          Divider(),
+                        ],
                       ),
-                      Divider(),
-                    ],
-                  ),
-                ),
-              ),
-      ),
+                    ),
+                  );
+              }
+              // switch (_inicializacaoStore.bensPatrimoniaisState) {
+              //   case BensPatrimoniaisState.initial:
+              //     return Center(
+              //       child: Text('BensPatrimoniaisState.initial'),
+              //     );
+              //   case BensPatrimoniaisState.empty:
+              //     return Center(
+              //       child: Text('BensPatrimoniaisState.empty'),
+              //     );
+              //   case BensPatrimoniaisState.loaded:
+              //     return Center(
+              //       child: Text('BensPatrimoniaisState.loaded'),
+              //     );
+              //   case BensPatrimoniaisState.loading:
+              //     return Center(
+              //       child: Text('BensPatrimoniaisState.loading'),
+              //     );
+              // }
+            },
+          )
+          // _isLoading
+          //     ? Center(
+          //         child: CircularProgressIndicator(),
+          //       )
+          // : Padding(
+          //     padding: const EdgeInsets.all(8),
+          //     child: ListView.builder(
+          //       itemCount: organizacoesLista.length,
+          //       itemBuilder: (_, idx) => Column(
+          //         children: [
+          //           OrganizacaoItem(
+          //             organizacoesLista[idx].organizacao.id,
+          //             organizacoesLista[idx].organizacao.codigoENome,
+          //           ),
+          //           Divider(),
+          //         ],
+          //       ),
+          //     ),
+          //   ),
+          ),
     );
   }
 }
