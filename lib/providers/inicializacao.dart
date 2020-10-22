@@ -13,8 +13,6 @@ class Inicializacao with ChangeNotifier {
   List<Dominio> _dominios = [];
   int _startFilter = 0;
   List<BemPatrimonial> _bensDemanda = [];
-  bool _existeBens = false;
-  bool _existeDominios = false;
 
   Map filter = {
     "start": 1,
@@ -24,20 +22,16 @@ class Inicializacao with ChangeNotifier {
     "filters": [],
   };
 
-  bool _isLoading = false;
-
-  bool get loading => loading;
-
-  bool get isLoading => _isLoading;
-
-  bool get getExisteDominios {
-    // db.deleteTable(db.dominioDB);
-    return _existeDominios;
-  }
-
-  bool get getExisteBens {
-    // db.deleteTable(db.bensPatrimoniaisDB);
-    return _existeBens;
+  Dio getConexaoPrefs(String conexao) {
+    Dio dio = new Dio()
+      ..options.baseUrl =
+          conexao + "/citgrp-patrimonio-web/rest/inventarioMobile/";
+    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
+        (client) {
+      client.badCertificateCallback =
+          (X509Certificate cert, String host, int port) => true;
+    };
+    return dio;
   }
 
   List<Dominio> get getDominios {
@@ -51,30 +45,14 @@ class Inicializacao with ChangeNotifier {
     ];
   }
 
-  Future<void> getVerificaDominioDB() async {
-    await db.dominioDao.getVerificaDominios().then((value) {
-      if (value != null) _existeDominios = true;
-      notifyListeners();
-    });
-  }
-
-  Future<void> getVerificaBensPatrimoniaisDB() async {
-    if (helperBemPatrimonial(
-            await db.bemPatrimoniaisDao.getVerificaBensPatrimoniais()) !=
-        null) {
-      _existeBens = true;
-      notifyListeners();
-    }
-  }
-
-  Future<bool> getVerificaDominio2DB() async {
+  Future<bool> getVerificaDominioDB() async {
     if (helperDominio(await db.dominioDao.getVerificaDominios()) != null) {
       return true;
     } else
       return false;
   }
 
-  Future<bool> getVerificaBensPatrimoniais2DB() async {
+  Future<bool> getVerificaBensPatrimoniaisDB() async {
     if (helperBemPatrimonial(
             await db.bemPatrimoniaisDao.getVerificaBensPatrimoniais()) !=
         null) {
@@ -115,43 +93,8 @@ class Inicializacao with ChangeNotifier {
   }
 
   Future<void> _getDominios(String conexao) async {
-    Dio dio = new Dio()
-      ..options.baseUrl =
-          conexao + "/citgrp-patrimonio-web/rest/inventarioMobile/";
-    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
-        (client) {
-      client.badCertificateCallback =
-          (X509Certificate cert, String host, int port) => true;
-    };
     try {
-      Response response = await dio
-          .get("obterDominiosInventario.json")
-          .timeout(
-            Duration(minutes: 2),
-          )
-          .catchError((error) {
-        throw error;
-      });
-
-      await db.dominioDao
-          .insertDominio(response.data["payload"] as List)
-          .whenComplete(() => _existeDominios = true);
-    } catch (error) {
-      throw error;
-    }
-  }
-
-  Future<void> _getDominios2(String conexao) async {
-    Dio dio = new Dio()
-      ..options.baseUrl =
-          conexao + "/citgrp-patrimonio-web/rest/inventarioMobile/";
-    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
-        (client) {
-      client.badCertificateCallback =
-          (X509Certificate cert, String host, int port) => true;
-    };
-    try {
-      Response response = await dio
+      Response response = await getConexaoPrefs(conexao)
           .get("obterDominiosInventario.json")
           .timeout(
             Duration(minutes: 2),
@@ -167,18 +110,10 @@ class Inicializacao with ChangeNotifier {
   }
 
   Future<void> _getBensDemanda({String conexao, int itemAtual}) async {
-    Dio dio = new Dio()
-      ..options.baseUrl =
-          conexao + "/citgrp-patrimonio-web/rest/inventarioMobile/";
-    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
-        (client) {
-      client.badCertificateCallback =
-          (X509Certificate cert, String host, int port) => true;
-    };
     try {
       if (_startFilter != 0 && filter['start'] < _startFilter) {
         filter['start'] = itemAtual;
-        Response response = await dio
+        Response response = await getConexaoPrefs(conexao)
             .post("obterBensPatrimoniaisDemandaV2.json", data: filter)
             .timeout(
               Duration(minutes: 2),
@@ -190,7 +125,7 @@ class Inicializacao with ChangeNotifier {
         await db.bemPatrimoniaisDao
             .insertBensPatrimoniais(response.data["objects"] as List);
       } else {
-        final response = await dio
+        final response = await getConexaoPrefs(conexao)
             .post("obterBensPatrimoniaisDemandaV2.json", data: filter)
             .timeout(Duration(minutes: 2))
             .catchError(
@@ -208,67 +143,13 @@ class Inicializacao with ChangeNotifier {
     }
   }
 
-  void markAsLoading() {
-    _isLoading = true;
-    notifyListeners();
-  }
-
-  Future<void> buscaDominioInicial(String conexao) async {
-    markAsLoading();
+  Future buscaDominioInicial(String conexao) async {
     // db.deleteTable(db.dominioDB);
 
-    if (!_existeDominios) {
-      await _getDominios(conexao);
-      await getVerificaDominioDB();
-    } else {
-      _isLoading = false;
-      notifyListeners();
-    }
+    await _getDominios(conexao);
   }
 
-  Future buscaDominioInicial2(String conexao) async {
-    // markAsLoading();
-    // db.deleteTable(db.dominioDB);
-
-    await _getDominios2(conexao);
-    // if (!_existeDominios) {
-    // await getVerificaDominioDB();
-    // } else {
-    //   _isLoading = false;
-    //   notifyListeners();
-    // }
-  }
-
-  Future<void> buscaBemPatrimonialInicial(String conexao) async {
-    markAsLoading();
-    // db.deleteTable(db.bensPatrimoniaisDB);
-
-    if (!_existeBens) {
-      await _getBensDemanda(conexao: conexao);
-      if (_startFilter != 0) {
-        List<dynamic> teste = [];
-        for (var i = 0; i < _startFilter; i++) {
-          teste.insert(i, i + 1);
-        }
-        await Stream.fromIterable(teste)
-            .asyncMap(
-              (element) =>
-                  _getBensDemanda(conexao: conexao, itemAtual: element),
-            )
-            .toList()
-            .whenComplete(() => _existeBens = true);
-        _isLoading = false;
-        notifyListeners();
-      } else {
-        _isLoading = false;
-        notifyListeners();
-        return;
-      }
-    }
-  }
-
-  Future buscaBemPatrimonialInicial2(String conexao) async {
-    // markAsLoading();
+  Future buscaBemPatrimonialInicial(String conexao) async {
     // db.deleteTable(db.bensPatrimoniaisDB);
 
     await _getBensDemanda(conexao: conexao);

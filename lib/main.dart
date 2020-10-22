@@ -1,4 +1,5 @@
 import 'package:app_inventario/stores/inicializacao_store.dart';
+import 'package:app_inventario/stores/levantamento_store.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -71,6 +72,10 @@ class MyApp extends StatelessWidget {
         ),
         Provider(
           create: (ctx) => InicializacaoStore(Inicializacao(), Autenticacao()),
+        ),
+        Provider(
+          create: (ctx) =>
+              LevantamentoStore(Levantamentos(), EstruturaLevantamento()),
         ),
       ],
       child: Consumer<Autenticacao>(

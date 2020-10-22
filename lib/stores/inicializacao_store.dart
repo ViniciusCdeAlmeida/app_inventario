@@ -90,18 +90,16 @@ abstract class _InicializacaoStore with Store {
   Future verificaInicializacao(String conexao) async {
     await _organizacoes.getOrganizacoesDB();
 
-    existeDominio = await _inicializacao.getVerificaDominio2DB();
+    existeDominio = await _inicializacao.getVerificaDominioDB();
 
     existeBensPatrimoniais =
-        await _inicializacao.getVerificaBensPatrimoniais2DB();
+        await _inicializacao.getVerificaBensPatrimoniaisDB();
 
     try {
       if (!existeDominio) {
-        print('Dominio busca web');
-
         _dominioFuture = ObservableFuture(
           _inicializacao
-              .buscaDominioInicial2(conexao)
+              .buscaDominioInicial(conexao)
               .whenComplete(() => existeDominio = true)
               .catchError(
             (error) {
@@ -113,18 +111,14 @@ abstract class _InicializacaoStore with Store {
             print(error);
           },
         );
-      } else {
-        print('Dominio busca banco');
       }
     } catch (e) {
       print(e);
     }
     try {
       if (!existeBensPatrimoniais) {
-        print('BensPatrimoniais busca web');
-
         _bensPatrimoniaisFuture = ObservableFuture(
-          _inicializacao.buscaBemPatrimonialInicial2(conexao).catchError(
+          _inicializacao.buscaBemPatrimonialInicial(conexao).catchError(
             (error) {
               print(error);
             },
@@ -134,8 +128,6 @@ abstract class _InicializacaoStore with Store {
             print(error);
           },
         );
-      } else {
-        print('BensPatrimoniais busca banco');
       }
     } catch (e) {
       print(e);

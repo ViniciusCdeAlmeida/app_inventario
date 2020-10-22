@@ -238,4 +238,20 @@ class EstruturaLevantamento with ChangeNotifier {
       },
     );
   }
+
+  Future<void> buscaEstruturas2(
+      String conexao, List<Levantamento> listLevantamento) async {
+    _estruturas.clear();
+
+    db.deleteTable(db.estruturaInventarioDB);
+    db.deleteTable(db.dadosBemPatrimoniaisDB);
+    await Stream.fromIterable(listLevantamento)
+        .asyncMap((element) => _getLevantamento(conexao, element.id))
+        .toList()
+        .whenComplete(
+      () {
+        _nomeEstrutura = null;
+      },
+    );
+  }
 }

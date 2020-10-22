@@ -1,5 +1,8 @@
 import 'package:app_inventario/screens/bens/bens_inventariados_tela.dart';
+import 'package:app_inventario/stores/inicializacao_store.dart';
+import 'package:app_inventario/stores/levantamento_store.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:moor_db_viewer/moor_db_viewer.dart';
 import 'package:provider/provider.dart';
 import 'package:app_inventario/custom/acoes.dart';
@@ -26,32 +29,39 @@ class LevantamentoFisicoTela extends StatefulWidget {
 class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   List<Levantamento> listaAtual = [];
+  LevantamentoStore _levantamentoStore;
 
   @override
   void didChangeDependencies() {
+    final conexao =
+        Provider.of<Autenticacao>(context, listen: false).atualConexao;
+    _levantamentoStore = Provider.of<LevantamentoStore>(context, listen: false);
+    final idOrganizacao = ModalRoute.of(context).settings.arguments;
+
+    _levantamentoStore.verificaInventarios(conexao, idOrganizacao);
     super.didChangeDependencies();
-    final nomeEstrutura = Provider.of<EstruturaLevantamento>(context);
-    nomeEstrutura.getNomeEstrutura;
-    if (nomeEstrutura.getNomeEstrutura != null) {
-      _scaffoldKey.currentState.showSnackBar(
-        SnackBar(
-          content: Text(nomeEstrutura.getNomeEstrutura),
-          duration: Duration(seconds: 1),
-        ),
-      );
-    }
+    // final nomeEstrutura = Provider.of<EstruturaLevantamento>(context);
+    // nomeEstrutura.getNomeEstrutura;
+    // if (nomeEstrutura.getNomeEstrutura != null) {
+    //   _scaffoldKey.currentState.showSnackBar(
+    //     SnackBar(
+    //       content: Text(nomeEstrutura.getNomeEstrutura),
+    //       duration: Duration(seconds: 1),
+    //     ),
+    //   );
+    // }
   }
 
-  @override
-  void initState() {
-    Future.delayed(Duration.zero).then((_) async {
-      await Provider.of<Levantamentos>(context, listen: false)
-          .getVerificaInventariosDB();
-    });
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   Future.delayed(Duration.zero).then((_) async {
+  //     await Provider.of<Levantamentos>(context, listen: false)
+  //         .getVerificaInventariosDB();
+  //   });
+  //   super.initState();
+  // }
 
-  Future<void> _refreshProd2(String conexao, int id, Acoes acoes,
+  Future<void> _actionButtons(String conexao, int id, Acoes acoes,
       List<Levantamento> listaLevantamento) async {
     switch (acoes) {
       case Acoes.buscarLevantamentos:
@@ -93,8 +103,10 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
         break;
       case Acoes.enviaLevantamento:
         try {
-          await Provider.of<EstruturaLevantamento>(context, listen: false)
-              .buscaEstruturas(conexao, listaLevantamento);
+          // await Provider.of<EstruturaLevantamento>(context, listen: false)
+          //     .buscaEstruturas(conexao, listaLevantamento);
+          await _levantamentoStore.buscaEstruturasInventario(
+              conexao, _levantamentoStore.levantamentos);
         } catch (error) {
           await showDialog<Null>(
             context: context,
@@ -125,31 +137,32 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
     final conexao =
         Provider.of<Autenticacao>(context, listen: false).atualConexao;
     final idOrganizacao = ModalRoute.of(context).settings.arguments;
-    final levantamentos = Provider.of<Levantamentos>(context);
-    listaAtual = levantamentos.getLevantamentos;
-    final estruturas = Provider.of<EstruturaLevantamento>(context);
+    listaAtual = _levantamentoStore.levantamentos;
+    // final levantamentos = Provider.of<Levantamentos>(context, listen: false);
+    // final levantamentos = Provider.of<Levantamentos>(context, listen: false);
+    // final estruturas = Provider.of<EstruturaLevantamento>(context);
 
-    if (!levantamentos.getExisteInventarios && !levantamentos.isLoading) {
-      levantamentos
-          .buscaLevantamento(idOrganizacao, conexao)
-          .catchError((error) async {
-        await showDialog<Null>(
-          context: context,
-          builder: (ctx) => AlertDialog(
-            title: const Text('Ocorreu um erro. . '),
-            content: Text(error.toString()),
-            actions: <Widget>[
-              FlatButton(
-                onPressed: () {
-                  Navigator.of(ctx).pop();
-                },
-                child: Text('OK'),
-              )
-            ],
-          ),
-        );
-      });
-    }
+    // if (!levantamentos.getExisteInventarios && !levantamentos.isLoading) {
+    //   levantamentos
+    //       .buscaLevantamento(idOrganizacao, conexao)
+    //       .catchError((error) async {
+    //     await showDialog<Null>(
+    //       context: context,
+    //       builder: (ctx) => AlertDialog(
+    //         title: const Text('Ocorreu um erro. . '),
+    //         content: Text(error.toString()),
+    //         actions: <Widget>[
+    //           FlatButton(
+    //             onPressed: () {
+    //               Navigator.of(ctx).pop();
+    //             },
+    //             child: Text('OK'),
+    //           )
+    //         ],
+    //       ),
+    //     );
+    //   });
+    // }
 
     return Scaffold(
       key: _scaffoldKey,
@@ -159,7 +172,7 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
           GestureDetector(
             child: PopupMenuButton<Acoes>(
               onSelected: (value) {
-                _refreshProd2(conexao, idOrganizacao, value, listaAtual);
+                _actionButtons(conexao, idOrganizacao, value, listaAtual);
               },
               offset: Offset(0, 100),
               itemBuilder: (context) => <PopupMenuEntry<Acoes>>[
@@ -186,8 +199,8 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
                 // ),
                 const PopupMenuDivider(),
                 PopupMenuItem<Acoes>(
-                  child:
-                      PopupMenuCustom('Buscar Estruturas', Icons.cloud_upload),
+                  child: PopupMenuCustom(
+                      'Buscar Estruturas', Icons.cloud_download),
                   value: Acoes.enviaLevantamento,
                 ),
                 const PopupMenuDivider(),
@@ -203,34 +216,64 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
       ),
       drawer: AppDrawer(),
       body: AnimatedSwitcher(
-        duration: Duration(milliseconds: 300),
-        child: levantamentos.isLoading || estruturas.isLoadingEstruturas
-            ? Center(
-                key: UniqueKey(),
-                child: CircularProgressIndicator(
-                  backgroundColor: Colors.white,
-                ),
-              )
-            : Consumer<Levantamentos>(
-                key: UniqueKey(),
-                builder: (context, levantamentoData, child) {
+          duration: Duration(milliseconds: 300),
+          child: Observer(
+            // ignore: missing_return
+            builder: (_) {
+              switch (_levantamentoStore.inventarioState) {
+                case LevantamentosState.inicial:
+                case LevantamentosState.carregando:
+                  return Center(
+                    child: CircularProgressIndicator(
+                      backgroundColor: Colors.white,
+                    ),
+                  );
+                case LevantamentosState.carregado:
                   return Padding(
+                    key: UniqueKey(),
                     padding: const EdgeInsets.all(8),
                     child: ListView.builder(
-                      itemCount: levantamentoData.getLevantamentos.length,
+                      itemCount: _levantamentoStore.levantamentos.length,
                       itemBuilder: (_, idx) => Column(
                         children: [
                           LevantamentoFisicoItem(
-                            levantamentoData.getLevantamentos[idx],
+                            _levantamentoStore.levantamentos[idx],
                           ),
                           Divider(),
                         ],
                       ),
                     ),
                   );
-                },
-              ),
-      ),
+              }
+            },
+          )
+          // levantamentos.isLoading || estruturas.isLoadingEstruturas
+          //     ? Center(
+          //         key: UniqueKey(),
+          //         child: CircularProgressIndicator(
+          //           backgroundColor: Colors.white,
+          //         ),
+          //       )
+          // : Consumer<Levantamentos>(
+          //     key: UniqueKey(),
+          //     builder: (context, levantamentoData, child) {
+          //       return Padding(
+          //         padding: const EdgeInsets.all(8),
+          //         child: ListView.builder(
+          //           itemCount: levantamentoData.getLevantamentos.length,
+          //           itemBuilder: (_, idx) => Column(
+          //             children: [
+          //               LevantamentoFisicoItem(
+          //                 levantamentoData.getLevantamentos[idx],
+          //               ),
+          //               Divider(),
+          //             ],
+          //           ),
+          //         ),
+          //       );
+          //     },
+          //   ),
+          ),
     );
   }
 }
