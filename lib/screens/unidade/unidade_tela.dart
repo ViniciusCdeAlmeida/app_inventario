@@ -1,10 +1,9 @@
 import 'package:app_inventario/models/telaArgumentos.dart';
-import 'package:app_inventario/providers/autenticacao.dart';
-import 'package:app_inventario/providers/estruturaLevantamento.dart';
-import 'package:app_inventario/providers/levantamentos.dart';
+import 'package:app_inventario/stores/estruturaLevantamento_store.dart';
 import 'package:app_inventario/widgets/cabecalho/app_cabecalho.dart';
 import 'package:app_inventario/widgets/unidade/unidade_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 
 // ignore: must_be_immutable
@@ -15,48 +14,55 @@ class UnidadeTela extends StatefulWidget {
 }
 
 class _UnidadeTelaState extends State<UnidadeTela> {
+  EstruturaLevantamentoStore _estruturaLevantamentoStore;
   TelaArgumentos unidadeArgs;
 
-  Future<void> _carregaUnidades(BuildContext context) async {
-    await Provider.of<EstruturaLevantamento>(context, listen: false)
-        .buscaPorEstrutura(unidadeArgs.id);
+  @override
+  void didChangeDependencies() {
+    _estruturaLevantamentoStore =
+        Provider.of<EstruturaLevantamentoStore>(context, listen: false);
+    unidadeArgs = ModalRoute.of(context).settings.arguments;
+    _estruturaLevantamentoStore.verificaInventarios(unidadeArgs.id);
+    super.didChangeDependencies();
   }
 
   @override
   Widget build(BuildContext context) {
-    unidadeArgs = ModalRoute.of(context).settings.arguments;
-    final unidades = Provider.of<Levantamentos>(context, listen: false);
-    Provider.of<EstruturaLevantamento>(context, listen: false)
-        .buscaPorEstrutura(unidadeArgs.id);
-
     return Scaffold(
       appBar: AppBar(
         title: Text(unidadeArgs.arg1),
       ),
       drawer: AppDrawer(),
-      body: unidades.isLoading
-          ? Center(
-              child: CircularProgressIndicator(),
-            )
-          : RefreshIndicator(
-              onRefresh: () => _carregaUnidades(context),
-              child: Consumer<EstruturaLevantamento>(
-                builder: (ctx, unidadesData, _) => Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: ListView.builder(
-                    itemBuilder: (_, idx) => Column(
-                      children: [
-                        UnidadeItem(
-                          unidadesData.getLevantamentosEstrutura[idx],
-                        ),
-                        Divider(),
-                      ],
-                    ),
-                    itemCount: unidadesData.getLevantamentosEstrutura.length,
+      body: Observer(
+        builder: (_) {
+          switch (_estruturaLevantamentoStore.estruturasState) {
+            case EstruturasLevantamentoState.inicial:
+            case EstruturasLevantamentoState.carregando:
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            case EstruturasLevantamentoState.vazio:
+              return Center(
+                child: Text('VAZIO'),
+              );
+            case EstruturasLevantamentoState.carregado:
+              return Padding(
+                padding: const EdgeInsets.all(8),
+                child: ListView.builder(
+                  itemCount: _estruturaLevantamentoStore.estruturas.length,
+                  itemBuilder: (_, idx) => Column(
+                    children: [
+                      UnidadeItem(
+                        _estruturaLevantamentoStore.estruturas[idx],
+                      ),
+                      Divider(),
+                    ],
                   ),
                 ),
-              ),
-            ),
+              );
+          }
+        },
+      ),
     );
   }
 }

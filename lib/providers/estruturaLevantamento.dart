@@ -130,6 +130,11 @@ class EstruturaLevantamento with ChangeNotifier {
     notifyListeners();
   }
 
+  Future<List<EstruturaInventario>> buscaPorEstrutura2(int id) async {
+    return helperEstruturaInventarioLista(
+        await db.estruturaInventarioDao.getAllEstruturasPorLevantamento(id));
+  }
+
   Future<BemPatrimonial> buscaBensPorId(String numeroBemPatrimonial) async {
     _isLoadingBens = false;
     _bemPatrimonial = helperDadoBemPatrimonial2(await db.bemPatrimoniaisDao
@@ -207,11 +212,6 @@ class EstruturaLevantamento with ChangeNotifier {
     }
   }
 
-  void markAsLoading() {
-    _isLoadingEstruturas = true;
-    notifyListeners();
-  }
-
   void atualizaDados(BemPatrimonial item) {
     final idx = _bensEstrutura.indexWhere((value) => value.id == item.id);
     if (idx >= 0) {
@@ -221,25 +221,6 @@ class EstruturaLevantamento with ChangeNotifier {
   }
 
   Future<void> buscaEstruturas(
-      String conexao, List<Levantamento> listLevantamento) async {
-    _estruturas.clear();
-    markAsLoading();
-
-    db.deleteTable(db.estruturaInventarioDB);
-    db.deleteTable(db.dadosBemPatrimoniaisDB);
-    await Stream.fromIterable(listLevantamento)
-        .asyncMap((element) => _getLevantamento(conexao, element.id))
-        .toList()
-        .whenComplete(
-      () {
-        _nomeEstrutura = null;
-        _isLoadingEstruturas = false;
-        notifyListeners();
-      },
-    );
-  }
-
-  Future<void> buscaEstruturas2(
       String conexao, List<Levantamento> listLevantamento) async {
     _estruturas.clear();
 

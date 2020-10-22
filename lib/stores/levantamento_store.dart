@@ -12,6 +12,7 @@ enum LevantamentosState {
   inicial,
   carregando,
   carregado,
+  vazio,
 }
 
 abstract class _LevantamentoStore with Store {
@@ -43,26 +44,23 @@ abstract class _LevantamentoStore with Store {
     if (_inventariosFuture.status == FutureStatus.pending || buscandoEstruturas)
       return LevantamentosState.carregando;
 
+    if (_inventariosFuture.status == FutureStatus.fulfilled &&
+        !buscandoEstruturas &&
+        levantamentos.isEmpty) return LevantamentosState.vazio;
+
     if (existeInventario && levantamentos.isNotEmpty)
       return LevantamentosState.carregado;
   }
 
   @action
   Future verificaInventarios(String conexao, int idOrganizacao) async {
-    existeInventario = await _levantamentos.getVerificaInventarios2DB();
+    existeInventario = await _levantamentos.getVerificaInventariosDB();
 
     if (!existeInventario) {
       try {
-        _inventariosFuture = ObservableFuture(
-          _levantamentos
-              .buscaLevantamento2(idOrganizacao, conexao)
-              .whenComplete(() => existeInventario = true)
-              .catchError(
-            (error) {
-              throw error;
-            },
-          ),
-        ).catchError(
+        _inventariosFuture = ObservableFuture(_levantamentos
+            .buscaLevantamento(idOrganizacao, conexao)
+            .whenComplete(() => existeInventario = true)).catchError(
           (error) {
             print(error);
           },
@@ -74,7 +72,7 @@ abstract class _LevantamentoStore with Store {
     } else {
       try {
         _inventariosFuture =
-            ObservableFuture(_levantamentos.getLevantamentos2DB(idOrganizacao));
+            ObservableFuture(_levantamentos.getLevantamentosDB(idOrganizacao));
         levantamentos = await _inventariosFuture;
       } catch (e) {
         print(e);
@@ -88,7 +86,7 @@ abstract class _LevantamentoStore with Store {
     buscandoEstruturas = true;
     try {
       await _estruturaLevantamento
-          .buscaEstruturas2(conexao, listaLevantamento)
+          .buscaEstruturas(conexao, listaLevantamento)
           .whenComplete(() => buscandoEstruturas = false)
           .catchError(
         (error) {

@@ -97,16 +97,9 @@ abstract class _InicializacaoStore with Store {
 
     try {
       if (!existeDominio) {
-        _dominioFuture = ObservableFuture(
-          _inicializacao
-              .buscaDominioInicial(conexao)
-              .whenComplete(() => existeDominio = true)
-              .catchError(
-            (error) {
-              throw error;
-            },
-          ),
-        ).catchError(
+        _dominioFuture = ObservableFuture(_inicializacao
+            .buscaDominioInicial(conexao)
+            .whenComplete(() => existeDominio = true)).catchError(
           (error) {
             print(error);
           },

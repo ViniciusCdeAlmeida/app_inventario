@@ -1,3 +1,4 @@
+import 'package:app_inventario/stores/estruturaLevantamento_store.dart';
 import 'package:app_inventario/stores/inicializacao_store.dart';
 import 'package:app_inventario/stores/levantamento_store.dart';
 import 'package:flutter/material.dart';
@@ -76,6 +77,9 @@ class MyApp extends StatelessWidget {
         Provider(
           create: (ctx) =>
               LevantamentoStore(Levantamentos(), EstruturaLevantamento()),
+        ),
+        Provider(
+          create: (ctx) => EstruturaLevantamentoStore(EstruturaLevantamento()),
         ),
       ],
       child: Consumer<Autenticacao>(
