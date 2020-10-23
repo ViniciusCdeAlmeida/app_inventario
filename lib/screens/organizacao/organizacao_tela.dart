@@ -1,5 +1,4 @@
 import 'package:app_inventario/providers/autenticacao.dart';
-import 'package:app_inventario/providers/inicializacao.dart';
 import 'package:app_inventario/stores/inicializacao_store.dart';
 import 'package:app_inventario/widgets/cabecalho/app_cabecalho.dart';
 import 'package:app_inventario/widgets/organizacao/organizacao_item.dart';
@@ -18,7 +17,7 @@ class OrganizacaoTela extends StatefulWidget {
 class _OrganizacaoTelaState extends State<OrganizacaoTela> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   InicializacaoStore _inicializacaoStore;
-  // List<ReactionDisposer> _disposers;
+
   List<ReactionDisposer> _disposers;
 
   @override
@@ -31,10 +30,6 @@ class _OrganizacaoTelaState extends State<OrganizacaoTela> {
     organizacoes.getOrganizacoesDB();
 
     _inicializacaoStore.verificaInicializacao(conexao);
-
-    // _disposers ??= [
-    //   autorun((_) => _inicializacaoStore.verificaInicializacao(conexao)),
-    // ];
     super.didChangeDependencies();
   }
 
@@ -58,6 +53,7 @@ class _OrganizacaoTelaState extends State<OrganizacaoTela> {
       body: AnimatedSwitcher(
           duration: Duration(milliseconds: 300),
           child: Observer(
+            // ignore: missing_return
             builder: (_) {
               switch (_inicializacaoStore.inicializacaoState) {
                 case InicializacaoState.inicial:
@@ -85,46 +81,8 @@ class _OrganizacaoTelaState extends State<OrganizacaoTela> {
                     ),
                   );
               }
-              // switch (_inicializacaoStore.bensPatrimoniaisState) {
-              //   case BensPatrimoniaisState.initial:
-              //     return Center(
-              //       child: Text('BensPatrimoniaisState.initial'),
-              //     );
-              //   case BensPatrimoniaisState.empty:
-              //     return Center(
-              //       child: Text('BensPatrimoniaisState.empty'),
-              //     );
-              //   case BensPatrimoniaisState.loaded:
-              //     return Center(
-              //       child: Text('BensPatrimoniaisState.loaded'),
-              //     );
-              //   case BensPatrimoniaisState.loading:
-              //     return Center(
-              //       child: Text('BensPatrimoniaisState.loading'),
-              //     );
-              // }
             },
-          )
-          // _isLoading
-          //     ? Center(
-          //         child: CircularProgressIndicator(),
-          //       )
-          // : Padding(
-          //     padding: const EdgeInsets.all(8),
-          //     child: ListView.builder(
-          //       itemCount: organizacoesLista.length,
-          //       itemBuilder: (_, idx) => Column(
-          //         children: [
-          //           OrganizacaoItem(
-          //             organizacoesLista[idx].organizacao.id,
-          //             organizacoesLista[idx].organizacao.codigoENome,
-          //           ),
-          //           Divider(),
-          //         ],
-          //       ),
-          //     ),
-          //   ),
-          ),
+          )),
     );
   }
 }

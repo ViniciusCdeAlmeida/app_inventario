@@ -4,8 +4,6 @@ import 'package:app_inventario/providers/autenticacao.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:app_inventario/models/http_exception.dart';
-
 class LoginCard extends StatefulWidget {
   LoginCard({Key key}) : super(key: key);
 

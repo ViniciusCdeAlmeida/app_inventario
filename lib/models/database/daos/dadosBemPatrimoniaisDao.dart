@@ -1,14 +1,7 @@
-import 'dart:convert';
-
-import 'package:app_inventario/helpers/helper_bemPatrimonial.dart';
-import 'package:app_inventario/helpers/helper_dadosBemPatrimonial.dart';
-import 'package:app_inventario/models/serialized/bemPatrimonial.dart';
-import 'package:app_inventario/models/serialized/dadosBensPatrimoniais.dart';
 import 'package:moor_flutter/moor_flutter.dart';
 
 import 'package:app_inventario/models/database/databaseMoor.dart';
 
-import 'package:app_inventario/models/serialized/caracteristicas.dart';
 import 'package:app_inventario/models/serialized/dominio.dart';
 import 'package:app_inventario/models/serialized/inventarioDadosBemPatrimonial.dart';
 import 'package:app_inventario/models/serialized/material.dart';

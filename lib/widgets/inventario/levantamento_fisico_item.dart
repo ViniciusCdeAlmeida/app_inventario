@@ -13,6 +13,7 @@ class LevantamentoFisicoItem extends StatefulWidget {
 
 class _LevantamentoFisicoItemState extends State<LevantamentoFisicoItem>
     with SingleTickerProviderStateMixin {
+  // ignore: unused_field
   AnimationController _controller;
 
   @override

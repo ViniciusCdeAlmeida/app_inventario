@@ -1,43 +1,26 @@
-import 'dart:io';
-import 'package:app_inventario/models/serialized/bemPatrimonial.dart';
-import 'package:dio/adapter.dart';
-import 'package:dio/dio.dart';
+import 'package:app_inventario/helpers/helper_dadosBemPatrimonial.dart';
+import 'package:app_inventario/main.dart';
+import 'package:app_inventario/models/serialized/dadosBensPatrimoniais.dart';
 import 'package:flutter/material.dart';
 
-class BensProvier with ChangeNotifier {
-  List<BemPatrimonial> _bens = [];
-  List<BemPatrimonial> _bensEstrutura = [];
+class BensProvider with ChangeNotifier {
+  List<DadosBensPatrimoniais> _bensPorEstrutura = [];
 
-  bool _isLoading = false;
-
-  List<BemPatrimonial> get getBens {
-    return _bens;
+  Future<List<DadosBensPatrimoniais>> buscaBensPorEstrutura(
+      int id, String idInventarioEstrutura) async {
+    _bensPorEstrutura = helperDadosBemPatrimonialLista(
+        await db.dadosBemPatrimoniaisDao.getAllDadosPorEstrutura(id));
+    List<DadosBensPatrimoniais> inventariadoForaEspelho =
+        helperDadosBemPatrimonialForaEspelhoLista(
+            await db.inventarioBemPatrimonialDao
+                .getInventariadosForaEspelho(idInventarioEstrutura),
+            int.parse(idInventarioEstrutura));
+    _bensPorEstrutura.addAll(inventariadoForaEspelho);
+    return _bensPorEstrutura;
   }
 
-  List<BemPatrimonial> get getBensEstrutura {
-    return [..._bensEstrutura];
-  }
-
-  void buscaPorEstrutura(int id) {
-    List<BemPatrimonial> lista =
-        _bens.where((element) => element.id == id).toList();
-    if (lista.isNotEmpty) {
-      _bensEstrutura = lista;
-    } else {
-      _bensEstrutura.clear();
-    }
-  }
-
-  bool get isLoading => _isLoading;
-
-  void markAsLoading() {
-    _isLoading = true;
-    notifyListeners();
-  }
-
-  Future<void> buscaBens(String conexao) async {
-    markAsLoading();
-    _isLoading = false;
-    notifyListeners();
+  Future<void> atualizaItemInventariado(int id) async {
+    await db.dadosBemPatrimoniaisDao.updateDadosBemPatrimonial(id);
+    await db.bemPatrimoniaisDao.updateBemPatrimonial(id);
   }
 }

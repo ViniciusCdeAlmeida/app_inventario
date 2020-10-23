@@ -1,3 +1,4 @@
+import 'package:app_inventario/stores/bensPatrimoniais_store.dart';
 import 'package:app_inventario/stores/estruturaLevantamento_store.dart';
 import 'package:app_inventario/stores/inicializacao_store.dart';
 import 'package:app_inventario/stores/levantamento_store.dart';
@@ -54,7 +55,7 @@ class MyApp extends StatelessWidget {
           create: (ctx) => Inventario(),
         ),
         ChangeNotifierProvider(
-          create: (ctx) => BensProvier(),
+          create: (ctx) => BensProvider(),
         ),
         ChangeNotifierProvider(
           create: (ctx) => Inicializacao(),
@@ -80,6 +81,9 @@ class MyApp extends StatelessWidget {
         ),
         Provider(
           create: (ctx) => EstruturaLevantamentoStore(EstruturaLevantamento()),
+        ),
+        Provider(
+          create: (ctx) => BensPatrimoniaisStore(BensProvider()),
         ),
       ],
       child: Consumer<Autenticacao>(

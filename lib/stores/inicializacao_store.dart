@@ -1,7 +1,3 @@
-import 'package:app_inventario/models/serialized/bemPatrimonial.dart';
-import 'package:app_inventario/models/serialized/dominio.dart';
-import 'package:app_inventario/models/serialized/organizacoes.dart';
-
 import 'package:app_inventario/providers/autenticacao.dart';
 import 'package:app_inventario/providers/inicializacao.dart';
 
@@ -61,6 +57,7 @@ abstract class _InicializacaoStore with Store {
   }
 
   @computed
+  // ignore: missing_return
   InicializacaoState get inicializacaoState {
     if (existeDominio && existeBensPatrimoniais)
       return InicializacaoState.carregadoInicializacao;

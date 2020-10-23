@@ -34,6 +34,7 @@ class _UnidadeTelaState extends State<UnidadeTela> {
       ),
       drawer: AppDrawer(),
       body: Observer(
+        // ignore: missing_return
         builder: (_) {
           switch (_estruturaLevantamentoStore.estruturasState) {
             case EstruturasLevantamentoState.inicial:

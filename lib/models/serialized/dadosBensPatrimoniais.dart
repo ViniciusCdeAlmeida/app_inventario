@@ -1,9 +1,9 @@
-import 'package:app_inventario/models/serialized/bemPatrimonial.dart';
 import 'package:app_inventario/models/serialized/dominio.dart';
 import 'package:app_inventario/models/serialized/inventarioDadosBemPatrimonial.dart';
 import 'package:app_inventario/models/serialized/material.dart';
 import 'package:flutter/material.dart' as mat;
 import 'package:json_annotation/json_annotation.dart';
+import 'package:mobx/mobx.dart';
 
 part 'dadosBensPatrimoniais.g.dart';
 
@@ -18,6 +18,7 @@ class DadosBensPatrimoniais with mat.ChangeNotifier {
   final int idInventarioEstruturaOrganizacional;
   final Material material;
   InventarioDadosBemPatrimonial inventarioBemPatrimonial;
+  @observable
   bool inventariado;
   final int idBemPatrimonial;
   final String numeroPatrimonialCompleto;

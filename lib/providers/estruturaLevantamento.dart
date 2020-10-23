@@ -17,17 +17,14 @@ class EstruturaLevantamento with ChangeNotifier {
   List<EstruturaInventario> _estruturas = [];
   List<EstruturaInventario> _levantamentosEstrutura = [];
   List<DadosBensPatrimoniais> _bensEstrutura = [];
-  List<DadosBensPatrimoniais> _bensEstruturaFiltrado = [];
   int _idUlAtual;
   BemPatrimonial _bemPatrimonial;
   String _quantidadeDigitos;
   String _digitoVerificador;
 
   String _nomeEstrutura;
-  bool _isLoadingEstruturas = false;
   bool _isLoadingBens = false;
 
-  bool get isLoadingEstruturas => _isLoadingEstruturas;
   bool get isLoadingBens => _isLoadingBens;
 
   List<EstruturaInventario> get getLevantamentos {
@@ -40,13 +37,6 @@ class EstruturaLevantamento with ChangeNotifier {
 
   List<EstruturaInventario> get getLevantamentosEstrutura {
     return [..._levantamentosEstrutura];
-  }
-
-  List<DadosBensPatrimoniais> get getBensPorEstrutura {
-    return _bensEstruturaFiltrado.length != 0 &&
-            _bensEstruturaFiltrado.length < [..._bensEstrutura].length
-        ? _bensEstruturaFiltrado
-        : [..._bensEstrutura];
   }
 
   BemPatrimonial get getBemPatrimonial {
@@ -77,60 +67,7 @@ class EstruturaLevantamento with ChangeNotifier {
     _digitoVerificador = digito;
   }
 
-  Future<void> buscaBensPorEstrutura(
-      int id, String idInventarioEstrutura) async {
-    _isLoadingBens = false;
-    _bensEstrutura = helperDadosBemPatrimonialLista(
-        await db.dadosBemPatrimoniaisDao.getAllDadosPorEstrutura(id));
-    List<DadosBensPatrimoniais> inventariadoForaEspelho =
-        helperDadosBemPatrimonialForaEspelhoLista(
-            await db.inventarioBemPatrimonialDao
-                .getInventariadosForaEspelho(idInventarioEstrutura),
-            int.parse(idInventarioEstrutura));
-    _bensEstrutura.addAll(inventariadoForaEspelho);
-    _isLoadingBens = true;
-    notifyListeners();
-  }
-
-  void limpaFiltrados() {
-    _bensEstruturaFiltrado.clear();
-    notifyListeners();
-  }
-
-  void filtraBens(String value) async {
-    _bensEstruturaFiltrado = _bensEstrutura.where(
-      (element) {
-        if (element.numeroPatrimonial != null && element.material != null) {
-          return element.numeroPatrimonial.contains(value.toUpperCase()) ||
-              element.material.descricao.contains(value.toUpperCase()) ||
-              element.material.codigoEDescricao.contains(value.toUpperCase());
-        } else if (element.numeroPatrimonial == null &&
-            element.material != null) {
-          return element.material.descricao.contains(value.toUpperCase()) ||
-              element.material.codigoEDescricao.contains(value.toUpperCase()) ||
-              element.inventarioBemPatrimonial.numeroPatrimonial
-                  .contains(value.toUpperCase());
-        } else if (element.numeroPatrimonial != null &&
-            element.material == null) {
-          return element.numeroPatrimonial.contains(value.toUpperCase());
-        } else if (element.numeroPatrimonial == null &&
-            element.material != null) {
-          return element.numeroPatrimonialCompleto
-              .contains(value.toUpperCase());
-        }
-      },
-    ).toList();
-    notifyListeners();
-  }
-
-  Future<void> buscaPorEstrutura(int id) async {
-    _levantamentosEstrutura = helperEstruturaInventarioLista(
-        await db.estruturaInventarioDao.getAllEstruturasPorLevantamento(id));
-
-    notifyListeners();
-  }
-
-  Future<List<EstruturaInventario>> buscaPorEstrutura2(int id) async {
+  Future<List<EstruturaInventario>> buscaPorEstrutura(int id) async {
     return helperEstruturaInventarioLista(
         await db.estruturaInventarioDao.getAllEstruturasPorLevantamento(id));
   }
@@ -145,25 +82,6 @@ class EstruturaLevantamento with ChangeNotifier {
     _isLoadingBens = true;
     notifyListeners();
     return _bemPatrimonial;
-  }
-
-  Future<void> atualizaItemInventariado(int id) async {
-    await db.dadosBemPatrimoniaisDao.updateDadosBemPatrimonial(id);
-    await db.bemPatrimoniaisDao.updateBemPatrimonial(id);
-    if (_bensEstruturaFiltrado.isNotEmpty) {
-      final idx = _bensEstruturaFiltrado
-          .indexWhere((value) => value.idBemPatrimonial == id);
-      if (idx >= 0) {
-        _bensEstruturaFiltrado[idx].inventariado = true;
-      }
-    } else {
-      final idx =
-          _bensEstrutura.indexWhere((value) => value.idBemPatrimonial == id);
-      if (idx >= 0) {
-        _bensEstrutura[idx].inventariado = true;
-      }
-    }
-    notifyListeners();
   }
 
   Future<void> _getLevantamento(String conexao, int idLevantamento) async {
@@ -203,8 +121,8 @@ class EstruturaLevantamento with ChangeNotifier {
 
       _nomeEstrutura = (response.data["objects"] as List<dynamic>)
           .first["inventario"]["codigoENome"];
-
       notifyListeners();
+
       await db.estruturaInventarioDao
           .insertEstruturaInventario((response.data["objects"] as List));
     } catch (error) {

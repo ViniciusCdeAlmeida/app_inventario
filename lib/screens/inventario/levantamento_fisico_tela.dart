@@ -12,8 +12,6 @@ import 'package:app_inventario/main.dart';
 import 'package:app_inventario/models/serialized/levantamento.dart';
 
 import 'package:app_inventario/providers/autenticacao.dart';
-import 'package:app_inventario/providers/bensProvider.dart';
-import 'package:app_inventario/providers/levantamentos.dart';
 
 import 'package:app_inventario/widgets/cabecalho/app_cabecalho.dart';
 import 'package:app_inventario/widgets/customizados/popupMenu_custom.dart';
@@ -80,10 +78,6 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
             ),
           );
         }
-        break;
-      case Acoes.gerarArquivoBackup:
-        print('11');
-        await Provider.of<BensProvier>(context).buscaBens(conexao);
         break;
     }
   }

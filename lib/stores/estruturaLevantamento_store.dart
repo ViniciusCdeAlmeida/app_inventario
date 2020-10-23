@@ -7,7 +7,12 @@ part 'estruturaLevantamento_store.g.dart';
 class EstruturaLevantamentoStore = _EstruturaLevantamentoStore
     with _$EstruturaLevantamentoStore;
 
-enum EstruturasLevantamentoState { inicial, carregando, carregado, vazio }
+enum EstruturasLevantamentoState {
+  inicial,
+  carregando,
+  carregado,
+  vazio,
+}
 
 abstract class _EstruturaLevantamentoStore with Store {
   final EstruturaLevantamento _estruturaLevantamento;
@@ -23,8 +28,8 @@ abstract class _EstruturaLevantamentoStore with Store {
   @observable
   ObservableFuture<List<EstruturaInventario>> _estruturasFuture;
 
-  // ignore: missing_return
   @computed
+  // ignore: missing_return
   EstruturasLevantamentoState get estruturasState {
     if (_estruturasFuture == null ||
         _estruturasFuture.status == FutureStatus.rejected) {
@@ -49,7 +54,7 @@ abstract class _EstruturaLevantamentoStore with Store {
     try {
       _estruturasFuture = ObservableFuture(
         _estruturaLevantamento
-            .buscaPorEstrutura2(idEstrutura)
+            .buscaPorEstrutura(idEstrutura)
             .whenComplete(() => buscandoEstruturas = false)
             .catchError(
           (error) {

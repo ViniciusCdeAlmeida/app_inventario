@@ -1,4 +1,4 @@
-import 'package:app_inventario/providers/estruturaLevantamento.dart';
+import 'package:app_inventario/stores/bensPatrimoniais_store.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -63,7 +63,7 @@ class _MySliverAppBarState extends State<MySliverAppBar>
             ? IconButton(
                 icon: Icon(Icons.close),
                 onPressed: () {
-                  Provider.of<EstruturaLevantamento>(context, listen: false)
+                  Provider.of<BensPatrimoniaisStore>(context, listen: false)
                       .limpaFiltrados();
                   _controller.text = '';
                   setState(() {
@@ -136,7 +136,7 @@ class _MySliverAppBarState extends State<MySliverAppBar>
                               color: Colors.red,
                             ),
                             onPressed: () {
-                              Provider.of<EstruturaLevantamento>(context,
+                              Provider.of<BensPatrimoniaisStore>(context,
                                       listen: false)
                                   .limpaFiltrados();
                               _controller.text = '';
@@ -150,12 +150,12 @@ class _MySliverAppBarState extends State<MySliverAppBar>
                         ),
                         controller: _controller,
                         onEditingComplete: () {
-                          Provider.of<EstruturaLevantamento>(context,
+                          Provider.of<BensPatrimoniaisStore>(context,
                                   listen: false)
                               .filtraBens(_controller.text);
                         },
                         onChanged: (value) =>
-                            Provider.of<EstruturaLevantamento>(context,
+                            Provider.of<BensPatrimoniaisStore>(context,
                                     listen: false)
                                 .filtraBens(_controller.text),
                       ),

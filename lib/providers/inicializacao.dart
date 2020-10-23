@@ -12,6 +12,7 @@ import 'package:app_inventario/models/serialized/dominio.dart';
 class Inicializacao with ChangeNotifier {
   List<Dominio> _dominios = [];
   int _startFilter = 0;
+  // ignore: unused_field
   List<BemPatrimonial> _bensDemanda = [];
 
   Map filter = {
@@ -125,7 +126,7 @@ class Inicializacao with ChangeNotifier {
         await db.bemPatrimoniaisDao
             .insertBensPatrimoniais(response.data["objects"] as List);
       } else {
-        final response = await getConexaoPrefs(conexao)
+        await getConexaoPrefs(conexao)
             .post("obterBensPatrimoniaisDemandaV2.json", data: filter)
             .timeout(Duration(minutes: 2))
             .catchError(

@@ -1,3 +1,4 @@
+import 'package:app_inventario/stores/bensPatrimoniais_store.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:searchable_dropdown/searchable_dropdown.dart';
@@ -111,10 +112,10 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
         listen: false,
       ).gravaDados(_edicaoBemInvent);
 
-      await Provider.of<EstruturaLevantamento>(
+      await Provider.of<BensPatrimoniaisStore>(
         context,
         listen: false,
-      ).atualizaItemInventariado(_item.id);
+      ).atualizaItem(_item.id);
     } catch (error) {
       await showDialog<Null>(
         context: context,
@@ -602,21 +603,26 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
                                                         keyword.isNotEmpty) {
                                                       keyword
                                                           .split(" ")
-                                                          .forEach((k) {
-                                                        int i = 0;
-                                                        _dominiosInicial
-                                                            .forEach((item) {
-                                                          if (k.isNotEmpty &&
-                                                              (item.descricao
-                                                                  .toString()
-                                                                  .toLowerCase()
-                                                                  .contains(k
-                                                                      .toLowerCase()))) {
-                                                            ret.add(i);
-                                                          }
-                                                          i++;
-                                                        });
-                                                      });
+                                                          .forEach(
+                                                        (k) {
+                                                          int i = 0;
+                                                          _dominiosInicial
+                                                              .forEach(
+                                                            (item) {
+                                                              if (k.isNotEmpty &&
+                                                                  (item
+                                                                      .descricao
+                                                                      .toString()
+                                                                      .toLowerCase()
+                                                                      .contains(
+                                                                          k.toLowerCase()))) {
+                                                                ret.add(i);
+                                                              }
+                                                              i++;
+                                                            },
+                                                          );
+                                                        },
+                                                      );
                                                     }
                                                     if (keyword.isEmpty) {
                                                       ret = Iterable<
