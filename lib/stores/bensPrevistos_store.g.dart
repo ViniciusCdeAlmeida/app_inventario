@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'bensPatrimoniais_store.dart';
+part of 'bensPrevistos_store.dart';
 
 // **************************************************************************
 // StoreGenerator
@@ -8,13 +8,13 @@ part of 'bensPatrimoniais_store.dart';
 
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
-mixin _$BensPatrimoniaisStore on _BensPatrimoniaisStore, Store {
+mixin _$BensPrevistosStore on _BensPrevistosStore, Store {
   Computed<BensPrevistosState> _$estruturasStateComputed;
 
   @override
   BensPrevistosState get estruturasState => (_$estruturasStateComputed ??=
           Computed<BensPrevistosState>(() => super.estruturasState,
-              name: '_BensPatrimoniaisStore.estruturasState'))
+              name: '_BensPrevistosStore.estruturasState'))
       .value;
   Computed<List<DadosBensPatrimoniais>> _$dadosBemPatrimoniaisComputed;
 
@@ -22,10 +22,10 @@ mixin _$BensPatrimoniaisStore on _BensPatrimoniaisStore, Store {
   List<DadosBensPatrimoniais> get dadosBemPatrimoniais =>
       (_$dadosBemPatrimoniaisComputed ??= Computed<List<DadosBensPatrimoniais>>(
               () => super.dadosBemPatrimoniais,
-              name: '_BensPatrimoniaisStore.dadosBemPatrimoniais'))
+              name: '_BensPrevistosStore.dadosBemPatrimoniais'))
           .value;
 
-  final _$buscandoBensAtom = Atom(name: '_BensPatrimoniaisStore.buscandoBens');
+  final _$buscandoBensAtom = Atom(name: '_BensPrevistosStore.buscandoBens');
 
   @override
   bool get buscandoBens {
@@ -41,7 +41,7 @@ mixin _$BensPatrimoniaisStore on _BensPatrimoniaisStore, Store {
   }
 
   final _$_dadosBensPatrimoniaisObservableAtom =
-      Atom(name: '_BensPatrimoniaisStore._dadosBensPatrimoniaisObservable');
+      Atom(name: '_BensPrevistosStore._dadosBensPatrimoniaisObservable');
 
   @override
   ObservableList<DadosBensPatrimoniais> get _dadosBensPatrimoniaisObservable {
@@ -59,7 +59,7 @@ mixin _$BensPatrimoniaisStore on _BensPatrimoniaisStore, Store {
   }
 
   final _$_dadosBensPatrimoniaisFiltradoObservableAtom = Atom(
-      name: '_BensPatrimoniaisStore._dadosBensPatrimoniaisFiltradoObservable');
+      name: '_BensPrevistosStore._dadosBensPatrimoniaisFiltradoObservable');
 
   @override
   ObservableList<DadosBensPatrimoniais>
@@ -78,7 +78,7 @@ mixin _$BensPatrimoniaisStore on _BensPatrimoniaisStore, Store {
   }
 
   final _$_dadosBensPatrimoniaisFutureAtom =
-      Atom(name: '_BensPatrimoniaisStore._dadosBensPatrimoniaisFuture');
+      Atom(name: '_BensPrevistosStore._dadosBensPatrimoniaisFuture');
 
   @override
   ObservableFuture<List<DadosBensPatrimoniais>>
@@ -96,37 +96,50 @@ mixin _$BensPatrimoniaisStore on _BensPatrimoniaisStore, Store {
     });
   }
 
-  final _$atualizaItemAsyncAction =
-      AsyncAction('_BensPatrimoniaisStore.atualizaItem');
-
-  @override
-  Future<dynamic> atualizaItem(int id) {
-    return _$atualizaItemAsyncAction.run(() => super.atualizaItem(id));
-  }
-
-  final _$filtraBensAsyncAction =
-      AsyncAction('_BensPatrimoniaisStore.filtraBens');
-
-  @override
-  Future<dynamic> filtraBens(String value) {
-    return _$filtraBensAsyncAction.run(() => super.filtraBens(value));
-  }
-
-  final _$limpaFiltradosAsyncAction =
-      AsyncAction('_BensPatrimoniaisStore.limpaFiltrados');
-
-  @override
-  Future<dynamic> limpaFiltrados() {
-    return _$limpaFiltradosAsyncAction.run(() => super.limpaFiltrados());
-  }
-
   final _$buscaBensPorEstruturaAsyncAction =
-      AsyncAction('_BensPatrimoniaisStore.buscaBensPorEstrutura');
+      AsyncAction('_BensPrevistosStore.buscaBensPorEstrutura');
 
   @override
-  Future<dynamic> buscaBensPorEstrutura(int id, String idInventarioEstrutura) {
+  Future<dynamic> buscaBensPorEstrutura(
+      int idUl, String idInventarioEstrutura) {
     return _$buscaBensPorEstruturaAsyncAction
-        .run(() => super.buscaBensPorEstrutura(id, idInventarioEstrutura));
+        .run(() => super.buscaBensPorEstrutura(idUl, idInventarioEstrutura));
+  }
+
+  final _$_BensPrevistosStoreActionController =
+      ActionController(name: '_BensPrevistosStore');
+
+  @override
+  void atualizaItem(int id) {
+    final _$actionInfo = _$_BensPrevistosStoreActionController.startAction(
+        name: '_BensPrevistosStore.atualizaItem');
+    try {
+      return super.atualizaItem(id);
+    } finally {
+      _$_BensPrevistosStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void filtraBens(String value) {
+    final _$actionInfo = _$_BensPrevistosStoreActionController.startAction(
+        name: '_BensPrevistosStore.filtraBens');
+    try {
+      return super.filtraBens(value);
+    } finally {
+      _$_BensPrevistosStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void limpaFiltrados() {
+    final _$actionInfo = _$_BensPrevistosStoreActionController.startAction(
+        name: '_BensPrevistosStore.limpaFiltrados');
+    try {
+      return super.limpaFiltrados();
+    } finally {
+      _$_BensPrevistosStoreActionController.endAction(_$actionInfo);
+    }
   }
 
   @override

@@ -62,8 +62,12 @@ class Inicializacao with ChangeNotifier {
       return false;
   }
 
+  // Future<void> getDominiosDB() async {
+  //   return _dominios = helperDominioLista(await db.dominioDao.getAllDominio());
+  // }
+
   Future<void> getDominiosDB() async {
-    _dominios = helperDominioLista(await db.dominioDao.getAllDominio());
+    return helperDominioLista(await db.dominioDao.getAllDominio());
   }
 
   Future<void> getBensPatrimoniaisDB() async {

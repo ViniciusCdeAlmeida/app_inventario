@@ -8,31 +8,14 @@ import 'package:flutter/material.dart';
 import 'package:app_inventario/main.dart';
 
 class Levantamentos with ChangeNotifier {
-  // List<Levantamento> _levantamentos = [];
   final int idOrganizacao;
   String _nomeLevantamento;
-  bool _isLoading = false;
-  // bool _existeInventario = false;
 
   Levantamentos({this.idOrganizacao});
 
   String get getNomeLevantamentos {
     return _nomeLevantamento;
   }
-
-  bool get isLoading => _isLoading;
-
-  // bool get getExisteInventarios {
-  //   getVerificaInventariosDB();
-  //   if (!_existeInventario) {
-  //     return false;
-  //   } else
-  //     return true;
-  // }
-
-  // List<Levantamento> get getLevantamentos {
-  //   return [..._levantamentos];
-  // }
 
   Future<bool> getVerificaInventariosDB() async {
     if (helperLevantamento(

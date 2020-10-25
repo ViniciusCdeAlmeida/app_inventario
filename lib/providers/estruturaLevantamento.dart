@@ -23,9 +23,6 @@ class EstruturaLevantamento with ChangeNotifier {
   String _digitoVerificador;
 
   String _nomeEstrutura;
-  bool _isLoadingBens = false;
-
-  bool get isLoadingBens => _isLoadingBens;
 
   List<EstruturaInventario> get getLevantamentos {
     return _estruturas;
@@ -55,8 +52,8 @@ class EstruturaLevantamento with ChangeNotifier {
     return _digitoVerificador;
   }
 
-  void setUlAtual(int id) {
-    _idUlAtual = id;
+  void ulAtual(int id) {
+    this._idUlAtual = id;
   }
 
   void setDigitosLeitura(String digitos) {
@@ -73,14 +70,11 @@ class EstruturaLevantamento with ChangeNotifier {
   }
 
   Future<BemPatrimonial> buscaBensPorId(String numeroBemPatrimonial) async {
-    _isLoadingBens = false;
     _bemPatrimonial = helperDadoBemPatrimonial2(await db.bemPatrimoniaisDao
         .getBemPatrimonial(numeroBemPatrimonial.toUpperCase()));
     _bemPatrimonial.dadosBensPatrimoniais = helperDadoBemPatrimonial(await db
         .dadosBemPatrimoniaisDao
         .getDadosInventariar(numeroBemPatrimonial.toUpperCase()));
-    _isLoadingBens = true;
-    notifyListeners();
     return _bemPatrimonial;
   }
 

@@ -1,4 +1,5 @@
-import 'package:app_inventario/stores/bensPatrimoniais_store.dart';
+import 'package:app_inventario/providers/estruturaLevantamento.dart';
+import 'package:app_inventario/stores/bensPrevistos_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
@@ -19,17 +20,17 @@ class PrevistosBensTela extends StatefulWidget {
 
 class _PrevistosBensTelaState extends State<PrevistosBensTela> {
   TelaArgumentos unidadeArgs;
-  BensPatrimoniaisStore _bensPatrimoniaisStore;
+  BensPrevistosStore _bensPrevistosStore;
 
   @override
   void didChangeDependencies() {
     unidadeArgs = ModalRoute.of(context).settings.arguments;
 
-    _bensPatrimoniaisStore =
-        Provider.of<BensPatrimoniaisStore>(context, listen: false);
-    _bensPatrimoniaisStore.limpaFiltrados();
-    _bensPatrimoniaisStore.buscaBensPorEstrutura(
-        unidadeArgs.id, unidadeArgs.arg1);
+    _bensPrevistosStore =
+        Provider.of<BensPrevistosStore>(context, listen: false);
+    _bensPrevistosStore.limpaFiltrados();
+    _bensPrevistosStore.buscaBensPorEstrutura(unidadeArgs.id, unidadeArgs.arg1);
+    Provider.of<EstruturaLevantamento>(context).ulAtual(unidadeArgs.id);
     super.didChangeDependencies();
   }
 
@@ -41,7 +42,7 @@ class _PrevistosBensTelaState extends State<PrevistosBensTela> {
       body: Observer(
         // ignore: missing_return
         builder: (_) {
-          switch (_bensPatrimoniaisStore.estruturasState) {
+          switch (_bensPrevistosStore.estruturasState) {
             case BensPrevistosState.inicial:
             case BensPrevistosState.carregando:
               return Center(
@@ -59,18 +60,13 @@ class _PrevistosBensTelaState extends State<PrevistosBensTela> {
                   ),
                   SliverList(
                     delegate: SliverChildListDelegate(
-                      _bensPatrimoniaisStore.dadosBemPatrimoniais
+                      _bensPrevistosStore.dadosBemPatrimoniais
                           .map(
                             (item) => Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Observer(
-                                builder: (_) => PrevistosBensItem(
-                                  bemInventario: _bensPatrimoniaisStore
-                                      .dadosBemPatrimoniais
-                                      .firstWhere(
-                                          (element) => element.id == item.id),
-                                  idInventarioEstrutura: unidadeArgs.arg1,
-                                ),
+                              child: PrevistosBensItem(
+                                bemInventario: item,
+                                idInventarioEstrutura: unidadeArgs.arg1,
                               ),
                             ),
                           )

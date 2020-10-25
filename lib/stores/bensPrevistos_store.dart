@@ -2,10 +2,9 @@ import 'package:app_inventario/models/serialized/dadosBensPatrimoniais.dart';
 import 'package:app_inventario/providers/bensProvider.dart';
 import 'package:mobx/mobx.dart';
 
-part 'bensPatrimoniais_store.g.dart';
+part 'bensPrevistos_store.g.dart';
 
-class BensPatrimoniaisStore = _BensPatrimoniaisStore
-    with _$BensPatrimoniaisStore;
+class BensPrevistosStore = _BensPrevistosStore with _$BensPrevistosStore;
 
 enum BensPrevistosState {
   inicial,
@@ -14,10 +13,10 @@ enum BensPrevistosState {
   vazio,
 }
 
-abstract class _BensPatrimoniaisStore with Store {
+abstract class _BensPrevistosStore with Store {
   final BensProvider _bensProvider;
 
-  _BensPatrimoniaisStore(this._bensProvider);
+  _BensPrevistosStore(this._bensProvider);
 
   @observable
   bool buscandoBens = false;
@@ -65,8 +64,7 @@ abstract class _BensPatrimoniaisStore with Store {
   }
 
   @action
-  Future atualizaItem(int id) async {
-    await _bensProvider.atualizaItemInventariado(id);
+  void atualizaItem(int id) {
     if (_dadosBensPatrimoniaisFiltradoObservable.isNotEmpty) {
       final idx = _dadosBensPatrimoniaisFiltradoObservable
           .indexWhere((e) => e.idBemPatrimonial == id);
@@ -89,7 +87,7 @@ abstract class _BensPatrimoniaisStore with Store {
   }
 
   @action
-  Future filtraBens(String value) async {
+  void filtraBens(String value) {
     _dadosBensPatrimoniaisFiltradoObservable = _dadosBensPatrimoniaisObservable
         .where(
           // ignore: missing_return
@@ -121,17 +119,17 @@ abstract class _BensPatrimoniaisStore with Store {
   }
 
   @action
-  Future limpaFiltrados() async {
+  void limpaFiltrados() {
     _dadosBensPatrimoniaisFiltradoObservable.clear();
-  }
+  } //006032
 
   @action
-  Future buscaBensPorEstrutura(int id, String idInventarioEstrutura) async {
+  Future buscaBensPorEstrutura(int idUl, String idInventarioEstrutura) async {
     buscandoBens = true;
     try {
       _dadosBensPatrimoniaisFuture = ObservableFuture(
         _bensProvider
-            .buscaBensPorEstrutura(id, idInventarioEstrutura)
+            .buscaBensPorEstrutura(idUl, idInventarioEstrutura)
             .whenComplete(() => buscandoBens = false)
             .catchError(
           (error) {

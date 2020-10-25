@@ -62,6 +62,11 @@ class InventarioBensPatrimoniais with ChangeNotifier {
   Future _gravaDados(InventarioBemPatrimonial bemPatrimonial) async {
     await db.inventarioBemPatrimonialDao
         .insertInventarioBensPatrimoniais(bemPatrimonial);
+
+    await db.dadosBemPatrimoniaisDao
+        .updateDadosBemPatrimonial(bemPatrimonial.idDadosBemPatrimonialMobile);
+    await db.bemPatrimoniaisDao
+        .updateBemPatrimonial(bemPatrimonial.idDadosBemPatrimonialMobile);
   }
 
   void markAsLoading() {
@@ -79,11 +84,6 @@ class InventarioBensPatrimoniais with ChangeNotifier {
   }
 
   Future<void> gravaDados(InventarioBemPatrimonial item) async {
-    markAsLoading();
     await _gravaDados(item);
-
-    // _inventariados.clear();
-    _isLoading = false;
-    notifyListeners();
   }
 }

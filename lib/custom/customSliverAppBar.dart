@@ -1,4 +1,4 @@
-import 'package:app_inventario/stores/bensPatrimoniais_store.dart';
+import 'package:app_inventario/stores/bensPrevistos_store.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -61,9 +61,9 @@ class _MySliverAppBarState extends State<MySliverAppBar>
       actions: [
         !_search == false
             ? IconButton(
-                icon: Icon(Icons.close),
+                icon: Icon(Icons.arrow_forward),
                 onPressed: () {
-                  Provider.of<BensPatrimoniaisStore>(context, listen: false)
+                  Provider.of<BensPrevistosStore>(context, listen: false)
                       .limpaFiltrados();
                   _controller.text = '';
                   setState(() {
@@ -132,11 +132,11 @@ class _MySliverAppBarState extends State<MySliverAppBar>
                         decoration: InputDecoration(
                           suffixIcon: IconButton(
                             icon: Icon(
-                              Icons.clear_all,
+                              Icons.clear,
                               color: Colors.red,
                             ),
                             onPressed: () {
-                              Provider.of<BensPatrimoniaisStore>(context,
+                              Provider.of<BensPrevistosStore>(context,
                                       listen: false)
                                   .limpaFiltrados();
                               _controller.text = '';
@@ -150,14 +150,14 @@ class _MySliverAppBarState extends State<MySliverAppBar>
                         ),
                         controller: _controller,
                         onEditingComplete: () {
-                          Provider.of<BensPatrimoniaisStore>(context,
+                          Provider.of<BensPrevistosStore>(context,
                                   listen: false)
                               .filtraBens(_controller.text);
                         },
-                        onChanged: (value) =>
-                            Provider.of<BensPatrimoniaisStore>(context,
-                                    listen: false)
-                                .filtraBens(_controller.text),
+                        onChanged: (value) => Provider.of<BensPrevistosStore>(
+                                context,
+                                listen: false)
+                            .filtraBens(_controller.text),
                       ),
                     ),
                   ),
