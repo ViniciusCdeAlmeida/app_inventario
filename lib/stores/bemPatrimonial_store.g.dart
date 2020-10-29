@@ -113,68 +113,6 @@ mixin _$BemPatrimonialStore on _BemPatrimonialStore, Store {
     });
   }
 
-  final _$digitoVerificadorAtom =
-      Atom(name: '_BemPatrimonialStore.digitoVerificador');
-
-  @override
-  String get digitoVerificador {
-    _$digitoVerificadorAtom.reportRead();
-    return super.digitoVerificador;
-  }
-
-  @override
-  set digitoVerificador(String value) {
-    _$digitoVerificadorAtom.reportWrite(value, super.digitoVerificador, () {
-      super.digitoVerificador = value;
-    });
-  }
-
-  final _$usuarioColetanteAtom =
-      Atom(name: '_BemPatrimonialStore.usuarioColetante');
-
-  @override
-  String get usuarioColetante {
-    _$usuarioColetanteAtom.reportRead();
-    return super.usuarioColetante;
-  }
-
-  @override
-  set usuarioColetante(String value) {
-    _$usuarioColetanteAtom.reportWrite(value, super.usuarioColetante, () {
-      super.usuarioColetante = value;
-    });
-  }
-
-  final _$idAtualUlAtom = Atom(name: '_BemPatrimonialStore.idAtualUl');
-
-  @override
-  int get idAtualUl {
-    _$idAtualUlAtom.reportRead();
-    return super.idAtualUl;
-  }
-
-  @override
-  set idAtualUl(int value) {
-    _$idAtualUlAtom.reportWrite(value, super.idAtualUl, () {
-      super.idAtualUl = value;
-    });
-  }
-
-  final _$qtdeDigitosAtom = Atom(name: '_BemPatrimonialStore.qtdeDigitos');
-
-  @override
-  String get qtdeDigitos {
-    _$qtdeDigitosAtom.reportRead();
-    return super.qtdeDigitos;
-  }
-
-  @override
-  set qtdeDigitos(String value) {
-    _$qtdeDigitosAtom.reportWrite(value, super.qtdeDigitos, () {
-      super.qtdeDigitos = value;
-    });
-  }
-
   final _$saveBemInventariadoAsyncAction =
       AsyncAction('_BemPatrimonialStore.saveBemInventariado');
 
@@ -233,10 +171,6 @@ mixin _$BemPatrimonialStore on _BemPatrimonialStore, Store {
 dominios: ${dominios},
 bemPatrimonial: ${bemPatrimonial},
 buscandoBem: ${buscandoBem},
-digitoVerificador: ${digitoVerificador},
-usuarioColetante: ${usuarioColetante},
-idAtualUl: ${idAtualUl},
-qtdeDigitos: ${qtdeDigitos},
 bemPatrimonialState: ${bemPatrimonialState}
     ''';
   }

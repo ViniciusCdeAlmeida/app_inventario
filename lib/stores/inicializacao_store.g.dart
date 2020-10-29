@@ -9,13 +9,6 @@ part of 'inicializacao_store.dart';
 // ignore_for_file: non_constant_identifier_names, unnecessary_brace_in_string_interps, unnecessary_lambdas, prefer_expression_function_bodies, lines_longer_than_80_chars, avoid_as, avoid_annotating_with_dynamic
 
 mixin _$InicializacaoStore on _InicializacaoStore, Store {
-  Computed<OrganizacoesState> _$organizacoesStateComputed;
-
-  @override
-  OrganizacoesState get organizacoesState => (_$organizacoesStateComputed ??=
-          Computed<OrganizacoesState>(() => super.organizacoesState,
-              name: '_InicializacaoStore.organizacoesState'))
-      .value;
   Computed<InicializacaoState> _$inicializacaoStateComputed;
 
   @override
@@ -53,6 +46,21 @@ mixin _$InicializacaoStore on _InicializacaoStore, Store {
     _$existeBensPatrimoniaisAtom
         .reportWrite(value, super.existeBensPatrimoniais, () {
       super.existeBensPatrimoniais = value;
+    });
+  }
+
+  final _$organizacoesAtom = Atom(name: '_InicializacaoStore.organizacoes');
+
+  @override
+  List<Organizacoes> get organizacoes {
+    _$organizacoesAtom.reportRead();
+    return super.organizacoes;
+  }
+
+  @override
+  set organizacoes(List<Organizacoes> value) {
+    _$organizacoesAtom.reportWrite(value, super.organizacoes, () {
+      super.organizacoes = value;
     });
   }
 
@@ -104,6 +112,32 @@ mixin _$InicializacaoStore on _InicializacaoStore, Store {
     });
   }
 
+  final _$_getBensPatrimoniaisAsyncAction =
+      AsyncAction('_InicializacaoStore._getBensPatrimoniais');
+
+  @override
+  Future<dynamic> _getBensPatrimoniais(String conexao) {
+    return _$_getBensPatrimoniaisAsyncAction
+        .run(() => super._getBensPatrimoniais(conexao));
+  }
+
+  final _$_getDominiosAsyncAction =
+      AsyncAction('_InicializacaoStore._getDominios');
+
+  @override
+  Future<dynamic> _getDominios(String conexao) {
+    return _$_getDominiosAsyncAction.run(() => super._getDominios(conexao));
+  }
+
+  final _$verificaOrganizacoesAsyncAction =
+      AsyncAction('_InicializacaoStore.verificaOrganizacoes');
+
+  @override
+  Future<dynamic> verificaOrganizacoes() {
+    return _$verificaOrganizacoesAsyncAction
+        .run(() => super.verificaOrganizacoes());
+  }
+
   final _$verificaInicializacaoAsyncAction =
       AsyncAction('_InicializacaoStore.verificaInicializacao');
 
@@ -118,7 +152,7 @@ mixin _$InicializacaoStore on _InicializacaoStore, Store {
     return '''
 existeDominio: ${existeDominio},
 existeBensPatrimoniais: ${existeBensPatrimoniais},
-organizacoesState: ${organizacoesState},
+organizacoes: ${organizacoes},
 inicializacaoState: ${inicializacaoState}
     ''';
   }

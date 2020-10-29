@@ -1,3 +1,4 @@
+import 'package:app_inventario/screens/login/inicializacao_tela.dart';
 import 'package:app_inventario/stores/bemPatrimonial_store.dart';
 import 'package:app_inventario/stores/bensPrevistos_store.dart';
 import 'package:app_inventario/stores/estruturaLevantamento_store.dart';
@@ -136,6 +137,7 @@ class MyApp extends StatelessWidget {
             PrevistosBensTela.routeName: (ctx) => PrevistosBensTela(),
             LerBensGeralTela.routeName: (ctx) => LerBensGeralTela(),
             BensInventariadosTela.routeName: (ctx) => BensInventariadosTela(),
+            InicializacaoTela.routeName: (ctx) => InicializacaoTela(),
           },
         ),
       ),

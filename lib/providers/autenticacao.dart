@@ -63,9 +63,8 @@ class Autenticacao with ChangeNotifier {
   }
 
   Future<void> getOrganizacoesDB() async {
-    _organizacoes =
-        helperOrganizacoesLista(await db.unidadesGestorasDao.getAllUnidades());
-    notifyListeners();
+    return helperOrganizacoesLista(
+        await db.unidadesGestorasDao.getAllUnidades());
   }
 
   Future<List<Organizacoes>> listaUnidades() async {

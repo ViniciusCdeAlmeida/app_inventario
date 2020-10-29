@@ -39,13 +39,6 @@ class Inicializacao with ChangeNotifier {
     return [..._dominios];
   }
 
-  List<Dominio> get getDominiosMarca {
-    return [
-      ...(db.dominioDao.getAllDominio() as List<Dominio>)
-          .where((element) => element.chave == 'tipoCaractMarca')
-    ];
-  }
-
   Future<bool> getVerificaDominioDB() async {
     if (helperDominio(await db.dominioDao.getVerificaDominios()) != null) {
       return true;
@@ -62,39 +55,8 @@ class Inicializacao with ChangeNotifier {
       return false;
   }
 
-  // Future<void> getDominiosDB() async {
-  //   return _dominios = helperDominioLista(await db.dominioDao.getAllDominio());
-  // }
-
   Future<void> getDominiosDB() async {
     return helperDominioLista(await db.dominioDao.getAllDominio());
-  }
-
-  Future<void> getBensPatrimoniaisDB() async {
-    _bensDemanda = helperBemPatrimonialLista(
-        await db.bemPatrimoniaisDao.getAllBensPatrimoniais());
-  }
-
-  List<DropdownMenuItem<Dominio>> getDominiosDropdownBens(String chave) {
-    List<Dominio> dominioFiltrado = [
-      ..._dominios.where((element) => element.chave == chave)
-    ];
-    return dominioFiltrado.map(
-      (itens) {
-        return DropdownMenuItem(
-          value: itens,
-          child: Text(itens.descricao),
-        );
-      },
-    ).toList();
-  }
-
-  List<Dominio> getDominiosBens(String chave) {
-    return [..._dominios.where((element) => element.chave == chave)];
-  }
-
-  void getDominiosBens2(String chave) {
-    db.dominioDao.getDominioBens(chave);
   }
 
   Future<void> _getDominios(String conexao) async {
@@ -117,22 +79,24 @@ class Inicializacao with ChangeNotifier {
   Future<void> _getBensDemanda({String conexao, int itemAtual}) async {
     try {
       if (_startFilter != 0 && filter['start'] < _startFilter) {
+        print('Buscando pagina $itemAtual\n');
         filter['start'] = itemAtual;
         Response response = await getConexaoPrefs(conexao)
             .post("obterBensPatrimoniaisDemandaV2.json", data: filter)
-            .timeout(
-              Duration(minutes: 2),
-            )
+            // .post("obterBensPatrimoniaisDemanda.json", data: filter)
             .catchError((error) {
           throw error;
         });
-
+        print('Buscado pagina $itemAtual\n');
+        print('Salvando pagina $itemAtual\n');
         await db.bemPatrimoniaisDao
             .insertBensPatrimoniais(response.data["objects"] as List);
+
+        print('Salvo pagina $itemAtual\n');
       } else {
         await getConexaoPrefs(conexao)
             .post("obterBensPatrimoniaisDemandaV2.json", data: filter)
-            .timeout(Duration(minutes: 2))
+            // .post("obterBensPatrimoniaisDemanda.json", data: filter)
             .catchError(
           (error) {
             throw error;
@@ -156,7 +120,6 @@ class Inicializacao with ChangeNotifier {
 
   Future buscaBemPatrimonialInicial(String conexao) async {
     // db.deleteTable(db.bensPatrimoniaisDB);
-
     await _getBensDemanda(conexao: conexao);
     if (_startFilter != 0) {
       List<dynamic> maximo = [];

@@ -45,18 +45,6 @@ abstract class _BemPatrimonialStore with Store {
   @observable
   ObservableFuture _bemPatrimonialFuture;
 
-  @observable
-  String digitoVerificador;
-
-  @observable
-  String usuarioColetante;
-
-  @observable
-  int idAtualUl;
-
-  @observable
-  String qtdeDigitos;
-
   @computed
   // ignore: missing_return
   BemPatrimonialState get bemPatrimonialState {
@@ -109,10 +97,6 @@ abstract class _BemPatrimonialStore with Store {
     buscandoBem = true;
 
     try {
-      // usuarioColetante = _autenticacao.usuarioLogado;
-      // idAtualUl = _estruturaLevantamento.getUlAtual;
-      // digitoVerificador = _estruturaLevantamento.getDigitoVerificador;
-      // qtdeDigitos = _estruturaLevantamento.getDigitosLeitura;
       _bemPatrimonialFuture = ObservableFuture(
         _estruturaLevantamento
             .buscaBensPorId(numeroPatrimonial)

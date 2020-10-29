@@ -1,3 +1,4 @@
+import 'package:app_inventario/models/serialized/organizacoes.dart';
 import 'package:app_inventario/providers/autenticacao.dart';
 import 'package:app_inventario/providers/inicializacao.dart';
 
@@ -7,20 +8,11 @@ part 'inicializacao_store.g.dart';
 
 class InicializacaoStore = _InicializacaoStore with _$InicializacaoStore;
 
-enum OrganizacoesState {
-  initial,
-  loading,
-  loaded,
-  empty,
-}
-
 enum InicializacaoState {
   inicial,
-  carregandoDominio,
-  carregandoBensPatrimonias,
-  carregadoBensPatrimonias,
-  carregadoDominio,
-  carregadoInicializacao
+  carregando,
+  carregado,
+  carregadoInicializacao,
 }
 
 abstract class _InicializacaoStore with Store {
@@ -36,6 +28,9 @@ abstract class _InicializacaoStore with Store {
   bool existeBensPatrimoniais = false;
 
   @observable
+  List<Organizacoes> organizacoes = [];
+
+  @observable
   ObservableFuture _organizacoesFuture;
 
   @observable
@@ -43,18 +38,6 @@ abstract class _InicializacaoStore with Store {
 
   @observable
   ObservableFuture _bensPatrimoniaisFuture;
-
-  @computed
-  OrganizacoesState get organizacoesState {
-    if (_organizacoesFuture == null ||
-        _organizacoesFuture.status == FutureStatus.rejected) {
-      return OrganizacoesState.initial;
-    }
-
-    return _organizacoesFuture.status == FutureStatus.pending
-        ? OrganizacoesState.loading
-        : OrganizacoesState.loaded;
-  }
 
   @computed
   // ignore: missing_return
@@ -69,58 +52,67 @@ abstract class _InicializacaoStore with Store {
       return InicializacaoState.inicial;
     }
 
-    if (_dominioFuture.status == FutureStatus.pending)
-      return InicializacaoState.carregandoDominio;
+    if ((_dominioFuture.status == FutureStatus.pending) ||
+        (_bensPatrimoniaisFuture.status == FutureStatus.pending))
+      return InicializacaoState.carregando;
 
-    if (_bensPatrimoniaisFuture.status == FutureStatus.pending)
-      return InicializacaoState.carregandoBensPatrimonias;
+    if ((_dominioFuture.status == FutureStatus.fulfilled || existeDominio) &&
+            (_bensPatrimoniaisFuture.status == FutureStatus.fulfilled ||
+                existeBensPatrimoniais) ||
+        (existeDominio && existeBensPatrimoniais))
+      return InicializacaoState.carregado;
+  }
 
-    if (_dominioFuture.status == FutureStatus.fulfilled || existeDominio)
-      return InicializacaoState.carregadoBensPatrimonias;
+  @action
+  Future _getBensPatrimoniais(String conexao) async {
+    try {
+      _bensPatrimoniaisFuture = ObservableFuture(
+        _inicializacao.buscaBemPatrimonialInicial(conexao).catchError(
+          (error) {
+            print(error);
+          },
+        ).whenComplete(() => existeBensPatrimoniais = true),
+      );
+    } catch (e) {
+      print(e);
+    }
+  }
 
-    if (_bensPatrimoniaisFuture.status == FutureStatus.fulfilled ||
-        existeBensPatrimoniais)
-      return InicializacaoState.carregadoBensPatrimonias;
+  @action
+  Future _getDominios(String conexao) async {
+    try {
+      _dominioFuture = ObservableFuture(
+        _inicializacao
+            .buscaDominioInicial(conexao)
+            .whenComplete(() => existeDominio = true),
+      );
+    } catch (e) {
+      print(e);
+    }
+  }
+
+  @action
+  Future verificaOrganizacoes() async {
+    try {
+      _organizacoesFuture = ObservableFuture(_organizacoes.getOrganizacoesDB());
+      organizacoes = await _organizacoesFuture;
+    } catch (e) {
+      print(e);
+    }
   }
 
   @action
   Future verificaInicializacao(String conexao) async {
-    await _organizacoes.getOrganizacoesDB();
-
     existeDominio = await _inicializacao.getVerificaDominioDB();
 
     existeBensPatrimoniais =
         await _inicializacao.getVerificaBensPatrimoniaisDB();
 
-    try {
-      if (!existeDominio) {
-        _dominioFuture = ObservableFuture(_inicializacao
-            .buscaDominioInicial(conexao)
-            .whenComplete(() => existeDominio = true)).catchError(
-          (error) {
-            print(error);
-          },
-        );
-      }
-    } catch (e) {
-      print(e);
+    if (!existeDominio) {
+      await _getDominios(conexao);
     }
-    try {
-      if (!existeBensPatrimoniais) {
-        _bensPatrimoniaisFuture = ObservableFuture(
-          _inicializacao.buscaBemPatrimonialInicial(conexao).catchError(
-            (error) {
-              print(error);
-            },
-          ).whenComplete(() => existeBensPatrimoniais = true),
-        ).catchError(
-          (error) {
-            print(error);
-          },
-        );
-      }
-    } catch (e) {
-      print(e);
+    if (!existeBensPatrimoniais) {
+      await _getBensPatrimoniais(conexao);
     }
   }
 }

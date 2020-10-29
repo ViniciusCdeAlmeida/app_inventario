@@ -3,9 +3,22 @@ import 'dart:math';
 
 import 'package:app_inventario/widgets/login/login_card.dart';
 import 'package:app_inventario/widgets/cabecalho/menu_cabecalho.dart';
+import 'package:flutter/services.dart';
 
-class LoginTela extends StatelessWidget {
+class LoginTela extends StatefulWidget {
   static const routeName = '/home';
+
+  @override
+  _LoginTelaState createState() => _LoginTelaState();
+}
+
+class _LoginTelaState extends State<LoginTela> {
+  @override
+  void initState() {
+    super.initState();
+    SystemChrome.setEnabledSystemUIOverlays(SystemUiOverlay.values);
+  }
+
   @override
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
