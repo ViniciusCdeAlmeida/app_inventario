@@ -21,7 +21,10 @@ class _UnidadeItemState extends State<UnidadeItem> {
       case Acoes.lerBens:
         Navigator.of(context).pushNamed(
           LerBensItens.routeName,
-          arguments: widget.unidade.id,
+          arguments: TelaArgumentos(
+            id: widget.unidade.id,
+            arg1: widget.unidade.idInventario.toString(),
+          ),
         );
         break;
       case Acoes.bensPrevistos:

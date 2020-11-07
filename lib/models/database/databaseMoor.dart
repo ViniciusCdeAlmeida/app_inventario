@@ -1,4 +1,8 @@
-import 'package:moor_flutter/moor_flutter.dart';
+import 'dart:io';
+import 'package:path/path.dart' as p;
+import 'package:sqflite/sqflite.dart' show getDatabasesPath;
+import 'package:moor/moor.dart';
+import 'package:moor/ffi.dart';
 
 import 'package:app_inventario/models/converters/caracteristicasConverter.dart';
 import 'package:app_inventario/models/converters/dominioConverter.dart';
@@ -170,10 +174,17 @@ class DadosBemPatrimoniaisDB extends Table {
 class AppDatabase extends _$AppDatabase {
   AppDatabase()
       : super(
-          (FlutterQueryExecutor.inDatabaseFolder(
-            path: 'db.sqlite',
-            // Good for debugging - prints SQL in the console
-            // logStatements: true,
+          (
+              // FlutterQueryExecutor.inDatabaseFolder(
+              // path: 'db.sqlite',
+              // // Good for debugging - prints SQL in the console
+              // // logStatements: true,
+              LazyDatabase(
+            () async {
+              final dbFolder = await getDatabasesPath();
+              final file = File(p.join(dbFolder, 'db.sqlite'));
+              return VmDatabase(file);
+            },
           )),
         );
 

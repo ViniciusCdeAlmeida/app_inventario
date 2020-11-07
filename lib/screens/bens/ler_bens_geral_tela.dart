@@ -64,8 +64,6 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
     unidadeArgs = ModalRoute.of(context).settings.arguments;
     _bemPatrimonialStore =
         Provider.of<BemPatrimonialStore>(context, listen: false);
-
-    _bemPatrimonialStore.buscaBemPatrimonial(unidadeArgs.arg1);
     _bemPatrimonialStore.buscaDominios();
     _idOrganizacao =
         Provider.of<Autenticacao>(context, listen: false).idUnidade;
@@ -78,6 +76,9 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
         Provider.of<Autenticacao>(context, listen: false).usuarioLogado;
     _qtdeDigitos = Provider.of<EstruturaLevantamento>(context, listen: false)
         .getDigitosLeitura;
+
+    _bemPatrimonialStore.buscaBemPatrimonial(
+        unidadeArgs.arg1, unidadeArgs.arg2, _idOrganizacao, unidadeArgs.arg3);
     super.didChangeDependencies();
   }
 
@@ -631,26 +632,29 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
           value: dropdownDominio,
           items: dropdownDominioItens,
           onChanged: (novoItemSelecionado) {
-            setState(
-              () {
-                if (label == 'Situação fisica') {
-                  _edicaoBemInvent.dominioSituacaoFisica = novoItemSelecionado;
-                  _edicaoBemInvent.idDominioSituacaoFisica =
-                      novoItemSelecionado.id;
-                  bem.dominioSituacaoFisica = novoItemSelecionado;
-                  if (bem.dadosBensPatrimoniais != null)
-                    bem.dadosBensPatrimoniais.dominioSituacaoFisica =
+            if (mounted) {
+              setState(
+                () {
+                  if (label == 'Situação fisica') {
+                    _edicaoBemInvent.dominioSituacaoFisica =
                         novoItemSelecionado;
-                } else if (label == 'Status') {
-                  _edicaoBemInvent.dominioStatus = novoItemSelecionado;
-                  _edicaoBemInvent.idDominioStatus = novoItemSelecionado.id;
-                  bem.dominioStatus = novoItemSelecionado;
-                  if (bem.dadosBensPatrimoniais != null)
-                    bem.dadosBensPatrimoniais.dominioStatus =
-                        novoItemSelecionado;
-                }
-              },
-            );
+                    _edicaoBemInvent.idDominioSituacaoFisica =
+                        novoItemSelecionado.id;
+                    bem.dominioSituacaoFisica = novoItemSelecionado;
+                    if (bem.dadosBensPatrimoniais != null)
+                      bem.dadosBensPatrimoniais.dominioSituacaoFisica =
+                          novoItemSelecionado;
+                  } else if (label == 'Status') {
+                    _edicaoBemInvent.dominioStatus = novoItemSelecionado;
+                    _edicaoBemInvent.idDominioStatus = novoItemSelecionado.id;
+                    bem.dominioStatus = novoItemSelecionado;
+                    if (bem.dadosBensPatrimoniais != null)
+                      bem.dadosBensPatrimoniais.dominioStatus =
+                          novoItemSelecionado;
+                  }
+                },
+              );
+            }
           },
         ),
       ),

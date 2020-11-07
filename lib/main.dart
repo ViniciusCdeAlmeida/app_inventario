@@ -1,5 +1,6 @@
 import 'package:app_inventario/screens/login/inicializacao_tela.dart';
 import 'package:app_inventario/stores/bemPatrimonial_store.dart';
+import 'package:app_inventario/stores/bensInventariados_store.dart';
 import 'package:app_inventario/stores/bensPrevistos_store.dart';
 import 'package:app_inventario/stores/estruturaLevantamento_store.dart';
 import 'package:app_inventario/stores/inicializacao_store.dart';
@@ -94,6 +95,11 @@ class MyApp extends StatelessWidget {
         Provider(
           create: (ctx) => BensPrevistosStore(
             BensProvider(),
+          ),
+        ),
+        Provider(
+          create: (ctx) => BensInventariadoStore(
+            InventarioBensPatrimoniais(),
           ),
         ),
         Provider(

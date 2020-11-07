@@ -93,13 +93,14 @@ abstract class _BemPatrimonialStore with Store {
   }
 
   @action
-  Future buscaBemPatrimonial(String numeroPatrimonial) async {
+  Future buscaBemPatrimonial(String numeroPatrimonial, String idInventario,
+      int idUnidade, String idBem) async {
     buscandoBem = true;
 
     try {
       _bemPatrimonialFuture = ObservableFuture(
         _estruturaLevantamento
-            .buscaBensPorId(numeroPatrimonial)
+            .buscaBensPorId(numeroPatrimonial, idInventario, idUnidade, idBem)
             .whenComplete(() => buscandoBem = false)
             .catchError(
           (error) {

@@ -127,9 +127,10 @@ mixin _$BemPatrimonialStore on _BemPatrimonialStore, Store {
       AsyncAction('_BemPatrimonialStore.buscaBemPatrimonial');
 
   @override
-  Future<dynamic> buscaBemPatrimonial(String numeroPatrimonial) {
-    return _$buscaBemPatrimonialAsyncAction
-        .run(() => super.buscaBemPatrimonial(numeroPatrimonial));
+  Future<dynamic> buscaBemPatrimonial(String numeroPatrimonial,
+      String idInventario, int idUnidade, String idBem) {
+    return _$buscaBemPatrimonialAsyncAction.run(() => super.buscaBemPatrimonial(
+        numeroPatrimonial, idInventario, idUnidade, idBem));
   }
 
   final _$buscaDominiosAsyncAction =

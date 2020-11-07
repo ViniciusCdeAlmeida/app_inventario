@@ -1,8 +1,7 @@
-import 'dart:io';
+import 'package:app_inventario/custom/conexao.dart';
 import 'package:app_inventario/helpers/helper_bemPatrimonial.dart';
 import 'package:app_inventario/helpers/helper_dominio.dart';
 import 'package:app_inventario/main.dart';
-import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 
@@ -20,20 +19,8 @@ class Inicializacao with ChangeNotifier {
     "dir": "asc",
     "sort": "numeroPatrimonial",
     "limit": 1000,
-    "filters": [],
+    "filters": []
   };
-
-  Dio getConexaoPrefs(String conexao) {
-    Dio dio = new Dio()
-      ..options.baseUrl =
-          conexao + "/citgrp-patrimonio-web/rest/inventarioMobile/";
-    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
-        (client) {
-      client.badCertificateCallback =
-          (X509Certificate cert, String host, int port) => true;
-    };
-    return dio;
-  }
 
   List<Dominio> get getDominios {
     return [..._dominios];
@@ -79,29 +66,23 @@ class Inicializacao with ChangeNotifier {
   Future<void> _getBensDemanda({String conexao, int itemAtual}) async {
     try {
       if (_startFilter != 0 && filter['start'] < _startFilter) {
-        print('Buscando pagina $itemAtual\n');
+        print('Buscando pagina $itemAtual:' + DateTime.now().toString());
         filter['start'] = itemAtual;
         Response response = await getConexaoPrefs(conexao)
-            .post("obterBensPatrimoniaisDemandaV2.json", data: filter)
-            // .post("obterBensPatrimoniaisDemanda.json", data: filter)
-            .catchError((error) {
-          throw error;
-        });
-        print('Buscado pagina $itemAtual\n');
-        print('Salvando pagina $itemAtual\n');
+            .post("obterBensPatrimoniaisDemandaV2.json", data: filter);
+        // .post("obterBensPatrimoniaisDemanda.json", data: filter);
+        print('Buscado pagina $itemAtual:' + DateTime.now().toString());
+        print('Salvando pagina $itemAtual:' + DateTime.now().toString());
+        // print(response);
         await db.bemPatrimoniaisDao
             .insertBensPatrimoniais(response.data["objects"] as List);
 
-        print('Salvo pagina $itemAtual\n');
+        print('Salvo pagina $itemAtual:' + DateTime.now().toString());
       } else {
         await getConexaoPrefs(conexao)
             .post("obterBensPatrimoniaisDemandaV2.json", data: filter)
             // .post("obterBensPatrimoniaisDemanda.json", data: filter)
-            .catchError(
-          (error) {
-            throw error;
-          },
-        ).then(
+            .then(
           (value) {
             _startFilter = value.data['totalPages'];
           },

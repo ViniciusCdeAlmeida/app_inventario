@@ -1,10 +1,11 @@
+import 'package:app_inventario/stores/bensInventariados_store.dart';
 import 'package:app_inventario/widgets/bens/bens_inventariados_item.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
+import 'package:flare_flutter/flare_actor.dart';
 
-import 'package:app_inventario/models/serialized/inventarioBemPatrimonial.dart';
 import 'package:app_inventario/providers/autenticacao.dart';
-import 'package:app_inventario/providers/inventarioBemPatrimonial.dart';
 
 class BensInventariadosTela extends StatefulWidget {
   static const routeName = '/bensInventariadosTela';
@@ -14,106 +15,122 @@ class BensInventariadosTela extends StatefulWidget {
 }
 
 class _BensInventariadosTelaState extends State<BensInventariadosTela> {
-  bool _isInit = true;
-  List<InventarioBemPatrimonial> _bensInventariados = [];
+  BensInventariadoStore _bensInventariadoStore;
+  final _sliver = GlobalKey();
 
   @override
   void didChangeDependencies() {
-    if (_isInit) {
-      final idUnidade = Provider.of<Autenticacao>(context).idUnidade;
-      Provider.of<InventarioBensPatrimoniais>(context)
-          .buscaBensInventariados(idUnidade);
-    }
-    _isInit = false;
+    final idUnidade = Provider.of<Autenticacao>(context).idUnidade;
+    _bensInventariadoStore =
+        Provider.of<BensInventariadoStore>(context, listen: false);
+    _bensInventariadoStore.buscaBensColetados(idUnidade);
     super.didChangeDependencies();
+  }
+
+  SliverAppBar appBar(String conexao, int idUnidade) {
+    return SliverAppBar(
+      title: Text('Bens Inventariados'),
+      floating: true,
+      pinned: false,
+      snap: true,
+      backgroundColor: Colors.yellow[800],
+      shape: ContinuousRectangleBorder(
+        borderRadius: BorderRadius.only(
+          bottomLeft: const Radius.circular(30.0),
+          bottomRight: const Radius.circular(30.0),
+        ),
+      ),
+      actions: [
+        IconButton(
+            icon: Icon(Icons.cloud_upload),
+            onPressed: () {
+              // if (_bensInventariados
+              //     .where((element) => element.enviado == false)
+              //     .toList()
+              //     .isNotEmpty) {
+              _bensInventariadoStore
+                  .enviaBensColetados(conexao, idUnidade)
+                  .catchError(
+                (error) async {
+                  await showDialog<Null>(
+                    context: context,
+                    builder: (ctx) => AlertDialog(
+                      title: const Text('Ocorreu um erro.'),
+                      content: Text(error.toString()),
+                      actions: <Widget>[
+                        FlatButton(
+                          onPressed: () {
+                            Navigator.of(ctx).pop();
+                          },
+                          child: Text('OK'),
+                        )
+                      ],
+                    ),
+                  );
+                },
+              );
+            }),
+      ],
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    _bensInventariados =
-        Provider.of<InventarioBensPatrimoniais>(context, listen: false)
-            .getInventariados;
+    final idUnidade = Provider.of<Autenticacao>(context).idUnidade;
     final conexao =
         Provider.of<Autenticacao>(context, listen: false).atualConexao;
 
     return Scaffold(
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            title: Text('Bens Inventariados'),
-            floating: true,
-            pinned: false,
-            snap: true,
-            backgroundColor: Colors.yellow[800],
-            shape: ContinuousRectangleBorder(
-              borderRadius: BorderRadius.only(
-                bottomLeft: const Radius.circular(30.0),
-                bottomRight: const Radius.circular(30.0),
-              ),
-            ),
-            actions: [
-              IconButton(
-                icon: Icon(Icons.cloud_upload),
-                onPressed: () {
-                  if (_bensInventariados
-                      .where((element) => element.enviado == false)
-                      .toList()
-                      .isNotEmpty) {
-                    Provider.of<InventarioBensPatrimoniais>(context,
-                            listen: false)
-                        .enviaDados(conexao)
-                        .catchError((error) async {
-                      await showDialog<Null>(
-                        context: context,
-                        builder: (ctx) => AlertDialog(
-                          title: const Text('Ocorreu um erro.'),
-                          content: Text(error.toString()),
-                          actions: <Widget>[
-                            FlatButton(
-                              onPressed: () {
-                                Navigator.of(ctx).pop();
-                              },
-                              child: Text('OK'),
-                            )
-                          ],
-                        ),
-                      );
-                    }).whenComplete(() => _isInit = true);
-                  } else
-                    return showDialog<Null>(
-                      context: context,
-                      builder: (ctx) => AlertDialog(
-                        title:
-                            const Text('Não existe itens para serem enviados.'),
-                        actions: <Widget>[
-                          FlatButton(
-                            onPressed: () {
-                              Navigator.of(ctx).pop();
+      body: Observer(
+        // ignore: missing_return
+        builder: (_) {
+          switch (_bensInventariadoStore.bensInventariadoState) {
+            case BensInventariadoState.inicial:
+            case BensInventariadoState.carregando:
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            case BensInventariadoState.vazio:
+              return Center(
+                child: Text('VAZIO'),
+              );
+            case BensInventariadoState.carregado:
+              return CustomScrollView(
+                key: _sliver,
+                slivers: [
+                  appBar(conexao, idUnidade),
+                  _bensInventariadoStore.enviandoBens
+                      ? SliverFillViewport(
+                          delegate: SliverChildBuilderDelegate(
+                            (BuildContext context, int index) {
+                              return FlareActor(
+                                "assets/animations/Upload.flr",
+                                alignment: Alignment.center,
+                                fit: BoxFit.scaleDown,
+                                animation: "upload",
+                              );
                             },
-                            child: Text('OK'),
-                          )
-                        ],
-                      ),
-                    );
-                },
-              ),
-            ],
-          ),
-          SliverList(
-            delegate: SliverChildListDelegate(
-              _bensInventariados
-                  .map(
-                    (item) => Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: BensInventariadosItem(
-                        bemInventariado: item,
-                      ),
-                    ),
-                  )
-                  .toList(),
-            ),
-          ),
-        ],
+                            childCount: 1,
+                          ),
+                        )
+                      : SliverList(
+                          delegate: SliverChildListDelegate(
+                            _bensInventariadoStore.bensInventariados
+                                .map(
+                                  (item) => Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: BensInventariadosItem(
+                                      bemInventariado: item,
+                                    ),
+                                  ),
+                                )
+                                .toList(),
+                          ),
+                        ),
+                ],
+              );
+          }
+        },
       ),
     );
   }

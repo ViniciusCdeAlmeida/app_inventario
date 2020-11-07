@@ -14,6 +14,12 @@ class LerBensItens extends StatefulWidget {
 }
 
 class _LerBensItensState extends State<LerBensItens> {
+  TelaArgumentos _args;
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+  }
+
   final _controller = TextEditingController();
   final _form = GlobalKey<FormState>();
 
@@ -23,17 +29,19 @@ class _LerBensItensState extends State<LerBensItens> {
   }
 
   void _buscaBemPatrimonial() {
-    int idInventarioUnidade = ModalRoute.of(context).settings.arguments;
+    _args = ModalRoute.of(context).settings.arguments;
     Navigator.of(context).pushNamed(
       LerBensGeralTela.routeName,
       arguments: TelaArgumentos(
-        id: idInventarioUnidade,
+        id: _args.id,
         arg1: _controller.text,
+        arg2: _args.arg1,
       ),
     );
     _controller.text = '';
   }
 
+//------------------MANUAL------------------//
   void _leituraBensManual(BuildContext ctx) {
     showModalBottomSheet(
       context: ctx,
@@ -98,12 +106,13 @@ class _LerBensItensState extends State<LerBensItens> {
     if (!mounted) return;
 
     setState(() {
-      int idInventarioUnidade = ModalRoute.of(context).settings.arguments;
+      _args = ModalRoute.of(context).settings.arguments;
       Navigator.of(context).pushNamed(
         LerBensGeralTela.routeName,
         arguments: TelaArgumentos(
-          id: idInventarioUnidade,
+          id: _args.id,
           arg1: barcodeScanRes,
+          arg2: _args.arg1,
         ),
       );
     });

@@ -17,11 +17,9 @@ class BemPatrimoniaisDao extends DatabaseAccessor<AppDatabase>
   Future<List<BensPatrimoniaisDBData>> getAllBensPatrimoniais() =>
       select(db.bensPatrimoniaisDB).get();
 
-  Future<BensPatrimoniaisDBData> getBemPatrimonial(
-          String numeroBemPatrimonial) =>
+  Future<BensPatrimoniaisDBData> getBemPatrimonial(String idBem) =>
       (select(db.bensPatrimoniaisDB)
-            ..where((tbl) =>
-                tbl.numeroPatrimonialCompleto.equals(numeroBemPatrimonial)))
+            ..where((tbl) => tbl.id.equals(int.parse(idBem))))
           .getSingle();
 
   Future<BensPatrimoniaisDBData> getVerificaBensPatrimoniais() =>

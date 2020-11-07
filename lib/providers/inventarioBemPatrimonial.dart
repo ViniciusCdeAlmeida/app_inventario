@@ -1,6 +1,4 @@
-import 'dart:io';
-import 'package:dio/adapter.dart';
-import 'package:dio/dio.dart';
+import 'package:app_inventario/custom/conexao.dart';
 import 'package:flutter/material.dart';
 
 import 'package:app_inventario/helpers/helper_inventarioBemPatrimonial.dart';
@@ -17,30 +15,21 @@ class InventarioBensPatrimoniais with ChangeNotifier {
     return [..._inventariados];
   }
 
-  Future<void> buscaBensInventariados(int idUnidade) async {
-    _isLoading = false;
-    _inventariados = helperInventarioBemPatrimonialLista(
+  Future<List<InventarioBemPatrimonial>> buscaBensInventariados(
+      int idUnidade) async {
+    return helperInventarioBemPatrimonialLista(
         await db.inventarioBemPatrimonialDao.getInventariados(idUnidade));
-    _isLoading = true;
-    notifyListeners();
   }
 
-  Future<void> _enviaDados(String conexao) async {
-    List itens = [..._inventariados]
+  Future<void> _enviaDados(
+      String conexao, List<InventarioBemPatrimonial> bensColetados) async {
+    List itens = bensColetados
         .where((element) => element.enviado == false)
         .map((e) => e.toJson())
         .toList();
 
-    Dio dio = new Dio()
-      ..options.baseUrl =
-          conexao + "/citgrp-patrimonio-web/rest/inventarioMobile/";
-    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
-        (client) {
-      client.badCertificateCallback =
-          (X509Certificate cert, String host, int port) => true;
-    };
     try {
-      await dio
+      await getConexaoPrefs(conexao)
           .post("saveInventarioBemPatrimonialMobile.json", data: itens)
           .timeout(
             Duration(seconds: 50),
@@ -69,18 +58,9 @@ class InventarioBensPatrimoniais with ChangeNotifier {
         .updateBemPatrimonial(bemPatrimonial.idDadosBemPatrimonialMobile);
   }
 
-  void markAsLoading() {
-    _isLoading = true;
-    notifyListeners();
-  }
-
-  Future<void> enviaDados(String conexao) async {
-    markAsLoading();
-    await _enviaDados(conexao).then((value) => null);
-
-    // _inventariados.clear();
-    _isLoading = false;
-    notifyListeners();
+  Future<void> enviaDados(
+      String conexao, List<InventarioBemPatrimonial> bensColetados) async {
+    await _enviaDados(conexao, bensColetados);
   }
 
   Future<void> gravaDados(InventarioBemPatrimonial item) async {

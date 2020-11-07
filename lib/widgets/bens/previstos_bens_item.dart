@@ -105,6 +105,10 @@ class _PrevistosBensItemState extends State<PrevistosBensItem> {
                                       .bemInventario
                                       .inventarioBemPatrimonial
                                       .numeroPatrimonial,
+                              arg2:
+                                  widget.bemInventario.idInventario.toString(),
+                              arg3: widget.bemInventario.idBemPatrimonial
+                                  .toString(),
                             ),
                           );
                         },

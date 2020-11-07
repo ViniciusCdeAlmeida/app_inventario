@@ -22,19 +22,14 @@ class DadosBemPatrimoniaisDao extends DatabaseAccessor<AppDatabase>
             ..where((tbl) => tbl.idEstruturaOrganizacional.equals(idEstrutura)))
           .get();
 
-  Future<DadosBemPatrimoniaisDBData> getDadosBemPatrimonial(
-          String numeroBemPatrimonial) =>
+  Future<DadosBemPatrimoniaisDBData> getDadosInventariar(
+          String numeroBemPatrimonial, String idInventario, int idUnidade) =>
       (select(db.dadosBemPatrimoniaisDB)
             ..where((tbl) =>
-                tbl.numeroPatrimonialCompleto.equals(numeroBemPatrimonial)))
+                tbl.numeroPatrimonialCompleto.equals(numeroBemPatrimonial) &
+                tbl.idInventario.equals(int.parse(idInventario)) &
+                tbl.idEstruturaOrganizacional.equals(idUnidade)))
           .getSingle();
-
-  Future<DadosBemPatrimoniaisDBData> getDadosInventariar(
-      String numeroBemPatrimonial) async {
-    DadosBemPatrimoniaisDBData dadosBemPatrimonial =
-        await getDadosBemPatrimonial(numeroBemPatrimonial);
-    return dadosBemPatrimonial;
-  }
 
   Future<void> updateDadosBemPatrimonial(int idBemPatrimonial) =>
       (update(db.dadosBemPatrimoniaisDB)

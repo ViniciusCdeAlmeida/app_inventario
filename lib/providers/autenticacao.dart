@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'dart:io';
+import 'package:app_inventario/custom/conexao.dart';
 import 'package:app_inventario/helpers/helper_organizacoes.dart';
 import 'package:app_inventario/main.dart';
 import 'package:app_inventario/models/serialized/conexao.dart';
@@ -7,7 +7,6 @@ import 'package:app_inventario/models/serialized/login.dart';
 import 'package:app_inventario/models/serialized/organizacoes.dart';
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
-import 'package:dio/adapter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // import '../models/http_exception.dart';
@@ -73,24 +72,11 @@ class Autenticacao with ChangeNotifier {
   }
 
   Future<void> _authenticate(String userName, String password) async {
-    bool trustSelfSigned = true;
-    HttpClient httpClient = new HttpClient();
-    httpClient.badCertificateCallback =
-        ((X509Certificate cert, String host, int port) => trustSelfSigned);
-
-    Dio dio = new Dio()
-      ..options.baseUrl =
-          _conexaoAtual.url + "/citgrp-patrimonio-web/rest/inventarioMobile/";
-    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
-        (client) {
-      client.badCertificateCallback =
-          (X509Certificate cert, String host, int port) => trustSelfSigned;
-    };
     try {
-      Response response = await dio
+      Response response = await getConexaoPrefs(_conexaoAtual.url)
           //.get("usuarioValidoV2/?username=$userName&password=$password");
           .get("usuarioValidoV2/?username=vinicius.correa&password=interno")
-          // .get("usuarioValido.json?username=vinicius.correa&password=interno")
+          // .get("usuarioValido.json?username=citsmart&password=interno")
           .timeout(
             Duration(seconds: 50),
           )

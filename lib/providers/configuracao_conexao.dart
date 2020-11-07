@@ -5,14 +5,14 @@ import '../models/serialized/conexao.dart';
 class ConfiguracaoConexao with ChangeNotifier {
   List<Conexao> _conexao = [
     Conexao(
-      // url: 'https://192.168.15.2:8443',
-      // nome: 'Teste App',
-      // ativo: true,
-      // id: '1',
-      url: 'https://grp-frotaspoc.centralit.com.br',
+      url: 'https://192.168.15.2:8443',
       nome: 'Teste App',
       ativo: true,
       id: '1',
+      // url: 'https://grp-frotaspoc.centralit.com.br',
+      // nome: 'Teste App',
+      // ativo: true,
+      // id: '1',
     )
   ];
 

@@ -1,8 +1,6 @@
-import 'dart:io';
-
+import 'package:app_inventario/custom/conexao.dart';
 import 'package:app_inventario/helpers/helper_levantamento.dart';
 import 'package:app_inventario/models/serialized/levantamento.dart';
-import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:app_inventario/main.dart';
@@ -33,16 +31,8 @@ class Levantamentos with ChangeNotifier {
 
   Future<List<Levantamento>> _getLevantamento(
       int idOrganizacao, String conexao) async {
-    Dio dio = new Dio()
-      ..options.baseUrl =
-          conexao + "/citgrp-patrimonio-web/rest/inventarioMobile/";
-    (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
-        (client) {
-      client.badCertificateCallback =
-          (X509Certificate cert, String host, int port) => true;
-    };
     try {
-      Response response = await dio
+      Response response = await getConexaoPrefs(conexao)
           .get("obterLevantamentosPorUGV3.json?idOrganizacao=$idOrganizacao")
           .timeout(
             Duration(seconds: 50),
