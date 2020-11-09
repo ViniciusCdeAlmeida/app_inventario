@@ -71,7 +71,7 @@ class EstruturaLevantamento with ChangeNotifier {
   Future<BemPatrimonial> buscaBensPorId(String numeroBemPatrimonial,
       String idInventario, int idUnidade, String idBem) async {
     _bemPatrimonial = helperDadoBemPatrimonial2(
-        await db.bemPatrimoniaisDao.getBemPatrimonial(idBem));
+        await db.bemPatrimoniaisDao.getBemPatrimonial(numeroBemPatrimonial));
     _bemPatrimonial.dadosBensPatrimoniais = helperDadoBemPatrimonial(
         await db.dadosBemPatrimoniaisDao.getDadosInventariar(
             numeroBemPatrimonial.toUpperCase(), idInventario, idUnidade));

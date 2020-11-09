@@ -74,7 +74,7 @@ class Autenticacao with ChangeNotifier {
   Future<void> _authenticate(String userName, String password) async {
     try {
       Response response = await getConexaoPrefs(_conexaoAtual.url)
-          //.get("usuarioValidoV2/?username=$userName&password=$password");
+          // .get("usuarioValidoV2/?username=$userName&password=$password")
           .get("usuarioValidoV2/?username=vinicius.correa&password=interno")
           // .get("usuarioValido.json?username=citsmart&password=interno")
           .timeout(

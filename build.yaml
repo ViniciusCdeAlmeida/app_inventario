@@ -1,0 +1,7 @@
+targets:
+  $default:
+    builders:
+      moor_generator:
+        options:
+          sqlite_modules:
+            - json1

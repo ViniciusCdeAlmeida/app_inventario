@@ -78,7 +78,7 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
         .getDigitosLeitura;
 
     _bemPatrimonialStore.buscaBemPatrimonial(
-        unidadeArgs.arg1, unidadeArgs.arg2, _idOrganizacao, unidadeArgs.arg3);
+        unidadeArgs.arg1, unidadeArgs.arg2, _idAtuaUl, unidadeArgs.arg3);
     super.didChangeDependencies();
   }
 

@@ -11,7 +11,6 @@ enum BensInventariadoState {
   inicial,
   carregando,
   carregado,
-  vazio,
 }
 
 abstract class _BensInventariadoStore with Store {
@@ -47,11 +46,6 @@ abstract class _BensInventariadoStore with Store {
     if (_bensInventariadosFuture.status == FutureStatus.pending ||
         buscandoBensColetados) return BensInventariadoState.carregando;
 
-    if (_bensInventariadosFuture.status == FutureStatus.fulfilled &&
-        !buscandoBensColetados &&
-        _bensInventariadosObservable.isEmpty)
-      return BensInventariadoState.vazio;
-
     if (_bensInventariadosFuture.status == FutureStatus.fulfilled)
       return BensInventariadoState.carregado;
   }
@@ -59,6 +53,14 @@ abstract class _BensInventariadoStore with Store {
   @computed
   List<InventarioBemPatrimonial> get bensInventariados {
     return _bensInventariadosObservable;
+  }
+
+  @computed
+  bool get existeBensParaEnviar {
+    return _bensInventariadosObservable
+        .where((element) => element.enviado == false)
+        .toList()
+        .isNotEmpty;
   }
 
   @computed
@@ -91,42 +93,49 @@ abstract class _BensInventariadoStore with Store {
 
   @action
   Future enviaBensColetados(String conexao, int idUnidade) async {
-    enviandoBensColetados = true;
-    try {
-      ObservableFuture(Future.delayed(Duration(seconds: 5)).then(
-        (_) {
-          _inventarioBemPatrimonial
-              .enviaDados(conexao, _bensInventariadosObservable.toList())
-              .whenComplete(
-                () => {
-                  enviandoBensColetados = false,
-                  buscaBensColetados(idUnidade),
+    var _listaEnviar = _bensInventariadosObservable
+        .where((element) => element.enviado == false)
+        .toList();
+    if (_listaEnviar.isNotEmpty) {
+      enviandoBensColetados = true;
+      try {
+        ObservableFuture(
+          Future.delayed(Duration(seconds: 2)).then(
+            (_) {
+              _inventarioBemPatrimonial
+                  .enviaDados(conexao, _listaEnviar)
+                  .whenComplete(
+                    () => {
+                      enviandoBensColetados = false,
+                      buscaBensColetados(idUnidade),
+                    },
+                  )
+                  .catchError(
+                (error) {
+                  throw error;
                 },
-              )
-              .catchError(
-            (error) {
-              throw error;
+              );
             },
-          );
-        },
-      ));
-      //   _inventarioBemPatrimonial
-      //       .enviaDados(conexao, _bensInventariadosObservable.toList())
-      //       .whenComplete(
-      //         () => {
-      //           enviandoBensColetados = false,
-      //           buscaBensColetados(idUnidade),
-      //         },
-      //       )
-      //       .catchError(
-      //     (error) {
-      //       throw error;
-      //     },
-      //   ),
-      // );
-    } catch (e) {
-      enviandoBensColetados = false;
-      print(e);
+          ),
+        );
+        //   _inventarioBemPatrimonial
+        //       .enviaDados(conexao, _bensInventariadosObservable.toList())
+        //       .whenComplete(
+        //         () => {
+        //           enviandoBensColetados = false,
+        //           buscaBensColetados(idUnidade),
+        //         },
+        //       )
+        //       .catchError(
+        //     (error) {
+        //       throw error;
+        //     },
+        //   ),
+        // );
+      } catch (e) {
+        enviandoBensColetados = false;
+        print(e);
+      }
     }
   }
 }

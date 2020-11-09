@@ -42,12 +42,10 @@ class _BensInventariadosTelaState extends State<BensInventariadosTela> {
       ),
       actions: [
         IconButton(
-            icon: Icon(Icons.cloud_upload),
+            icon: _bensInventariadoStore.existeBensParaEnviar
+                ? Icon(Icons.cloud_upload)
+                : Icon(Icons.cloud_upload_outlined),
             onPressed: () {
-              // if (_bensInventariados
-              //     .where((element) => element.enviado == false)
-              //     .toList()
-              //     .isNotEmpty) {
               _bensInventariadoStore
                   .enviaBensColetados(conexao, idUnidade)
                   .catchError(
@@ -90,10 +88,6 @@ class _BensInventariadosTelaState extends State<BensInventariadosTela> {
               return Center(
                 child: CircularProgressIndicator(),
               );
-            case BensInventariadoState.vazio:
-              return Center(
-                child: Text('VAZIO'),
-              );
             case BensInventariadoState.carregado:
               return CustomScrollView(
                 key: _sliver,
@@ -115,16 +109,32 @@ class _BensInventariadosTelaState extends State<BensInventariadosTela> {
                         )
                       : SliverList(
                           delegate: SliverChildListDelegate(
-                            _bensInventariadoStore.bensInventariados
-                                .map(
-                                  (item) => Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: BensInventariadosItem(
-                                      bemInventariado: item,
+                            _bensInventariadoStore.bensInventariados.isNotEmpty
+                                ? _bensInventariadoStore.bensInventariados
+                                    .map(
+                                      (item) => Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: BensInventariadosItem(
+                                          bemInventariado: item,
+                                        ),
+                                      ),
+                                    )
+                                    .toList()
+                                : [
+                                    Container(
+                                      height:
+                                          MediaQuery.of(context).size.height,
+                                      width: MediaQuery.of(context).size.width,
+                                      child: Center(
+                                        child: FlareActor(
+                                          "assets/animations/empty.flr",
+                                          alignment: Alignment.center,
+                                          fit: BoxFit.scaleDown,
+                                          animation: "idle",
+                                        ),
+                                      ),
                                     ),
-                                  ),
-                                )
-                                .toList(),
+                                  ],
                           ),
                         ),
                 ],

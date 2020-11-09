@@ -25,6 +25,13 @@ mixin _$BensInventariadoStore on _BensInventariadoStore, Store {
               () => super.bensInventariados,
               name: '_BensInventariadoStore.bensInventariados'))
           .value;
+  Computed<bool> _$existeBensParaEnviarComputed;
+
+  @override
+  bool get existeBensParaEnviar => (_$existeBensParaEnviarComputed ??=
+          Computed<bool>(() => super.existeBensParaEnviar,
+              name: '_BensInventariadoStore.existeBensParaEnviar'))
+      .value;
   Computed<bool> _$enviandoBensComputed;
 
   @override
@@ -129,6 +136,7 @@ buscandoBensColetados: ${buscandoBensColetados},
 enviandoBensColetados: ${enviandoBensColetados},
 bensInventariadoState: ${bensInventariadoState},
 bensInventariados: ${bensInventariados},
+existeBensParaEnviar: ${existeBensParaEnviar},
 enviandoBens: ${enviandoBens}
     ''';
   }

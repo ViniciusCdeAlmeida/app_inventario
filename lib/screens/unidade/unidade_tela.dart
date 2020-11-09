@@ -30,7 +30,14 @@ class _UnidadeTelaState extends State<UnidadeTela> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(unidadeArgs.arg1),
+        title: Text(
+          unidadeArgs.arg1,
+          overflow: TextOverflow.ellipsis,
+          softWrap: true,
+          style: TextStyle(fontSize: 16.0),
+          maxLines: 3,
+        ),
+        elevation: 5,
       ),
       drawer: AppDrawer(),
       body: Observer(

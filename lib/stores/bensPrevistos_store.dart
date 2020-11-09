@@ -121,7 +121,7 @@ abstract class _BensPrevistosStore with Store {
   @action
   void limpaFiltrados() {
     _dadosBensPatrimoniaisFiltradoObservable.clear();
-  } //006032
+  }
 
   @action
   Future buscaBensPorEstrutura(int idUl, String idInventarioEstrutura) async {

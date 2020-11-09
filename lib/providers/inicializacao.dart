@@ -68,14 +68,17 @@ class Inicializacao with ChangeNotifier {
       if (_startFilter != 0 && filter['start'] < _startFilter) {
         print('Buscando pagina $itemAtual:' + DateTime.now().toString());
         filter['start'] = itemAtual;
-        Response response = await getConexaoPrefs(conexao)
-            .post("obterBensPatrimoniaisDemandaV2.json", data: filter);
+        await getConexaoPrefs(conexao)
+            .post("obterBensPatrimoniaisDemandaV2.json", data: filter)
+            .then((value) async {
+          await db.bemPatrimoniaisDao
+              .insertBensPatrimoniais(value.data["objects"] as List);
+        });
+
         // .post("obterBensPatrimoniaisDemanda.json", data: filter);
         print('Buscado pagina $itemAtual:' + DateTime.now().toString());
         print('Salvando pagina $itemAtual:' + DateTime.now().toString());
         // print(response);
-        await db.bemPatrimoniaisDao
-            .insertBensPatrimoniais(response.data["objects"] as List);
 
         print('Salvo pagina $itemAtual:' + DateTime.now().toString());
       } else {

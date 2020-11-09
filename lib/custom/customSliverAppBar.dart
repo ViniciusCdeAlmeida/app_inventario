@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:app_inventario/stores/bensPrevistos_store.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -57,7 +59,13 @@ class _MySliverAppBarState extends State<MySliverAppBar>
           bottomRight: const Radius.circular(30.0),
         ),
       ),
-      title: Text(_search ? '' : widget.titulo),
+      title: Text(
+        _search ? '' : widget.titulo,
+        overflow: TextOverflow.ellipsis,
+        softWrap: true,
+        style: TextStyle(fontSize: 14.0),
+        maxLines: 3,
+      ),
       actions: [
         !_search == false
             ? IconButton(

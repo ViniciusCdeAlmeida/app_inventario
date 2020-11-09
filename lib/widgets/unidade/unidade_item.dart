@@ -24,6 +24,7 @@ class _UnidadeItemState extends State<UnidadeItem> {
           arguments: TelaArgumentos(
             id: widget.unidade.id,
             arg1: widget.unidade.idInventario.toString(),
+            arg2: widget.unidade.estruturaOrganizacional.codigoENome,
           ),
         );
         break;
@@ -33,6 +34,7 @@ class _UnidadeItemState extends State<UnidadeItem> {
           arguments: TelaArgumentos(
             id: idEstrutura,
             arg1: widget.unidade.id.toString(),
+            arg2: widget.unidade.estruturaOrganizacional.codigoENome,
           ),
         );
         break;
