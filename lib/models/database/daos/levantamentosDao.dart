@@ -62,7 +62,7 @@ class LevantamentosDao extends DatabaseAccessor<AppDatabase>
               idOrganizacao: Value(e['idOrganizacao']),
               nome: Value(e['nome']),
               quantidadeEstruturas: Value(e['quantidadeEstruturas']),
-              quantidadeTotalBens: Value(e['quantidadeTotalBensNaoInformados']),
+              quantidadeTotalBens: Value(e['quantidadeTotalBens']),
               quantidadeTotalBensBaixados:
                   Value(e['quantidadeTotalBensBaixados']),
               quantidadeTotalBensEmInconsistencia:

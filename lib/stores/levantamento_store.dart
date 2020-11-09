@@ -47,13 +47,13 @@ abstract class _LevantamentoStore with Store {
       return LevantamentosState.inicial;
     }
 
-    if (_inventariosFuture.status == FutureStatus.pending ||
-        buscandoEstruturas ||
-        atualizandoInv) return LevantamentosState.carregando;
+    if (_inventariosFuture.status == FutureStatus.pending || buscandoEstruturas)
+      return LevantamentosState.carregando;
 
     if (_inventariosFuture.status == FutureStatus.fulfilled &&
         !buscandoEstruturas &&
-        _levantamentosObservable.isEmpty) return LevantamentosState.vazio;
+        _levantamentosObservable.isEmpty &&
+        !atualizandoInv) return LevantamentosState.vazio;
 
     if (existeInventario && _levantamentosObservable.isNotEmpty)
       return LevantamentosState.carregado;
