@@ -29,6 +29,34 @@ class Levantamentos with ChangeNotifier {
         await db.levantamentosDao.getAllLevantamentos(idOrganizacao));
   }
 
+  Future<Levantamento> getLevantamentoDB(int id) async {
+    return helperLevantamento(await db.levantamentosDao.getLevantamento(id));
+  }
+
+  Future<Levantamento> _getAtualizaDadosInventario(
+      int id, String conexao) async {
+    try {
+      Response response = await getConexaoPrefs(conexao)
+          .get("atualizaDadosLevantamentos.json?idLevantamento=$id")
+          .timeout(
+            Duration(seconds: 50),
+          )
+          .catchError((error) {
+        throw error;
+      });
+
+      await db.levantamentosDao
+          .updateAtualizaDados(Levantamento.fromJson(response.data["payload"]));
+      return await getLevantamentoDB(id);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  Future<Levantamento> atualizaDadosInventario(int id, String conexao) async {
+    return await _getAtualizaDadosInventario(id, conexao);
+  }
+
   Future<List<Levantamento>> _getLevantamento(
       int idOrganizacao, String conexao) async {
     try {

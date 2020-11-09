@@ -1,5 +1,6 @@
 import 'package:app_inventario/models/database/databaseMoor.dart';
 import 'package:app_inventario/models/serialized/dominio.dart';
+import 'package:app_inventario/models/serialized/levantamento.dart';
 import 'package:moor_flutter/moor_flutter.dart';
 
 part 'levantamentosDao.g.dart';
@@ -16,8 +17,31 @@ class LevantamentosDao extends DatabaseAccessor<AppDatabase>
             ..where((tbl) => tbl.idOrganizacao.equals(idOrganizacao)))
           .get();
 
+  Future<LevantamentoDBData> getLevantamento(int id) =>
+      (select(db.levantamentoDB)..where((tbl) => tbl.id.equals(id)))
+          .getSingle();
+
   Future<LevantamentoDBData> getVerificaLevantamentos() =>
       (select(db.levantamentoDB)..limit(1)).getSingle();
+
+  Future<void> updateAtualizaDados(Levantamento levantamento) =>
+      (update(db.levantamentoDB)
+            ..where(
+              (tbl) => tbl.id.equals(levantamento.id),
+            ))
+          .write(
+        LevantamentoDBCompanion(
+          quantidadeTotalBensBaixados:
+              Value(levantamento.quantidadeTotalBensBaixados),
+          quantidadeTotalBensEmInconsistencia:
+              Value(levantamento.quantidadeTotalBensEmInconsistencia),
+          quantidadeTotalBensSemInconsistencia:
+              Value(levantamento.quantidadeTotalBensSemInconsistencia),
+          quantidadeTotalBensTratados:
+              Value(levantamento.quantidadeTotalBensTratados),
+          quantidadeTotalBens: Value(levantamento.quantidadeTotalBens),
+        ),
+      );
 
   Future<void> insertLevantamentos(List levantamentos) async {
     await batch(
@@ -38,7 +62,7 @@ class LevantamentosDao extends DatabaseAccessor<AppDatabase>
               idOrganizacao: Value(e['idOrganizacao']),
               nome: Value(e['nome']),
               quantidadeEstruturas: Value(e['quantidadeEstruturas']),
-              quantidadeTotalBens: Value(e['quantidadeTotalBens']),
+              quantidadeTotalBens: Value(e['quantidadeTotalBensNaoInformados']),
               quantidadeTotalBensBaixados:
                   Value(e['quantidadeTotalBensBaixados']),
               quantidadeTotalBensEmInconsistencia:

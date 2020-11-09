@@ -60,7 +60,7 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
       case Acoes.buscarLevantamentos:
         try {
           await _levantamentoStore.buscaEstruturasInventario(
-              conexao, _levantamentoStore.levantamentos);
+              conexao, _levantamentoStore.levantamentosDados);
         } catch (error) {
           await showDialog<Null>(
             context: context,
@@ -160,11 +160,11 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
                   key: UniqueKey(),
                   padding: const EdgeInsets.all(8),
                   child: ListView.builder(
-                    itemCount: _levantamentoStore.levantamentos.length,
+                    itemCount: _levantamentoStore.levantamentosDados.length,
                     itemBuilder: (_, idx) => Column(
                       children: [
                         LevantamentoFisicoItem(
-                          _levantamentoStore.levantamentos[idx],
+                          _levantamentoStore.levantamentosDados[idx],
                         ),
                         Divider(),
                       ],

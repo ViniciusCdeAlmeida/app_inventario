@@ -16,6 +16,13 @@ mixin _$LevantamentoStore on _LevantamentoStore, Store {
           Computed<LevantamentosState>(() => super.inventarioState,
               name: '_LevantamentoStore.inventarioState'))
       .value;
+  Computed<List<Levantamento>> _$levantamentosDadosComputed;
+
+  @override
+  List<Levantamento> get levantamentosDados => (_$levantamentosDadosComputed ??=
+          Computed<List<Levantamento>>(() => super.levantamentosDados,
+              name: '_LevantamentoStore.levantamentosDados'))
+      .value;
 
   final _$existeInventarioAtom =
       Atom(name: '_LevantamentoStore.existeInventario');
@@ -49,18 +56,35 @@ mixin _$LevantamentoStore on _LevantamentoStore, Store {
     });
   }
 
-  final _$levantamentosAtom = Atom(name: '_LevantamentoStore.levantamentos');
+  final _$atualizandoInvAtom = Atom(name: '_LevantamentoStore.atualizandoInv');
 
   @override
-  List<Levantamento> get levantamentos {
-    _$levantamentosAtom.reportRead();
-    return super.levantamentos;
+  bool get atualizandoInv {
+    _$atualizandoInvAtom.reportRead();
+    return super.atualizandoInv;
   }
 
   @override
-  set levantamentos(List<Levantamento> value) {
-    _$levantamentosAtom.reportWrite(value, super.levantamentos, () {
-      super.levantamentos = value;
+  set atualizandoInv(bool value) {
+    _$atualizandoInvAtom.reportWrite(value, super.atualizandoInv, () {
+      super.atualizandoInv = value;
+    });
+  }
+
+  final _$_levantamentosObservableAtom =
+      Atom(name: '_LevantamentoStore._levantamentosObservable');
+
+  @override
+  ObservableList<Levantamento> get _levantamentosObservable {
+    _$_levantamentosObservableAtom.reportRead();
+    return super._levantamentosObservable;
+  }
+
+  @override
+  set _levantamentosObservable(ObservableList<Levantamento> value) {
+    _$_levantamentosObservableAtom
+        .reportWrite(value, super._levantamentosObservable, () {
+      super._levantamentosObservable = value;
     });
   }
 
@@ -80,6 +104,23 @@ mixin _$LevantamentoStore on _LevantamentoStore, Store {
     });
   }
 
+  final _$_inventarioAtualizadoFutureAtom =
+      Atom(name: '_LevantamentoStore._inventarioAtualizadoFuture');
+
+  @override
+  ObservableFuture<Levantamento> get _inventarioAtualizadoFuture {
+    _$_inventarioAtualizadoFutureAtom.reportRead();
+    return super._inventarioAtualizadoFuture;
+  }
+
+  @override
+  set _inventarioAtualizadoFuture(ObservableFuture<Levantamento> value) {
+    _$_inventarioAtualizadoFutureAtom
+        .reportWrite(value, super._inventarioAtualizadoFuture, () {
+      super._inventarioAtualizadoFuture = value;
+    });
+  }
+
   final _$verificaInventariosAsyncAction =
       AsyncAction('_LevantamentoStore.verificaInventarios');
 
@@ -87,6 +128,15 @@ mixin _$LevantamentoStore on _LevantamentoStore, Store {
   Future<dynamic> verificaInventarios(String conexao, int idOrganizacao) {
     return _$verificaInventariosAsyncAction
         .run(() => super.verificaInventarios(conexao, idOrganizacao));
+  }
+
+  final _$atualizaInventariosAsyncAction =
+      AsyncAction('_LevantamentoStore.atualizaInventarios');
+
+  @override
+  Future<dynamic> atualizaInventarios(String conexao, int id) {
+    return _$atualizaInventariosAsyncAction
+        .run(() => super.atualizaInventarios(conexao, id));
   }
 
   final _$buscaEstruturasInventarioAsyncAction =
@@ -104,8 +154,9 @@ mixin _$LevantamentoStore on _LevantamentoStore, Store {
     return '''
 existeInventario: ${existeInventario},
 buscandoEstruturas: ${buscandoEstruturas},
-levantamentos: ${levantamentos},
-inventarioState: ${inventarioState}
+atualizandoInv: ${atualizandoInv},
+inventarioState: ${inventarioState},
+levantamentosDados: ${levantamentosDados}
     ''';
   }
 }

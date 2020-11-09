@@ -27,10 +27,17 @@ abstract class _LevantamentoStore with Store {
   bool buscandoEstruturas = false;
 
   @observable
-  List<Levantamento> levantamentos = [];
+  bool atualizandoInv = false;
+
+  @observable
+  ObservableList<Levantamento> _levantamentosObservable =
+      ObservableList<Levantamento>();
 
   @observable
   ObservableFuture<List<Levantamento>> _inventariosFuture;
+
+  @observable
+  ObservableFuture<Levantamento> _inventarioAtualizadoFuture;
 
   @computed
   // ignore: missing_return
@@ -40,15 +47,21 @@ abstract class _LevantamentoStore with Store {
       return LevantamentosState.inicial;
     }
 
-    if (_inventariosFuture.status == FutureStatus.pending || buscandoEstruturas)
-      return LevantamentosState.carregando;
+    if (_inventariosFuture.status == FutureStatus.pending ||
+        buscandoEstruturas ||
+        atualizandoInv) return LevantamentosState.carregando;
 
     if (_inventariosFuture.status == FutureStatus.fulfilled &&
         !buscandoEstruturas &&
-        levantamentos.isEmpty) return LevantamentosState.vazio;
+        _levantamentosObservable.isEmpty) return LevantamentosState.vazio;
 
-    if (existeInventario && levantamentos.isNotEmpty)
+    if (existeInventario && _levantamentosObservable.isNotEmpty)
       return LevantamentosState.carregado;
+  }
+
+  @computed
+  List<Levantamento> get levantamentosDados {
+    return [..._levantamentosObservable];
   }
 
   @action
@@ -64,7 +77,7 @@ abstract class _LevantamentoStore with Store {
             print(error);
           },
         );
-        levantamentos = await _inventariosFuture;
+        _levantamentosObservable = (await _inventariosFuture).asObservable();
       } catch (e) {
         print(e);
       }
@@ -72,10 +85,29 @@ abstract class _LevantamentoStore with Store {
       try {
         _inventariosFuture =
             ObservableFuture(_levantamentos.getLevantamentosDB(idOrganizacao));
-        levantamentos = await _inventariosFuture;
+        _levantamentosObservable = (await _inventariosFuture).asObservable();
       } catch (e) {
         print(e);
       }
+    }
+  }
+
+  @action
+  Future atualizaInventarios(String conexao, int id) async {
+    atualizandoInv = true;
+    try {
+      _inventarioAtualizadoFuture =
+          ObservableFuture(_levantamentos.atualizaDadosInventario(id, conexao))
+              // ignore: missing_return
+              .then((value) {
+        var item =
+            _levantamentosObservable.indexWhere((element) => element.id == id);
+        _levantamentosObservable.removeAt(item);
+        _levantamentosObservable.insert(item, value);
+        atualizandoInv = false;
+      });
+    } catch (e) {
+      print(e);
     }
   }
 
