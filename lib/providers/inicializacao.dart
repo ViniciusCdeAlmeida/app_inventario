@@ -3,16 +3,12 @@ import 'package:app_inventario/helpers/helper_bemPatrimonial.dart';
 import 'package:app_inventario/helpers/helper_dominio.dart';
 import 'package:app_inventario/main.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 
-import 'package:app_inventario/models/serialized/bemPatrimonial.dart';
-import 'package:app_inventario/models/serialized/dominio.dart';
-
-class Inicializacao with ChangeNotifier {
-  List<Dominio> _dominios = [];
+class Inicializacao {
   int _startFilter = 0;
-  // ignore: unused_field
-  List<BemPatrimonial> _bensDemanda = [];
+  int qtdeItens = 0;
+  int qtdeItensAtual = 0;
+  double progress = 0;
 
   Map filter = {
     "start": 1,
@@ -21,10 +17,6 @@ class Inicializacao with ChangeNotifier {
     "limit": 1000,
     "filters": []
   };
-
-  List<Dominio> get getDominios {
-    return [..._dominios];
-  }
 
   Future<bool> getVerificaDominioDB() async {
     if (helperDominio(await db.dominioDao.getVerificaDominios()) != null) {
@@ -63,37 +55,36 @@ class Inicializacao with ChangeNotifier {
     }
   }
 
-  Future<void> _getBensDemanda({String conexao, int itemAtual}) async {
+  Future<double> getBensDemanda({String conexao, int itemAtual}) async {
+    int itens = 0;
     try {
-      if (_startFilter != 0 && filter['start'] < _startFilter) {
-        print('Buscando pagina $itemAtual:' + DateTime.now().toString());
-        filter['start'] = itemAtual;
-        await getConexaoPrefs(conexao)
-            .post("obterBensPatrimoniaisDemandaV2.json", data: filter)
-            .then((value) async {
-          await db.bemPatrimoniaisDao
-              .insertBensPatrimoniais(value.data["objects"] as List);
-        });
-
-        // .post("obterBensPatrimoniaisDemanda.json", data: filter);
-        print('Buscado pagina $itemAtual:' + DateTime.now().toString());
-        print('Salvando pagina $itemAtual:' + DateTime.now().toString());
-        // print(response);
-
-        print('Salvo pagina $itemAtual:' + DateTime.now().toString());
-      } else {
-        await getConexaoPrefs(conexao)
-            .post("obterBensPatrimoniaisDemandaV2.json", data: filter)
-            // .post("obterBensPatrimoniaisDemanda.json", data: filter)
-            .then(
-          (value) {
-            _startFilter = value.data['totalPages'];
-          },
-        );
-      }
+      print('Buscando pagina $itemAtual:' + DateTime.now().toString());
+      filter['start'] = itemAtual;
+      await getConexaoPrefs(conexao)
+          .post("obterBensPatrimoniaisDemandaV2.json", data: filter)
+          .then((value) {
+        itens = (value.data["objects"] as List).length;
+        db.bemPatrimoniaisDao
+            .insertBensPatrimoniais(value.data["objects"] as List);
+      });
+      print('Salvo pagina $itemAtual:' + DateTime.now().toString());
     } catch (error) {
       throw error;
     }
+    qtdeItensAtual = qtdeItensAtual + itens;
+    return progress = qtdeItensAtual / qtdeItens;
+  }
+
+  Future _getDadosBensDemanda(String conexao) async {
+    await getConexaoPrefs(conexao)
+        .post("obterBensPatrimoniaisDemandaV2.json", data: filter)
+        // .post("obterBensPatrimoniaisDemanda.json", data: filter)
+        .then(
+      (value) {
+        _startFilter = value.data['totalPages'];
+        qtdeItens = value.data['totalItens'];
+      },
+    );
   }
 
   Future buscaDominioInicial(String conexao) async {
@@ -102,21 +93,13 @@ class Inicializacao with ChangeNotifier {
     await _getDominios(conexao);
   }
 
-  Future buscaBemPatrimonialInicial(String conexao) async {
+  Future<List> buscaBemPatrimonialInicial(String conexao) async {
     // db.deleteTable(db.bensPatrimoniaisDB);
-    await _getBensDemanda(conexao: conexao);
-    if (_startFilter != 0) {
-      List<dynamic> maximo = [];
-      for (var i = 0; i < _startFilter; i++) {
-        maximo.insert(i, i + 1);
-      }
-      await Stream.fromIterable(maximo)
-          .asyncMap(
-            (element) => _getBensDemanda(conexao: conexao, itemAtual: element),
-          )
-          .toList();
-    } else {
-      return;
+    await _getDadosBensDemanda(conexao);
+    List<dynamic> maximo = [];
+    for (var i = 0; i < _startFilter; i++) {
+      maximo.insert(i, i + 1);
     }
+    return maximo.toList();
   }
 }

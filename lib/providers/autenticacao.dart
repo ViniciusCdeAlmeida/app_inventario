@@ -71,36 +71,32 @@ class Autenticacao with ChangeNotifier {
         await db.unidadesGestorasDao.getAllUnidades());
   }
 
-  Future<void> _authenticate(String userName, String password) async {
+  Future _authenticate(String userName, String password) async {
     try {
       Response response = await getConexaoPrefs(_conexaoAtual.url)
           // .get("usuarioValidoV2/?username=$userName&password=$password")
-          .get("usuarioValidoV2/?username=vinicius.correa&password=interno")
-          // .get("usuarioValido.json?username=citsmart&password=interno")
-          .timeout(
-            Duration(seconds: 50),
-          )
-          .catchError((error) {
-        throw error;
-      });
+          .get("usuarioValidoV2/?username=vinicius.correa&password=interno");
+      // .get("usuarioValido.json?username=citsmart&password=interno")
+      // .timeout(
+      //   Duration(seconds: 50),
+      // )
       if (!_existeOrganizacao) {
         await db.unidadesGestorasDao
             .insertUnidadeGestora(response.data['organizacoes'] as List)
-            .then((_) => _existeOrganizacao = true)
+            .whenComplete(() => _existeOrganizacao = true)
             .catchError(
           (error) {
-            throw error;
+            print(error);
           },
         );
       }
       _usrLogado = Login.fromJson(response.data);
     } catch (error) {
-      throw error;
+      print(error);
     }
-    notifyListeners();
   }
 
-  Future<void> login(String userName, String password) async {
+  Future login(String userName, String password) async {
     await getVerificaOrganizacaoDB();
     // db.deleteTable(db.unidadesGestorasDB);
     await _authenticate(userName, password);

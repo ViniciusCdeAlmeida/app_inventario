@@ -1,17 +1,17 @@
-import 'package:app_inventario/screens/login/inicializacao_tela.dart';
+import 'package:app_inventario/providers/inicializacao.dart';
 import 'package:app_inventario/stores/bemPatrimonial_store.dart';
 import 'package:app_inventario/stores/bensInventariados_store.dart';
 import 'package:app_inventario/stores/bensPrevistos_store.dart';
 import 'package:app_inventario/stores/estruturaLevantamento_store.dart';
 import 'package:app_inventario/stores/inicializacao_store.dart';
 import 'package:app_inventario/stores/levantamento_store.dart';
+import 'package:app_inventario/stores/login_store.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:app_inventario/models/database/databaseMoor.dart';
 
 import 'package:app_inventario/providers/bensProvider.dart';
-import 'package:app_inventario/providers/inicializacao.dart';
 import 'package:app_inventario/providers/estruturaLevantamento.dart';
 import 'package:app_inventario/providers/inventarioBemPatrimonial.dart';
 import 'package:app_inventario/providers/levantamentos.dart';
@@ -19,20 +19,8 @@ import 'package:app_inventario/providers/configuracao_conexao.dart';
 import 'package:app_inventario/providers/autenticacao.dart';
 import 'package:app_inventario/providers/inventario.dart';
 
-import 'package:app_inventario/screens/inventario/inventario_geral_tela.dart';
-import 'package:app_inventario/screens/inventario/inventario_selecao_tela.dart';
-import 'package:app_inventario/screens/inventario/levantamento_fisico_tela.dart';
-import 'package:app_inventario/screens/unidade/unidade_tela.dart';
-import 'package:app_inventario/screens/bens/previstos_bens_tela.dart';
-import 'package:app_inventario/screens/bens/ler_bens_geral_tela.dart';
-import 'package:app_inventario/screens/configuracao/configuracao_conexao_edicao_tela.dart';
 import 'package:app_inventario/screens/login/login_tela.dart';
 import 'package:app_inventario/screens/organizacao/organizacao_tela.dart';
-import 'package:app_inventario/screens/bens/bens_inventariados_tela.dart';
-
-import 'package:app_inventario/widgets/bens/ler_bens_item.dart';
-
-import 'package:app_inventario/screens/configuracao/configuracao_conexao_tela.dart';
 
 import 'package:app_inventario/custom/custom_route.dart';
 
@@ -60,7 +48,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (ctx) => BensProvider(),
         ),
-        ChangeNotifierProvider(
+        Provider(
           create: (ctx) => Inicializacao(),
         ),
         ChangeNotifierProvider(
@@ -103,6 +91,12 @@ class MyApp extends StatelessWidget {
           ),
         ),
         Provider(
+          create: (ctx) => LoginStore(
+            Autenticacao(),
+            ConfiguracaoConexao(),
+          ),
+        ),
+        Provider(
           create: (ctx) => BemPatrimonialStore(
             BensProvider(),
             EstruturaLevantamento(),
@@ -126,25 +120,8 @@ class MyApp extends StatelessWidget {
             ),
           ),
           initialRoute: '/',
-          home:
-              autenticacaoDados.existeUsuario ? OrganizacaoTela() : LoginTela(),
-          routes: {
-            ConfiguracaoConexaoTela.routeName: (ctx) =>
-                ConfiguracaoConexaoTela(),
-            ConfiguracaoConexaoEdicaoTela.routeName: (ctx) =>
-                ConfiguracaoConexaoEdicaoTela(),
-            LoginTela.routeName: (ctx) => LoginTela(),
-            OrganizacaoTela.routeName: (ctx) => OrganizacaoTela(),
-            InventarioSelecaoTela.routeName: (ctx) => InventarioSelecaoTela(),
-            InventarioGeralTela.routeName: (ctx) => InventarioGeralTela(),
-            UnidadeTela.routeName: (ctx) => UnidadeTela(),
-            LevantamentoFisicoTela.routeName: (ctx) => LevantamentoFisicoTela(),
-            LerBensItens.routeName: (ctx) => LerBensItens(),
-            PrevistosBensTela.routeName: (ctx) => PrevistosBensTela(),
-            LerBensGeralTela.routeName: (ctx) => LerBensGeralTela(),
-            BensInventariadosTela.routeName: (ctx) => BensInventariadosTela(),
-            InicializacaoTela.routeName: (ctx) => InicializacaoTela(),
-          },
+          home: LoginTela(),
+          routes: rotas(),
         ),
       ),
     );

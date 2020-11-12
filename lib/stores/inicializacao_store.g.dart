@@ -16,6 +16,13 @@ mixin _$InicializacaoStore on _InicializacaoStore, Store {
           Computed<InicializacaoState>(() => super.inicializacaoState,
               name: '_InicializacaoStore.inicializacaoState'))
       .value;
+  Computed<int> _$qtdeItensComputed;
+
+  @override
+  int get qtdeItens =>
+      (_$qtdeItensComputed ??= Computed<int>(() => super.qtdeItens,
+              name: '_InicializacaoStore.qtdeItens'))
+          .value;
 
   final _$existeDominioAtom = Atom(name: '_InicializacaoStore.existeDominio');
 
@@ -46,6 +53,69 @@ mixin _$InicializacaoStore on _InicializacaoStore, Store {
     _$existeBensPatrimoniaisAtom
         .reportWrite(value, super.existeBensPatrimoniais, () {
       super.existeBensPatrimoniais = value;
+    });
+  }
+
+  final _$buscandoBensPatrimoniaisAtom =
+      Atom(name: '_InicializacaoStore.buscandoBensPatrimoniais');
+
+  @override
+  bool get buscandoBensPatrimoniais {
+    _$buscandoBensPatrimoniaisAtom.reportRead();
+    return super.buscandoBensPatrimoniais;
+  }
+
+  @override
+  set buscandoBensPatrimoniais(bool value) {
+    _$buscandoBensPatrimoniaisAtom
+        .reportWrite(value, super.buscandoBensPatrimoniais, () {
+      super.buscandoBensPatrimoniais = value;
+    });
+  }
+
+  final _$_qtdeItensAtom = Atom(name: '_InicializacaoStore._qtdeItens');
+
+  @override
+  int get _qtdeItens {
+    _$_qtdeItensAtom.reportRead();
+    return super._qtdeItens;
+  }
+
+  @override
+  set _qtdeItens(int value) {
+    _$_qtdeItensAtom.reportWrite(value, super._qtdeItens, () {
+      super._qtdeItens = value;
+    });
+  }
+
+  final _$_qtdeItensTotalAtom =
+      Atom(name: '_InicializacaoStore._qtdeItensTotal');
+
+  @override
+  int get _qtdeItensTotal {
+    _$_qtdeItensTotalAtom.reportRead();
+    return super._qtdeItensTotal;
+  }
+
+  @override
+  set _qtdeItensTotal(int value) {
+    _$_qtdeItensTotalAtom.reportWrite(value, super._qtdeItensTotal, () {
+      super._qtdeItensTotal = value;
+    });
+  }
+
+  final _$_progressAtom = Atom(name: '_InicializacaoStore._progress');
+
+  @override
+  double get _progress {
+    _$_progressAtom.reportRead();
+    return super._progress;
+  }
+
+  @override
+  set _progress(double value) {
+    _$_progressAtom.reportWrite(value, super._progress, () {
+      super._progress = value;
     });
   }
 
@@ -152,8 +222,10 @@ mixin _$InicializacaoStore on _InicializacaoStore, Store {
     return '''
 existeDominio: ${existeDominio},
 existeBensPatrimoniais: ${existeBensPatrimoniais},
+buscandoBensPatrimoniais: ${buscandoBensPatrimoniais},
 organizacoes: ${organizacoes},
-inicializacaoState: ${inicializacaoState}
+inicializacaoState: ${inicializacaoState},
+qtdeItens: ${qtdeItens}
     ''';
   }
 }

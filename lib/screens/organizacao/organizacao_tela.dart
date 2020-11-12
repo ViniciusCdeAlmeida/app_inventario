@@ -4,6 +4,7 @@ import 'package:app_inventario/widgets/cabecalho/app_cabecalho.dart';
 import 'package:app_inventario/widgets/organizacao/organizacao_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:mobx/mobx.dart';
 import 'package:provider/provider.dart';
 
 class OrganizacaoTela extends StatefulWidget {
@@ -25,6 +26,7 @@ class _OrganizacaoTelaState extends State<OrganizacaoTela> {
         Provider.of<InicializacaoStore>(context, listen: false);
     _inicializacaoStore.verificaOrganizacoes();
     _inicializacaoStore.verificaInicializacao(conexao);
+
     super.didChangeDependencies();
   }
 
@@ -33,7 +35,13 @@ class _OrganizacaoTelaState extends State<OrganizacaoTela> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        title: Text('Selecione a Unidade Organizacional'),
+        title: Text(
+          'Selecione a Unidade Organizacional',
+          overflow: TextOverflow.ellipsis,
+          softWrap: true,
+          style: TextStyle(fontSize: 16.0),
+          maxLines: 3,
+        ),
       ),
       drawer: AppDrawer(),
       body: AnimatedSwitcher(
@@ -45,7 +53,27 @@ class _OrganizacaoTelaState extends State<OrganizacaoTela> {
               case InicializacaoState.inicial:
               case InicializacaoState.carregando:
                 return Center(
-                  child: CircularProgressIndicator(),
+                  child: Container(
+                    height: 72,
+                    child: Column(
+                      children: [
+                        Text('Carregando bens patrimoniais...'),
+                        Container(
+                          height: 35,
+                          padding: EdgeInsets.all(8.0),
+                          child: LinearProgressIndicator(
+                            value: _inicializacaoStore.progress,
+                          ),
+                        ),
+                        Container(
+                          child: Text(
+                            '${(_inicializacaoStore.progress * 100).ceil()}%',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 );
               case InicializacaoState.carregado:
               case InicializacaoState.carregadoInicializacao:

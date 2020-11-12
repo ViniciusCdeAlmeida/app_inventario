@@ -21,11 +21,25 @@ abstract class _InicializacaoStore with Store {
 
   _InicializacaoStore(this._inicializacao, this._organizacoes);
 
+  List paginas = [];
+
   @observable
   bool existeDominio = false;
 
   @observable
   bool existeBensPatrimoniais = false;
+
+  @observable
+  bool buscandoBensPatrimoniais = false;
+
+  @observable
+  int _qtdeItens = 0;
+
+  @observable
+  int _qtdeItensTotal = 0;
+
+  @observable
+  double _progress = 0.0;
 
   @observable
   List<Organizacoes> organizacoes = [];
@@ -53,8 +67,9 @@ abstract class _InicializacaoStore with Store {
     }
 
     if ((_dominioFuture.status == FutureStatus.pending) ||
-        (_bensPatrimoniaisFuture.status == FutureStatus.pending))
+        _bensPatrimoniaisFuture.status == FutureStatus.pending) {
       return InicializacaoState.carregando;
+    }
 
     if ((_dominioFuture.status == FutureStatus.fulfilled || existeDominio) &&
             (_bensPatrimoniaisFuture.status == FutureStatus.fulfilled ||
@@ -63,14 +78,29 @@ abstract class _InicializacaoStore with Store {
       return InicializacaoState.carregado;
   }
 
+  @computed
+  int get qtdeItens {
+    return _qtdeItens;
+  }
+
+  int get qtdeItensTotal {
+    return _qtdeItensTotal;
+  }
+
+  double get progress {
+    return _progress;
+  }
+
   @action
   Future _getBensPatrimoniais(String conexao) async {
+    paginas = await _inicializacao.buscaBemPatrimonialInicial(conexao);
     try {
       _bensPatrimoniaisFuture = ObservableFuture(
-        _inicializacao.buscaBemPatrimonialInicial(conexao).catchError(
-          (error) {
-            print(error);
-          },
+        Future.forEach(
+          paginas,
+          (element) => _inicializacao
+              .getBensDemanda(conexao: conexao, itemAtual: element)
+              .then((value) => _progress = value),
         ).whenComplete(() => existeBensPatrimoniais = true),
       );
     } catch (e) {
