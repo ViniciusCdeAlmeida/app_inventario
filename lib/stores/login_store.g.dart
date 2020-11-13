@@ -77,16 +77,31 @@ mixin _$LoginStore on _LoginStore, Store {
     });
   }
 
+  final _$_usuarioLogadoAtom = Atom(name: '_LoginStore._usuarioLogado');
+
+  @override
+  Login get _usuarioLogado {
+    _$_usuarioLogadoAtom.reportRead();
+    return super._usuarioLogado;
+  }
+
+  @override
+  set _usuarioLogado(Login value) {
+    _$_usuarioLogadoAtom.reportWrite(value, super._usuarioLogado, () {
+      super._usuarioLogado = value;
+    });
+  }
+
   final _$_loginFutureAtom = Atom(name: '_LoginStore._loginFuture');
 
   @override
-  ObservableFuture<dynamic> get _loginFuture {
+  ObservableFuture<Login> get _loginFuture {
     _$_loginFutureAtom.reportRead();
     return super._loginFuture;
   }
 
   @override
-  set _loginFuture(ObservableFuture<dynamic> value) {
+  set _loginFuture(ObservableFuture<Login> value) {
     _$_loginFutureAtom.reportWrite(value, super._loginFuture, () {
       super._loginFuture = value;
     });

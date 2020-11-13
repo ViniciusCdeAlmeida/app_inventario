@@ -24,23 +24,23 @@ class _LoginCardState extends State<LoginCard> {
     'password': '',
   };
 
-  void _showErrorDialog(String message) {
-    showDialog(
-      context: context,
-      builder: (ctx) => AlertDialog(
-        title: Text('Error'),
-        content: Text(message),
-        actions: <Widget>[
-          FlatButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: Text('OK'),
-          ),
-        ],
-      ),
-    );
-  }
+  // void _showErrorDialog(String message) {
+  //   showDialog(
+  //     context: context,
+  //     builder: (ctx) => AlertDialog(
+  //       title: Text('Error'),
+  //       content: Text(message),
+  //       actions: <Widget>[
+  //         FlatButton(
+  //           onPressed: () {
+  //             Navigator.of(context).pop();
+  //           },
+  //           child: Text('OK'),
+  //         ),
+  //       ],
+  //     ),
+  //   );
+  // }
 
   Future<void> _submit() async {
     var _conexoes = Provider.of<ConfiguracaoConexao>(context, listen: false);
@@ -60,8 +60,8 @@ class _LoginCardState extends State<LoginCard> {
             _loginData['userName'],
             _loginData['password'],
           )
-          .whenComplete(
-            () => Navigator.of(context).pushNamed(
+          .then(
+            (_) => Navigator.of(context).pushNamed(
               OrganizacaoTela.routeName,
             ),
           );

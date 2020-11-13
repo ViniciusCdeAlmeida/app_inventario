@@ -1,3 +1,4 @@
+import 'package:app_inventario/models/serialized/login.dart';
 import 'package:app_inventario/providers/autenticacao.dart';
 import 'package:app_inventario/providers/configuracao_conexao.dart';
 
@@ -32,7 +33,14 @@ abstract class _LoginStore with Store {
   double _progress = 0.0;
 
   @observable
-  ObservableFuture _loginFuture;
+  Login _usuarioLogado;
+
+  @observable
+  ObservableFuture<Login> _loginFuture;
+
+  Login get usuarioLogado {
+    return _usuarioLogado;
+  }
 
   @computed
   // ignore: missing_return
@@ -54,11 +62,12 @@ abstract class _LoginStore with Store {
     _autenticacao.conexaoAtual(_configuracaoConexao.conexoes);
     logando = true;
     try {
-      _loginFuture = await ObservableFuture(
+      _loginFuture = ObservableFuture(
         _autenticacao.login(usuario, senha),
-      ).whenComplete(() => logando = false);
+      );
+      _usuarioLogado = await _loginFuture.whenComplete(() => logando = false);
     } catch (e) {
-      print(e);
+      throw e;
     }
   }
 }

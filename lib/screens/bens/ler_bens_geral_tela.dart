@@ -1,5 +1,6 @@
 import 'package:app_inventario/stores/bemPatrimonial_store.dart';
 import 'package:app_inventario/stores/bensPrevistos_store.dart';
+import 'package:app_inventario/stores/login_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
@@ -73,7 +74,7 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
         Provider.of<EstruturaLevantamento>(context, listen: false)
             .getDigitoVerificador;
     _usuarioColetante =
-        Provider.of<Autenticacao>(context, listen: false).usuarioLogado;
+        Provider.of<LoginStore>(context, listen: false).usuarioLogado.username;
     _qtdeDigitos = Provider.of<EstruturaLevantamento>(context, listen: false)
         .getDigitosLeitura;
 

@@ -16,6 +16,7 @@ class Conexao with ChangeNotifier {
     this.nome,
     this.ativo,
   });
+  // ignore: missing_return
   factory Conexao.fromJson(Map<String, dynamic> json) {
     if (json == null) {
       return null;
