@@ -24,6 +24,7 @@ class MyApp extends StatelessWidget {
       providers: providers(),
       child: Consumer<Autenticacao>(
         builder: (ctx, autenticacaoDados, _) => MaterialApp(
+          debugShowCheckedModeBanner: false,
           title: 'APP inventario',
           theme: ThemeData(
             primaryColor: Colors.yellow[800],

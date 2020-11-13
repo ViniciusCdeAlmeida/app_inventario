@@ -18,28 +18,28 @@ import 'package:app_inventario/stores/levantamento_store.dart';
 import 'package:app_inventario/stores/login_store.dart';
 
 List<SingleChildWidget> providers() => [
-      ChangeNotifierProvider(
+      Provider(
         create: (ctx) => Autenticacao(),
       ),
-      ChangeNotifierProvider(
+      Provider(
         create: (ctx) => ConfiguracaoConexao(),
       ),
-      ChangeNotifierProvider(
+      Provider(
         create: (ctx) => Inventario(),
       ),
-      ChangeNotifierProvider(
+      Provider(
         create: (ctx) => BensProvider(),
       ),
       Provider(
         create: (ctx) => Inicializacao(),
       ),
-      ChangeNotifierProvider(
+      Provider(
         create: (ctx) => InventarioBensPatrimoniais(),
       ),
-      ChangeNotifierProvider(
+      Provider(
         create: (ctx) => EstruturaLevantamento(),
       ),
-      ChangeNotifierProxyProvider<Autenticacao, Levantamentos>(
+      ProxyProvider<Autenticacao, Levantamentos>(
         create: (context) => Levantamentos(),
         update: (ctx, autenticacao, _) => Levantamentos(
           idOrganizacao: autenticacao.idUnidade,

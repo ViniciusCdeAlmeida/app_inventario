@@ -130,18 +130,13 @@ abstract class _BensPrevistosStore with Store {
       _dadosBensPatrimoniaisFuture = ObservableFuture(
         _bensProvider
             .buscaBensPorEstrutura(idUl, idInventarioEstrutura)
-            .whenComplete(() => buscandoBens = false)
-            .catchError(
-          (error) {
-            throw error;
-          },
-        ),
+            .whenComplete(() => buscandoBens = false),
       );
       _dadosBensPatrimoniaisObservable =
           (await _dadosBensPatrimoniaisFuture).asObservable();
     } catch (e) {
       buscandoBens = false;
-      print(e);
+      throw (e);
     }
   }
 }

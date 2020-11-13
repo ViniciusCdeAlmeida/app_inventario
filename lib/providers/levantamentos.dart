@@ -2,10 +2,9 @@ import 'package:app_inventario/custom/conexao.dart';
 import 'package:app_inventario/helpers/helper_levantamento.dart';
 import 'package:app_inventario/models/serialized/levantamento.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 import 'package:app_inventario/main.dart';
 
-class Levantamentos with ChangeNotifier {
+class Levantamentos {
   final int idOrganizacao;
   String _nomeLevantamento;
 

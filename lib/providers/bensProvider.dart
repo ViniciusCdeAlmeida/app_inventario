@@ -1,9 +1,8 @@
 import 'package:app_inventario/helpers/helper_dadosBemPatrimonial.dart';
 import 'package:app_inventario/main.dart';
 import 'package:app_inventario/models/serialized/dadosBensPatrimoniais.dart';
-import 'package:flutter/material.dart';
 
-class BensProvider with ChangeNotifier {
+class BensProvider {
   List<DadosBensPatrimoniais> _bensPorEstrutura = [];
 
   Future<List<DadosBensPatrimoniais>> buscaBensPorEstrutura(

@@ -55,17 +55,12 @@ abstract class _EstruturaLevantamentoStore with Store {
       _estruturasFuture = ObservableFuture(
         _estruturaLevantamento
             .buscaPorEstrutura(idEstrutura)
-            .whenComplete(() => buscandoEstruturas = false)
-            .catchError(
-          (error) {
-            throw error;
-          },
-        ),
+            .whenComplete(() => buscandoEstruturas = false),
       );
       estruturas = await _estruturasFuture;
     } catch (e) {
       buscandoEstruturas = false;
-      print(e);
+      throw (e);
     }
   }
 }

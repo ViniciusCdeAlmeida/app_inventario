@@ -1,7 +1,6 @@
 import 'package:app_inventario/custom/conexao.dart';
 import 'package:app_inventario/models/serialized/bemPatrimonial.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/material.dart';
 
 import 'package:app_inventario/main.dart';
 
@@ -12,7 +11,7 @@ import 'package:app_inventario/models/serialized/dadosBensPatrimoniais.dart';
 import 'package:app_inventario/models/serialized/estruturaInventario.dart';
 import 'package:app_inventario/models/serialized/levantamento.dart';
 
-class EstruturaLevantamento with ChangeNotifier {
+class EstruturaLevantamento {
   List<EstruturaInventario> _estruturas = [];
   List<EstruturaInventario> _levantamentosEstrutura = [];
   List<DadosBensPatrimoniais> _bensEstrutura = [];
@@ -107,7 +106,6 @@ class EstruturaLevantamento with ChangeNotifier {
 
       _nomeEstrutura = (response.data["objects"] as List<dynamic>)
           .first["inventario"]["codigoENome"];
-      notifyListeners();
 
       await db.estruturaInventarioDao
           .insertEstruturaInventario((response.data["objects"] as List));
@@ -120,7 +118,6 @@ class EstruturaLevantamento with ChangeNotifier {
     final idx = _bensEstrutura.indexWhere((value) => value.id == item.id);
     if (idx >= 0) {
       _bensEstrutura[idx].inventariado = true;
-      notifyListeners();
     }
   }
 

@@ -31,7 +31,7 @@ class _MySliverAppBarState extends State<MySliverAppBar>
       ),
     );
     _slideAnimation = Tween<Offset>(
-      begin: Offset(0, 0),
+      begin: Offset(0.0, 0.0),
       end: Offset(1.5, 1.5),
     ).animate(
       CurvedAnimation(

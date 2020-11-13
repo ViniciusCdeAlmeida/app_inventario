@@ -88,7 +88,7 @@ abstract class _BemPatrimonialStore with Store {
       await _inventarioBemPatrimonial.gravaDados(bemInventariado);
       await _bensProvider.atualizaItemInventariado(idBem);
     } catch (e) {
-      print(e);
+      throw (e);
     }
   }
 
@@ -111,7 +111,7 @@ abstract class _BemPatrimonialStore with Store {
       bemPatrimonial = await _bemPatrimonialFuture;
     } catch (e) {
       buscandoBem = false;
-      print(e);
+      throw (e);
     }
   }
 
@@ -119,16 +119,10 @@ abstract class _BemPatrimonialStore with Store {
   Future buscaDominios() async {
     if (dominios.isEmpty) {
       try {
-        _dominiosFuture = ObservableFuture(
-          _inicializacao.getDominiosDB().catchError(
-            (error) {
-              throw error;
-            },
-          ),
-        );
+        _dominiosFuture = ObservableFuture(_inicializacao.getDominiosDB());
         dominios = await _dominiosFuture;
       } catch (e) {
-        print(e);
+        throw (e);
       }
     }
   }

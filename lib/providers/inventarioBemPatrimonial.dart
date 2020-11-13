@@ -1,11 +1,10 @@
 import 'package:app_inventario/custom/conexao.dart';
-import 'package:flutter/material.dart';
 
 import 'package:app_inventario/helpers/helper_inventarioBemPatrimonial.dart';
 import 'package:app_inventario/models/serialized/inventarioBemPatrimonial.dart';
 import 'package:app_inventario/main.dart';
 
-class InventarioBensPatrimoniais with ChangeNotifier {
+class InventarioBensPatrimoniais {
   bool _isLoading = false;
   List<InventarioBemPatrimonial> _inventariados = [];
 

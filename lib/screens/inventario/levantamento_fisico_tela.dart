@@ -138,42 +138,39 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
         ],
       ),
       drawer: AppDrawer(),
-      body: AnimatedSwitcher(
-        duration: Duration(milliseconds: 300),
-        child: Observer(
-          // ignore: missing_return
-          builder: (_) {
-            switch (_levantamentoStore.inventarioState) {
-              case LevantamentosState.inicial:
-              case LevantamentosState.carregando:
-                return Center(
-                  child: CircularProgressIndicator(
-                    backgroundColor: Colors.white,
+      body: Observer(
+        // ignore: missing_return
+        builder: (_) {
+          switch (_levantamentoStore.inventarioState) {
+            case LevantamentosState.inicial:
+            case LevantamentosState.carregando:
+              return Center(
+                child: CircularProgressIndicator(
+                  backgroundColor: Colors.white,
+                ),
+              );
+            case LevantamentosState.vazio:
+              return Center(
+                child: Text('VAZIO'),
+              );
+            case LevantamentosState.carregado:
+              return Padding(
+                key: UniqueKey(),
+                padding: const EdgeInsets.all(8),
+                child: ListView.builder(
+                  itemCount: _levantamentoStore.levantamentosDados.length,
+                  itemBuilder: (_, idx) => Column(
+                    children: [
+                      LevantamentoFisicoItem(
+                        _levantamentoStore.levantamentosDados[idx],
+                      ),
+                      Divider(),
+                    ],
                   ),
-                );
-              case LevantamentosState.vazio:
-                return Center(
-                  child: Text('VAZIO'),
-                );
-              case LevantamentosState.carregado:
-                return Padding(
-                  key: UniqueKey(),
-                  padding: const EdgeInsets.all(8),
-                  child: ListView.builder(
-                    itemCount: _levantamentoStore.levantamentosDados.length,
-                    itemBuilder: (_, idx) => Column(
-                      children: [
-                        LevantamentoFisicoItem(
-                          _levantamentoStore.levantamentosDados[idx],
-                        ),
-                        Divider(),
-                      ],
-                    ),
-                  ),
-                );
-            }
-          },
-        ),
+                ),
+              );
+          }
+        },
       ),
     );
   }

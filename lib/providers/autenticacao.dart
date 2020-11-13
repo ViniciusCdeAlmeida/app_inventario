@@ -5,13 +5,12 @@ import 'package:app_inventario/main.dart';
 import 'package:app_inventario/models/serialized/conexao.dart';
 import 'package:app_inventario/models/serialized/login.dart';
 import 'package:app_inventario/models/serialized/organizacoes.dart';
-import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // import '../models/http_exception.dart';
 
-class Autenticacao with ChangeNotifier {
+class Autenticacao {
   Login _usrLogado;
   Conexao _conexaoAtual;
   int idOrganizacao;
@@ -74,8 +73,8 @@ class Autenticacao with ChangeNotifier {
   Future<Login> _authenticate(String userName, String password) async {
     try {
       Response response = await getConexaoPrefs(_conexaoAtual.url)
-          // .get("usuarioValidoV2/?username=$userName&password=$password");
-          .get("usuarioValidoV2/?username=vinicius.correa&password=interno");
+          .get("usuarioValidoV2/?username=$userName&password=$password");
+      // .get("usuarioValidoV2/?username=vinicius.correa&password=interno");
       // .get("usuarioValido.json?username=citsmart&password=interno")
       // .timeout(
       //   Duration(seconds: 50),
@@ -88,7 +87,6 @@ class Autenticacao with ChangeNotifier {
       return Login.fromJson(response.data);
     } catch (error) {
       throw error;
-      // print(error);
     }
   }
 
@@ -100,7 +98,6 @@ class Autenticacao with ChangeNotifier {
 
   Future<void> sair() async {
     _usrLogado = null;
-    notifyListeners();
     final prefs = await SharedPreferences.getInstance();
     prefs.clear();
   }

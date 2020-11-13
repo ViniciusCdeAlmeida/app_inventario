@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-
-class Inventario with ChangeNotifier {
+class Inventario {
   final List tipoInventario = [
     {
       'nome': 'Inventario geral',

@@ -70,16 +70,14 @@ abstract class _LevantamentoStore with Store {
 
     if (!existeInventario) {
       try {
-        _inventariosFuture = ObservableFuture(_levantamentos
-            .buscaLevantamento(idOrganizacao, conexao)
-            .whenComplete(() => existeInventario = true)).catchError(
-          (error) {
-            print(error);
-          },
+        _inventariosFuture = ObservableFuture(
+          _levantamentos
+              .buscaLevantamento(idOrganizacao, conexao)
+              .whenComplete(() => existeInventario = true),
         );
         _levantamentosObservable = (await _inventariosFuture).asObservable();
       } catch (e) {
-        print(e);
+        throw (e);
       }
     } else {
       try {
@@ -87,7 +85,7 @@ abstract class _LevantamentoStore with Store {
             ObservableFuture(_levantamentos.getLevantamentosDB(idOrganizacao));
         _levantamentosObservable = (await _inventariosFuture).asObservable();
       } catch (e) {
-        print(e);
+        throw (e);
       }
     }
   }
@@ -107,7 +105,7 @@ abstract class _LevantamentoStore with Store {
         atualizandoInv = false;
       });
     } catch (e) {
-      print(e);
+      throw (e);
     }
   }
 
@@ -118,15 +116,10 @@ abstract class _LevantamentoStore with Store {
     try {
       await _estruturaLevantamento
           .buscaEstruturas(conexao, listaLevantamento)
-          .whenComplete(() => buscandoEstruturas = false)
-          .catchError(
-        (error) {
-          throw error;
-        },
-      );
+          .whenComplete(() => buscandoEstruturas = false);
     } catch (e) {
       buscandoEstruturas = false;
-      print(e);
+      throw (e);
     }
   }
 }

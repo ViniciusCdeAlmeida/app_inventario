@@ -1,18 +1,16 @@
-import 'package:flutter/material.dart';
-
 import '../models/serialized/conexao.dart';
 
-class ConfiguracaoConexao with ChangeNotifier {
+class ConfiguracaoConexao {
   List<Conexao> _conexao = [
     Conexao(
-      url: 'https://192.168.15.2:8443',
-      nome: 'Teste App',
-      ativo: true,
-      id: '1',
-      // url: 'https://grp-frotaspoc.centralit.com.br',
+      // url: 'https://192.168.15.2:8443',
       // nome: 'Teste App',
       // ativo: true,
       // id: '1',
+      url: 'https://grp-frotaspoc.centralit.com.br',
+      nome: 'Teste App',
+      ativo: true,
+      id: '1',
     )
   ];
 
@@ -32,14 +30,12 @@ class ConfiguracaoConexao with ChangeNotifier {
       ativo: conexao.ativo == null ? false : conexao.ativo,
     );
     _conexao.add(novaConexao);
-    notifyListeners();
   }
 
   void atualizarConexao(String id, Conexao novaConexao) {
     final conexaoIdx = _conexao.indexWhere((value) => value.id == id);
     if (conexaoIdx >= 0) {
       _conexao[conexaoIdx] = novaConexao;
-      notifyListeners();
     }
   }
 
@@ -68,11 +64,9 @@ class ConfiguracaoConexao with ChangeNotifier {
     } else {
       _conexao[conexaoIdx].ativo = false;
     }
-    notifyListeners();
   }
 
   void deletarConexao(String id) {
     _conexao.removeWhere((value) => value.id == id);
-    notifyListeners();
   }
 }

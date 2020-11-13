@@ -55,7 +55,7 @@ class _LoginCardState extends State<LoginCard> {
       //   _loginData['userName'],
       //   _loginData['password'],
       // );
-      await _loginStore
+      _loginStore
           .login(
             _loginData['userName'],
             _loginData['password'],

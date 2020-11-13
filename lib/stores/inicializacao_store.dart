@@ -104,7 +104,7 @@ abstract class _InicializacaoStore with Store {
         ).whenComplete(() => existeBensPatrimoniais = true),
       );
     } catch (e) {
-      print(e);
+      throw (e);
     }
   }
 
@@ -117,7 +117,7 @@ abstract class _InicializacaoStore with Store {
             .whenComplete(() => existeDominio = true),
       );
     } catch (e) {
-      print(e);
+      throw e;
     }
   }
 
@@ -127,7 +127,7 @@ abstract class _InicializacaoStore with Store {
       _organizacoesFuture = ObservableFuture(_organizacoes.getOrganizacoesDB());
       organizacoes = await _organizacoesFuture;
     } catch (e) {
-      print(e);
+      throw (e);
     }
   }
 

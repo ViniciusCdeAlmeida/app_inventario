@@ -73,21 +73,14 @@ abstract class _BensInventariadoStore with Store {
     buscandoBensColetados = true;
 
     try {
-      _bensInventariadosFuture = ObservableFuture(
-        _inventarioBemPatrimonial
-            .buscaBensInventariados(idUnidade)
-            .whenComplete(() => buscandoBensColetados = false)
-            .catchError(
-          (error) {
-            throw error;
-          },
-        ),
-      );
+      _bensInventariadosFuture = ObservableFuture(_inventarioBemPatrimonial
+          .buscaBensInventariados(idUnidade)
+          .whenComplete(() => buscandoBensColetados = false));
       _bensInventariadosObservable =
           (await _bensInventariadosFuture).asObservable();
     } catch (e) {
       buscandoBensColetados = false;
-      print(e);
+      throw (e);
     }
   }
 
@@ -109,32 +102,13 @@ abstract class _BensInventariadoStore with Store {
                       enviandoBensColetados = false,
                       buscaBensColetados(idUnidade),
                     },
-                  )
-                  .catchError(
-                (error) {
-                  throw error;
-                },
-              );
+                  );
             },
           ),
         );
-        //   _inventarioBemPatrimonial
-        //       .enviaDados(conexao, _bensInventariadosObservable.toList())
-        //       .whenComplete(
-        //         () => {
-        //           enviandoBensColetados = false,
-        //           buscaBensColetados(idUnidade),
-        //         },
-        //       )
-        //       .catchError(
-        //     (error) {
-        //       throw error;
-        //     },
-        //   ),
-        // );
       } catch (e) {
         enviandoBensColetados = false;
-        print(e);
+        throw (e);
       }
     }
   }

@@ -36,7 +36,7 @@ class InventarioBemPatrimonialDao extends DatabaseAccessor<AppDatabase>
                   isNull(tbl.dominioStatusInventarioBem),
             ))
           .get();
-// ..where((tbl) => tbl.dominioStatusInventarioBem.length.equals(0)
+
   Future updateDadosInventariado(String numeroPatrimonialInventariado) {
     return (update(inventarioBemPatrimonialDB)
           ..where(

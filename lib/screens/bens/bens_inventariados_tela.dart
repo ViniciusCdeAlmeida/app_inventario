@@ -42,32 +42,33 @@ class _BensInventariadosTelaState extends State<BensInventariadosTela> {
       ),
       actions: [
         IconButton(
-            icon: _bensInventariadoStore.existeBensParaEnviar
-                ? Icon(Icons.cloud_upload)
-                : Icon(Icons.cloud_upload_outlined),
-            onPressed: () {
-              _bensInventariadoStore
-                  .enviaBensColetados(conexao, idUnidade)
-                  .catchError(
-                (error) async {
-                  await showDialog<Null>(
-                    context: context,
-                    builder: (ctx) => AlertDialog(
-                      title: const Text('Ocorreu um erro.'),
-                      content: Text(error.toString()),
-                      actions: <Widget>[
-                        FlatButton(
-                          onPressed: () {
-                            Navigator.of(ctx).pop();
-                          },
-                          child: Text('OK'),
-                        )
-                      ],
-                    ),
-                  );
-                },
-              );
-            }),
+          icon: _bensInventariadoStore.existeBensParaEnviar
+              ? Icon(Icons.cloud_upload)
+              : Icon(Icons.cloud_upload_outlined),
+          onPressed: () {
+            _bensInventariadoStore
+                .enviaBensColetados(conexao, idUnidade)
+                .catchError(
+              (error) async {
+                await showDialog<Null>(
+                  context: context,
+                  builder: (ctx) => AlertDialog(
+                    title: const Text('Ocorreu um erro.'),
+                    content: Text(error.toString()),
+                    actions: <Widget>[
+                      FlatButton(
+                        onPressed: () {
+                          Navigator.of(ctx).pop();
+                        },
+                        child: Text('OK'),
+                      )
+                    ],
+                  ),
+                );
+              },
+            );
+          },
+        ),
       ],
     );
   }

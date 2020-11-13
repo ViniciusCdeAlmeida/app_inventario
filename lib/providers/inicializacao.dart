@@ -44,11 +44,7 @@ class Inicializacao {
           .get("obterDominiosInventario.json")
           .timeout(
             Duration(minutes: 2),
-          )
-          .catchError((error) {
-        throw error;
-      });
-
+          );
       await db.dominioDao.insertDominio(response.data["payload"] as List);
     } catch (error) {
       throw error;
@@ -76,15 +72,19 @@ class Inicializacao {
   }
 
   Future _getDadosBensDemanda(String conexao) async {
-    await getConexaoPrefs(conexao)
-        .post("obterBensPatrimoniaisDemandaV2.json", data: filter)
-        // .post("obterBensPatrimoniaisDemanda.json", data: filter)
-        .then(
-      (value) {
-        _startFilter = value.data['totalPages'];
-        qtdeItens = value.data['totalItens'];
-      },
-    );
+    try {
+      await getConexaoPrefs(conexao)
+          .post("obterBensPatrimoniaisDemandaV2.json", data: filter)
+          // .post("obterBensPatrimoniaisDemanda.json", data: filter)
+          .then(
+        (value) {
+          _startFilter = value.data['totalPages'];
+          qtdeItens = value.data['totalItens'];
+        },
+      );
+    } catch (e) {
+      throw e;
+    }
   }
 
   Future buscaDominioInicial(String conexao) async {
