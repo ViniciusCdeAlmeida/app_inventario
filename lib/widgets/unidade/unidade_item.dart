@@ -16,7 +16,7 @@ class UnidadeItem extends StatefulWidget {
 }
 
 class _UnidadeItemState extends State<UnidadeItem>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   Animation<Offset> _slideAnimation;
   AnimationController _controller;
 

@@ -14,7 +14,7 @@ class MySliverAppBar extends StatefulWidget {
 }
 
 class _MySliverAppBarState extends State<MySliverAppBar>
-    with SingleTickerProviderStateMixin {
+    with TickerProviderStateMixin {
   bool _search = false;
 
   TextEditingController _controller;
@@ -77,7 +77,6 @@ class _MySliverAppBarState extends State<MySliverAppBar>
           transitionBuilder: (child, animation) {
             final fadeAnimation =
                 CurvedAnimation(parent: animation, curve: Curves.fastOutSlowIn);
-
             if (_search) {
               return ClipRect(
                 child: FadeTransition(

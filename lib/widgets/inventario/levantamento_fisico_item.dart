@@ -24,7 +24,6 @@ class _LevantamentoFisicoItemState extends State<LevantamentoFisicoItem>
 
   @override
   void initState() {
-    super.initState();
     _controller = AnimationController(
       vsync: this,
       duration: Duration(
@@ -51,6 +50,7 @@ class _LevantamentoFisicoItemState extends State<LevantamentoFisicoItem>
       _controllerCard.forward();
       // );
     });
+    super.initState();
   }
 
   @override

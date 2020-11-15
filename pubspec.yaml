@@ -27,38 +27,38 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^0.1.3
-  provider: ^4.3.2+1
-  intl: ^0.16.1  
-  http: ^0.12.0+2  
-  shared_preferences: ^0.5.7+3
-  dio: ^3.0.10
-  async: ^2.4.1
-  built_value: ^7.1.0
-  built_collection: ^4.3.2
-  built_value_generator: ^7.1.0
-  searchable_dropdown: ^1.1.3
-  path_provider: ^1.6.14
-  path: ^1.7.0
-  json_annotation: ^3.0.1
-  moor_db_viewer: ^2.0.3
-  flutter_barcode_scanner: ^1.0.1 
-  flutter_mobx: ^1.1.0+2
-  mobx: ^1.2.1+3
-  mobx_codegen: ^1.1.1+1
-  flare_splash_screen: ^3.0.1
-  sqflite: ^1.3.2+1
-  sqlite3_flutter_libs: ^0.2.0
-  moor: ^3.4.0
-  flare_flutter: ^2.0.6
+  cupertino_icons: 
+  provider: 
+  intl: 
+  http: 
+  shared_preferences: 
+  dio: 
+  async: 
+  built_value: 
+  built_collection: 
+  built_value_generator: 
+  searchable_dropdown: 
+  path_provider: 
+  path: 
+  json_annotation: 
+  moor_db_viewer: 
+  flutter_barcode_scanner: 
+  flutter_mobx: 
+  mobx: 
+  mobx_codegen: 
+  flare_splash_screen: 
+  sqflite: 
+  sqlite3_flutter_libs: 
+  moor: 
+  flare_flutter: any
   
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  moor_generator: ^3.3.1  
-  build_runner: ^1.10.1
-  json_serializable: ^3.4.1
-  flutter_launcher_icons: ^0.7.5
+  moor_generator: 
+  build_runner: 
+  json_serializable: 
+  flutter_launcher_icons: any
 
 flutter_icons:
   android: "launcher_icon"
