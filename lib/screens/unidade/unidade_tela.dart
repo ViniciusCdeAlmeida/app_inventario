@@ -1,6 +1,6 @@
+import 'package:app_inventario/custom/customSliverAppBar.dart';
 import 'package:app_inventario/models/telaArgumentos.dart';
 import 'package:app_inventario/stores/estruturaLevantamento_store.dart';
-import 'package:app_inventario/widgets/cabecalho/app_cabecalho.dart';
 import 'package:app_inventario/widgets/unidade/unidade_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -28,18 +28,10 @@ class _UnidadeTelaState extends State<UnidadeTela> {
 
   @override
   Widget build(BuildContext context) {
+    _estruturaLevantamentoStore =
+        Provider.of<EstruturaLevantamentoStore>(context, listen: false);
+    unidadeArgs = ModalRoute.of(context).settings.arguments;
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          unidadeArgs.arg1,
-          overflow: TextOverflow.ellipsis,
-          softWrap: true,
-          style: TextStyle(fontSize: 16.0),
-          maxLines: 3,
-        ),
-        elevation: 5,
-      ),
-      drawer: AppDrawer(),
       body: Observer(
         // ignore: missing_return
         builder: (_) {
@@ -54,20 +46,40 @@ class _UnidadeTelaState extends State<UnidadeTela> {
                 child: Text('VAZIO'),
               );
             case EstruturasLevantamentoState.carregado:
-              return Padding(
-                padding: const EdgeInsets.all(8),
-                child: ListView.builder(
-                  itemCount: _estruturaLevantamentoStore.estruturas.length,
-                  itemBuilder: (_, idx) => Column(
-                    children: [
-                      UnidadeItem(
-                        _estruturaLevantamentoStore.estruturas[idx],
-                      ),
-                      Divider(),
-                    ],
+              return CustomScrollView(
+                slivers: [
+                  MySliverAppBar(
+                    titulo: unidadeArgs.arg1,
+                    filtro: _estruturaLevantamentoStore.filtraBens,
+                    limpar: _estruturaLevantamentoStore.limpaFiltrados,
                   ),
-                ),
+                  SliverList(
+                    delegate: SliverChildListDelegate(
+                      _estruturaLevantamentoStore.estruturas
+                          .map(
+                            (estrutura) => Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: UnidadeItem(estrutura),
+                            ),
+                          )
+                          .toList(),
+                    ),
+                  ),
+                ],
               );
+            // Padding(
+            //   padding: const EdgeInsets.all(8),
+            //   child: ListView.builder(
+            //     itemCount: _estruturaLevantamentoStore.estruturas.length,
+            //     itemBuilder: (_, idx) => Column(
+            //       children: [
+            //         UnidadeItem(
+            //           _estruturaLevantamentoStore.estruturas[idx],
+            //         ),
+            //       ],
+            //     ),
+            //   ),
+            // );
           }
         },
       ),

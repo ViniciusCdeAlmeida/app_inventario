@@ -17,6 +17,13 @@ mixin _$EstruturaLevantamentoStore on _EstruturaLevantamentoStore, Store {
               () => super.estruturasState,
               name: '_EstruturaLevantamentoStore.estruturasState'))
           .value;
+  Computed<List<EstruturaInventario>> _$estruturasComputed;
+
+  @override
+  List<EstruturaInventario> get estruturas => (_$estruturasComputed ??=
+          Computed<List<EstruturaInventario>>(() => super.estruturas,
+              name: '_EstruturaLevantamentoStore.estruturas'))
+      .value;
 
   final _$buscandoEstruturasAtom =
       Atom(name: '_EstruturaLevantamentoStore.buscandoEstruturas');
@@ -34,18 +41,36 @@ mixin _$EstruturaLevantamentoStore on _EstruturaLevantamentoStore, Store {
     });
   }
 
-  final _$estruturasAtom = Atom(name: '_EstruturaLevantamentoStore.estruturas');
+  final _$_estruturasObservableAtom =
+      Atom(name: '_EstruturaLevantamentoStore._estruturasObservable');
 
   @override
-  List<EstruturaInventario> get estruturas {
-    _$estruturasAtom.reportRead();
-    return super.estruturas;
+  List<EstruturaInventario> get _estruturasObservable {
+    _$_estruturasObservableAtom.reportRead();
+    return super._estruturasObservable;
   }
 
   @override
-  set estruturas(List<EstruturaInventario> value) {
-    _$estruturasAtom.reportWrite(value, super.estruturas, () {
-      super.estruturas = value;
+  set _estruturasObservable(List<EstruturaInventario> value) {
+    _$_estruturasObservableAtom.reportWrite(value, super._estruturasObservable,
+        () {
+      super._estruturasObservable = value;
+    });
+  }
+
+  final _$_estruturasFiltradoAtom =
+      Atom(name: '_EstruturaLevantamentoStore._estruturasFiltrado');
+
+  @override
+  List<EstruturaInventario> get _estruturasFiltrado {
+    _$_estruturasFiltradoAtom.reportRead();
+    return super._estruturasFiltrado;
+  }
+
+  @override
+  set _estruturasFiltrado(List<EstruturaInventario> value) {
+    _$_estruturasFiltradoAtom.reportWrite(value, super._estruturasFiltrado, () {
+      super._estruturasFiltrado = value;
     });
   }
 
@@ -74,12 +99,37 @@ mixin _$EstruturaLevantamentoStore on _EstruturaLevantamentoStore, Store {
         .run(() => super.verificaInventarios(idEstrutura));
   }
 
+  final _$_EstruturaLevantamentoStoreActionController =
+      ActionController(name: '_EstruturaLevantamentoStore');
+
+  @override
+  void filtraBens(String value) {
+    final _$actionInfo = _$_EstruturaLevantamentoStoreActionController
+        .startAction(name: '_EstruturaLevantamentoStore.filtraBens');
+    try {
+      return super.filtraBens(value);
+    } finally {
+      _$_EstruturaLevantamentoStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void limpaFiltrados() {
+    final _$actionInfo = _$_EstruturaLevantamentoStoreActionController
+        .startAction(name: '_EstruturaLevantamentoStore.limpaFiltrados');
+    try {
+      return super.limpaFiltrados();
+    } finally {
+      _$_EstruturaLevantamentoStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
 buscandoEstruturas: ${buscandoEstruturas},
-estruturas: ${estruturas},
-estruturasState: ${estruturasState}
+estruturasState: ${estruturasState},
+estruturas: ${estruturas}
     ''';
   }
 }

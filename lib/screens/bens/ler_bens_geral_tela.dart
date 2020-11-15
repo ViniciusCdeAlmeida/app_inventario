@@ -229,7 +229,7 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
                     )
                 ],
               ),
-              drawer: AppDrawer(),
+              // drawer: AppDrawer(),
               body: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Form(

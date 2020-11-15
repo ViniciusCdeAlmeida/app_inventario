@@ -23,7 +23,10 @@ abstract class _EstruturaLevantamentoStore with Store {
   bool buscandoEstruturas = false;
 
   @observable
-  List<EstruturaInventario> estruturas = [];
+  List<EstruturaInventario> _estruturasObservable = [];
+
+  @observable
+  List<EstruturaInventario> _estruturasFiltrado = [];
 
   @observable
   ObservableFuture<List<EstruturaInventario>> _estruturasFuture;
@@ -48,6 +51,34 @@ abstract class _EstruturaLevantamentoStore with Store {
       return EstruturasLevantamentoState.carregado;
   }
 
+  @computed
+  List<EstruturaInventario> get estruturas {
+    return _estruturasFiltrado.isNotEmpty &&
+            _estruturasFiltrado.length < [..._estruturasObservable].length
+        ? _estruturasFiltrado
+        : [..._estruturasObservable];
+  }
+
+  @action
+  void filtraBens(String value) {
+    _estruturasFiltrado = _estruturasObservable
+        .where(
+            // ignore: missing_return
+            (element) {
+          return element.estruturaOrganizacional.codigo
+                  .contains(value.toUpperCase()) ||
+              element.estruturaOrganizacional.nome
+                  .contains(value.toUpperCase());
+        })
+        .toList()
+        .asObservable();
+  }
+
+  @action
+  void limpaFiltrados() {
+    _estruturasFiltrado.clear();
+  }
+
   @action
   Future verificaInventarios(int idEstrutura) async {
     buscandoEstruturas = true;
@@ -57,7 +88,7 @@ abstract class _EstruturaLevantamentoStore with Store {
             .buscaPorEstrutura(idEstrutura)
             .whenComplete(() => buscandoEstruturas = false),
       );
-      estruturas = await _estruturasFuture;
+      _estruturasObservable = await _estruturasFuture;
     } catch (e) {
       buscandoEstruturas = false;
       throw (e);

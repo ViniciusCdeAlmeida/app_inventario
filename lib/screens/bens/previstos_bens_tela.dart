@@ -9,7 +9,6 @@ import 'package:app_inventario/custom/customSliverAppBar.dart';
 import 'package:app_inventario/models/telaArgumentos.dart';
 
 import 'package:app_inventario/widgets/bens/previstos_bens_item.dart';
-import 'package:app_inventario/widgets/cabecalho/app_cabecalho.dart';
 
 class PrevistosBensTela extends StatefulWidget {
   static const routeName = '/bensPrevistosTela';
@@ -37,8 +36,10 @@ class _PrevistosBensTelaState extends State<PrevistosBensTela> {
   @override
   Widget build(BuildContext context) {
     unidadeArgs = ModalRoute.of(context).settings.arguments;
+    _bensPrevistosStore =
+        Provider.of<BensPrevistosStore>(context, listen: false);
     return Scaffold(
-      drawer: AppDrawer(),
+      // drawer: AppDrawer(),
       body: Observer(
         // ignore: missing_return
         builder: (_) {
@@ -57,6 +58,8 @@ class _PrevistosBensTelaState extends State<PrevistosBensTela> {
                 slivers: [
                   MySliverAppBar(
                     titulo: unidadeArgs.arg2,
+                    filtro: _bensPrevistosStore.filtraBens,
+                    limpar: _bensPrevistosStore.limpaFiltrados,
                   ),
                   SliverList(
                     delegate: SliverChildListDelegate(

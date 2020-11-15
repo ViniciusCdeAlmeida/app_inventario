@@ -100,7 +100,8 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
               offset: Offset(0, 100),
               itemBuilder: (context) => <PopupMenuEntry<Acoes>>[
                 PopupMenuItem<Acoes>(
-                  child: PopupMenuCustom('Itens inventariados', Icons.check),
+                  child: PopupMenuCustom(
+                      'Itens Inventariados', Icons.cloud_upload),
                   value: Acoes.itensInventariados,
                 ),
                 const PopupMenuDivider(),
@@ -109,17 +110,18 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
                       'Acessar banco de dados', Icons.description),
                   value: Acoes.acessarBanco,
                 ),
-                // const PopupMenuDivider(),
-                // PopupMenuItem<Acoes>(
-                //   child: PopupMenuCustom('Excluir Levantamentos', Icons.delete),
-                //   value: Acoes.exluirLevantamentos,
-                // ),
-                // const PopupMenuDivider(),
-                // PopupMenuItem<Acoes>(
-                //   child: PopupMenuCustom(
-                //       'Excluir Levantamento', Icons.delete_outline),
-                //   value: Acoes.exluirLevantamento,
-                // ),
+                const PopupMenuDivider(),
+                PopupMenuItem<Acoes>(
+                  child:
+                      PopupMenuCustom('Buscar Levantamentos', Icons.save_alt),
+                  value: Acoes.buscarLevantamentos,
+                ),
+                const PopupMenuDivider(),
+                PopupMenuItem<Acoes>(
+                  child: PopupMenuCustom(
+                      'Buscar Levantamento', Icons.download_sharp),
+                  value: Acoes.buscarLevantamento,
+                ),
                 const PopupMenuDivider(),
                 PopupMenuItem<Acoes>(
                   child: PopupMenuCustom(
@@ -164,7 +166,6 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
                       LevantamentoFisicoItem(
                         _levantamentoStore.levantamentosDados[idx],
                       ),
-                      Divider(),
                     ],
                   ),
                 ),
