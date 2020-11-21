@@ -85,7 +85,7 @@ abstract class _BensInventariadoStore with Store {
   }
 
   @action
-  Future enviaBensColetados(String conexao, int idUnidade) async {
+  Future enviaBensColetados(int idUnidade) async {
     var _listaEnviar = _bensInventariadosObservable
         .where((element) => element.enviado == false)
         .toList();

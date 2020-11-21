@@ -1,7 +1,5 @@
-import 'package:app_inventario/providers/autenticacao.dart';
 import 'package:app_inventario/screens/organizacao/organizacao_tela.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class AppDrawer extends StatelessWidget {
   @override
@@ -27,9 +25,9 @@ class AppDrawer extends StatelessWidget {
             leading: Icon(Icons.exit_to_app),
             title: const Text('Sair'),
             onTap: () {
-              Navigator.of(context).pop();
-              Navigator.of(context).pushReplacementNamed('/');
-              Provider.of<Autenticacao>(context, listen: false).sair();
+              Navigator.of(context).popUntil(ModalRoute.withName('/'));
+              // Navigator.of(context).pushReplacementNamed('/');
+              // Provider.of<Autenticacao>(context, listen: false).sair();
             },
           ),
         ],

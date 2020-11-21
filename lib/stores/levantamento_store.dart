@@ -107,7 +107,7 @@ abstract class _LevantamentoStore with Store {
   @action
   Future verificaLevantamento() async {
     _existeLevantamento = await _levantamentos.getVerificaInventariosDB();
-    // if (_existeLevantamento) _levantamentosObservable.asObservable();
+    if (_existeLevantamento) _levantamentosObservable.asObservable();
   }
 
   @action
@@ -161,12 +161,11 @@ abstract class _LevantamentoStore with Store {
   }
 
   @action
-  Future buscaEstruturasInventario(
-      String conexao, List<Levantamento> listaLevantamento) async {
+  Future buscaEstruturasInventario(List<Levantamento> listaLevantamento) async {
     buscandoEstruturas = true;
     try {
       await _estruturaLevantamento
-          .buscaEstruturas(conexao, listaLevantamento)
+          .buscaEstruturas(listaLevantamento)
           .whenComplete(() => buscandoEstruturas = false);
     } catch (e) {
       buscandoEstruturas = false;

@@ -124,9 +124,9 @@ mixin _$BensInventariadoStore on _BensInventariadoStore, Store {
       AsyncAction('_BensInventariadoStore.enviaBensColetados');
 
   @override
-  Future<dynamic> enviaBensColetados(String conexao, int idUnidade) {
+  Future<dynamic> enviaBensColetados(int idUnidade) {
     return _$enviaBensColetadosAsyncAction
-        .run(() => super.enviaBensColetados(conexao, idUnidade));
+        .run(() => super.enviaBensColetados(idUnidade));
   }
 
   @override

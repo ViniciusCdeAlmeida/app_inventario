@@ -205,9 +205,9 @@ mixin _$LevantamentoStore on _LevantamentoStore, Store {
 
   @override
   Future<dynamic> buscaEstruturasInventario(
-      String conexao, List<Levantamento> listaLevantamento) {
+      List<Levantamento> listaLevantamento) {
     return _$buscaEstruturasInventarioAsyncAction
-        .run(() => super.buscaEstruturasInventario(conexao, listaLevantamento));
+        .run(() => super.buscaEstruturasInventario(listaLevantamento));
   }
 
   @override

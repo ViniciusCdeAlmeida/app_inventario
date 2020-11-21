@@ -27,7 +27,7 @@ class _BensInventariadosTelaState extends State<BensInventariadosTela> {
     super.didChangeDependencies();
   }
 
-  SliverAppBar appBar(String conexao, int idUnidade) {
+  SliverAppBar appBar(int idUnidade) {
     return SliverAppBar(
       title: Text('Bens Inventariados'),
       floating: true,
@@ -46,9 +46,7 @@ class _BensInventariadosTelaState extends State<BensInventariadosTela> {
               ? Icon(Icons.cloud_upload)
               : Icon(Icons.cloud_upload_outlined),
           onPressed: () {
-            _bensInventariadoStore
-                .enviaBensColetados(conexao, idUnidade)
-                .catchError(
+            _bensInventariadoStore.enviaBensColetados(idUnidade).catchError(
               (error) async {
                 await showDialog<Null>(
                   context: context,
@@ -76,8 +74,6 @@ class _BensInventariadosTelaState extends State<BensInventariadosTela> {
   @override
   Widget build(BuildContext context) {
     final idUnidade = Provider.of<Autenticacao>(context).idUnidade;
-    final conexao =
-        Provider.of<Autenticacao>(context, listen: false).atualConexao;
 
     return Scaffold(
       body: Observer(
@@ -93,7 +89,7 @@ class _BensInventariadosTelaState extends State<BensInventariadosTela> {
               return CustomScrollView(
                 key: _sliver,
                 slivers: [
-                  appBar(conexao, idUnidade),
+                  appBar(idUnidade),
                   _bensInventariadoStore.enviandoBens
                       ? SliverFillViewport(
                           delegate: SliverChildBuilderDelegate(

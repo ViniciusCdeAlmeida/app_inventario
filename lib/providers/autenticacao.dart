@@ -3,36 +3,19 @@ import 'package:app_inventario/custom/conexao.dart';
 import 'package:app_inventario/helpers/helper_login.dart';
 import 'package:app_inventario/helpers/helper_organizacoes.dart';
 import 'package:app_inventario/main.dart';
-import 'package:app_inventario/models/serialized/conexao.dart';
 import 'package:app_inventario/models/serialized/login.dart';
 import 'package:app_inventario/models/serialized/organizacoes.dart';
 import 'package:dio/dio.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 // import '../models/http_exception.dart';
 
 class Autenticacao {
-  Login _usrLogado;
-  Conexao _conexaoAtual;
   int idOrganizacao;
-  List<Organizacoes> _organizacoes = [];
   bool _existeOrganizacao = false;
   // String _token;
   // String _userId;
 
   // String get token {}
-
-  bool get existeUsuario {
-    return _usrLogado != null;
-  }
-
-  String get usuarioLogado {
-    return _usrLogado.username;
-  }
-
-  List<Organizacoes> get listaOrganizacoes {
-    return [..._organizacoes];
-  }
 
   int get idUnidade {
     return idOrganizacao;
@@ -43,10 +26,6 @@ class Autenticacao {
       return false;
     } else
       return true;
-  }
-
-  String get atualConexao {
-    return _conexaoAtual.url;
   }
 
   set idUnidade(int idOrganizacao) {
@@ -92,8 +71,7 @@ class Autenticacao {
 
   Future<Login> _authenticateOffline() async {
     try {
-      var _usuarioOffline = await db.usuarioDao.getUsuario();
-      return helperLogin(_usuarioOffline);
+      return helperLogin(await db.usuarioDao.getUsuario());
     } catch (error) {
       throw error;
     }
@@ -111,17 +89,5 @@ class Autenticacao {
     } catch (e) {
       throw e;
     }
-  }
-
-  Future<void> sair() async {
-    _usrLogado = null;
-    final prefs = await SharedPreferences.getInstance();
-    prefs.clear();
-  }
-
-  Conexao conexaoAtual(List<Conexao> conexao) {
-    _conexaoAtual =
-        conexao.where((element) => (element.ativo == true)).toList()[0];
-    return _conexaoAtual;
   }
 }

@@ -10,8 +10,6 @@ import 'package:app_inventario/custom/acoes.dart';
 
 import 'package:app_inventario/main.dart';
 
-import 'package:app_inventario/providers/autenticacao.dart';
-
 import 'package:app_inventario/widgets/cabecalho/app_cabecalho.dart';
 import 'package:app_inventario/widgets/customizados/popupMenu_custom.dart';
 import 'package:app_inventario/widgets/inventario/levantamento_fisico_item.dart';
@@ -29,14 +27,12 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
   final _form = GlobalKey<FormState>();
   LevantamentoStore _levantamentoStore;
   int idOrganizacao;
-  String conexao;
 
   @override
   void didChangeDependencies() {
-    conexao = Provider.of<Autenticacao>(context, listen: false).atualConexao;
     _levantamentoStore = Provider.of<LevantamentoStore>(context, listen: false);
     idOrganizacao = ModalRoute.of(context).settings.arguments;
-    _levantamentoStore.verificaLevantamento();
+    _levantamentoStore.verificaLevantamentos(idOrganizacao, false);
     super.didChangeDependencies();
   }
 
@@ -62,8 +58,8 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
         break;
       case Acoes.buscarEstruturas:
         try {
-          await _levantamentoStore.buscaEstruturasInventario(
-              conexao, _levantamentoStore.levantamentosDados);
+          await _levantamentoStore
+              .buscaEstruturasInventario(_levantamentoStore.levantamentosDados);
         } catch (error) {
           await showDialog<Null>(
             context: context,
@@ -85,8 +81,8 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
     }
   }
 
-  Future<void> _buscaLevantamento(String conexao, int idOrganizacao,
-      String codigo, BuildContext context) async {
+  Future<void> _buscaLevantamento(
+      int idOrganizacao, String codigo, BuildContext context) async {
     try {
       await _levantamentoStore.buscaLevantamento(codigo);
     } catch (error) {
@@ -141,8 +137,7 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
                     icon: Icon(Icons.search),
                     onPressed: () {
                       Navigator.of(ctx).pop();
-                      _buscaLevantamento(
-                          conexao, idOrganizacao, _controller.text, ctx);
+                      _buscaLevantamento(idOrganizacao, _controller.text, ctx);
                       _controller.text = null;
                     },
                     label: Text('Buscar'),
@@ -217,16 +212,15 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
         // ignore: missing_return
         builder: (_) {
           switch (_levantamentoStore.inventarioState) {
+            case LevantamentosState.inicial:
+              return Center(
+                child: Text('VAZIO'),
+              );
             case LevantamentosState.carregando:
               return Center(
                 child: CircularProgressIndicator(
                   backgroundColor: Colors.white,
                 ),
-              );
-            case LevantamentosState.inicial:
-              // case LevantamentosState.vazio:
-              return Center(
-                child: Text('VAZIO'),
               );
             case LevantamentosState.carregado:
               return Padding(

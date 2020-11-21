@@ -76,7 +76,7 @@ class EstruturaLevantamento {
     return _bemPatrimonial;
   }
 
-  Future<void> _getLevantamento(String conexao, int idLevantamento) async {
+  Future<void> _getLevantamento(int idLevantamento) async {
     try {
       final filter = {
         "start": 1,
@@ -119,14 +119,13 @@ class EstruturaLevantamento {
     }
   }
 
-  Future<void> buscaEstruturas(
-      String conexao, List<Levantamento> listLevantamento) async {
+  Future<void> buscaEstruturas(List<Levantamento> listLevantamento) async {
     _estruturas.clear();
 
     db.deleteTable(db.estruturaInventarioDB);
     db.deleteTable(db.dadosBemPatrimoniaisDB);
     await Stream.fromIterable(listLevantamento)
-        .asyncMap((element) => _getLevantamento(conexao, element.id))
+        .asyncMap((element) => _getLevantamento(element.id))
         .toList()
         .whenComplete(
       () {

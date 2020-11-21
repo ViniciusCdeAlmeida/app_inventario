@@ -55,11 +55,10 @@ class Endpoint {
         .post('saveInventarioBemPatrimonialMobile.json', data: itens);
   }
 
-  static Future getAutenticacao({String usuario, String senha}) async {
-    var t = getConexaoPrefs()
-        .get('usuarioValidoV2/?username=vinicius.correa&password=interno');
-    return t;
-    // .get("usuarioValidoV2/?username=$userName&password=$password");
-    // .get("usuarioValido.json?username=citsmart&password=interno")
-  }
+  static Future getAutenticacao({String usuario, String senha}) async =>
+      getConexaoPrefs()
+          .get('usuarioValidoV2/?username=vinicius.correa&password=interno');
+  // .get("usuarioValidoV2/?username=$userName&password=$password");
+  // .get("usuarioValido.json?username=citsmart&password=interno")
+
 }

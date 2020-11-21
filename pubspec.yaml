@@ -31,7 +31,6 @@ dependencies:
   provider: 
   intl: 
   http: 
-  shared_preferences: 
   dio: 
   async: 
   built_value: 
