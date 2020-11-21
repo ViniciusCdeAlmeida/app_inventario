@@ -46,9 +46,11 @@ class Autenticacao {
   Future<List<Organizacoes>> listaUnidades() async =>
       helperOrganizacoesListaDB(await db.unidadesGestorasDao.getAllUnidades());
 
-  Future<Login> _authenticate(String userName, String password) async {
+  Future<Login> _authenticate(String usuario, String senha) async {
     try {
-      Response response = await Endpoint.getAutenticacao();
+      // Response response = await Endpoint.getAutenticacao();
+      Response response =
+          await Endpoint.getAutenticacao(usuario: usuario, senha: senha);
       // .get("usuarioValido.json?username=citsmart&password=interno")
       // .timeout(
       //   Duration(seconds: 50),

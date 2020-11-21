@@ -57,8 +57,8 @@ class Endpoint {
 
   static Future getAutenticacao({String usuario, String senha}) async =>
       getConexaoPrefs()
-          .get('usuarioValidoV2/?username=vinicius.correa&password=interno');
-  // .get("usuarioValidoV2/?username=$userName&password=$password");
+          // .get('usuarioValidoV2/?username=vinicius.correa&password=interno');
+          .get("usuarioValidoV2/?username=$usuario&password=$senha");
   // .get("usuarioValido.json?username=citsmart&password=interno")
 
 }

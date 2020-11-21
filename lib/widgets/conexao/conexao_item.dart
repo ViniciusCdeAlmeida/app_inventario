@@ -1,6 +1,4 @@
-import 'package:app_inventario/providers/configuracao.dart';
 import 'package:app_inventario/stores/conexao_store.dart';
-import 'package:app_inventario/widgets/alerta/alerta_conexao.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -42,28 +40,29 @@ class _ConexaoItemState extends State<ConexaoItem> {
       ),
       leading: Container(
         child: IconButton(
-          alignment: Alignment.centerLeft,
-          icon: Icon(
-            Icons.check_circle,
-            color: widget.ativo != false
-                ? Theme.of(context).toggleableActiveColor
-                : null,
-          ),
-          onPressed: () => widget.ativo == false
-              ? Provider.of<Configuracao>(context, listen: false)
-                      .verificaConexaoAtiva()
-                  ? showDialog(
-                      context: context,
-                      builder: (context) {
-                        return AlertaConexao(id: widget.id.toString());
-                      },
-                    )
-                  : {
-                      Provider.of<Configuracao>(context, listen: false)
-                          .atualizarConexaoAtiva(widget.id)
-                    }
-              : null,
-        ),
+            alignment: Alignment.centerLeft,
+            icon: Icon(
+              Icons.check_circle,
+              color: widget.ativo != false
+                  ? Theme.of(context).toggleableActiveColor
+                  : null,
+            ),
+            onPressed: () {}
+            // => widget.ativo == false
+            //     ? Provider.of<Configuracao>(context, listen: false)
+            //             .verificaConexaoAtiva()
+            //         ? showDialog(
+            //             context: context,
+            //             builder: (context) {
+            //               return AlertaConexao(id: widget.id.toString());
+            //             },
+            //           )
+            //         : {
+            //             Provider.of<Configuracao>(context, listen: false)
+            //                 .atualizarConexaoAtiva(widget.id)
+            //           }
+            //     : null,
+            ),
       ),
       trailing: Container(
         width: 100,
