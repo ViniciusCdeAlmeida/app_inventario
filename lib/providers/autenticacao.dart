@@ -48,10 +48,8 @@ class Autenticacao {
 
   Future<Login> _authenticate(String usuario, String senha) async {
     try {
-      // Response response = await Endpoint.getAutenticacao();
       Response response =
           await Endpoint.getAutenticacao(usuario: usuario, senha: senha);
-      // .get("usuarioValido.json?username=citsmart&password=interno")
       // .timeout(
       //   Duration(seconds: 50),
       // )
@@ -66,6 +64,8 @@ class Autenticacao {
           helperOrganizacoesLista(response.data['organizacoes']),
         );
       return Login.fromJson(response.data);
+    } on NoSuchMethodError {
+      throw "Usuário e/ou senha incorretos.";
     } catch (error) {
       throw error;
     }

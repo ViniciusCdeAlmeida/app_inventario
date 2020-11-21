@@ -11,7 +11,7 @@ enum LevantamentosState {
   inicial,
   carregando,
   carregado,
-  // vazio,
+  vazio,
 }
 
 abstract class _LevantamentoStore with Store {
@@ -52,18 +52,18 @@ abstract class _LevantamentoStore with Store {
         _levantamentosFuture.status == FutureStatus.rejected) {
       return LevantamentosState.inicial;
     }
-    // if (_levantamentosObservable.isEmpty ||
-    //     _levantamentosFuture.status == FutureStatus.fulfilled &&
-    //         !buscandoEstruturas &&
-    //         _levantamentosObservable.isEmpty &&
-    //         !atualizandoInv) return LevantamentosState.vazio;
+    if (_levantamentosObservable.isEmpty &&
+        _levantamentosFuture.status == FutureStatus.fulfilled)
+      return LevantamentosState.vazio;
 
     if ((_levantamentosFuture.status == FutureStatus.pending ||
             (_levantamentoFuture != null &&
                 _levantamentoFuture.status == FutureStatus.pending)) ||
         buscandoEstruturas) return LevantamentosState.carregando;
 
-    if (_existeLevantamento && _levantamentosObservable.isNotEmpty)
+    if (_existeLevantamento &&
+        _levantamentosObservable.isNotEmpty &&
+        _levantamentosFuture.status == FutureStatus.fulfilled)
       return LevantamentosState.carregado;
   }
 

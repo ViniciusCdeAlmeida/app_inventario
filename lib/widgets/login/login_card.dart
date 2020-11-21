@@ -43,14 +43,11 @@ class _LoginCardState extends State<LoginCard> {
               (error) => erroDialog(context, error.toString()),
             );
       } else {
-        _loginStore
-            .logarOffline()
-            .then(
+        _loginStore.logarOffline().then(
               (_) => Navigator.of(context).pushNamed(
                 OrganizacaoTela.routeName,
               ),
-            )
-            .catchError((onError) => print('onError2'));
+            );
       }
     } catch (error) {
       erroDialog(context, error.toString());

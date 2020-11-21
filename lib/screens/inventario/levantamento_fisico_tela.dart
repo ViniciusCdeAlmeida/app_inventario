@@ -213,6 +213,7 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
         builder: (_) {
           switch (_levantamentoStore.inventarioState) {
             case LevantamentosState.inicial:
+            case LevantamentosState.vazio:
               return Center(
                 child: Text('VAZIO'),
               );
