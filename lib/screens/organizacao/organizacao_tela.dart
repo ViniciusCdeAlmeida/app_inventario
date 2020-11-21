@@ -1,4 +1,4 @@
-import 'package:app_inventario/providers/autenticacao.dart';
+import 'package:app_inventario/custom/erroModal.dart';
 import 'package:app_inventario/stores/inicializacao_store.dart';
 import 'package:app_inventario/widgets/cabecalho/app_cabecalho.dart';
 import 'package:app_inventario/widgets/organizacao/organizacao_item.dart';
@@ -19,12 +19,15 @@ class _OrganizacaoTelaState extends State<OrganizacaoTela> {
 
   @override
   void didChangeDependencies() {
-    final conexao =
-        Provider.of<Autenticacao>(context, listen: false).atualConexao;
     _inicializacaoStore =
         Provider.of<InicializacaoStore>(context, listen: false);
-    _inicializacaoStore.verificaOrganizacoes();
-    _inicializacaoStore.verificaInicializacao(conexao);
+    _inicializacaoStore
+        .verificaOrganizacoes()
+        .catchError((onError) => print('onError1'));
+    _inicializacaoStore.verificaInicializacao().catchError((_) {
+      Navigator.pop(context);
+      return erroDialog(context, null);
+    });
 
     super.didChangeDependencies();
   }

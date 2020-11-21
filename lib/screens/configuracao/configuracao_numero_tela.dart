@@ -1,4 +1,4 @@
-import 'package:app_inventario/providers/estruturaLevantamento.dart';
+import 'package:app_inventario/stores/configuracao_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -10,27 +10,32 @@ class ConfiguracaoNumeroTela extends StatefulWidget {
 
 class _ConfiguracaoNumeroTelaState extends State<ConfiguracaoNumeroTela> {
   final _form = GlobalKey<FormState>();
-  String _valorInicial;
+  // String _valorInicial;
   String _valorFinal;
+  ConfiguracaoStore _configuracaoStore;
 
   void _adicionarLetra() {
     _form.currentState.save();
 
-    if (_valorFinal == null) {
-      Provider.of<EstruturaLevantamento>(context)
-          .setDigitoVerificador(_valorInicial);
+    if (_configuracaoStore.prefixo != null) {
+      _configuracaoStore.salvarPrefixo(
+        prefixo: _valorFinal,
+        existente: false,
+        id: _configuracaoStore.prefixo.id,
+      );
     } else {
-      Provider.of<EstruturaLevantamento>(context)
-          .setDigitoVerificador(_valorFinal);
+      _configuracaoStore.salvarPrefixo(
+        prefixo: _valorFinal,
+        existente: true,
+      );
     }
-
     Navigator.of(context).pop();
   }
 
   @override
   void didChangeDependencies() {
-    _valorInicial =
-        Provider.of<EstruturaLevantamento>(context).getDigitoVerificador;
+    _configuracaoStore = Provider.of<ConfiguracaoStore>(context);
+    _configuracaoStore.buscarPrefixo();
     super.didChangeDependencies();
   }
 
@@ -52,7 +57,9 @@ class _ConfiguracaoNumeroTelaState extends State<ConfiguracaoNumeroTela> {
                 key: _form,
                 child: TextFormField(
                   key: Key('digitoText'),
-                  initialValue: _valorInicial,
+                  initialValue: _configuracaoStore.prefixo != null
+                      ? _configuracaoStore.prefixo.prefixo
+                      : null,
                   textInputAction: TextInputAction.done,
                   autofocus: true,
                   decoration: InputDecoration(

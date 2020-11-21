@@ -1,5 +1,6 @@
-import 'package:app_inventario/providers/estruturaLevantamento.dart';
+import 'package:app_inventario/stores/configuracao_store.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 
 class ConfiguracaoBensTela extends StatefulWidget {
@@ -9,8 +10,9 @@ class ConfiguracaoBensTela extends StatefulWidget {
 
 class _ConfiguracaoBensTelaState extends State<ConfiguracaoBensTela> {
   final _form = GlobalKey<FormState>();
-  String _valorInicial;
+  // String _valorInicial;
   String _valorFinal;
+  ConfiguracaoStore _configuracaoStore;
 
   void _adicionarDigitosBens() {
     final isValid = _form.currentState.validate();
@@ -20,12 +22,17 @@ class _ConfiguracaoBensTelaState extends State<ConfiguracaoBensTela> {
 
     _form.currentState.save();
 
-    if (_valorFinal == null) {
-      Provider.of<EstruturaLevantamento>(context)
-          .setDigitosLeitura(_valorInicial);
+    if (_configuracaoStore.mascara != null) {
+      _configuracaoStore.salvarMascara(
+        mascara: _valorFinal,
+        existente: false,
+        id: _configuracaoStore.mascara.id,
+      );
     } else {
-      Provider.of<EstruturaLevantamento>(context)
-          .setDigitosLeitura(_valorFinal);
+      _configuracaoStore.salvarMascara(
+        mascara: _valorFinal,
+        existente: true,
+      );
     }
 
     Navigator.of(context).pop();
@@ -33,63 +40,80 @@ class _ConfiguracaoBensTelaState extends State<ConfiguracaoBensTela> {
 
   @override
   void didChangeDependencies() {
-    _valorInicial =
-        Provider.of<EstruturaLevantamento>(context).getDigitosLeitura;
+    _configuracaoStore = Provider.of<ConfiguracaoStore>(context);
+
+    _configuracaoStore.buscarMascara();
     super.didChangeDependencies();
   }
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Card(
-        elevation: 5,
-        child: Container(
-          padding: EdgeInsets.only(
-            top: 10,
-            left: 10,
-            right: 10,
-            bottom: MediaQuery.of(context).viewInsets.bottom,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: <Widget>[
-              Form(
-                key: _form,
-                child: TextFormField(
-                  key: Key('digitosText'),
-                  initialValue: _valorInicial,
-                  keyboardType: TextInputType.number,
-                  autofocus: true,
-                  decoration: InputDecoration(
-                    labelText: 'Quantidade de digitos considerados na leitura',
-                    helperText: 'Informe os digitos(min 6, max 15) Ex.: 999999',
+    return Observer(
+      // ignore: missing_return
+      builder: (context) {
+        switch (_configuracaoStore.mascaraState) {
+          case MascaraState.inicial:
+          case MascaraState.carregando:
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          case MascaraState.carregado:
+            return SingleChildScrollView(
+              child: Card(
+                elevation: 5,
+                child: Container(
+                  padding: EdgeInsets.only(
+                    top: 10,
+                    left: 10,
+                    right: 10,
+                    bottom: MediaQuery.of(context).viewInsets.bottom,
                   ),
-                  onChanged: (value) {
-                    _valorFinal = value;
-                  },
-                  textInputAction: TextInputAction.done,
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return 'Insira um valor.';
-                    }
-                    if (value.length < 5 || value.length > 16) {
-                      return 'Valor inserido não está entre 6 e 15.';
-                    }
-                    return null;
-                  },
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: <Widget>[
+                      Form(
+                        key: _form,
+                        child: TextFormField(
+                          key: Key('digitosText'),
+                          initialValue: _configuracaoStore.mascara != null
+                              ? _configuracaoStore.mascara.mascara
+                              : null,
+                          keyboardType: TextInputType.number,
+                          autofocus: true,
+                          decoration: InputDecoration(
+                            labelText:
+                                'Quantidade de digitos considerados na leitura',
+                            helperText:
+                                'Informe os digitos(min 6, max 15) Ex.: 999999',
+                          ),
+                          onChanged: (value) {
+                            _valorFinal = value;
+                          },
+                          textInputAction: TextInputAction.done,
+                          validator: (value) {
+                            if (value != null &&
+                                value != "" &&
+                                (value.length < 5 || value.length > 16)) {
+                              return 'Valor inserido não está entre 6 e 15.';
+                            }
+                            return null;
+                          },
+                        ),
+                      ),
+                      FlatButton.icon(
+                        icon: Icon(Icons.save),
+                        onPressed: _adicionarDigitosBens,
+                        label: Text('Salvar'),
+                        color: Theme.of(context).primaryColor,
+                        textColor: Theme.of(context).textTheme.button.color,
+                      )
+                    ],
+                  ),
                 ),
               ),
-              FlatButton.icon(
-                icon: Icon(Icons.save),
-                onPressed: _adicionarDigitosBens,
-                label: Text('Salvar'),
-                color: Theme.of(context).primaryColor,
-                textColor: Theme.of(context).textTheme.button.color,
-              )
-            ],
-          ),
-        ),
-      ),
+            );
+        }
+      },
     );
   }
 }

@@ -62,10 +62,9 @@ class EstruturaLevantamento {
     _digitoVerificador = digito;
   }
 
-  Future<List<EstruturaInventario>> buscaPorEstrutura(int id) async {
-    return helperEstruturaInventarioLista(
-        await db.estruturaInventarioDao.getAllEstruturasPorLevantamento(id));
-  }
+  Future<List<EstruturaInventario>> buscaPorEstrutura(int id) async =>
+      helperEstruturaInventarioLista(
+          await db.estruturaInventarioDao.getAllEstruturasPorLevantamento(id));
 
   Future<BemPatrimonial> buscaBensPorId(String numeroBemPatrimonial,
       String idInventario, int idUnidade, String idBem) async {
@@ -92,13 +91,12 @@ class EstruturaLevantamento {
           },
         ],
       };
-      Response response = await getConexaoPrefs(conexao)
-          .post("obterInventarioEstruturaOrganizacionalPorDemandaV2.json",
-              data: filter)
-          .timeout(
-            Duration(minutes: 5),
-          )
-          .catchError((error) {
+      Response response =
+          await Endpoint.getInventarioEstruturaOrganizacional(filter)
+              .timeout(
+        Duration(minutes: 5),
+      )
+              .catchError((error) {
         throw error.error.message == "Connection failed"
             ? "Falha de conexão."
             : error.error.message;

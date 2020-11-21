@@ -92,14 +92,14 @@ abstract class _InicializacaoStore with Store {
   }
 
   @action
-  Future _getBensPatrimoniais(String conexao) async {
-    paginas = await _inicializacao.buscaBemPatrimonialInicial(conexao);
+  Future _getBensPatrimoniais() async {
+    paginas = await _inicializacao.buscaBemPatrimonialInicial();
     try {
       _bensPatrimoniaisFuture = ObservableFuture(
         Future.forEach(
           paginas,
           (element) => _inicializacao
-              .getBensDemanda(conexao: conexao, itemAtual: element)
+              .getBensDemanda(itemAtual: element)
               .then((value) => _progress = value),
         ).whenComplete(() => existeBensPatrimoniais = true),
       );
@@ -109,11 +109,11 @@ abstract class _InicializacaoStore with Store {
   }
 
   @action
-  Future _getDominios(String conexao) async {
+  Future _getDominios() async {
     try {
       _dominioFuture = ObservableFuture(
         _inicializacao
-            .buscaDominioInicial(conexao)
+            .buscaDominioInicial()
             .whenComplete(() => existeDominio = true),
       );
     } catch (e) {
@@ -132,17 +132,17 @@ abstract class _InicializacaoStore with Store {
   }
 
   @action
-  Future verificaInicializacao(String conexao) async {
+  Future verificaInicializacao() async {
     existeDominio = await _inicializacao.getVerificaDominioDB();
 
     existeBensPatrimoniais =
         await _inicializacao.getVerificaBensPatrimoniaisDB();
 
     if (!existeDominio) {
-      await _getDominios(conexao);
+      await _getDominios();
     }
     if (!existeBensPatrimoniais) {
-      await _getBensPatrimoniais(conexao);
+      await _getBensPatrimoniais();
     }
   }
 }

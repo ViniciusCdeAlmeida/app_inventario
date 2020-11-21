@@ -1,4 +1,4 @@
-import 'package:app_inventario/screens/configuracao/configuracao_conexao_tela.dart';
+import 'package:app_inventario/screens/conexao/conexao_tela.dart';
 import 'package:flutter/material.dart';
 
 import '../../screens/configuracao/configuracao_bens_tela.dart';
@@ -57,8 +57,7 @@ class MenuDrawer extends StatelessWidget {
             leading: Icon(Icons.phonelink_setup),
             title: const Text('Conexão'),
             onTap: () {
-              Navigator.of(context)
-                  .pushNamed(ConfiguracaoConexaoTela.routeName);
+              Navigator.of(context).pushNamed(ConexaoTela.routeName);
             },
           ),
           Divider(),

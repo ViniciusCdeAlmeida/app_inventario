@@ -11,7 +11,7 @@ enum LevantamentosState {
   inicial,
   carregando,
   carregado,
-  vazio,
+  // vazio,
 }
 
 abstract class _LevantamentoStore with Store {
@@ -21,7 +21,7 @@ abstract class _LevantamentoStore with Store {
   _LevantamentoStore(this._levantamentos, this._estruturaLevantamento);
 
   @observable
-  bool existeInventario = false;
+  bool _existeLevantamento = false;
 
   @observable
   bool buscandoEstruturas = false;
@@ -30,32 +30,40 @@ abstract class _LevantamentoStore with Store {
   bool atualizandoInv = false;
 
   @observable
+  Levantamento _levantamentoObservable;
+
+  @observable
   ObservableList<Levantamento> _levantamentosObservable =
       ObservableList<Levantamento>();
 
   @observable
-  ObservableFuture<List<Levantamento>> _inventariosFuture;
+  ObservableFuture<List<Levantamento>> _levantamentosFuture;
 
   @observable
-  ObservableFuture<Levantamento> _inventarioAtualizadoFuture;
+  ObservableFuture<Levantamento> _levantamentoFuture;
+
+  @observable
+  ObservableFuture<Levantamento> _levantamentoAtualizadoFuture;
 
   @computed
   // ignore: missing_return
   LevantamentosState get inventarioState {
-    if (_inventariosFuture == null ||
-        _inventariosFuture.status == FutureStatus.rejected) {
+    if (_levantamentosFuture == null ||
+        _levantamentosFuture.status == FutureStatus.rejected) {
       return LevantamentosState.inicial;
     }
+    // if (_levantamentosObservable.isEmpty ||
+    //     _levantamentosFuture.status == FutureStatus.fulfilled &&
+    //         !buscandoEstruturas &&
+    //         _levantamentosObservable.isEmpty &&
+    //         !atualizandoInv) return LevantamentosState.vazio;
 
-    if (_inventariosFuture.status == FutureStatus.pending || buscandoEstruturas)
-      return LevantamentosState.carregando;
+    if ((_levantamentosFuture.status == FutureStatus.pending ||
+            (_levantamentoFuture != null &&
+                _levantamentoFuture.status == FutureStatus.pending)) ||
+        buscandoEstruturas) return LevantamentosState.carregando;
 
-    if (_inventariosFuture.status == FutureStatus.fulfilled &&
-        !buscandoEstruturas &&
-        _levantamentosObservable.isEmpty &&
-        !atualizandoInv) return LevantamentosState.vazio;
-
-    if (existeInventario && _levantamentosObservable.isNotEmpty)
+    if (_existeLevantamento && _levantamentosObservable.isNotEmpty)
       return LevantamentosState.carregado;
   }
 
@@ -65,25 +73,31 @@ abstract class _LevantamentoStore with Store {
   }
 
   @action
-  Future verificaInventarios(String conexao, int idOrganizacao) async {
-    existeInventario = await _levantamentos.getVerificaInventariosDB();
+  Future verificaLevantamentos(int idOrganizacao, bool deleteDB) async {
+    if (deleteDB) {
+      _levantamentos.deleteLevantamento();
+      _levantamentosFuture =
+          ObservableFuture(_levantamentos.getLevantamentosDB(idOrganizacao));
+      _levantamentosObservable = (await _levantamentosFuture).asObservable();
+    }
+    _existeLevantamento = await _levantamentos.getVerificaInventariosDB();
 
-    if (!existeInventario) {
+    if (!_existeLevantamento) {
       try {
-        _inventariosFuture = ObservableFuture(
+        _levantamentosFuture = ObservableFuture(
           _levantamentos
-              .buscaLevantamento(idOrganizacao, conexao)
-              .whenComplete(() => existeInventario = true),
+              .buscaLevantamentos(idOrganizacao)
+              .whenComplete(() => _existeLevantamento = true),
         );
-        _levantamentosObservable = (await _inventariosFuture).asObservable();
+        _levantamentosObservable = (await _levantamentosFuture).asObservable();
       } catch (e) {
         throw (e);
       }
     } else {
       try {
-        _inventariosFuture =
+        _levantamentosFuture =
             ObservableFuture(_levantamentos.getLevantamentosDB(idOrganizacao));
-        _levantamentosObservable = (await _inventariosFuture).asObservable();
+        _levantamentosObservable = (await _levantamentosFuture).asObservable();
       } catch (e) {
         throw (e);
       }
@@ -91,11 +105,48 @@ abstract class _LevantamentoStore with Store {
   }
 
   @action
-  Future atualizaInventarios(String conexao, int id) async {
+  Future verificaLevantamento() async {
+    _existeLevantamento = await _levantamentos.getVerificaInventariosDB();
+    // if (_existeLevantamento) _levantamentosObservable.asObservable();
+  }
+
+  @action
+  Future buscaLevantamento(String codigo) async {
+    try {
+      _levantamentoFuture = ObservableFuture(
+        _levantamentos.buscaLevantamento(codigo),
+      );
+      _levantamentoObservable = await _levantamentoFuture;
+
+      if (_levantamentoObservable != null) {
+        _levantamentosObservable.add(_levantamentoObservable);
+        _levantamentoObservable = null;
+      }
+    } catch (e) {
+      throw (e);
+    }
+  }
+
+  @action
+  Future buscaLevantamentos(int idOrganizacao, bool deleteDB) async {
+    try {
+      _levantamentosFuture = ObservableFuture(
+        _levantamentos
+            .buscaLevantamentos(idOrganizacao)
+            .whenComplete(() => _existeLevantamento = true),
+      );
+      _levantamentosObservable = (await _levantamentosFuture).asObservable();
+    } catch (e) {
+      throw (e);
+    }
+  }
+
+  @action
+  Future atualizaLevantamentos(int id) async {
     atualizandoInv = true;
     try {
-      _inventarioAtualizadoFuture =
-          ObservableFuture(_levantamentos.atualizaDadosInventario(id, conexao))
+      _levantamentoAtualizadoFuture =
+          ObservableFuture(_levantamentos.atualizaDadosInventario(id))
               // ignore: missing_return
               .then((value) {
         var item =

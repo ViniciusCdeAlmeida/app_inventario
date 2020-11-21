@@ -24,6 +24,8 @@ class LevantamentosDao extends DatabaseAccessor<AppDatabase>
   Future<LevantamentoDBData> getVerificaLevantamentos() =>
       (select(db.levantamentoDB)..limit(1)).getSingle();
 
+  void deletarLevantamentos(Table database) async => delete(database);
+
   Future<void> updateAtualizaDados(Levantamento levantamento) =>
       (update(db.levantamentoDB)
             ..where(

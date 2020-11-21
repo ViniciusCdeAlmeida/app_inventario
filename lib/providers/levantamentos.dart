@@ -23,19 +23,17 @@ class Levantamentos {
       return false;
   }
 
-  Future<List<Levantamento>> getLevantamentosDB(int idOrganizacao) async {
-    return helperLevantamentoList(
-        await db.levantamentosDao.getAllLevantamentos(idOrganizacao));
-  }
+  Future<List<Levantamento>> getLevantamentosDB(int idOrganizacao) async =>
+      helperLevantamentoList(
+          await db.levantamentosDao.getAllLevantamentos(idOrganizacao));
 
   Future<Levantamento> getLevantamentoDB(int id) async {
     return helperLevantamento(await db.levantamentosDao.getLevantamento(id));
   }
 
-  Future<Levantamento> _getAtualizaDadosInventario(
-      int id, String conexao) async {
+  Future<Levantamento> _getAtualizaDadosInventario(int id) async {
     try {
-      Response response = await getConexaoPrefs(conexao)
+      Response response = await getConexaoPrefs()
           .get("atualizaDadosLevantamentos.json?idLevantamento=$id")
           .timeout(
             Duration(seconds: 50),
@@ -52,18 +50,15 @@ class Levantamentos {
     }
   }
 
-  Future<Levantamento> atualizaDadosInventario(int id, String conexao) async {
-    return await _getAtualizaDadosInventario(id, conexao);
-  }
+  Future<Levantamento> atualizaDadosInventario(int id) async =>
+      await _getAtualizaDadosInventario(id);
 
-  Future<List<Levantamento>> _getLevantamento(
-      int idOrganizacao, String conexao) async {
+  Future<List<Levantamento>> _getLevantamentos(int idOrganizacao) async {
     try {
-      Response response = await getConexaoPrefs(conexao)
-          .get("obterLevantamentosPorUGV3.json?idOrganizacao=$idOrganizacao")
+      Response response = await Endpoint.getObterLevantamentosUg(idOrganizacao)
           .timeout(
-            Duration(seconds: 50),
-          )
+        Duration(seconds: 50),
+      )
           .catchError((error) {
         throw error;
       });
@@ -76,10 +71,37 @@ class Levantamentos {
     }
   }
 
-  Future<List<Levantamento>> buscaLevantamento(
-      int idOrganizacao, String conexao) async {
-    // db.deleteTable(db.levantamentoDB);
+  Future<Levantamento> _getLevantamento(String codigo) async {
+    try {
+      Response response =
+          await Endpoint.getObterLevantamentosCodigo(codigo).timeout(
+        Duration(seconds: 50),
+      );
+      Levantamento _levantamento = await getLevantamentoDB(
+          (((response.data["payload"] as List).first)["id"]));
+      if (_levantamento == null) {
+        db.levantamentosDao
+            .insertLevantamentos(response.data["payload"] as List);
+        return await getLevantamentoDB(
+            (((response.data["payload"] as List).first)["id"]));
+      } else {
+        return null;
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
 
-    return await _getLevantamento(idOrganizacao, conexao);
+  void deleteLevantamento() {
+    db.deleteTable(db.levantamentoDB);
+  }
+
+  Future<List<Levantamento>> buscaLevantamentos(int idOrganizacao) async =>
+      await _getLevantamentos(
+        idOrganizacao,
+      );
+
+  Future<Levantamento> buscaLevantamento(String codigo) async {
+    return await _getLevantamento(codigo);
   }
 }

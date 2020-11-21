@@ -5,9 +5,9 @@ part 'conexao.g.dart';
 
 @JsonSerializable()
 class Conexao with ChangeNotifier {
-  final String id;
-  final String url;
-  final String nome;
+  int id;
+  String url;
+  String nome;
   bool ativo;
 
   Conexao({

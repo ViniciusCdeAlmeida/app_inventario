@@ -1,17 +1,18 @@
-import 'package:app_inventario/providers/configuracao_conexao.dart';
+import 'package:app_inventario/providers/configuracao.dart';
+import 'package:app_inventario/stores/conexao_store.dart';
 import 'package:app_inventario/widgets/alerta/alerta_conexao.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../screens/configuracao/configuracao_conexao_edicao_tela.dart';
+import 'package:app_inventario/screens/conexao/conexao_tela_edicao.dart';
 
-class ConfiguracaoConexaoItem extends StatefulWidget {
-  final String id;
+class ConexaoItem extends StatefulWidget {
+  final int id;
   final String nome;
   final String url;
   final bool ativo;
 
-  ConfiguracaoConexaoItem({
+  ConexaoItem({
     @required this.id,
     @required this.url,
     @required this.nome,
@@ -19,11 +20,18 @@ class ConfiguracaoConexaoItem extends StatefulWidget {
   });
 
   @override
-  _ConfiguracaoConexaoItemState createState() =>
-      _ConfiguracaoConexaoItemState();
+  _ConexaoItemState createState() => _ConexaoItemState();
 }
 
-class _ConfiguracaoConexaoItemState extends State<ConfiguracaoConexaoItem> {
+class _ConexaoItemState extends State<ConexaoItem> {
+  ConexaoStore _conexaoStore;
+
+  @override
+  void didChangeDependencies() {
+    _conexaoStore = Provider.of<ConexaoStore>(context, listen: false);
+    super.didChangeDependencies();
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListTile(
@@ -42,16 +50,16 @@ class _ConfiguracaoConexaoItemState extends State<ConfiguracaoConexaoItem> {
                 : null,
           ),
           onPressed: () => widget.ativo == false
-              ? Provider.of<ConfiguracaoConexao>(context, listen: false)
+              ? Provider.of<Configuracao>(context, listen: false)
                       .verificaConexaoAtiva()
                   ? showDialog(
                       context: context,
                       builder: (context) {
-                        return AlertaConexao(id: widget.id);
+                        return AlertaConexao(id: widget.id.toString());
                       },
                     )
                   : {
-                      Provider.of<ConfiguracaoConexao>(context, listen: false)
+                      Provider.of<Configuracao>(context, listen: false)
                           .atualizarConexaoAtiva(widget.id)
                     }
               : null,
@@ -64,8 +72,7 @@ class _ConfiguracaoConexaoItemState extends State<ConfiguracaoConexaoItem> {
             IconButton(
               icon: Icon(Icons.edit),
               onPressed: () {
-                Navigator.of(context).pushNamed(
-                    ConfiguracaoConexaoEdicaoTela.routeName,
+                Navigator.of(context).pushNamed(ConexaoEdicaoTela.routeName,
                     arguments: widget.id);
               },
               color: Theme.of(context).primaryColor,
@@ -73,8 +80,7 @@ class _ConfiguracaoConexaoItemState extends State<ConfiguracaoConexaoItem> {
             IconButton(
               icon: Icon(Icons.delete),
               onPressed: () {
-                Provider.of<ConfiguracaoConexao>(context, listen: false)
-                    .deletarConexao(widget.id);
+                _conexaoStore.deletaConexao(widget.id);
               },
               color: Theme.of(context).errorColor,
             )

@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import 'package:app_inventario/providers/configuracao_conexao.dart';
 
 class AlertaConexao extends StatefulWidget {
   final String id;
@@ -24,8 +21,8 @@ class _AlertaConexaoState extends State<AlertaConexao> {
     Widget continuarBtn = FlatButton(
       child: Text("Sim"),
       onPressed: () {
-        Provider.of<ConfiguracaoConexao>(context, listen: false)
-            .ativarConexao(widget.id);
+        // Provider.of<Configuracao>(context, listen: false)
+        //     .ativarConexao(widget.id);
         Navigator.of(context).pop();
       },
     );

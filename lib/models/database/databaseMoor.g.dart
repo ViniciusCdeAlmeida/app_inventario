@@ -2327,11 +2327,11 @@ class ConexaoDBCompanion extends UpdateCompanion<ConexaoDBData> {
     this.ativo = const Value.absent(),
   });
   ConexaoDBCompanion.insert({
-    @required int id,
+    this.id = const Value.absent(),
     this.nome = const Value.absent(),
     this.url = const Value.absent(),
     this.ativo = const Value.absent(),
-  }) : id = Value(id);
+  });
   static Insertable<ConexaoDBData> custom({
     Expression<int> id,
     Expression<String> nome,
@@ -2399,11 +2399,8 @@ class $ConexaoDBTable extends ConexaoDB
   @override
   GeneratedIntColumn get id => _id ??= _constructId();
   GeneratedIntColumn _constructId() {
-    return GeneratedIntColumn(
-      'id',
-      $tableName,
-      false,
-    );
+    return GeneratedIntColumn('id', $tableName, false,
+        hasAutoIncrement: true, declaredAsPrimaryKey: true);
   }
 
   final VerificationMeta _nomeMeta = const VerificationMeta('nome');
@@ -2457,8 +2454,6 @@ class $ConexaoDBTable extends ConexaoDB
     final data = instance.toColumns(true);
     if (data.containsKey('id')) {
       context.handle(_idMeta, id.isAcceptableOrUnknown(data['id'], _idMeta));
-    } else if (isInserting) {
-      context.missing(_idMeta);
     }
     if (data.containsKey('nome')) {
       context.handle(
@@ -2476,7 +2471,7 @@ class $ConexaoDBTable extends ConexaoDB
   }
 
   @override
-  Set<GeneratedColumn> get $primaryKey => <GeneratedColumn>{};
+  Set<GeneratedColumn> get $primaryKey => {id};
   @override
   ConexaoDBData map(Map<String, dynamic> data, {String tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
@@ -4812,6 +4807,637 @@ class $InventarioBemPatrimonialDBTable extends InventarioBemPatrimonialDB
   static TypeConverter<Dominio, String> $converter4 = const DominioConverter();
 }
 
+class MascaraNumeroPatrimonialDBData extends DataClass
+    implements Insertable<MascaraNumeroPatrimonialDBData> {
+  final int id;
+  final String mascara;
+  MascaraNumeroPatrimonialDBData({@required this.id, this.mascara});
+  factory MascaraNumeroPatrimonialDBData.fromData(
+      Map<String, dynamic> data, GeneratedDatabase db,
+      {String prefix}) {
+    final effectivePrefix = prefix ?? '';
+    final intType = db.typeSystem.forDartType<int>();
+    final stringType = db.typeSystem.forDartType<String>();
+    return MascaraNumeroPatrimonialDBData(
+      id: intType.mapFromDatabaseResponse(data['${effectivePrefix}id']),
+      mascara:
+          stringType.mapFromDatabaseResponse(data['${effectivePrefix}mascara']),
+    );
+  }
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (!nullToAbsent || id != null) {
+      map['id'] = Variable<int>(id);
+    }
+    if (!nullToAbsent || mascara != null) {
+      map['mascara'] = Variable<String>(mascara);
+    }
+    return map;
+  }
+
+  MascaraNumeroPatrimonialDBCompanion toCompanion(bool nullToAbsent) {
+    return MascaraNumeroPatrimonialDBCompanion(
+      id: id == null && nullToAbsent ? const Value.absent() : Value(id),
+      mascara: mascara == null && nullToAbsent
+          ? const Value.absent()
+          : Value(mascara),
+    );
+  }
+
+  factory MascaraNumeroPatrimonialDBData.fromJson(Map<String, dynamic> json,
+      {ValueSerializer serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return MascaraNumeroPatrimonialDBData(
+      id: serializer.fromJson<int>(json['id']),
+      mascara: serializer.fromJson<String>(json['mascara']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'mascara': serializer.toJson<String>(mascara),
+    };
+  }
+
+  MascaraNumeroPatrimonialDBData copyWith({int id, String mascara}) =>
+      MascaraNumeroPatrimonialDBData(
+        id: id ?? this.id,
+        mascara: mascara ?? this.mascara,
+      );
+  @override
+  String toString() {
+    return (StringBuffer('MascaraNumeroPatrimonialDBData(')
+          ..write('id: $id, ')
+          ..write('mascara: $mascara')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => $mrjf($mrjc(id.hashCode, mascara.hashCode));
+  @override
+  bool operator ==(dynamic other) =>
+      identical(this, other) ||
+      (other is MascaraNumeroPatrimonialDBData &&
+          other.id == this.id &&
+          other.mascara == this.mascara);
+}
+
+class MascaraNumeroPatrimonialDBCompanion
+    extends UpdateCompanion<MascaraNumeroPatrimonialDBData> {
+  final Value<int> id;
+  final Value<String> mascara;
+  const MascaraNumeroPatrimonialDBCompanion({
+    this.id = const Value.absent(),
+    this.mascara = const Value.absent(),
+  });
+  MascaraNumeroPatrimonialDBCompanion.insert({
+    this.id = const Value.absent(),
+    this.mascara = const Value.absent(),
+  });
+  static Insertable<MascaraNumeroPatrimonialDBData> custom({
+    Expression<int> id,
+    Expression<String> mascara,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (mascara != null) 'mascara': mascara,
+    });
+  }
+
+  MascaraNumeroPatrimonialDBCompanion copyWith(
+      {Value<int> id, Value<String> mascara}) {
+    return MascaraNumeroPatrimonialDBCompanion(
+      id: id ?? this.id,
+      mascara: mascara ?? this.mascara,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (mascara.present) {
+      map['mascara'] = Variable<String>(mascara.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('MascaraNumeroPatrimonialDBCompanion(')
+          ..write('id: $id, ')
+          ..write('mascara: $mascara')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $MascaraNumeroPatrimonialDBTable extends MascaraNumeroPatrimonialDB
+    with
+        TableInfo<$MascaraNumeroPatrimonialDBTable,
+            MascaraNumeroPatrimonialDBData> {
+  final GeneratedDatabase _db;
+  final String _alias;
+  $MascaraNumeroPatrimonialDBTable(this._db, [this._alias]);
+  final VerificationMeta _idMeta = const VerificationMeta('id');
+  GeneratedIntColumn _id;
+  @override
+  GeneratedIntColumn get id => _id ??= _constructId();
+  GeneratedIntColumn _constructId() {
+    return GeneratedIntColumn('id', $tableName, false,
+        hasAutoIncrement: true, declaredAsPrimaryKey: true);
+  }
+
+  final VerificationMeta _mascaraMeta = const VerificationMeta('mascara');
+  GeneratedTextColumn _mascara;
+  @override
+  GeneratedTextColumn get mascara => _mascara ??= _constructMascara();
+  GeneratedTextColumn _constructMascara() {
+    return GeneratedTextColumn(
+      'mascara',
+      $tableName,
+      true,
+    );
+  }
+
+  @override
+  List<GeneratedColumn> get $columns => [id, mascara];
+  @override
+  $MascaraNumeroPatrimonialDBTable get asDslTable => this;
+  @override
+  String get $tableName => _alias ?? 'mascara_numero_patrimonial_d_b';
+  @override
+  final String actualTableName = 'mascara_numero_patrimonial_d_b';
+  @override
+  VerificationContext validateIntegrity(
+      Insertable<MascaraNumeroPatrimonialDBData> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id'], _idMeta));
+    }
+    if (data.containsKey('mascara')) {
+      context.handle(_mascaraMeta,
+          mascara.isAcceptableOrUnknown(data['mascara'], _mascaraMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  MascaraNumeroPatrimonialDBData map(Map<String, dynamic> data,
+      {String tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
+    return MascaraNumeroPatrimonialDBData.fromData(data, _db,
+        prefix: effectivePrefix);
+  }
+
+  @override
+  $MascaraNumeroPatrimonialDBTable createAlias(String alias) {
+    return $MascaraNumeroPatrimonialDBTable(_db, alias);
+  }
+}
+
+class PrefixoDBData extends DataClass implements Insertable<PrefixoDBData> {
+  final int id;
+  final String prefixo;
+  PrefixoDBData({@required this.id, this.prefixo});
+  factory PrefixoDBData.fromData(
+      Map<String, dynamic> data, GeneratedDatabase db,
+      {String prefix}) {
+    final effectivePrefix = prefix ?? '';
+    final intType = db.typeSystem.forDartType<int>();
+    final stringType = db.typeSystem.forDartType<String>();
+    return PrefixoDBData(
+      id: intType.mapFromDatabaseResponse(data['${effectivePrefix}id']),
+      prefixo:
+          stringType.mapFromDatabaseResponse(data['${effectivePrefix}prefixo']),
+    );
+  }
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (!nullToAbsent || id != null) {
+      map['id'] = Variable<int>(id);
+    }
+    if (!nullToAbsent || prefixo != null) {
+      map['prefixo'] = Variable<String>(prefixo);
+    }
+    return map;
+  }
+
+  PrefixoDBCompanion toCompanion(bool nullToAbsent) {
+    return PrefixoDBCompanion(
+      id: id == null && nullToAbsent ? const Value.absent() : Value(id),
+      prefixo: prefixo == null && nullToAbsent
+          ? const Value.absent()
+          : Value(prefixo),
+    );
+  }
+
+  factory PrefixoDBData.fromJson(Map<String, dynamic> json,
+      {ValueSerializer serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return PrefixoDBData(
+      id: serializer.fromJson<int>(json['id']),
+      prefixo: serializer.fromJson<String>(json['prefixo']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'prefixo': serializer.toJson<String>(prefixo),
+    };
+  }
+
+  PrefixoDBData copyWith({int id, String prefixo}) => PrefixoDBData(
+        id: id ?? this.id,
+        prefixo: prefixo ?? this.prefixo,
+      );
+  @override
+  String toString() {
+    return (StringBuffer('PrefixoDBData(')
+          ..write('id: $id, ')
+          ..write('prefixo: $prefixo')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => $mrjf($mrjc(id.hashCode, prefixo.hashCode));
+  @override
+  bool operator ==(dynamic other) =>
+      identical(this, other) ||
+      (other is PrefixoDBData &&
+          other.id == this.id &&
+          other.prefixo == this.prefixo);
+}
+
+class PrefixoDBCompanion extends UpdateCompanion<PrefixoDBData> {
+  final Value<int> id;
+  final Value<String> prefixo;
+  const PrefixoDBCompanion({
+    this.id = const Value.absent(),
+    this.prefixo = const Value.absent(),
+  });
+  PrefixoDBCompanion.insert({
+    this.id = const Value.absent(),
+    this.prefixo = const Value.absent(),
+  });
+  static Insertable<PrefixoDBData> custom({
+    Expression<int> id,
+    Expression<String> prefixo,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (prefixo != null) 'prefixo': prefixo,
+    });
+  }
+
+  PrefixoDBCompanion copyWith({Value<int> id, Value<String> prefixo}) {
+    return PrefixoDBCompanion(
+      id: id ?? this.id,
+      prefixo: prefixo ?? this.prefixo,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (prefixo.present) {
+      map['prefixo'] = Variable<String>(prefixo.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('PrefixoDBCompanion(')
+          ..write('id: $id, ')
+          ..write('prefixo: $prefixo')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $PrefixoDBTable extends PrefixoDB
+    with TableInfo<$PrefixoDBTable, PrefixoDBData> {
+  final GeneratedDatabase _db;
+  final String _alias;
+  $PrefixoDBTable(this._db, [this._alias]);
+  final VerificationMeta _idMeta = const VerificationMeta('id');
+  GeneratedIntColumn _id;
+  @override
+  GeneratedIntColumn get id => _id ??= _constructId();
+  GeneratedIntColumn _constructId() {
+    return GeneratedIntColumn('id', $tableName, false,
+        hasAutoIncrement: true, declaredAsPrimaryKey: true);
+  }
+
+  final VerificationMeta _prefixoMeta = const VerificationMeta('prefixo');
+  GeneratedTextColumn _prefixo;
+  @override
+  GeneratedTextColumn get prefixo => _prefixo ??= _constructPrefixo();
+  GeneratedTextColumn _constructPrefixo() {
+    return GeneratedTextColumn(
+      'prefixo',
+      $tableName,
+      true,
+    );
+  }
+
+  @override
+  List<GeneratedColumn> get $columns => [id, prefixo];
+  @override
+  $PrefixoDBTable get asDslTable => this;
+  @override
+  String get $tableName => _alias ?? 'prefixo_d_b';
+  @override
+  final String actualTableName = 'prefixo_d_b';
+  @override
+  VerificationContext validateIntegrity(Insertable<PrefixoDBData> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id'], _idMeta));
+    }
+    if (data.containsKey('prefixo')) {
+      context.handle(_prefixoMeta,
+          prefixo.isAcceptableOrUnknown(data['prefixo'], _prefixoMeta));
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  PrefixoDBData map(Map<String, dynamic> data, {String tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
+    return PrefixoDBData.fromData(data, _db, prefix: effectivePrefix);
+  }
+
+  @override
+  $PrefixoDBTable createAlias(String alias) {
+    return $PrefixoDBTable(_db, alias);
+  }
+}
+
+class UsuarioDBData extends DataClass implements Insertable<UsuarioDBData> {
+  final int id;
+  final String username;
+  final List<Organizacoes> organizacoes;
+  UsuarioDBData({@required this.id, this.username, this.organizacoes});
+  factory UsuarioDBData.fromData(
+      Map<String, dynamic> data, GeneratedDatabase db,
+      {String prefix}) {
+    final effectivePrefix = prefix ?? '';
+    final intType = db.typeSystem.forDartType<int>();
+    final stringType = db.typeSystem.forDartType<String>();
+    return UsuarioDBData(
+      id: intType.mapFromDatabaseResponse(data['${effectivePrefix}id']),
+      username: stringType
+          .mapFromDatabaseResponse(data['${effectivePrefix}username']),
+      organizacoes: $UsuarioDBTable.$converter0.mapToDart(stringType
+          .mapFromDatabaseResponse(data['${effectivePrefix}organizacoes'])),
+    );
+  }
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (!nullToAbsent || id != null) {
+      map['id'] = Variable<int>(id);
+    }
+    if (!nullToAbsent || username != null) {
+      map['username'] = Variable<String>(username);
+    }
+    if (!nullToAbsent || organizacoes != null) {
+      final converter = $UsuarioDBTable.$converter0;
+      map['organizacoes'] = Variable<String>(converter.mapToSql(organizacoes));
+    }
+    return map;
+  }
+
+  UsuarioDBCompanion toCompanion(bool nullToAbsent) {
+    return UsuarioDBCompanion(
+      id: id == null && nullToAbsent ? const Value.absent() : Value(id),
+      username: username == null && nullToAbsent
+          ? const Value.absent()
+          : Value(username),
+      organizacoes: organizacoes == null && nullToAbsent
+          ? const Value.absent()
+          : Value(organizacoes),
+    );
+  }
+
+  factory UsuarioDBData.fromJson(Map<String, dynamic> json,
+      {ValueSerializer serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return UsuarioDBData(
+      id: serializer.fromJson<int>(json['id']),
+      username: serializer.fromJson<String>(json['username']),
+      organizacoes:
+          serializer.fromJson<List<Organizacoes>>(json['organizacoes']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer serializer}) {
+    serializer ??= moorRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'username': serializer.toJson<String>(username),
+      'organizacoes': serializer.toJson<List<Organizacoes>>(organizacoes),
+    };
+  }
+
+  UsuarioDBData copyWith(
+          {int id, String username, List<Organizacoes> organizacoes}) =>
+      UsuarioDBData(
+        id: id ?? this.id,
+        username: username ?? this.username,
+        organizacoes: organizacoes ?? this.organizacoes,
+      );
+  @override
+  String toString() {
+    return (StringBuffer('UsuarioDBData(')
+          ..write('id: $id, ')
+          ..write('username: $username, ')
+          ..write('organizacoes: $organizacoes')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => $mrjf(
+      $mrjc(id.hashCode, $mrjc(username.hashCode, organizacoes.hashCode)));
+  @override
+  bool operator ==(dynamic other) =>
+      identical(this, other) ||
+      (other is UsuarioDBData &&
+          other.id == this.id &&
+          other.username == this.username &&
+          other.organizacoes == this.organizacoes);
+}
+
+class UsuarioDBCompanion extends UpdateCompanion<UsuarioDBData> {
+  final Value<int> id;
+  final Value<String> username;
+  final Value<List<Organizacoes>> organizacoes;
+  const UsuarioDBCompanion({
+    this.id = const Value.absent(),
+    this.username = const Value.absent(),
+    this.organizacoes = const Value.absent(),
+  });
+  UsuarioDBCompanion.insert({
+    this.id = const Value.absent(),
+    this.username = const Value.absent(),
+    this.organizacoes = const Value.absent(),
+  });
+  static Insertable<UsuarioDBData> custom({
+    Expression<int> id,
+    Expression<String> username,
+    Expression<String> organizacoes,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (username != null) 'username': username,
+      if (organizacoes != null) 'organizacoes': organizacoes,
+    });
+  }
+
+  UsuarioDBCompanion copyWith(
+      {Value<int> id,
+      Value<String> username,
+      Value<List<Organizacoes>> organizacoes}) {
+    return UsuarioDBCompanion(
+      id: id ?? this.id,
+      username: username ?? this.username,
+      organizacoes: organizacoes ?? this.organizacoes,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (username.present) {
+      map['username'] = Variable<String>(username.value);
+    }
+    if (organizacoes.present) {
+      final converter = $UsuarioDBTable.$converter0;
+      map['organizacoes'] =
+          Variable<String>(converter.mapToSql(organizacoes.value));
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('UsuarioDBCompanion(')
+          ..write('id: $id, ')
+          ..write('username: $username, ')
+          ..write('organizacoes: $organizacoes')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $UsuarioDBTable extends UsuarioDB
+    with TableInfo<$UsuarioDBTable, UsuarioDBData> {
+  final GeneratedDatabase _db;
+  final String _alias;
+  $UsuarioDBTable(this._db, [this._alias]);
+  final VerificationMeta _idMeta = const VerificationMeta('id');
+  GeneratedIntColumn _id;
+  @override
+  GeneratedIntColumn get id => _id ??= _constructId();
+  GeneratedIntColumn _constructId() {
+    return GeneratedIntColumn('id', $tableName, false,
+        hasAutoIncrement: true, declaredAsPrimaryKey: true);
+  }
+
+  final VerificationMeta _usernameMeta = const VerificationMeta('username');
+  GeneratedTextColumn _username;
+  @override
+  GeneratedTextColumn get username => _username ??= _constructUsername();
+  GeneratedTextColumn _constructUsername() {
+    return GeneratedTextColumn(
+      'username',
+      $tableName,
+      true,
+    );
+  }
+
+  final VerificationMeta _organizacoesMeta =
+      const VerificationMeta('organizacoes');
+  GeneratedTextColumn _organizacoes;
+  @override
+  GeneratedTextColumn get organizacoes =>
+      _organizacoes ??= _constructOrganizacoes();
+  GeneratedTextColumn _constructOrganizacoes() {
+    return GeneratedTextColumn(
+      'organizacoes',
+      $tableName,
+      true,
+    );
+  }
+
+  @override
+  List<GeneratedColumn> get $columns => [id, username, organizacoes];
+  @override
+  $UsuarioDBTable get asDslTable => this;
+  @override
+  String get $tableName => _alias ?? 'usuario_d_b';
+  @override
+  final String actualTableName = 'usuario_d_b';
+  @override
+  VerificationContext validateIntegrity(Insertable<UsuarioDBData> instance,
+      {bool isInserting = false}) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id'], _idMeta));
+    }
+    if (data.containsKey('username')) {
+      context.handle(_usernameMeta,
+          username.isAcceptableOrUnknown(data['username'], _usernameMeta));
+    }
+    context.handle(_organizacoesMeta, const VerificationResult.success());
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  UsuarioDBData map(Map<String, dynamic> data, {String tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
+    return UsuarioDBData.fromData(data, _db, prefix: effectivePrefix);
+  }
+
+  @override
+  $UsuarioDBTable createAlias(String alias) {
+    return $UsuarioDBTable(_db, alias);
+  }
+
+  static TypeConverter<List<Organizacoes>, String> $converter0 =
+      const OrganizacoesConverter();
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(SqlTypeSystem.defaultInstance, e);
   $DominioDBTable _dominioDB;
@@ -4836,6 +5462,13 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   $InventarioBemPatrimonialDBTable _inventarioBemPatrimonialDB;
   $InventarioBemPatrimonialDBTable get inventarioBemPatrimonialDB =>
       _inventarioBemPatrimonialDB ??= $InventarioBemPatrimonialDBTable(this);
+  $MascaraNumeroPatrimonialDBTable _mascaraNumeroPatrimonialDB;
+  $MascaraNumeroPatrimonialDBTable get mascaraNumeroPatrimonialDB =>
+      _mascaraNumeroPatrimonialDB ??= $MascaraNumeroPatrimonialDBTable(this);
+  $PrefixoDBTable _prefixoDB;
+  $PrefixoDBTable get prefixoDB => _prefixoDB ??= $PrefixoDBTable(this);
+  $UsuarioDBTable _usuarioDB;
+  $UsuarioDBTable get usuarioDB => _usuarioDB ??= $UsuarioDBTable(this);
   DominioDao _dominioDao;
   DominioDao get dominioDao => _dominioDao ??= DominioDao(this as AppDatabase);
   BemPatrimoniaisDao _bemPatrimoniaisDao;
@@ -4857,6 +5490,13 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   InventarioBemPatrimonialDao get inventarioBemPatrimonialDao =>
       _inventarioBemPatrimonialDao ??=
           InventarioBemPatrimonialDao(this as AppDatabase);
+  ConfiguracaoDao _configuracaoDao;
+  ConfiguracaoDao get configuracaoDao =>
+      _configuracaoDao ??= ConfiguracaoDao(this as AppDatabase);
+  UsuarioDao _usuarioDao;
+  UsuarioDao get usuarioDao => _usuarioDao ??= UsuarioDao(this as AppDatabase);
+  ConexaoDao _conexaoDao;
+  ConexaoDao get conexaoDao => _conexaoDao ??= ConexaoDao(this as AppDatabase);
   @override
   Iterable<TableInfo> get allTables => allSchemaEntities.whereType<TableInfo>();
   @override
@@ -4868,6 +5508,9 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         conexaoDB,
         unidadesGestorasDB,
         dadosBemPatrimoniaisDB,
-        inventarioBemPatrimonialDB
+        inventarioBemPatrimonialDB,
+        mascaraNumeroPatrimonialDB,
+        prefixoDB,
+        usuarioDB
       ];
 }

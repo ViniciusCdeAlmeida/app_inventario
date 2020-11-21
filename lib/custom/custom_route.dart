@@ -1,8 +1,8 @@
 import 'package:app_inventario/screens/bens/bens_inventariados_tela.dart';
 import 'package:app_inventario/screens/bens/ler_bens_geral_tela.dart';
 import 'package:app_inventario/screens/bens/previstos_bens_tela.dart';
-import 'package:app_inventario/screens/configuracao/configuracao_conexao_edicao_tela.dart';
-import 'package:app_inventario/screens/configuracao/configuracao_conexao_tela.dart';
+import 'package:app_inventario/screens/conexao/conexao_tela_edicao.dart';
+import 'package:app_inventario/screens/conexao/conexao_tela.dart';
 import 'package:app_inventario/screens/inventario/inventario_geral_tela.dart';
 import 'package:app_inventario/screens/inventario/inventario_selecao_tela.dart';
 import 'package:app_inventario/screens/inventario/levantamento_fisico_tela.dart';
@@ -30,10 +30,9 @@ class CustomPageTransitionBuilder extends PageTransitionsBuilder {
 }
 
 Map<String, Widget Function(BuildContext)> rotas() {
-  var rotas = {
-    ConfiguracaoConexaoTela.routeName: (ctx) => ConfiguracaoConexaoTela(),
-    ConfiguracaoConexaoEdicaoTela.routeName: (ctx) =>
-        ConfiguracaoConexaoEdicaoTela(),
+  return {
+    ConexaoTela.routeName: (ctx) => ConexaoTela(),
+    ConexaoEdicaoTela.routeName: (ctx) => ConexaoEdicaoTela(),
     LoginTela.routeName: (ctx) => LoginTela(),
     OrganizacaoTela.routeName: (ctx) => OrganizacaoTela(),
     InventarioSelecaoTela.routeName: (ctx) => InventarioSelecaoTela(),
@@ -46,5 +45,4 @@ Map<String, Widget Function(BuildContext)> rotas() {
     BensInventariadosTela.routeName: (ctx) => BensInventariadosTela(),
     InicializacaoTela.routeName: (ctx) => InicializacaoTela(),
   };
-  return rotas;
 }

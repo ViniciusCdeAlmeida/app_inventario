@@ -95,9 +95,7 @@ abstract class _BensInventariadoStore with Store {
         ObservableFuture(
           Future.delayed(Duration(seconds: 2)).then(
             (_) {
-              _inventarioBemPatrimonial
-                  .enviaDados(conexao, _listaEnviar)
-                  .whenComplete(
+              _inventarioBemPatrimonial.enviaDados(_listaEnviar).whenComplete(
                     () => {
                       enviandoBensColetados = false,
                       buscaBensColetados(idUnidade),

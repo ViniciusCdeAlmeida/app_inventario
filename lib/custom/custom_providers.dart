@@ -1,9 +1,12 @@
+import 'package:app_inventario/providers/conexoes.dart';
+import 'package:app_inventario/stores/conexao_store.dart';
+import 'package:app_inventario/stores/configuracao_store.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
 import 'package:app_inventario/providers/autenticacao.dart';
 import 'package:app_inventario/providers/bensProvider.dart';
-import 'package:app_inventario/providers/configuracao_conexao.dart';
+import 'package:app_inventario/providers/configuracao.dart';
 import 'package:app_inventario/providers/estruturaLevantamento.dart';
 import 'package:app_inventario/providers/inicializacao.dart';
 import 'package:app_inventario/providers/inventario.dart';
@@ -22,7 +25,13 @@ List<SingleChildWidget> providers() => [
         create: (ctx) => Autenticacao(),
       ),
       Provider(
-        create: (ctx) => ConfiguracaoConexao(),
+        create: (ctx) => Configuracao(),
+      ),
+      Provider(
+        create: (ctx) => Conexoes(),
+      ),
+      Provider(
+        create: (ctx) => ConexaoStore(Conexoes()),
       ),
       Provider(
         create: (ctx) => Inventario(),
@@ -75,7 +84,6 @@ List<SingleChildWidget> providers() => [
       Provider(
         create: (ctx) => LoginStore(
           Autenticacao(),
-          ConfiguracaoConexao(),
         ),
       ),
       Provider(
@@ -84,6 +92,11 @@ List<SingleChildWidget> providers() => [
           EstruturaLevantamento(),
           Inicializacao(),
           InventarioBensPatrimoniais(),
+        ),
+      ),
+      Provider(
+        create: (ctx) => ConfiguracaoStore(
+          Configuracao(),
         ),
       ),
     ];

@@ -24,19 +24,19 @@ mixin _$LevantamentoStore on _LevantamentoStore, Store {
               name: '_LevantamentoStore.levantamentosDados'))
       .value;
 
-  final _$existeInventarioAtom =
-      Atom(name: '_LevantamentoStore.existeInventario');
+  final _$_existeLevantamentoAtom =
+      Atom(name: '_LevantamentoStore._existeLevantamento');
 
   @override
-  bool get existeInventario {
-    _$existeInventarioAtom.reportRead();
-    return super.existeInventario;
+  bool get _existeLevantamento {
+    _$_existeLevantamentoAtom.reportRead();
+    return super._existeLevantamento;
   }
 
   @override
-  set existeInventario(bool value) {
-    _$existeInventarioAtom.reportWrite(value, super.existeInventario, () {
-      super.existeInventario = value;
+  set _existeLevantamento(bool value) {
+    _$_existeLevantamentoAtom.reportWrite(value, super._existeLevantamento, () {
+      super._existeLevantamento = value;
     });
   }
 
@@ -71,6 +71,23 @@ mixin _$LevantamentoStore on _LevantamentoStore, Store {
     });
   }
 
+  final _$_levantamentoObservableAtom =
+      Atom(name: '_LevantamentoStore._levantamentoObservable');
+
+  @override
+  Levantamento get _levantamentoObservable {
+    _$_levantamentoObservableAtom.reportRead();
+    return super._levantamentoObservable;
+  }
+
+  @override
+  set _levantamentoObservable(Levantamento value) {
+    _$_levantamentoObservableAtom
+        .reportWrite(value, super._levantamentoObservable, () {
+      super._levantamentoObservable = value;
+    });
+  }
+
   final _$_levantamentosObservableAtom =
       Atom(name: '_LevantamentoStore._levantamentosObservable');
 
@@ -88,55 +105,99 @@ mixin _$LevantamentoStore on _LevantamentoStore, Store {
     });
   }
 
-  final _$_inventariosFutureAtom =
-      Atom(name: '_LevantamentoStore._inventariosFuture');
+  final _$_levantamentosFutureAtom =
+      Atom(name: '_LevantamentoStore._levantamentosFuture');
 
   @override
-  ObservableFuture<List<Levantamento>> get _inventariosFuture {
-    _$_inventariosFutureAtom.reportRead();
-    return super._inventariosFuture;
+  ObservableFuture<List<Levantamento>> get _levantamentosFuture {
+    _$_levantamentosFutureAtom.reportRead();
+    return super._levantamentosFuture;
   }
 
   @override
-  set _inventariosFuture(ObservableFuture<List<Levantamento>> value) {
-    _$_inventariosFutureAtom.reportWrite(value, super._inventariosFuture, () {
-      super._inventariosFuture = value;
+  set _levantamentosFuture(ObservableFuture<List<Levantamento>> value) {
+    _$_levantamentosFutureAtom.reportWrite(value, super._levantamentosFuture,
+        () {
+      super._levantamentosFuture = value;
     });
   }
 
-  final _$_inventarioAtualizadoFutureAtom =
-      Atom(name: '_LevantamentoStore._inventarioAtualizadoFuture');
+  final _$_levantamentoFutureAtom =
+      Atom(name: '_LevantamentoStore._levantamentoFuture');
 
   @override
-  ObservableFuture<Levantamento> get _inventarioAtualizadoFuture {
-    _$_inventarioAtualizadoFutureAtom.reportRead();
-    return super._inventarioAtualizadoFuture;
+  ObservableFuture<Levantamento> get _levantamentoFuture {
+    _$_levantamentoFutureAtom.reportRead();
+    return super._levantamentoFuture;
   }
 
   @override
-  set _inventarioAtualizadoFuture(ObservableFuture<Levantamento> value) {
-    _$_inventarioAtualizadoFutureAtom
-        .reportWrite(value, super._inventarioAtualizadoFuture, () {
-      super._inventarioAtualizadoFuture = value;
+  set _levantamentoFuture(ObservableFuture<Levantamento> value) {
+    _$_levantamentoFutureAtom.reportWrite(value, super._levantamentoFuture, () {
+      super._levantamentoFuture = value;
     });
   }
 
-  final _$verificaInventariosAsyncAction =
-      AsyncAction('_LevantamentoStore.verificaInventarios');
+  final _$_levantamentoAtualizadoFutureAtom =
+      Atom(name: '_LevantamentoStore._levantamentoAtualizadoFuture');
 
   @override
-  Future<dynamic> verificaInventarios(String conexao, int idOrganizacao) {
-    return _$verificaInventariosAsyncAction
-        .run(() => super.verificaInventarios(conexao, idOrganizacao));
+  ObservableFuture<Levantamento> get _levantamentoAtualizadoFuture {
+    _$_levantamentoAtualizadoFutureAtom.reportRead();
+    return super._levantamentoAtualizadoFuture;
   }
 
-  final _$atualizaInventariosAsyncAction =
-      AsyncAction('_LevantamentoStore.atualizaInventarios');
+  @override
+  set _levantamentoAtualizadoFuture(ObservableFuture<Levantamento> value) {
+    _$_levantamentoAtualizadoFutureAtom
+        .reportWrite(value, super._levantamentoAtualizadoFuture, () {
+      super._levantamentoAtualizadoFuture = value;
+    });
+  }
+
+  final _$verificaLevantamentosAsyncAction =
+      AsyncAction('_LevantamentoStore.verificaLevantamentos');
 
   @override
-  Future<dynamic> atualizaInventarios(String conexao, int id) {
-    return _$atualizaInventariosAsyncAction
-        .run(() => super.atualizaInventarios(conexao, id));
+  Future<dynamic> verificaLevantamentos(int idOrganizacao, bool deleteDB) {
+    return _$verificaLevantamentosAsyncAction
+        .run(() => super.verificaLevantamentos(idOrganizacao, deleteDB));
+  }
+
+  final _$verificaLevantamentoAsyncAction =
+      AsyncAction('_LevantamentoStore.verificaLevantamento');
+
+  @override
+  Future<dynamic> verificaLevantamento() {
+    return _$verificaLevantamentoAsyncAction
+        .run(() => super.verificaLevantamento());
+  }
+
+  final _$buscaLevantamentoAsyncAction =
+      AsyncAction('_LevantamentoStore.buscaLevantamento');
+
+  @override
+  Future<dynamic> buscaLevantamento(String codigo) {
+    return _$buscaLevantamentoAsyncAction
+        .run(() => super.buscaLevantamento(codigo));
+  }
+
+  final _$buscaLevantamentosAsyncAction =
+      AsyncAction('_LevantamentoStore.buscaLevantamentos');
+
+  @override
+  Future<dynamic> buscaLevantamentos(int idOrganizacao, bool deleteDB) {
+    return _$buscaLevantamentosAsyncAction
+        .run(() => super.buscaLevantamentos(idOrganizacao, deleteDB));
+  }
+
+  final _$atualizaLevantamentosAsyncAction =
+      AsyncAction('_LevantamentoStore.atualizaLevantamentos');
+
+  @override
+  Future<dynamic> atualizaLevantamentos(int id) {
+    return _$atualizaLevantamentosAsyncAction
+        .run(() => super.atualizaLevantamentos(id));
   }
 
   final _$buscaEstruturasInventarioAsyncAction =
@@ -152,7 +213,6 @@ mixin _$LevantamentoStore on _LevantamentoStore, Store {
   @override
   String toString() {
     return '''
-existeInventario: ${existeInventario},
 buscandoEstruturas: ${buscandoEstruturas},
 atualizandoInv: ${atualizandoInv},
 inventarioState: ${inventarioState},

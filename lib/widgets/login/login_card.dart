@@ -1,6 +1,4 @@
-import 'package:app_inventario/providers/configuracao_conexao.dart';
-
-import 'package:app_inventario/providers/autenticacao.dart';
+import 'package:app_inventario/custom/erroModal.dart';
 import 'package:app_inventario/screens/organizacao/organizacao_tela.dart';
 import 'package:app_inventario/stores/login_store.dart';
 import 'package:flutter/material.dart';
@@ -24,64 +22,38 @@ class _LoginCardState extends State<LoginCard> {
     'password': '',
   };
 
-  // void _showErrorDialog(String message) {
-  //   showDialog(
-  //     context: context,
-  //     builder: (ctx) => AlertDialog(
-  //       title: Text('Error'),
-  //       content: Text(message),
-  //       actions: <Widget>[
-  //         FlatButton(
-  //           onPressed: () {
-  //             Navigator.of(context).pop();
-  //           },
-  //           child: Text('OK'),
-  //         ),
-  //       ],
-  //     ),
-  //   );
-  // }
-
   Future<void> _submit() async {
-    var _conexoes = Provider.of<ConfiguracaoConexao>(context, listen: false);
-    var _autenticacao = Provider.of<Autenticacao>(context, listen: false);
     if (!_formKey.currentState.validate()) {
       return;
     }
     _formKey.currentState.save();
     try {
-      _autenticacao.conexaoAtual(_conexoes.conexoes);
-      // await Provider.of<Autenticacao>(context, listen: false).login(
-      //   _loginData['userName'],
-      //   _loginData['password'],
-      // );
-      _loginStore
-          .login(
-            _loginData['userName'],
-            _loginData['password'],
-          )
-          .then(
-            (_) => Navigator.of(context).pushNamed(
-              OrganizacaoTela.routeName,
-            ),
-          );
-    } catch (error) {
-      await showDialog<Null>(
-        context: context,
-        builder: (ctx) => AlertDialog(
-          title: const Text('Não foi possivel realizar o login.'),
-          content: const Text(
-              'A conexão é invalida ou o servidor está fora de alcance.'),
-          actions: <Widget>[
-            FlatButton(
-              onPressed: () {
-                Navigator.of(ctx).pop();
-              },
-              child: Text('OK'),
+      if (!_loginStore.usuarioOffline) {
+        _loginStore
+            .login(
+              _loginData['userName'],
+              _loginData['password'],
             )
-          ],
-        ),
-      );
+            .then(
+              (_) => Navigator.of(context).pushNamed(
+                OrganizacaoTela.routeName,
+              ),
+            )
+            .catchError(
+              (error) => erroDialog(context, error.toString()),
+            );
+      } else {
+        _loginStore
+            .logarOffline()
+            .then(
+              (_) => Navigator.of(context).pushNamed(
+                OrganizacaoTela.routeName,
+              ),
+            )
+            .catchError((onError) => print('onError2'));
+      }
+    } catch (error) {
+      erroDialog(context, error.toString());
     }
   }
 
@@ -118,6 +90,25 @@ class _LoginCardState extends State<LoginCard> {
                     onSaved: (pass) {
                       _loginData['password'] = pass;
                     },
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('Iniciar Offline?'),
+                        IconButton(
+                            icon: Icon(Icons.check_box,
+                                color: _loginStore.usuarioOffline
+                                    ? Theme.of(context).toggleableActiveColor
+                                    : null),
+                            onPressed: () {
+                              _loginStore.usuarioOffline
+                                  ? _loginStore.loginOffline(false)
+                                  : _loginStore.loginOffline(true);
+                            })
+                      ],
+                    ),
                   ),
                   SizedBox(
                     height: 20,

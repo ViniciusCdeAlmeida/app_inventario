@@ -8,7 +8,7 @@ part of 'conexao.dart';
 
 Conexao _$ConexaoFromJson(Map<String, dynamic> json) {
   return Conexao(
-    id: json['id'] as String,
+    id: json['id'] as int,
     url: json['url'] as String,
     nome: json['nome'] as String,
     ativo: json['ativo'] as bool,

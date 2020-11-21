@@ -15,24 +15,21 @@ class InventarioBensPatrimoniais {
   }
 
   Future<List<InventarioBemPatrimonial>> buscaBensInventariados(
-      int idUnidade) async {
-    return helperInventarioBemPatrimonialLista(
-        await db.inventarioBemPatrimonialDao.getInventariados(idUnidade));
-  }
+          int idUnidade) async =>
+      helperInventarioBemPatrimonialLista(
+          await db.inventarioBemPatrimonialDao.getInventariados(idUnidade));
 
-  Future<void> _enviaDados(
-      String conexao, List<InventarioBemPatrimonial> bensColetados) async {
+  Future<void> _enviaDados(List<InventarioBemPatrimonial> bensColetados) async {
     List itens = bensColetados
         .where((element) => element.enviado == false)
         .map((e) => e.toJson())
         .toList();
 
     try {
-      await getConexaoPrefs(conexao)
-          .post("saveInventarioBemPatrimonialMobile.json", data: itens)
+      await Endpoint.getSaveInventario(itens)
           .timeout(
-            Duration(seconds: 50),
-          )
+        Duration(seconds: 50),
+      )
           .catchError((error) {
         throw error.error.message == "Connection failed"
             ? "Falha de conexão."
@@ -57,12 +54,9 @@ class InventarioBensPatrimoniais {
         .updateBemPatrimonial(bemPatrimonial.idDadosBemPatrimonialMobile);
   }
 
-  Future<void> enviaDados(
-      String conexao, List<InventarioBemPatrimonial> bensColetados) async {
-    await _enviaDados(conexao, bensColetados);
-  }
+  Future<void> enviaDados(List<InventarioBemPatrimonial> bensColetados) async =>
+      await _enviaDados(bensColetados);
 
-  Future<void> gravaDados(InventarioBemPatrimonial item) async {
-    await _gravaDados(item);
-  }
+  Future<void> gravaDados(InventarioBemPatrimonial item) async =>
+      await _gravaDados(item);
 }

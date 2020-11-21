@@ -186,17 +186,17 @@ mixin _$InicializacaoStore on _InicializacaoStore, Store {
       AsyncAction('_InicializacaoStore._getBensPatrimoniais');
 
   @override
-  Future<dynamic> _getBensPatrimoniais(String conexao) {
+  Future<dynamic> _getBensPatrimoniais() {
     return _$_getBensPatrimoniaisAsyncAction
-        .run(() => super._getBensPatrimoniais(conexao));
+        .run(() => super._getBensPatrimoniais());
   }
 
   final _$_getDominiosAsyncAction =
       AsyncAction('_InicializacaoStore._getDominios');
 
   @override
-  Future<dynamic> _getDominios(String conexao) {
-    return _$_getDominiosAsyncAction.run(() => super._getDominios(conexao));
+  Future<dynamic> _getDominios() {
+    return _$_getDominiosAsyncAction.run(() => super._getDominios());
   }
 
   final _$verificaOrganizacoesAsyncAction =
@@ -212,9 +212,9 @@ mixin _$InicializacaoStore on _InicializacaoStore, Store {
       AsyncAction('_InicializacaoStore.verificaInicializacao');
 
   @override
-  Future<dynamic> verificaInicializacao(String conexao) {
+  Future<dynamic> verificaInicializacao() {
     return _$verificaInicializacaoAsyncAction
-        .run(() => super.verificaInicializacao(conexao));
+        .run(() => super.verificaInicializacao());
   }
 
   @override

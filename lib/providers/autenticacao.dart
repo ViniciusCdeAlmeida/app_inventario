@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:app_inventario/custom/conexao.dart';
+import 'package:app_inventario/helpers/helper_login.dart';
 import 'package:app_inventario/helpers/helper_organizacoes.dart';
 import 'package:app_inventario/main.dart';
 import 'package:app_inventario/models/serialized/conexao.dart';
@@ -60,21 +61,15 @@ class Autenticacao {
     }
   }
 
-  Future<void> getOrganizacoesDB() async {
-    return helperOrganizacoesLista(
-        await db.unidadesGestorasDao.getAllUnidades());
-  }
+  Future<void> getOrganizacoesDB() async =>
+      helperOrganizacoesListaDB(await db.unidadesGestorasDao.getAllUnidades());
 
-  Future<List<Organizacoes>> listaUnidades() async {
-    return helperOrganizacoesLista(
-        await db.unidadesGestorasDao.getAllUnidades());
-  }
+  Future<List<Organizacoes>> listaUnidades() async =>
+      helperOrganizacoesListaDB(await db.unidadesGestorasDao.getAllUnidades());
 
   Future<Login> _authenticate(String userName, String password) async {
     try {
-      Response response = await getConexaoPrefs(_conexaoAtual.url)
-          // .get("usuarioValidoV2/?username=$userName&password=$password");
-          .get("usuarioValidoV2/?username=vinicius.correa&password=interno");
+      Response response = await Endpoint.getAutenticacao();
       // .get("usuarioValido.json?username=citsmart&password=interno")
       // .timeout(
       //   Duration(seconds: 50),
@@ -84,16 +79,38 @@ class Autenticacao {
             .insertUnidadeGestora(response.data['organizacoes'] as List)
             .whenComplete(() => _existeOrganizacao = true);
       }
+      var _usuarioOffline = await db.usuarioDao.getUsuario();
+      if (_usuarioOffline.organizacoes == null)
+        db.usuarioDao.updateUsuario(
+          helperOrganizacoesLista(response.data['organizacoes']),
+        );
       return Login.fromJson(response.data);
     } catch (error) {
       throw error;
     }
   }
 
-  Future<Login> login(String userName, String password) async {
-    await getVerificaOrganizacaoDB();
-    // db.deleteTable(db.unidadesGestorasDB);
-    return await _authenticate(userName, password);
+  Future<Login> _authenticateOffline() async {
+    try {
+      var _usuarioOffline = await db.usuarioDao.getUsuario();
+      return helperLogin(_usuarioOffline);
+    } catch (error) {
+      throw error;
+    }
+  }
+
+  Future<Login> login({String userName, String password, bool offline}) async {
+    try {
+      if (!offline) {
+        await buscaConexaoAtiva();
+        await getVerificaOrganizacaoDB();
+        // db.deleteTable(db.unidadesGestorasDB);
+        return await _authenticate(userName, password);
+      } else
+        return await _authenticateOffline();
+    } catch (e) {
+      throw e;
+    }
   }
 
   Future<void> sair() async {

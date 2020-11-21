@@ -1,6 +1,5 @@
 import 'package:app_inventario/models/serialized/levantamento.dart';
 import 'package:app_inventario/models/telaArgumentos.dart';
-import 'package:app_inventario/providers/autenticacao.dart';
 import 'package:app_inventario/screens/unidade/unidade_tela.dart';
 import 'package:app_inventario/stores/levantamento_store.dart';
 import 'package:flutter/material.dart';
@@ -64,7 +63,6 @@ class _LevantamentoFisicoItemState extends State<LevantamentoFisicoItem>
   @override
   Widget build(BuildContext context) {
     _levantamentoStore = Provider.of<LevantamentoStore>(context, listen: false);
-    var _conexao = Provider.of<Autenticacao>(context, listen: false);
     int totalBens = widget.levantamento.quantidadeTotalBensBaixados +
         widget.levantamento.quantidadeTotalBensTratados +
         widget.levantamento.quantidadeTotalBensSemInconsistencia +
@@ -153,8 +151,7 @@ class _LevantamentoFisicoItemState extends State<LevantamentoFisicoItem>
                                         icon: Icon(Icons.refresh),
                                         onPressed: () {
                                           _levantamentoStore
-                                              .atualizaInventarios(
-                                            _conexao.atualConexao,
+                                              .atualizaLevantamentos(
                                             widget.levantamento.id,
                                           );
                                         }),

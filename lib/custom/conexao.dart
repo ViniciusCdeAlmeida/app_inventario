@@ -1,15 +1,65 @@
 import 'dart:io';
+import 'package:app_inventario/helpers/helper_conexao.dart';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
+import 'package:app_inventario/main.dart';
 
-Dio getConexaoPrefs(String conexao) {
+String conexaoAtiva;
+
+Future<void> buscaConexaoAtiva() async {
+  try {
+    conexaoAtiva = helperConexao(await db.conexaoDao.getConexaoAtiva()).url;
+  } on NoSuchMethodError {
+    throw "Sem conexão ativa";
+  }
+}
+
+Dio getConexaoPrefs() {
   Dio dio = new Dio()
     ..options.baseUrl =
-        conexao + "/citgrp-patrimonio-web/rest/inventarioMobile/";
+        conexaoAtiva + "/citgrp-patrimonio-web/rest/inventarioMobile/";
   (dio.httpClientAdapter as DefaultHttpClientAdapter).onHttpClientCreate =
       (client) {
     client.badCertificateCallback =
         (X509Certificate cert, String host, int port) => true;
   };
   return dio;
+}
+
+class Endpoint {
+  static Future getDadosBemPatrimonial(Map filter) async => getConexaoPrefs()
+      .post('obterBensPatrimoniaisDemandaV2.json', data: filter);
+
+  static Future getDominios() async {
+    return getConexaoPrefs().get('obterDominiosInventario.json');
+  }
+
+  static Future getInventarioEstruturaOrganizacional(Map filter) async {
+    return getConexaoPrefs().post(
+        'obterInventarioEstruturaOrganizacionalPorDemandaV2.json',
+        data: filter);
+  }
+
+  static Future getObterLevantamentosUg(int id) async {
+    return getConexaoPrefs()
+        .get('obterLevantamentosPorUGV3.json?idOrganizacao=$id');
+  }
+
+  static Future getObterLevantamentosCodigo(String codigo) async {
+    return getConexaoPrefs()
+        .get('obterLevantamentoPorCodigoV2.json?codigo=$codigo');
+  }
+
+  static Future getSaveInventario(List itens) async {
+    return getConexaoPrefs()
+        .post('saveInventarioBemPatrimonialMobile.json', data: itens);
+  }
+
+  static Future getAutenticacao({String usuario, String senha}) async {
+    var t = getConexaoPrefs()
+        .get('usuarioValidoV2/?username=vinicius.correa&password=interno');
+    return t;
+    // .get("usuarioValidoV2/?username=$userName&password=$password");
+    // .get("usuarioValido.json?username=citsmart&password=interno")
+  }
 }

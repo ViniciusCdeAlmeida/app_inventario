@@ -1,5 +1,6 @@
 import 'package:app_inventario/models/database/databaseMoor.dart';
 import 'package:app_inventario/models/serialized/dominio.dart';
+import 'package:app_inventario/models/serialized/organizacao.dart';
 import 'package:app_inventario/models/serialized/organizacoes.dart';
 
 Organizacoes helperOrganizacoes(UnidadesGestorasDBData organizacoes) {
@@ -12,7 +13,7 @@ Organizacoes helperOrganizacoes(UnidadesGestorasDBData organizacoes) {
     return null;
 }
 
-List<Organizacoes> helperOrganizacoesLista(
+List<Organizacoes> helperOrganizacoesListaDB(
     List<UnidadesGestorasDBData> organizacoes) {
   if (organizacoes != null) {
     return List<Organizacoes>.from(
@@ -20,6 +21,20 @@ List<Organizacoes> helperOrganizacoesLista(
         (item) => Organizacoes(
           id: item.id,
           organizacao: item.organizacao,
+        ),
+      ),
+    );
+  } else
+    return null;
+}
+
+List<Organizacoes> helperOrganizacoesLista(List organizacoes) {
+  if (organizacoes != null) {
+    return List<Organizacoes>.from(
+      (organizacoes).map(
+        (item) => Organizacoes(
+          id: item['id'],
+          organizacao: Organizacao.fromJson(item['organizacao'] as Map),
         ),
       ),
     );

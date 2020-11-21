@@ -34,31 +34,26 @@ class Inicializacao {
       return false;
   }
 
-  Future<void> getDominiosDB() async {
-    return helperDominioLista(await db.dominioDao.getAllDominio());
-  }
+  Future<void> getDominiosDB() async =>
+      helperDominioLista(await db.dominioDao.getAllDominio());
 
-  Future<void> _getDominios(String conexao) async {
+  Future<void> _getDominios() async {
     try {
-      Response response = await getConexaoPrefs(conexao)
-          .get("obterDominiosInventario.json")
-          .timeout(
-            Duration(minutes: 2),
-          );
+      Response response = await Endpoint.getDominios().timeout(
+        Duration(minutes: 2),
+      );
       await db.dominioDao.insertDominio(response.data["payload"] as List);
     } catch (error) {
       throw error;
     }
   }
 
-  Future<double> getBensDemanda({String conexao, int itemAtual}) async {
+  Future<double> getBensDemanda({int itemAtual}) async {
     int itens = 0;
     try {
       print('Buscando pagina $itemAtual:' + DateTime.now().toString());
       filter['start'] = itemAtual;
-      await getConexaoPrefs(conexao)
-          .post("obterBensPatrimoniaisDemandaV2.json", data: filter)
-          .then((value) {
+      await Endpoint.getDadosBemPatrimonial(filter).then((value) {
         itens = (value.data["objects"] as List).length;
         db.bemPatrimoniaisDao
             .insertBensPatrimoniais(value.data["objects"] as List);
@@ -71,12 +66,9 @@ class Inicializacao {
     return progress = qtdeItensAtual / qtdeItens;
   }
 
-  Future _getDadosBensDemanda(String conexao) async {
+  Future _getDadosBensDemanda() async {
     try {
-      await getConexaoPrefs(conexao)
-          .post("obterBensPatrimoniaisDemandaV2.json", data: filter)
-          // .post("obterBensPatrimoniaisDemanda.json", data: filter)
-          .then(
+      await Endpoint.getDadosBemPatrimonial(filter).then(
         (value) {
           _startFilter = value.data['totalPages'];
           qtdeItens = value.data['totalItens'];
@@ -87,15 +79,15 @@ class Inicializacao {
     }
   }
 
-  Future buscaDominioInicial(String conexao) async {
+  Future buscaDominioInicial() async {
     // db.deleteTable(db.dominioDB);
 
-    await _getDominios(conexao);
+    await _getDominios();
   }
 
-  Future<List> buscaBemPatrimonialInicial(String conexao) async {
+  Future<List> buscaBemPatrimonialInicial() async {
     // db.deleteTable(db.bensPatrimoniaisDB);
-    await _getDadosBensDemanda(conexao);
+    await _getDadosBensDemanda();
     List<dynamic> maximo = [];
     for (var i = 0; i < _startFilter; i++) {
       maximo.insert(i, i + 1);

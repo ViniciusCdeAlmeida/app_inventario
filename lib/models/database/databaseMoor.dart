@@ -1,4 +1,8 @@
 import 'dart:io';
+import 'package:app_inventario/models/converters/organizacoesConverter.dart';
+import 'package:app_inventario/models/database/daos/conexaoDao.dart';
+import 'package:app_inventario/models/database/daos/configuracaoDao.dart';
+import 'package:app_inventario/models/database/daos/usuarioDao.dart';
 import 'package:path/path.dart' as p;
 import 'package:sqflite/sqflite.dart' show getDatabasesPath;
 import 'package:moor/moor.dart';
@@ -24,6 +28,7 @@ import 'package:app_inventario/models/serialized/organizacao.dart';
 import 'package:app_inventario/models/serialized/dominio.dart';
 import 'package:app_inventario/models/serialized/caracteristicas.dart';
 import 'package:app_inventario/models/serialized/inventarioDadosBemPatrimonial.dart';
+import 'package:app_inventario/models/serialized/organizacoes.dart';
 import 'package:app_inventario/models/serialized/dadosBensPatrimoniais.dart';
 
 part 'databaseMoor.g.dart';
@@ -96,10 +101,20 @@ class InventarioBemPatrimonialDB extends Table {
 }
 
 class ConexaoDB extends Table {
-  IntColumn get id => integer()();
+  IntColumn get id => integer().autoIncrement()();
   TextColumn get nome => text().nullable()();
   TextColumn get url => text().nullable()();
   BoolColumn get ativo => boolean().nullable()();
+}
+
+class MascaraNumeroPatrimonialDB extends Table {
+  IntColumn get id => integer().autoIncrement()();
+  TextColumn get mascara => text().nullable()();
+}
+
+class PrefixoDB extends Table {
+  IntColumn get id => integer().autoIncrement()();
+  TextColumn get prefixo => text().nullable()();
 }
 
 class LevantamentoDB extends Table {
@@ -127,6 +142,13 @@ class EstruturaInventarioDB extends Table {
       text().map(const DominioConverter()).nullable()();
   TextColumn get estruturaOrganizacional =>
       text().map(const OrganizacaoConverter()).nullable()();
+}
+
+class UsuarioDB extends Table {
+  IntColumn get id => integer().autoIncrement()();
+  TextColumn get username => text().nullable()();
+  TextColumn get organizacoes =>
+      text().map(const OrganizacoesConverter()).nullable()();
 }
 
 class DadosBemPatrimoniaisDB extends Table {
@@ -158,7 +180,10 @@ class DadosBemPatrimoniaisDB extends Table {
     ConexaoDB,
     UnidadesGestorasDB,
     DadosBemPatrimoniaisDB,
-    InventarioBemPatrimonialDB
+    InventarioBemPatrimonialDB,
+    MascaraNumeroPatrimonialDB,
+    PrefixoDB,
+    UsuarioDB
   ],
   daos: [
     DominioDao,
@@ -167,7 +192,10 @@ class DadosBemPatrimoniaisDB extends Table {
     EstruturaInventarioDao,
     UnidadesGestorasDao,
     DadosBemPatrimoniaisDao,
-    InventarioBemPatrimonialDao
+    InventarioBemPatrimonialDao,
+    ConfiguracaoDao,
+    UsuarioDao,
+    ConexaoDao
   ],
 )
 // _$AppDatabase is the name of the generated class
@@ -191,7 +219,7 @@ class AppDatabase extends _$AppDatabase {
   // Bump this when changing tables and columns.
   // Migrations will be covered in the next part.
   @override
-  int get schemaVersion => 14;
+  int get schemaVersion => 16;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
@@ -202,16 +230,20 @@ class AppDatabase extends _$AppDatabase {
           // m.createTable(unidadesGestorasDB);
           // m.addColumn(dadosBemPatrimoniaisDB, dadosBemPatrimoniaisDB.inventarioBemPatrimonial);inventariado
           // m.drop(inventarioBemPatrimonialDB);
-          m.addColumn(inventarioBemPatrimonialDB,
-              inventarioBemPatrimonialDB.idDominioSituacaoFisica);
-          m.addColumn(inventarioBemPatrimonialDB,
-              inventarioBemPatrimonialDB.idDominioStatus);
-          m.addColumn(inventarioBemPatrimonialDB,
-              inventarioBemPatrimonialDB.idMaterial);
-          m.addColumn(inventarioBemPatrimonialDB,
-              inventarioBemPatrimonialDB.idEstruturaOrganizacionalAtual);
-          return m.addColumn(inventarioBemPatrimonialDB,
-              inventarioBemPatrimonialDB.identificaoPatrimonial);
+          // m.addColumn(inventarioBemPatrimonialDB,
+          //     inventarioBemPatrimonialDB.idDominioSituacaoFisica);
+          // m.addColumn(inventarioBemPatrimonialDB,
+          //     inventarioBemPatrimonialDB.idDominioStatus);
+          // m.addColumn(inventarioBemPatrimonialDB,
+          //     inventarioBemPatrimonialDB.idMaterial);
+          // m.addColumn(inventarioBemPatrimonialDB,
+          //     inventarioBemPatrimonialDB.idEstruturaOrganizacionalAtual);
+
+          m.createTable(mascaraNumeroPatrimonialDB);
+          return m.createTable(prefixoDB);
+        },
+        beforeOpen: (usuarioDB) async {
+          if (usuarioDB.wasCreated) usuarioDao.insertUsuario();
         },
       );
 

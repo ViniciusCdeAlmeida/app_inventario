@@ -1,6 +1,5 @@
 import 'package:app_inventario/models/serialized/login.dart';
 import 'package:app_inventario/providers/autenticacao.dart';
-import 'package:app_inventario/providers/configuracao_conexao.dart';
 
 import 'package:mobx/mobx.dart';
 
@@ -15,16 +14,18 @@ enum LoginState {
 }
 
 abstract class _LoginStore with Store {
-  final ConfiguracaoConexao _configuracaoConexao;
   final Autenticacao _autenticacao;
 
-  _LoginStore(this._autenticacao, this._configuracaoConexao);
+  _LoginStore(this._autenticacao);
 
   @observable
   bool logando = false;
 
   @observable
   int _qtdeItens = 0;
+
+  @observable
+  bool _loginOffline = false;
 
   @observable
   int _qtdeItensTotal = 0;
@@ -40,6 +41,10 @@ abstract class _LoginStore with Store {
 
   Login get usuarioLogado {
     return _usuarioLogado;
+  }
+
+  bool get usuarioOffline {
+    return _loginOffline;
   }
 
   @computed
@@ -58,12 +63,33 @@ abstract class _LoginStore with Store {
   }
 
   @action
-  Future login(String usuario, String senha) async {
-    _autenticacao.conexaoAtual(_configuracaoConexao.conexoes);
+  void loginOffline(bool status) {
+    _loginOffline = status;
+  }
+
+  @action
+  Future logarOffline() async {
     logando = true;
     try {
       _loginFuture = ObservableFuture(
-        _autenticacao.login(usuario, senha),
+        _autenticacao.login(offline: _loginOffline),
+      );
+      _usuarioLogado = await _loginFuture.whenComplete(() => logando = false);
+    } catch (e) {
+      throw e;
+    }
+  }
+
+  @action
+  Future login(String usuario, String senha) async {
+    logando = true;
+    try {
+      _loginFuture = ObservableFuture(
+        _autenticacao.login(
+          userName: usuario,
+          password: senha,
+          offline: _loginOffline,
+        ),
       );
       _usuarioLogado = await _loginFuture.whenComplete(() => logando = false);
     } catch (e) {

@@ -47,6 +47,21 @@ mixin _$LoginStore on _LoginStore, Store {
     });
   }
 
+  final _$_loginOfflineAtom = Atom(name: '_LoginStore._loginOffline');
+
+  @override
+  bool get _loginOffline {
+    _$_loginOfflineAtom.reportRead();
+    return super._loginOffline;
+  }
+
+  @override
+  set _loginOffline(bool value) {
+    _$_loginOfflineAtom.reportWrite(value, super._loginOffline, () {
+      super._loginOffline = value;
+    });
+  }
+
   final _$_qtdeItensTotalAtom = Atom(name: '_LoginStore._qtdeItensTotal');
 
   @override
@@ -107,11 +122,31 @@ mixin _$LoginStore on _LoginStore, Store {
     });
   }
 
+  final _$logarOfflineAsyncAction = AsyncAction('_LoginStore.logarOffline');
+
+  @override
+  Future<dynamic> logarOffline() {
+    return _$logarOfflineAsyncAction.run(() => super.logarOffline());
+  }
+
   final _$loginAsyncAction = AsyncAction('_LoginStore.login');
 
   @override
   Future<dynamic> login(String usuario, String senha) {
     return _$loginAsyncAction.run(() => super.login(usuario, senha));
+  }
+
+  final _$_LoginStoreActionController = ActionController(name: '_LoginStore');
+
+  @override
+  void loginOffline(bool status) {
+    final _$actionInfo = _$_LoginStoreActionController.startAction(
+        name: '_LoginStore.loginOffline');
+    try {
+      return super.loginOffline(status);
+    } finally {
+      _$_LoginStoreActionController.endAction(_$actionInfo);
+    }
   }
 
   @override

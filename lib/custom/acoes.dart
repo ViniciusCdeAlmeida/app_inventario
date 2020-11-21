@@ -1,4 +1,5 @@
 enum Acoes {
+  buscarEstruturas,
   buscarLevantamentos,
   buscarLevantamento,
   buscarInventarios,

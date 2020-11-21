@@ -9,7 +9,6 @@ import 'package:provider/provider.dart';
 import 'package:app_inventario/custom/acoes.dart';
 
 import 'package:app_inventario/main.dart';
-import 'package:app_inventario/models/serialized/levantamento.dart';
 
 import 'package:app_inventario/providers/autenticacao.dart';
 
@@ -26,24 +25,28 @@ class LevantamentoFisicoTela extends StatefulWidget {
 
 class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
-  List<Levantamento> listaAtual = [];
+  final _controller = TextEditingController();
+  final _form = GlobalKey<FormState>();
   LevantamentoStore _levantamentoStore;
+  int idOrganizacao;
+  String conexao;
 
   @override
   void didChangeDependencies() {
-    final conexao =
-        Provider.of<Autenticacao>(context, listen: false).atualConexao;
+    conexao = Provider.of<Autenticacao>(context, listen: false).atualConexao;
     _levantamentoStore = Provider.of<LevantamentoStore>(context, listen: false);
-    final idOrganizacao = ModalRoute.of(context).settings.arguments;
-
-    _levantamentoStore.verificaInventarios(conexao, idOrganizacao);
+    idOrganizacao = ModalRoute.of(context).settings.arguments;
+    _levantamentoStore.verificaLevantamento();
     super.didChangeDependencies();
   }
 
-  Future<void> _actionButtons(String conexao, int id, Acoes acoes) async {
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  Future<void> _actionButtons(int id, Acoes acoes) async {
     switch (acoes) {
-      case Acoes.buscarLevantamento:
-        break;
       case Acoes.acessarBanco:
         Navigator.of(context)
             .push(MaterialPageRoute(builder: (context) => MoorDbViewer(db)));
@@ -51,13 +54,13 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
       case Acoes.itensInventariados:
         Navigator.of(context).pushNamed(BensInventariadosTela.routeName);
         break;
-      case Acoes.itensInventariados:
-        print('3');
-        break;
-      case Acoes.exluirLevantamento:
-        print('4');
+      case Acoes.buscarLevantamento:
+        _leituraCodigoLevantamento(idOrganizacao, context);
         break;
       case Acoes.buscarLevantamentos:
+        _levantamentoStore.verificaLevantamentos(idOrganizacao, true);
+        break;
+      case Acoes.buscarEstruturas:
         try {
           await _levantamentoStore.buscaEstruturasInventario(
               conexao, _levantamentoStore.levantamentosDados);
@@ -82,11 +85,81 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
     }
   }
 
+  Future<void> _buscaLevantamento(String conexao, int idOrganizacao,
+      String codigo, BuildContext context) async {
+    try {
+      await _levantamentoStore.buscaLevantamento(codigo);
+    } catch (error) {
+      await showDialog<Null>(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: const Text('Ocorreu um erro.'),
+          content: Text((error as StateError).message),
+          actions: <Widget>[
+            FlatButton(
+              onPressed: () {
+                Navigator.of(ctx).pop();
+              },
+              child: Text('OK'),
+            )
+          ],
+        ),
+      );
+    }
+  }
+
+  void _leituraCodigoLevantamento(int idOrganizacao, BuildContext ctx) {
+    showModalBottomSheet(
+      context: ctx,
+      builder: (bCtx) {
+        return SingleChildScrollView(
+          child: Card(
+            child: Container(
+              padding: EdgeInsets.only(
+                top: 10,
+                left: 10,
+                right: 10,
+                bottom: MediaQuery.of(context).viewInsets.bottom + 10,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: <Widget>[
+                  Form(
+                    key: _form,
+                    child: TextFormField(
+                      key: Key('codigoText'),
+                      textInputAction: TextInputAction.done,
+                      autofocus: true,
+                      controller: _controller,
+                      decoration: InputDecoration(
+                        labelText: 'Código',
+                        helperText: 'Informe o código do levantamento.',
+                      ),
+                    ),
+                  ),
+                  FlatButton.icon(
+                    icon: Icon(Icons.search),
+                    onPressed: () {
+                      Navigator.of(ctx).pop();
+                      _buscaLevantamento(
+                          conexao, idOrganizacao, _controller.text, ctx);
+                      _controller.text = null;
+                    },
+                    label: Text('Buscar'),
+                    color: Theme.of(context).primaryColor,
+                    textColor: Theme.of(context).textTheme.button.color,
+                  )
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    final conexao =
-        Provider.of<Autenticacao>(context, listen: false).atualConexao;
-    final idOrganizacao = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
@@ -95,13 +168,13 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
           GestureDetector(
             child: PopupMenuButton<Acoes>(
               onSelected: (value) {
-                _actionButtons(conexao, idOrganizacao, value);
+                _actionButtons(idOrganizacao, value);
               },
               offset: Offset(0, 100),
               itemBuilder: (context) => <PopupMenuEntry<Acoes>>[
                 PopupMenuItem<Acoes>(
                   child: PopupMenuCustom(
-                      'Itens Inventariados', Icons.cloud_upload),
+                      'Itens inventariados', Icons.cloud_upload),
                   value: Acoes.itensInventariados,
                 ),
                 const PopupMenuDivider(),
@@ -113,20 +186,20 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
                 const PopupMenuDivider(),
                 PopupMenuItem<Acoes>(
                   child:
-                      PopupMenuCustom('Buscar Levantamentos', Icons.save_alt),
+                      PopupMenuCustom('Buscar levantamentos', Icons.save_alt),
                   value: Acoes.buscarLevantamentos,
                 ),
                 const PopupMenuDivider(),
                 PopupMenuItem<Acoes>(
                   child: PopupMenuCustom(
-                      'Buscar Levantamento', Icons.download_sharp),
+                      'Buscar levantamento', Icons.download_sharp),
                   value: Acoes.buscarLevantamento,
                 ),
                 const PopupMenuDivider(),
                 PopupMenuItem<Acoes>(
                   child: PopupMenuCustom(
-                      'Buscar Estruturas', Icons.cloud_download),
-                  value: Acoes.buscarLevantamentos,
+                      'Buscar todas estruturas', Icons.cloud_download),
+                  value: Acoes.buscarEstruturas,
                 ),
                 const PopupMenuDivider(),
                 // PopupMenuItem<Acoes>(
@@ -144,14 +217,14 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
         // ignore: missing_return
         builder: (_) {
           switch (_levantamentoStore.inventarioState) {
-            case LevantamentosState.inicial:
             case LevantamentosState.carregando:
               return Center(
                 child: CircularProgressIndicator(
                   backgroundColor: Colors.white,
                 ),
               );
-            case LevantamentosState.vazio:
+            case LevantamentosState.inicial:
+              // case LevantamentosState.vazio:
               return Center(
                 child: Text('VAZIO'),
               );
