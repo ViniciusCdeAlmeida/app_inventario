@@ -1,15 +1,10 @@
-import 'package:app_inventario/models/serialized/caracteristicas.dart';
-import 'package:app_inventario/models/serialized/dadosBensPatrimoniais.dart';
-import 'package:app_inventario/models/serialized/dominio.dart';
-import 'package:app_inventario/models/serialized/material.dart';
-import 'package:app_inventario/models/serialized/organizacao.dart';
-import 'package:flutter/material.dart' as mat;
+import 'package:app_inventario/models/serialized/index.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'bemPatrimonial.g.dart';
 
 @JsonSerializable()
-class BemPatrimonial with mat.ChangeNotifier {
+class BemPatrimonial {
   int id;
   String numeroPatrimonial;
   String numeroPatrimonialCompleto;

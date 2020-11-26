@@ -1,6 +1,6 @@
-import 'package:app_inventario/helpers/helper_dominio.dart';
+import 'package:app_inventario/helpers/index.dart';
 import 'package:app_inventario/models/database/databaseMoor.dart';
-import 'package:app_inventario/models/serialized/inventario.dart';
+import 'package:app_inventario/models/serialized/index.dart';
 
 List<Inventario> helperInventarioList(
     List<InventarioDBData> listaLevantamento) {

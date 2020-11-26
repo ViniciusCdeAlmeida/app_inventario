@@ -1,7 +1,5 @@
 import 'package:app_inventario/models/database/databaseMoor.dart';
-import 'package:app_inventario/models/serialized/dominio.dart';
-import 'package:app_inventario/models/serialized/organizacao.dart';
-import 'package:app_inventario/models/serialized/organizacoes.dart';
+import 'package:app_inventario/models/serialized/index.dart';
 
 Organizacoes helperOrganizacoes(UnidadesGestorasDBData organizacoes) {
   if (organizacoes != null) {
@@ -40,18 +38,4 @@ List<Organizacoes> helperOrganizacoesLista(List organizacoes) {
     );
   } else
     return null;
-}
-
-List<Dominio> helperDominioLista(List<DominioDBData> listaDominios) {
-  return List<Dominio>.from(
-    (listaDominios).map(
-      (item) => Dominio(
-        id: item.id,
-        nome: item.nome,
-        chave: item.chave,
-        codigo: item.codigo,
-        descricao: item.descricao,
-      ),
-    ),
-  );
 }

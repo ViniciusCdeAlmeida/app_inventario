@@ -1,10 +1,9 @@
-import 'package:app_inventario/models/telaArgumentos.dart';
-import 'package:app_inventario/providers/autenticacao.dart';
-import 'package:app_inventario/providers/inventario.dart';
 import 'package:flutter/material.dart';
-import 'package:app_inventario/widgets/cabecalho/app_cabecalho.dart';
-import 'package:app_inventario/widgets/inventario/inventario_selecao_item.dart';
 import 'package:provider/provider.dart';
+import 'package:app_inventario/widgets/index.dart';
+
+import 'package:app_inventario/models/telaArgumentos.dart';
+import 'package:app_inventario/providers/index.dart';
 
 class InventarioSelecaoTela extends StatelessWidget {
   static const routeName = '/inventarioSelecaoTela';

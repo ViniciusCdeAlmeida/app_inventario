@@ -2,13 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:app_inventario/models/database/databaseMoor.dart';
-
-import 'package:app_inventario/providers/autenticacao.dart';
-
-import 'package:app_inventario/screens/login/login_tela.dart';
-
-import 'package:app_inventario/custom/custom_route.dart';
-import 'package:app_inventario/custom/custom_providers.dart';
+import 'package:app_inventario/providers/index.dart';
+import 'package:app_inventario/screens/index.dart';
+import 'package:app_inventario/custom/index.dart';
 
 AppDatabase db;
 

@@ -1,5 +1,5 @@
 import 'package:app_inventario/models/database/databaseMoor.dart';
-import 'package:app_inventario/models/serialized/conexao.dart';
+import 'package:app_inventario/models/serialized/index.dart';
 
 List<Conexao> helperConexoes(List<ConexaoDBData> conexoes) {
   if (conexoes != null) {

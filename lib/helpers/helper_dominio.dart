@@ -1,5 +1,5 @@
 import 'package:app_inventario/models/database/databaseMoor.dart';
-import 'package:app_inventario/models/serialized/dominio.dart';
+import 'package:app_inventario/models/serialized/index.dart';
 
 Dominio helperDominio(dynamic dominio) {
   if (dominio != null) {

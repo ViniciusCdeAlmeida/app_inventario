@@ -1,11 +1,12 @@
-import 'package:app_inventario/stores/bensInventariados_store.dart';
-import 'package:app_inventario/widgets/bens/bens_inventariados_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 import 'package:flare_flutter/flare_actor.dart';
 
-import 'package:app_inventario/providers/autenticacao.dart';
+import 'package:app_inventario/stores/index.dart';
+import 'package:app_inventario/widgets/index.dart';
+
+import 'package:app_inventario/providers/index.dart';
 
 class BensInventariadosTela extends StatefulWidget {
   static const routeName = '/bensInventariadosTela';

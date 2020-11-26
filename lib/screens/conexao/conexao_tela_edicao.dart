@@ -1,8 +1,8 @@
-import 'package:app_inventario/models/serialized/conexao.dart';
-import 'package:app_inventario/stores/conexao_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
+import 'package:app_inventario/models/serialized/index.dart';
+import 'package:app_inventario/stores/index.dart';
 
 class ConexaoEdicaoTela extends StatefulWidget {
   static const routeName = '/ConexaoEdicaoTela';

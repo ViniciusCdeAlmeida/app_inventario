@@ -1,10 +1,9 @@
-import 'package:app_inventario/custom/custom_acoes.dart';
-import 'package:app_inventario/models/serialized/estruturaInventario.dart';
-import 'package:app_inventario/models/telaArgumentos.dart';
-import 'package:app_inventario/screens/bens/previstos_bens_tela.dart';
-import 'package:app_inventario/widgets/bens/ler_bens_item.dart';
-import 'package:app_inventario/widgets/customizados/popupMenu_custom.dart';
 import 'package:flutter/material.dart';
+import 'package:app_inventario/custom/index.dart';
+import 'package:app_inventario/models/serialized/index.dart';
+import 'package:app_inventario/models/telaArgumentos.dart';
+import 'package:app_inventario/screens/index.dart';
+import 'package:app_inventario/widgets/index.dart';
 
 class UnidadeItem extends StatefulWidget {
   final EstruturaInventario unidade;

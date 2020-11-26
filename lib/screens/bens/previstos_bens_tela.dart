@@ -1,14 +1,14 @@
-import 'package:app_inventario/providers/estruturaLevantamento.dart';
-import 'package:app_inventario/stores/bensPrevistos_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 
-import 'package:app_inventario/custom/custom_sliverAppBar.dart';
+import 'package:app_inventario/custom/index.dart';
+import 'package:app_inventario/providers/index.dart';
+import 'package:app_inventario/stores/index.dart';
 
 import 'package:app_inventario/models/telaArgumentos.dart';
 
-import 'package:app_inventario/widgets/bens/previstos_bens_item.dart';
+import 'package:app_inventario/widgets/index.dart';
 
 class PrevistosBensTela extends StatefulWidget {
   static const routeName = '/bensPrevistosTela';

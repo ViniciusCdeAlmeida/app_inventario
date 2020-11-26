@@ -1,16 +1,5 @@
-import 'package:app_inventario/screens/bens/bens_inventariados_tela.dart';
-import 'package:app_inventario/screens/bens/ler_bens_geral_tela.dart';
-import 'package:app_inventario/screens/bens/previstos_bens_tela.dart';
-import 'package:app_inventario/screens/conexao/conexao_tela_edicao.dart';
-import 'package:app_inventario/screens/conexao/conexao_tela.dart';
-import 'package:app_inventario/screens/inventario/inventario/inventario_geral_tela.dart';
-import 'package:app_inventario/screens/inventario/inventario_selecao_tela.dart';
-import 'package:app_inventario/screens/inventario/levantamento/levantamento_fisico_tela.dart';
-import 'package:app_inventario/screens/login/inicializacao_tela.dart';
-import 'package:app_inventario/screens/login/login_tela.dart';
-import 'package:app_inventario/screens/organizacao/organizacao_tela.dart';
-import 'package:app_inventario/screens/unidade/unidade_tela.dart';
-import 'package:app_inventario/widgets/bens/ler_bens_item.dart';
+import 'package:app_inventario/screens/index.dart';
+import 'package:app_inventario/widgets/index.dart';
 import 'package:flutter/material.dart';
 
 class CustomPageTransitionBuilder extends PageTransitionsBuilder {

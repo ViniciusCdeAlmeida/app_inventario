@@ -1,23 +1,14 @@
-import 'package:app_inventario/stores/bemPatrimonial_store.dart';
-import 'package:app_inventario/stores/bensPrevistos_store.dart';
-import 'package:app_inventario/stores/inventario_store.dart';
-import 'package:app_inventario/stores/login_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 import 'package:searchable_dropdown/searchable_dropdown.dart';
 
-import 'package:app_inventario/models/serialized/bemPatrimonial.dart';
-import 'package:app_inventario/models/serialized/estruturaInventario.dart';
-import 'package:app_inventario/models/serialized/dominio.dart';
-import 'package:app_inventario/models/serialized/inventarioBemPatrimonial.dart';
+import 'package:app_inventario/models/serialized/index.dart';
+import 'package:app_inventario/stores/index.dart';
+import 'package:app_inventario/providers/index.dart';
 import 'package:app_inventario/models/telaArgumentos.dart';
 
-import 'package:app_inventario/providers/inventarioBemPatrimonial.dart';
-import 'package:app_inventario/providers/autenticacao.dart';
-import 'package:app_inventario/providers/estruturaLevantamento.dart';
-
-import 'package:app_inventario/widgets/cabecalho/app_cabecalho.dart';
+import 'package:app_inventario/widgets/index.dart';
 
 // ignore: must_be_immutable
 class LerBensGeralTela extends StatefulWidget {
@@ -50,7 +41,6 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
   String _usuarioColetante;
   int _idAtuaUl;
   int _idOrganizacao;
-  bool _tipoLevantamento;
 
   BemPatrimonialStore _bemPatrimonialStore;
   InventarioStore _inventarioStore;

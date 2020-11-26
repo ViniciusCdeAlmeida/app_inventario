@@ -1,10 +1,10 @@
-import 'package:app_inventario/custom/custom_sliverAppBar.dart';
-import 'package:app_inventario/models/telaArgumentos.dart';
-import 'package:app_inventario/stores/estruturaLevantamento_store.dart';
-import 'package:app_inventario/widgets/unidade/unidade_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
+import 'package:app_inventario/custom/index.dart';
+import 'package:app_inventario/models/telaArgumentos.dart';
+import 'package:app_inventario/stores/index.dart';
+import 'package:app_inventario/widgets/index.dart';
 
 // ignore: must_be_immutable
 class UnidadeTela extends StatefulWidget {

@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:app_inventario/models/serialized/organizacoes.dart';
+import 'package:app_inventario/models/serialized/index.dart';
 import 'package:moor_flutter/moor_flutter.dart';
 
 class OrganizacoesConverter extends TypeConverter<List<Organizacoes>, String> {

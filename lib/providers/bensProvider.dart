@@ -1,6 +1,6 @@
-import 'package:app_inventario/helpers/helper_dadosBemPatrimonial.dart';
+import 'package:app_inventario/helpers/index.dart';
 import 'package:app_inventario/main.dart';
-import 'package:app_inventario/models/serialized/dadosBensPatrimoniais.dart';
+import 'package:app_inventario/models/serialized/index.dart';
 
 class BensProvider {
   List<DadosBensPatrimoniais> _bensPorEstrutura = [];

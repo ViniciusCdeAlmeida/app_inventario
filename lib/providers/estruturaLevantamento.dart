@@ -1,15 +1,10 @@
-import 'package:app_inventario/custom/custom_conexao.dart';
-import 'package:app_inventario/models/serialized/bemPatrimonial.dart';
 import 'package:dio/dio.dart';
 
 import 'package:app_inventario/main.dart';
 
-import 'package:app_inventario/helpers/helper_dadosBemPatrimonial.dart';
-import 'package:app_inventario/helpers/helper_estruturaInventario.dart';
-
-import 'package:app_inventario/models/serialized/dadosBensPatrimoniais.dart';
-import 'package:app_inventario/models/serialized/estruturaInventario.dart';
-import 'package:app_inventario/models/serialized/inventario.dart';
+import 'package:app_inventario/helpers/index.dart';
+import 'package:app_inventario/custom/index.dart';
+import 'package:app_inventario/models/serialized/index.dart';
 
 class EstruturaLevantamento {
   List<EstruturaInventario> _estruturas = [];

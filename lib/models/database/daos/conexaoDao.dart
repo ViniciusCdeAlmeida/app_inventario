@@ -1,6 +1,6 @@
 import 'package:app_inventario/models/database/databaseMoor.dart';
-import 'package:app_inventario/models/database/tables/conexao.dart';
-import 'package:app_inventario/models/serialized/conexao.dart';
+import 'package:app_inventario/models/database/tables/index.dart';
+import 'package:app_inventario/models/serialized/index.dart';
 import 'package:moor_flutter/moor_flutter.dart';
 
 part 'conexaoDao.g.dart';

@@ -1,4 +1,4 @@
-import 'package:app_inventario/screens/organizacao/organizacao_tela.dart';
+import 'package:app_inventario/screens/index.dart';
 import 'package:flutter/material.dart';
 
 class AppDrawer extends StatelessWidget {

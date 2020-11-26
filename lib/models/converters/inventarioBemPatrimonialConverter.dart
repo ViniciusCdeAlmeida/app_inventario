@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:moor_flutter/moor_flutter.dart';
 
-import 'package:app_inventario/models/serialized/inventarioDadosBemPatrimonial.dart';
+import 'package:app_inventario/models/serialized/index.dart';
 
 class InventarioBemPatrimonialConverter
     extends TypeConverter<InventarioDadosBemPatrimonial, String> {

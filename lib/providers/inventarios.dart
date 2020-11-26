@@ -1,6 +1,6 @@
-import 'package:app_inventario/custom/custom_conexao.dart';
-import 'package:app_inventario/helpers/helper_levantamento.dart';
-import 'package:app_inventario/models/serialized/inventario.dart';
+import 'package:app_inventario/custom/index.dart';
+import 'package:app_inventario/helpers/index.dart';
+import 'package:app_inventario/models/serialized/index.dart';
 import 'package:dio/dio.dart';
 import 'package:app_inventario/main.dart';
 

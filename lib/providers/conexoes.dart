@@ -1,6 +1,6 @@
-import 'package:app_inventario/helpers/helper_conexao.dart';
+import 'package:app_inventario/helpers/index.dart';
 import 'package:app_inventario/main.dart';
-import 'package:app_inventario/models/serialized/conexao.dart';
+import 'package:app_inventario/models/serialized/index.dart';
 
 class Conexoes {
   Future salvaConexao(Conexao conexao) async {

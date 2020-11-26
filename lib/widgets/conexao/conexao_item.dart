@@ -1,8 +1,8 @@
-import 'package:app_inventario/stores/conexao_store.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:app_inventario/screens/conexao/conexao_tela_edicao.dart';
+import 'package:app_inventario/screens/index.dart';
+import 'package:app_inventario/stores/index.dart';
 
 class ConexaoItem extends StatefulWidget {
   final int id;

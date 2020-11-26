@@ -4,44 +4,13 @@ import 'package:sqflite/sqflite.dart' show getDatabasesPath;
 import 'package:moor/moor.dart';
 import 'package:moor/ffi.dart';
 
-import 'package:app_inventario/models/database/tables/dadosBemPatrimoniais.dart';
-import 'package:app_inventario/models/database/tables/bensPatrimoniais.dart';
-import 'package:app_inventario/models/database/tables/conexao.dart';
-import 'package:app_inventario/models/database/tables/dominio.dart';
-import 'package:app_inventario/models/database/tables/estruturaInventario.dart';
-import 'package:app_inventario/models/database/tables/inventario.dart';
-import 'package:app_inventario/models/database/tables/inventarioBemPatrimonial.dart';
-import 'package:app_inventario/models/database/tables/mascara.dart';
-import 'package:app_inventario/models/database/tables/prefixo.dart';
-import 'package:app_inventario/models/database/tables/unidadesGestoras.dart';
-import 'package:app_inventario/models/database/tables/usuario.dart';
+import 'package:app_inventario/models/database/tables/index.dart';
 
-import 'package:app_inventario/models/serialized/material.dart';
-import 'package:app_inventario/models/serialized/organizacao.dart';
-import 'package:app_inventario/models/serialized/organizacoes.dart';
-import 'package:app_inventario/models/serialized/dominio.dart';
-import 'package:app_inventario/models/serialized/caracteristicas.dart';
-import 'package:app_inventario/models/serialized/inventarioDadosBemPatrimonial.dart';
-import 'package:app_inventario/models/serialized/dadosBensPatrimoniais.dart';
+import 'package:app_inventario/models/serialized/index.dart';
 
-import 'package:app_inventario/models/converters/caracteristicasConverter.dart';
-import 'package:app_inventario/models/converters/dominioConverter.dart';
-import 'package:app_inventario/models/converters/materialConverter.dart';
-import 'package:app_inventario/models/converters/organizacaoConverter.dart';
-import 'package:app_inventario/models/converters/organizacoesConverter.dart';
-import 'package:app_inventario/models/converters/inventarioBemPatrimonialConverter.dart';
-import 'package:app_inventario/models/converters/dadosBensPatrimoniaisConverter.dart';
+import 'package:app_inventario/models/converters/index.dart';
 
-import 'package:app_inventario/models/database/daos/bemPatrimoniaisDao.dart';
-import 'package:app_inventario/models/database/daos/dominioDao.dart';
-import 'package:app_inventario/models/database/daos/dadosBemPatrimoniaisDao.dart';
-import 'package:app_inventario/models/database/daos/estruturaInventarioDao.dart';
-import 'package:app_inventario/models/database/daos/inventariosDao.dart';
-import 'package:app_inventario/models/database/daos/unidadesGestorasDao.dart';
-import 'package:app_inventario/models/database/daos/inventarioBemPatrimonialDao.dart';
-import 'package:app_inventario/models/database/daos/conexaoDao.dart';
-import 'package:app_inventario/models/database/daos/configuracaoDao.dart';
-import 'package:app_inventario/models/database/daos/usuarioDao.dart';
+import 'package:app_inventario/models/database/daos/index.dart';
 
 part 'databaseMoor.g.dart';
 

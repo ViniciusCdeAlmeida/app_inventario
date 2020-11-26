@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-
-class TelaArgumentos with ChangeNotifier {
+class TelaArgumentos {
   final int id;
   final String arg1;
   final String arg2;

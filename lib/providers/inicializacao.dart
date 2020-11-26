@@ -1,8 +1,7 @@
-import 'package:app_inventario/custom/custom_conexao.dart';
-import 'package:app_inventario/helpers/helper_bemPatrimonial.dart';
-import 'package:app_inventario/helpers/helper_dominio.dart';
-import 'package:app_inventario/main.dart';
 import 'package:dio/dio.dart';
+import 'package:app_inventario/custom/index.dart';
+import 'package:app_inventario/helpers/index.dart';
+import 'package:app_inventario/main.dart';
 
 class Inicializacao {
   int _startFilter = 0;

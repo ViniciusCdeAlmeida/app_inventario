@@ -1,6 +1,6 @@
 import 'package:app_inventario/models/database/databaseMoor.dart';
 
-import 'package:app_inventario/models/serialized/inventarioBemPatrimonial.dart';
+import 'package:app_inventario/models/serialized/index.dart';
 
 List<InventarioBemPatrimonial> helperInventarioBemPatrimonialLista(
     List<InventarioBemPatrimonialDBData> listaInvetariados) {

@@ -1,4 +1,4 @@
-import 'package:app_inventario/models/serialized/materialCaracteristica.dart';
+import 'package:app_inventario/models/serialized/index.dart';
 
 import 'package:json_annotation/json_annotation.dart';
 

@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
-
-class NumeroBens with ChangeNotifier {
+class NumeroBens {
   final String numero;
 
   NumeroBens({

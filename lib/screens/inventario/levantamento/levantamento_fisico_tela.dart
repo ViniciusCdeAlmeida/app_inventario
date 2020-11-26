@@ -1,18 +1,13 @@
-import 'package:app_inventario/screens/bens/bens_inventariados_tela.dart';
-import 'package:app_inventario/stores/levantamento_store.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:moor_db_viewer/moor_db_viewer.dart';
 import 'package:provider/provider.dart';
 
-import 'package:app_inventario/custom/custom_acoes.dart';
-
 import 'package:app_inventario/main.dart';
-
-import 'package:app_inventario/widgets/cabecalho/app_cabecalho.dart';
-import 'package:app_inventario/widgets/customizados/popupMenu_custom.dart';
-import 'package:app_inventario/widgets/inventario/inventario/levantamento_fisico_item.dart';
+import 'package:app_inventario/screens/index.dart';
+import 'package:app_inventario/stores/index.dart';
+import 'package:app_inventario/widgets/index.dart';
+import 'package:app_inventario/custom/index.dart';
 
 class LevantamentoFisicoTela extends StatefulWidget {
   static const routeName = '/levantamentoFisicoTela';

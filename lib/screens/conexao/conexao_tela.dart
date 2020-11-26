@@ -1,11 +1,10 @@
-import 'package:app_inventario/stores/conexao_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 
-import 'package:app_inventario/widgets/cabecalho/menu_cabecalho.dart';
-import 'package:app_inventario/screens/conexao/conexao_tela_edicao.dart';
-import 'package:app_inventario/widgets/conexao/conexao_item.dart';
+import 'package:app_inventario/stores/index.dart';
+import 'package:app_inventario/widgets/index.dart';
+import 'package:app_inventario/screens/index.dart';
 
 class ConexaoTela extends StatefulWidget {
   static const routeName = '/conexaoTela';

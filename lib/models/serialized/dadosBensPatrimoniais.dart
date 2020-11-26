@@ -1,6 +1,4 @@
-import 'package:app_inventario/models/serialized/dominio.dart';
-import 'package:app_inventario/models/serialized/inventarioDadosBemPatrimonial.dart';
-import 'package:app_inventario/models/serialized/material.dart';
+import 'package:app_inventario/models/serialized/index.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:mobx/mobx.dart';
 

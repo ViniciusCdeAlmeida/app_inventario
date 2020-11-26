@@ -1,7 +1,6 @@
-import 'package:app_inventario/custom/custom_conexao.dart';
-
-import 'package:app_inventario/helpers/helper_inventarioBemPatrimonial.dart';
-import 'package:app_inventario/models/serialized/inventarioBemPatrimonial.dart';
+import 'package:app_inventario/custom/index.dart';
+import 'package:app_inventario/helpers/index.dart';
+import 'package:app_inventario/models/serialized/index.dart';
 import 'package:app_inventario/main.dart';
 
 class InventarioBensPatrimoniais {

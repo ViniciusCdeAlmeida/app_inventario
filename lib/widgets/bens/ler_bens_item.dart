@@ -1,10 +1,10 @@
-import 'package:app_inventario/models/telaArgumentos.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
-import 'package:app_inventario/screens/bens/ler_bens_geral_tela.dart';
-import 'package:app_inventario/widgets/cabecalho/app_cabecalho.dart';
+import 'package:app_inventario/screens/index.dart';
+import 'package:app_inventario/models/telaArgumentos.dart';
+import 'package:app_inventario/widgets/index.dart';
 
 class LerBensItens extends StatefulWidget {
   static const routeName = '/lerBens';

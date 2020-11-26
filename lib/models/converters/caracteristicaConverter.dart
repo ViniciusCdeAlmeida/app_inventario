@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:app_inventario/models/serialized/caracteristica.dart';
+import 'package:app_inventario/models/serialized/index.dart';
 import 'package:moor_flutter/moor_flutter.dart';
 
 class CaracteristicaConverter extends TypeConverter<Caracteristica, String> {

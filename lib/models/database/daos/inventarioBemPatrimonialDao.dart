@@ -1,7 +1,7 @@
-import 'package:app_inventario/models/database/tables/inventarioBemPatrimonial.dart';
 import 'package:moor_flutter/moor_flutter.dart';
 
-import 'package:app_inventario/models/serialized/inventarioBemPatrimonial.dart';
+import 'package:app_inventario/models/serialized/index.dart';
+import 'package:app_inventario/models/database/tables/index.dart';
 import 'package:app_inventario/models/database/databaseMoor.dart';
 
 part 'inventarioBemPatrimonialDao.g.dart';

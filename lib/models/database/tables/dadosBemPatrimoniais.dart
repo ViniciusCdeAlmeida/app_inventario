@@ -1,7 +1,4 @@
-import 'package:app_inventario/models/converters/dominioConverter.dart';
-import 'package:app_inventario/models/converters/inventarioBemPatrimonialConverter.dart';
-import 'package:app_inventario/models/converters/materialConverter.dart';
-import 'package:app_inventario/models/converters/organizacaoConverter.dart';
+import 'package:app_inventario/models/converters/index.dart';
 import 'package:moor/moor.dart';
 
 class DadosBemPatrimoniaisDB extends Table {

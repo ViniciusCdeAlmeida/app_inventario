@@ -1,10 +1,9 @@
-import 'package:app_inventario/custom/custom_erroModal.dart';
-import 'package:app_inventario/stores/inicializacao_store.dart';
-import 'package:app_inventario/widgets/cabecalho/app_cabecalho.dart';
-import 'package:app_inventario/widgets/organizacao/organizacao_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
+import 'package:app_inventario/custom/index.dart';
+import 'package:app_inventario/stores/index.dart';
+import 'package:app_inventario/widgets/index.dart';
 
 class OrganizacaoTela extends StatefulWidget {
   static const routeName = '/organizacaoTela';

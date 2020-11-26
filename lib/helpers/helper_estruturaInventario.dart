@@ -1,9 +1,7 @@
 import 'dart:convert';
 
 import 'package:app_inventario/models/database/databaseMoor.dart';
-import 'package:app_inventario/models/serialized/dominio.dart';
-import 'package:app_inventario/models/serialized/estruturaInventario.dart';
-import 'package:app_inventario/models/serialized/organizacao.dart';
+import 'package:app_inventario/models/serialized/index.dart';
 
 List<EstruturaInventario> helperEstruturaInventarioLista(
     List<EstruturaInventarioDBData> listaUnidades) {

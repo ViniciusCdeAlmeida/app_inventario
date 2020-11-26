@@ -1,7 +1,5 @@
-import 'package:app_inventario/helpers/helper_mascara.dart';
-import 'package:app_inventario/helpers/helper_prefixo.dart';
-import 'package:app_inventario/models/serialized/mascara.dart';
-import 'package:app_inventario/models/serialized/prefixo.dart';
+import 'package:app_inventario/helpers/index.dart';
+import 'package:app_inventario/models/serialized/index.dart';
 
 import 'package:app_inventario/main.dart';
 

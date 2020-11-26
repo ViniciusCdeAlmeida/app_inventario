@@ -1,6 +1,6 @@
-import 'package:app_inventario/custom/custom_bensPrevistos.dart';
-import 'package:app_inventario/models/serialized/inventarioBemPatrimonial.dart';
 import 'package:flutter/material.dart';
+import 'package:app_inventario/custom/index.dart';
+import 'package:app_inventario/models/serialized/index.dart';
 
 // ignore: must_be_immutable
 class BensInventariadosItem extends StatefulWidget {

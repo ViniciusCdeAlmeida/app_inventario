@@ -1,10 +1,10 @@
-import 'package:app_inventario/models/serialized/inventario.dart';
-import 'package:app_inventario/models/telaArgumentos.dart';
-import 'package:app_inventario/screens/unidade/unidade_tela.dart';
-import 'package:app_inventario/stores/levantamento_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
+import 'package:app_inventario/models/serialized/index.dart';
+import 'package:app_inventario/models/telaArgumentos.dart';
+import 'package:app_inventario/screens/index.dart';
+import 'package:app_inventario/stores/index.dart';
 
 class LevantamentoFisicoItem extends StatefulWidget {
   final Inventario levantamento;

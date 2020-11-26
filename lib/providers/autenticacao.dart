@@ -1,13 +1,9 @@
 import 'dart:async';
-import 'package:app_inventario/custom/custom_conexao.dart';
-import 'package:app_inventario/helpers/helper_login.dart';
-import 'package:app_inventario/helpers/helper_organizacoes.dart';
-import 'package:app_inventario/main.dart';
-import 'package:app_inventario/models/serialized/login.dart';
-import 'package:app_inventario/models/serialized/organizacoes.dart';
 import 'package:dio/dio.dart';
-
-// import '../models/http_exception.dart';
+import 'package:app_inventario/custom/index.dart';
+import 'package:app_inventario/main.dart';
+import 'package:app_inventario/models/serialized/index.dart';
+import 'package:app_inventario/helpers/index.dart';
 
 class Autenticacao {
   int idOrganizacao;

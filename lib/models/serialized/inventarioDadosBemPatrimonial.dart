@@ -1,7 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import 'package:app_inventario/models/serialized/bemPatrimonial.dart';
-import 'package:app_inventario/models/serialized/dominio.dart';
+import 'package:app_inventario/models/serialized/index.dart';
 
 part 'inventarioDadosBemPatrimonial.g.dart';
 

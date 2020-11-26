@@ -1,0 +1,11 @@
+export 'dadosBemPatrimoniais.dart';
+export 'bensPatrimoniais.dart';
+export 'conexao.dart';
+export 'dominio.dart';
+export 'estruturaInventario.dart';
+export 'inventario.dart';
+export 'inventarioBemPatrimonial.dart';
+export 'mascara.dart';
+export 'prefixo.dart';
+export 'unidadesGestoras.dart';
+export 'usuario.dart';

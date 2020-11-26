@@ -1,12 +1,10 @@
-import 'package:app_inventario/models/database/tables/dadosBemPatrimoniais.dart';
 import 'package:moor_flutter/moor_flutter.dart';
 
 import 'package:app_inventario/models/database/databaseMoor.dart';
 
-import 'package:app_inventario/models/serialized/dominio.dart';
-import 'package:app_inventario/models/serialized/inventarioDadosBemPatrimonial.dart';
-import 'package:app_inventario/models/serialized/material.dart';
-import 'package:app_inventario/models/serialized/organizacao.dart';
+import 'package:app_inventario/models/serialized/index.dart';
+
+import 'package:app_inventario/models/database/tables/index.dart';
 
 part 'dadosBemPatrimoniaisDao.g.dart';
 

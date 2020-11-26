@@ -1,8 +1,6 @@
-import 'package:app_inventario/screens/conexao/conexao_tela.dart';
 import 'package:flutter/material.dart';
 
-import '../../screens/configuracao/configuracao_bens_tela.dart';
-import '../../screens/configuracao/configuracao_numero_tela.dart';
+import 'package:app_inventario/screens/index.dart';
 
 class MenuDrawer extends StatelessWidget {
   void _configBens(BuildContext ctx) {

@@ -1,5 +1,5 @@
 import 'package:app_inventario/models/database/databaseMoor.dart';
-import 'package:app_inventario/models/serialized/mascara.dart';
+import 'package:app_inventario/models/serialized/index.dart';
 
 Mascara helperMascara(MascaraNumeroPatrimonialDBData mascara) {
   if (mascara != null) {

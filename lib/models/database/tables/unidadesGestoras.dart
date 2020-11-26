@@ -1,4 +1,4 @@
-import 'package:app_inventario/models/converters/organizacaoConverter.dart';
+import 'package:app_inventario/models/converters/index.dart';
 import 'package:moor/moor.dart';
 
 class UnidadesGestorasDB extends Table {
