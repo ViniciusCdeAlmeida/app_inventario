@@ -1,5 +1,5 @@
 import 'dart:async';
-import 'package:app_inventario/custom/conexao.dart';
+import 'package:app_inventario/custom/custom_conexao.dart';
 import 'package:app_inventario/helpers/helper_login.dart';
 import 'package:app_inventario/helpers/helper_organizacoes.dart';
 import 'package:app_inventario/main.dart';

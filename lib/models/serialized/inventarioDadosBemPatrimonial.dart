@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart' as mat;
 import 'package:json_annotation/json_annotation.dart';
 
 import 'package:app_inventario/models/serialized/bemPatrimonial.dart';
@@ -7,7 +6,7 @@ import 'package:app_inventario/models/serialized/dominio.dart';
 part 'inventarioDadosBemPatrimonial.g.dart';
 
 @JsonSerializable()
-class InventarioDadosBemPatrimonial with mat.ChangeNotifier {
+class InventarioDadosBemPatrimonial {
   int id;
   String numeroPatrimonial;
   String numeroPatrimonialAntigo;

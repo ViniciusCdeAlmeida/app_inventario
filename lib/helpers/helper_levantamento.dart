@@ -1,12 +1,12 @@
 import 'package:app_inventario/helpers/helper_dominio.dart';
 import 'package:app_inventario/models/database/databaseMoor.dart';
-import 'package:app_inventario/models/serialized/levantamento.dart';
+import 'package:app_inventario/models/serialized/inventario.dart';
 
-List<Levantamento> helperLevantamentoList(
-    List<LevantamentoDBData> listaLevantamento) {
-  return List<Levantamento>.from(
+List<Inventario> helperInventarioList(
+    List<InventarioDBData> listaLevantamento) {
+  return List<Inventario>.from(
     (listaLevantamento).map(
-      (item) => Levantamento(
+      (item) => Inventario(
         id: item.id,
         codigo: item.codigo,
         codigoENome: item.codigoENome,
@@ -27,9 +27,9 @@ List<Levantamento> helperLevantamentoList(
   );
 }
 
-Levantamento helperLevantamento(LevantamentoDBData levantamento) {
+Inventario helperInventario(InventarioDBData levantamento) {
   if (levantamento != null) {
-    return Levantamento(
+    return Inventario(
       id: levantamento.id,
       codigo: levantamento.codigo,
       codigoENome: levantamento.codigoENome,

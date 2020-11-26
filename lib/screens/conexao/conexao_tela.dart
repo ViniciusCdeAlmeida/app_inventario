@@ -52,7 +52,7 @@ class _ConexaoTelaState extends State<ConexaoTela> {
               );
             case ConexoesState.carregado:
               return Padding(
-                padding: const EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8.0),
                 child: ListView.builder(
                   itemCount: _conexaoStore.conexoes.length,
                   itemBuilder: (_, i) => Column(

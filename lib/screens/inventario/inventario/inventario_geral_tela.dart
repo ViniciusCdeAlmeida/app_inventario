@@ -1,38 +1,33 @@
+import 'package:app_inventario/custom/custom_acoes.dart';
+import 'package:app_inventario/main.dart';
 import 'package:app_inventario/screens/bens/bens_inventariados_tela.dart';
-import 'package:app_inventario/stores/levantamento_store.dart';
-
+import 'package:app_inventario/stores/inventario_store.dart';
+import 'package:app_inventario/widgets/cabecalho/app_cabecalho.dart';
+import 'package:app_inventario/widgets/customizados/popupMenu_custom.dart';
+import 'package:app_inventario/widgets/inventario/inventario/levantamento_fisico_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:moor_db_viewer/moor_db_viewer.dart';
 import 'package:provider/provider.dart';
 
-import 'package:app_inventario/custom/acoes.dart';
-
-import 'package:app_inventario/main.dart';
-
-import 'package:app_inventario/widgets/cabecalho/app_cabecalho.dart';
-import 'package:app_inventario/widgets/customizados/popupMenu_custom.dart';
-import 'package:app_inventario/widgets/inventario/levantamento_fisico_item.dart';
-
-class LevantamentoFisicoTela extends StatefulWidget {
-  static const routeName = '/levantamentoFisicoTela';
-
+class InventarioGeralTela extends StatefulWidget {
+  static const routeName = '/inventarioGeralTela';
   @override
-  _LevantamentoFisicoTelaState createState() => _LevantamentoFisicoTelaState();
+  _InventarioGeralTelaState createState() => _InventarioGeralTelaState();
 }
 
-class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
+class _InventarioGeralTelaState extends State<InventarioGeralTela> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
   final _controller = TextEditingController();
   final _form = GlobalKey<FormState>();
-  LevantamentoStore _levantamentoStore;
+  InventarioStore _inventarioStore;
   int idOrganizacao;
 
   @override
   void didChangeDependencies() {
-    _levantamentoStore = Provider.of<LevantamentoStore>(context, listen: false);
+    _inventarioStore = Provider.of<InventarioStore>(context, listen: false);
     idOrganizacao = ModalRoute.of(context).settings.arguments;
-    _levantamentoStore.verificaLevantamentos(idOrganizacao, false);
+    _inventarioStore.verificaInventarios(idOrganizacao, false);
     super.didChangeDependencies();
   }
 
@@ -54,12 +49,12 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
         _leituraCodigoLevantamento(idOrganizacao, context);
         break;
       case Acoes.buscarLevantamentos:
-        _levantamentoStore.verificaLevantamentos(idOrganizacao, true);
+        _inventarioStore.verificaInventarios(idOrganizacao, true);
         break;
       case Acoes.buscarEstruturas:
         try {
-          await _levantamentoStore
-              .buscaEstruturasInventario(_levantamentoStore.levantamentosDados);
+          await _inventarioStore
+              .buscaEstruturasInventarios(_inventarioStore.inventariosDados);
         } catch (error) {
           await showDialog<Null>(
             context: context,
@@ -81,10 +76,10 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
     }
   }
 
-  Future<void> _buscaLevantamento(
+  Future<void> _buscaInventario(
       int idOrganizacao, String codigo, BuildContext context) async {
     try {
-      await _levantamentoStore.buscaLevantamento(codigo);
+      await _inventarioStore.buscaInventario(codigo);
     } catch (error) {
       await showDialog<Null>(
         context: context,
@@ -112,9 +107,9 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
           child: Card(
             child: Container(
               padding: EdgeInsets.only(
-                top: 10,
-                left: 10,
-                right: 10,
+                top: 10.0,
+                left: 10.0,
+                right: 10.0,
                 bottom: MediaQuery.of(context).viewInsets.bottom + 10,
               ),
               child: Column(
@@ -137,7 +132,7 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
                     icon: Icon(Icons.search),
                     onPressed: () {
                       Navigator.of(ctx).pop();
-                      _buscaLevantamento(idOrganizacao, _controller.text, ctx);
+                      _buscaInventario(idOrganizacao, _controller.text, ctx);
                       _controller.text = null;
                     },
                     label: Text('Buscar'),
@@ -158,7 +153,7 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        title: Text('Levantamentos'),
+        title: Text('Inventários'),
         actions: <Widget>[
           GestureDetector(
             child: PopupMenuButton<Acoes>(
@@ -180,14 +175,13 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
                 ),
                 const PopupMenuDivider(),
                 PopupMenuItem<Acoes>(
-                  child:
-                      PopupMenuCustom('Buscar levantamentos', Icons.save_alt),
+                  child: PopupMenuCustom('Buscar inventarios', Icons.save_alt),
                   value: Acoes.buscarLevantamentos,
                 ),
                 const PopupMenuDivider(),
                 PopupMenuItem<Acoes>(
                   child: PopupMenuCustom(
-                      'Buscar levantamento', Icons.download_sharp),
+                      'Buscar inventario', Icons.download_sharp),
                   value: Acoes.buscarLevantamento,
                 ),
                 const PopupMenuDivider(),
@@ -197,10 +191,6 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
                   value: Acoes.buscarEstruturas,
                 ),
                 const PopupMenuDivider(),
-                // PopupMenuItem<Acoes>(
-                //   child: PopupMenuCustom(
-                //       'Gerar arquivo de backup', Icons.content_copy),
-                //   value: Acoes.gerarArquivoBackup,
                 // ),
               ],
             ),
@@ -211,28 +201,28 @@ class _LevantamentoFisicoTelaState extends State<LevantamentoFisicoTela> {
       body: Observer(
         // ignore: missing_return
         builder: (_) {
-          switch (_levantamentoStore.inventarioState) {
-            case LevantamentosState.inicial:
-            case LevantamentosState.vazio:
+          switch (_inventarioStore.inventarioState) {
+            case InventarioState.inicial:
+            case InventarioState.vazio:
               return Center(
                 child: Text('VAZIO'),
               );
-            case LevantamentosState.carregando:
+            case InventarioState.carregando:
               return Center(
                 child: CircularProgressIndicator(
                   backgroundColor: Colors.white,
                 ),
               );
-            case LevantamentosState.carregado:
+            case InventarioState.carregado:
               return Padding(
                 key: UniqueKey(),
-                padding: const EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8.0),
                 child: ListView.builder(
-                  itemCount: _levantamentoStore.levantamentosDados.length,
+                  itemCount: _inventarioStore.inventariosDados.length,
                   itemBuilder: (_, idx) => Column(
                     children: [
                       LevantamentoFisicoItem(
-                        _levantamentoStore.levantamentosDados[idx],
+                        _inventarioStore.inventariosDados[idx],
                       ),
                     ],
                   ),

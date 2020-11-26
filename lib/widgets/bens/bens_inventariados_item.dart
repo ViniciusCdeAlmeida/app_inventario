@@ -1,4 +1,4 @@
-import 'package:app_inventario/custom/bensPrevistos.dart';
+import 'package:app_inventario/custom/custom_bensPrevistos.dart';
 import 'package:app_inventario/models/serialized/inventarioBemPatrimonial.dart';
 import 'package:flutter/material.dart';
 

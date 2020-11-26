@@ -1,4 +1,4 @@
-import 'package:app_inventario/custom/conexao.dart';
+import 'package:app_inventario/custom/custom_conexao.dart';
 import 'package:app_inventario/helpers/helper_bemPatrimonial.dart';
 import 'package:app_inventario/helpers/helper_dominio.dart';
 import 'package:app_inventario/main.dart';

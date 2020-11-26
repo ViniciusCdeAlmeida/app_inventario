@@ -1,4 +1,4 @@
-import 'package:app_inventario/custom/erroModal.dart';
+import 'package:app_inventario/custom/custom_erroModal.dart';
 import 'package:app_inventario/screens/organizacao/organizacao_tela.dart';
 import 'package:app_inventario/stores/login_store.dart';
 import 'package:flutter/material.dart';

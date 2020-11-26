@@ -16,11 +16,11 @@ mixin _$LevantamentoStore on _LevantamentoStore, Store {
           Computed<LevantamentosState>(() => super.inventarioState,
               name: '_LevantamentoStore.inventarioState'))
       .value;
-  Computed<List<Levantamento>> _$levantamentosDadosComputed;
+  Computed<List<Inventario>> _$levantamentosDadosComputed;
 
   @override
-  List<Levantamento> get levantamentosDados => (_$levantamentosDadosComputed ??=
-          Computed<List<Levantamento>>(() => super.levantamentosDados,
+  List<Inventario> get levantamentosDados => (_$levantamentosDadosComputed ??=
+          Computed<List<Inventario>>(() => super.levantamentosDados,
               name: '_LevantamentoStore.levantamentosDados'))
       .value;
 
@@ -75,13 +75,13 @@ mixin _$LevantamentoStore on _LevantamentoStore, Store {
       Atom(name: '_LevantamentoStore._levantamentoObservable');
 
   @override
-  Levantamento get _levantamentoObservable {
+  Inventario get _levantamentoObservable {
     _$_levantamentoObservableAtom.reportRead();
     return super._levantamentoObservable;
   }
 
   @override
-  set _levantamentoObservable(Levantamento value) {
+  set _levantamentoObservable(Inventario value) {
     _$_levantamentoObservableAtom
         .reportWrite(value, super._levantamentoObservable, () {
       super._levantamentoObservable = value;
@@ -92,13 +92,13 @@ mixin _$LevantamentoStore on _LevantamentoStore, Store {
       Atom(name: '_LevantamentoStore._levantamentosObservable');
 
   @override
-  ObservableList<Levantamento> get _levantamentosObservable {
+  ObservableList<Inventario> get _levantamentosObservable {
     _$_levantamentosObservableAtom.reportRead();
     return super._levantamentosObservable;
   }
 
   @override
-  set _levantamentosObservable(ObservableList<Levantamento> value) {
+  set _levantamentosObservable(ObservableList<Inventario> value) {
     _$_levantamentosObservableAtom
         .reportWrite(value, super._levantamentosObservable, () {
       super._levantamentosObservable = value;
@@ -109,13 +109,13 @@ mixin _$LevantamentoStore on _LevantamentoStore, Store {
       Atom(name: '_LevantamentoStore._levantamentosFuture');
 
   @override
-  ObservableFuture<List<Levantamento>> get _levantamentosFuture {
+  ObservableFuture<List<Inventario>> get _levantamentosFuture {
     _$_levantamentosFutureAtom.reportRead();
     return super._levantamentosFuture;
   }
 
   @override
-  set _levantamentosFuture(ObservableFuture<List<Levantamento>> value) {
+  set _levantamentosFuture(ObservableFuture<List<Inventario>> value) {
     _$_levantamentosFutureAtom.reportWrite(value, super._levantamentosFuture,
         () {
       super._levantamentosFuture = value;
@@ -126,13 +126,13 @@ mixin _$LevantamentoStore on _LevantamentoStore, Store {
       Atom(name: '_LevantamentoStore._levantamentoFuture');
 
   @override
-  ObservableFuture<Levantamento> get _levantamentoFuture {
+  ObservableFuture<Inventario> get _levantamentoFuture {
     _$_levantamentoFutureAtom.reportRead();
     return super._levantamentoFuture;
   }
 
   @override
-  set _levantamentoFuture(ObservableFuture<Levantamento> value) {
+  set _levantamentoFuture(ObservableFuture<Inventario> value) {
     _$_levantamentoFutureAtom.reportWrite(value, super._levantamentoFuture, () {
       super._levantamentoFuture = value;
     });
@@ -142,13 +142,13 @@ mixin _$LevantamentoStore on _LevantamentoStore, Store {
       Atom(name: '_LevantamentoStore._levantamentoAtualizadoFuture');
 
   @override
-  ObservableFuture<Levantamento> get _levantamentoAtualizadoFuture {
+  ObservableFuture<Inventario> get _levantamentoAtualizadoFuture {
     _$_levantamentoAtualizadoFutureAtom.reportRead();
     return super._levantamentoAtualizadoFuture;
   }
 
   @override
-  set _levantamentoAtualizadoFuture(ObservableFuture<Levantamento> value) {
+  set _levantamentoAtualizadoFuture(ObservableFuture<Inventario> value) {
     _$_levantamentoAtualizadoFutureAtom
         .reportWrite(value, super._levantamentoAtualizadoFuture, () {
       super._levantamentoAtualizadoFuture = value;
@@ -164,13 +164,13 @@ mixin _$LevantamentoStore on _LevantamentoStore, Store {
         .run(() => super.verificaLevantamentos(idOrganizacao, deleteDB));
   }
 
-  final _$verificaLevantamentoAsyncAction =
-      AsyncAction('_LevantamentoStore.verificaLevantamento');
+  final _$verificaInventarioAsyncAction =
+      AsyncAction('_LevantamentoStore.verificaInventario');
 
   @override
-  Future<dynamic> verificaLevantamento() {
-    return _$verificaLevantamentoAsyncAction
-        .run(() => super.verificaLevantamento());
+  Future<dynamic> verificaInventario() {
+    return _$verificaInventarioAsyncAction
+        .run(() => super.verificaInventario());
   }
 
   final _$buscaLevantamentoAsyncAction =
@@ -200,14 +200,14 @@ mixin _$LevantamentoStore on _LevantamentoStore, Store {
         .run(() => super.atualizaLevantamentos(id));
   }
 
-  final _$buscaEstruturasInventarioAsyncAction =
-      AsyncAction('_LevantamentoStore.buscaEstruturasInventario');
+  final _$buscaEstruturasLevantamentoAsyncAction =
+      AsyncAction('_LevantamentoStore.buscaEstruturasLevantamento');
 
   @override
-  Future<dynamic> buscaEstruturasInventario(
-      List<Levantamento> listaLevantamento) {
-    return _$buscaEstruturasInventarioAsyncAction
-        .run(() => super.buscaEstruturasInventario(listaLevantamento));
+  Future<dynamic> buscaEstruturasLevantamento(
+      List<Inventario> listaLevantamento) {
+    return _$buscaEstruturasLevantamentoAsyncAction
+        .run(() => super.buscaEstruturasLevantamento(listaLevantamento));
   }
 
   @override

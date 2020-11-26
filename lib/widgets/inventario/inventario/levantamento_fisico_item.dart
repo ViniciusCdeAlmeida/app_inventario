@@ -1,4 +1,4 @@
-import 'package:app_inventario/models/serialized/levantamento.dart';
+import 'package:app_inventario/models/serialized/inventario.dart';
 import 'package:app_inventario/models/telaArgumentos.dart';
 import 'package:app_inventario/screens/unidade/unidade_tela.dart';
 import 'package:app_inventario/stores/levantamento_store.dart';
@@ -7,7 +7,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 
 class LevantamentoFisicoItem extends StatefulWidget {
-  final Levantamento levantamento;
+  final Inventario levantamento;
 
   LevantamentoFisicoItem(this.levantamento);
   @override
@@ -19,7 +19,8 @@ class _LevantamentoFisicoItemState extends State<LevantamentoFisicoItem>
   // ignore: unused_field
   AnimationController _controller, _controllerCard;
   LevantamentoStore _levantamentoStore;
-  Animation<Offset> _slideAnimation;
+  // Animation<Offset> _slideAnimation;
+  Animation<double> _fadeAnimation;
 
   @override
   void initState() {
@@ -35,9 +36,18 @@ class _LevantamentoFisicoItemState extends State<LevantamentoFisicoItem>
         milliseconds: 1000,
       ),
     );
-    _slideAnimation = Tween<Offset>(
-      begin: Offset(1.0, 0.0),
-      end: Offset(0, 0),
+    // _slideAnimation = Tween<Offset>(
+    //   begin: Offset(1.0, 0.0),
+    //   end: Offset(0, 0),
+    // ).animate(
+    //   CurvedAnimation(
+    //     parent: _controllerCard,
+    //     curve: Curves.ease,
+    //   ),
+    // );
+    _fadeAnimation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
     ).animate(
       CurvedAnimation(
         parent: _controllerCard,
@@ -70,14 +80,14 @@ class _LevantamentoFisicoItemState extends State<LevantamentoFisicoItem>
         widget.levantamento.quantidadeTotalBensEmInconsistencia;
     return AnimatedBuilder(
       animation: _controllerCard,
-      builder: (context, child) => SlideTransition(
-        position: _slideAnimation,
+      builder: (context, child) => FadeTransition(
+        opacity: _fadeAnimation,
         child: child,
       ),
       child: Column(
         children: [
           Card(
-            elevation: 5.0,
+            elevation: 1.0,
             margin: const EdgeInsets.all(10),
             child: Column(
               children: <Widget>[
@@ -112,7 +122,7 @@ class _LevantamentoFisicoItemState extends State<LevantamentoFisicoItem>
                   duration: Duration(milliseconds: 300),
                   curve: Curves.easeIn,
                   height: _expanded ? 168 : 0,
-                  padding: const EdgeInsets.all(20),
+                  padding: const EdgeInsets.all(20.0),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,

@@ -1391,8 +1391,8 @@ class $EstruturaInventarioDBTable extends EstruturaInventarioDB
       const OrganizacaoConverter();
 }
 
-class LevantamentoDBData extends DataClass
-    implements Insertable<LevantamentoDBData> {
+class InventarioDBData extends DataClass
+    implements Insertable<InventarioDBData> {
   final int id;
   final int idOrganizacao;
   final String nome;
@@ -1406,7 +1406,7 @@ class LevantamentoDBData extends DataClass
   final int quantidadeTotalBensEmInconsistencia;
   final int quantidadeTotalBensSemInconsistencia;
   final int quantidadeTotalBensBaixados;
-  LevantamentoDBData(
+  InventarioDBData(
       {@required this.id,
       this.idOrganizacao,
       this.nome,
@@ -1420,13 +1420,13 @@ class LevantamentoDBData extends DataClass
       this.quantidadeTotalBensEmInconsistencia,
       this.quantidadeTotalBensSemInconsistencia,
       this.quantidadeTotalBensBaixados});
-  factory LevantamentoDBData.fromData(
+  factory InventarioDBData.fromData(
       Map<String, dynamic> data, GeneratedDatabase db,
       {String prefix}) {
     final effectivePrefix = prefix ?? '';
     final intType = db.typeSystem.forDartType<int>();
     final stringType = db.typeSystem.forDartType<String>();
-    return LevantamentoDBData(
+    return InventarioDBData(
       id: intType.mapFromDatabaseResponse(data['${effectivePrefix}id']),
       idOrganizacao: intType
           .mapFromDatabaseResponse(data['${effectivePrefix}id_organizacao']),
@@ -1435,10 +1435,10 @@ class LevantamentoDBData extends DataClass
           .mapFromDatabaseResponse(data['${effectivePrefix}codigo_e_nome']),
       codigo:
           stringType.mapFromDatabaseResponse(data['${effectivePrefix}codigo']),
-      dominioTipoInventario: $LevantamentoDBTable.$converter0.mapToDart(
+      dominioTipoInventario: $InventarioDBTable.$converter0.mapToDart(
           stringType.mapFromDatabaseResponse(
               data['${effectivePrefix}dominio_tipo_inventario'])),
-      dominioStatusInventario: $LevantamentoDBTable.$converter1.mapToDart(
+      dominioStatusInventario: $InventarioDBTable.$converter1.mapToDart(
           stringType.mapFromDatabaseResponse(
               data['${effectivePrefix}dominio_status_inventario'])),
       quantidadeEstruturas: intType.mapFromDatabaseResponse(
@@ -1474,12 +1474,12 @@ class LevantamentoDBData extends DataClass
       map['codigo'] = Variable<String>(codigo);
     }
     if (!nullToAbsent || dominioTipoInventario != null) {
-      final converter = $LevantamentoDBTable.$converter0;
+      final converter = $InventarioDBTable.$converter0;
       map['dominio_tipo_inventario'] =
           Variable<String>(converter.mapToSql(dominioTipoInventario));
     }
     if (!nullToAbsent || dominioStatusInventario != null) {
-      final converter = $LevantamentoDBTable.$converter1;
+      final converter = $InventarioDBTable.$converter1;
       map['dominio_status_inventario'] =
           Variable<String>(converter.mapToSql(dominioStatusInventario));
     }
@@ -1508,8 +1508,8 @@ class LevantamentoDBData extends DataClass
     return map;
   }
 
-  LevantamentoDBCompanion toCompanion(bool nullToAbsent) {
-    return LevantamentoDBCompanion(
+  InventarioDBCompanion toCompanion(bool nullToAbsent) {
+    return InventarioDBCompanion(
       id: id == null && nullToAbsent ? const Value.absent() : Value(id),
       idOrganizacao: idOrganizacao == null && nullToAbsent
           ? const Value.absent()
@@ -1551,10 +1551,10 @@ class LevantamentoDBData extends DataClass
     );
   }
 
-  factory LevantamentoDBData.fromJson(Map<String, dynamic> json,
+  factory InventarioDBData.fromJson(Map<String, dynamic> json,
       {ValueSerializer serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
-    return LevantamentoDBData(
+    return InventarioDBData(
       id: serializer.fromJson<int>(json['id']),
       idOrganizacao: serializer.fromJson<int>(json['idOrganizacao']),
       nome: serializer.fromJson<String>(json['nome']),
@@ -1604,7 +1604,7 @@ class LevantamentoDBData extends DataClass
     };
   }
 
-  LevantamentoDBData copyWith(
+  InventarioDBData copyWith(
           {int id,
           int idOrganizacao,
           String nome,
@@ -1618,7 +1618,7 @@ class LevantamentoDBData extends DataClass
           int quantidadeTotalBensEmInconsistencia,
           int quantidadeTotalBensSemInconsistencia,
           int quantidadeTotalBensBaixados}) =>
-      LevantamentoDBData(
+      InventarioDBData(
         id: id ?? this.id,
         idOrganizacao: idOrganizacao ?? this.idOrganizacao,
         nome: nome ?? this.nome,
@@ -1643,7 +1643,7 @@ class LevantamentoDBData extends DataClass
       );
   @override
   String toString() {
-    return (StringBuffer('LevantamentoDBData(')
+    return (StringBuffer('InventarioDBData(')
           ..write('id: $id, ')
           ..write('idOrganizacao: $idOrganizacao, ')
           ..write('nome: $nome, ')
@@ -1695,7 +1695,7 @@ class LevantamentoDBData extends DataClass
   @override
   bool operator ==(dynamic other) =>
       identical(this, other) ||
-      (other is LevantamentoDBData &&
+      (other is InventarioDBData &&
           other.id == this.id &&
           other.idOrganizacao == this.idOrganizacao &&
           other.nome == this.nome &&
@@ -1715,7 +1715,7 @@ class LevantamentoDBData extends DataClass
               this.quantidadeTotalBensBaixados);
 }
 
-class LevantamentoDBCompanion extends UpdateCompanion<LevantamentoDBData> {
+class InventarioDBCompanion extends UpdateCompanion<InventarioDBData> {
   final Value<int> id;
   final Value<int> idOrganizacao;
   final Value<String> nome;
@@ -1729,7 +1729,7 @@ class LevantamentoDBCompanion extends UpdateCompanion<LevantamentoDBData> {
   final Value<int> quantidadeTotalBensEmInconsistencia;
   final Value<int> quantidadeTotalBensSemInconsistencia;
   final Value<int> quantidadeTotalBensBaixados;
-  const LevantamentoDBCompanion({
+  const InventarioDBCompanion({
     this.id = const Value.absent(),
     this.idOrganizacao = const Value.absent(),
     this.nome = const Value.absent(),
@@ -1744,7 +1744,7 @@ class LevantamentoDBCompanion extends UpdateCompanion<LevantamentoDBData> {
     this.quantidadeTotalBensSemInconsistencia = const Value.absent(),
     this.quantidadeTotalBensBaixados = const Value.absent(),
   });
-  LevantamentoDBCompanion.insert({
+  InventarioDBCompanion.insert({
     @required int id,
     this.idOrganizacao = const Value.absent(),
     this.nome = const Value.absent(),
@@ -1759,7 +1759,7 @@ class LevantamentoDBCompanion extends UpdateCompanion<LevantamentoDBData> {
     this.quantidadeTotalBensSemInconsistencia = const Value.absent(),
     this.quantidadeTotalBensBaixados = const Value.absent(),
   }) : id = Value(id);
-  static Insertable<LevantamentoDBData> custom({
+  static Insertable<InventarioDBData> custom({
     Expression<int> id,
     Expression<int> idOrganizacao,
     Expression<String> nome,
@@ -1801,7 +1801,7 @@ class LevantamentoDBCompanion extends UpdateCompanion<LevantamentoDBData> {
     });
   }
 
-  LevantamentoDBCompanion copyWith(
+  InventarioDBCompanion copyWith(
       {Value<int> id,
       Value<int> idOrganizacao,
       Value<String> nome,
@@ -1815,7 +1815,7 @@ class LevantamentoDBCompanion extends UpdateCompanion<LevantamentoDBData> {
       Value<int> quantidadeTotalBensEmInconsistencia,
       Value<int> quantidadeTotalBensSemInconsistencia,
       Value<int> quantidadeTotalBensBaixados}) {
-    return LevantamentoDBCompanion(
+    return InventarioDBCompanion(
       id: id ?? this.id,
       idOrganizacao: idOrganizacao ?? this.idOrganizacao,
       nome: nome ?? this.nome,
@@ -1859,12 +1859,12 @@ class LevantamentoDBCompanion extends UpdateCompanion<LevantamentoDBData> {
       map['codigo'] = Variable<String>(codigo.value);
     }
     if (dominioTipoInventario.present) {
-      final converter = $LevantamentoDBTable.$converter0;
+      final converter = $InventarioDBTable.$converter0;
       map['dominio_tipo_inventario'] =
           Variable<String>(converter.mapToSql(dominioTipoInventario.value));
     }
     if (dominioStatusInventario.present) {
-      final converter = $LevantamentoDBTable.$converter1;
+      final converter = $InventarioDBTable.$converter1;
       map['dominio_status_inventario'] =
           Variable<String>(converter.mapToSql(dominioStatusInventario.value));
     }
@@ -1895,7 +1895,7 @@ class LevantamentoDBCompanion extends UpdateCompanion<LevantamentoDBData> {
 
   @override
   String toString() {
-    return (StringBuffer('LevantamentoDBCompanion(')
+    return (StringBuffer('InventarioDBCompanion(')
           ..write('id: $id, ')
           ..write('idOrganizacao: $idOrganizacao, ')
           ..write('nome: $nome, ')
@@ -1916,11 +1916,11 @@ class LevantamentoDBCompanion extends UpdateCompanion<LevantamentoDBData> {
   }
 }
 
-class $LevantamentoDBTable extends LevantamentoDB
-    with TableInfo<$LevantamentoDBTable, LevantamentoDBData> {
+class $InventarioDBTable extends InventarioDB
+    with TableInfo<$InventarioDBTable, InventarioDBData> {
   final GeneratedDatabase _db;
   final String _alias;
-  $LevantamentoDBTable(this._db, [this._alias]);
+  $InventarioDBTable(this._db, [this._alias]);
   final VerificationMeta _idMeta = const VerificationMeta('id');
   GeneratedIntColumn _id;
   @override
@@ -2116,13 +2116,13 @@ class $LevantamentoDBTable extends LevantamentoDB
         quantidadeTotalBensBaixados
       ];
   @override
-  $LevantamentoDBTable get asDslTable => this;
+  $InventarioDBTable get asDslTable => this;
   @override
-  String get $tableName => _alias ?? 'levantamento_d_b';
+  String get $tableName => _alias ?? 'inventario_d_b';
   @override
-  final String actualTableName = 'levantamento_d_b';
+  final String actualTableName = 'inventario_d_b';
   @override
-  VerificationContext validateIntegrity(Insertable<LevantamentoDBData> instance,
+  VerificationContext validateIntegrity(Insertable<InventarioDBData> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
@@ -2201,14 +2201,14 @@ class $LevantamentoDBTable extends LevantamentoDB
   @override
   Set<GeneratedColumn> get $primaryKey => <GeneratedColumn>{};
   @override
-  LevantamentoDBData map(Map<String, dynamic> data, {String tablePrefix}) {
+  InventarioDBData map(Map<String, dynamic> data, {String tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
-    return LevantamentoDBData.fromData(data, _db, prefix: effectivePrefix);
+    return InventarioDBData.fromData(data, _db, prefix: effectivePrefix);
   }
 
   @override
-  $LevantamentoDBTable createAlias(String alias) {
-    return $LevantamentoDBTable(_db, alias);
+  $InventarioDBTable createAlias(String alias) {
+    return $InventarioDBTable(_db, alias);
   }
 
   static TypeConverter<Dominio, String> $converter0 = const DominioConverter();
@@ -5448,9 +5448,9 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   $EstruturaInventarioDBTable _estruturaInventarioDB;
   $EstruturaInventarioDBTable get estruturaInventarioDB =>
       _estruturaInventarioDB ??= $EstruturaInventarioDBTable(this);
-  $LevantamentoDBTable _levantamentoDB;
-  $LevantamentoDBTable get levantamentoDB =>
-      _levantamentoDB ??= $LevantamentoDBTable(this);
+  $InventarioDBTable _inventarioDB;
+  $InventarioDBTable get inventarioDB =>
+      _inventarioDB ??= $InventarioDBTable(this);
   $ConexaoDBTable _conexaoDB;
   $ConexaoDBTable get conexaoDB => _conexaoDB ??= $ConexaoDBTable(this);
   $UnidadesGestorasDBTable _unidadesGestorasDB;
@@ -5474,9 +5474,9 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   BemPatrimoniaisDao _bemPatrimoniaisDao;
   BemPatrimoniaisDao get bemPatrimoniaisDao =>
       _bemPatrimoniaisDao ??= BemPatrimoniaisDao(this as AppDatabase);
-  LevantamentosDao _levantamentosDao;
-  LevantamentosDao get levantamentosDao =>
-      _levantamentosDao ??= LevantamentosDao(this as AppDatabase);
+  InventariosDao _inventariosDao;
+  InventariosDao get inventariosDao =>
+      _inventariosDao ??= InventariosDao(this as AppDatabase);
   EstruturaInventarioDao _estruturaInventarioDao;
   EstruturaInventarioDao get estruturaInventarioDao =>
       _estruturaInventarioDao ??= EstruturaInventarioDao(this as AppDatabase);
@@ -5504,7 +5504,7 @@ abstract class _$AppDatabase extends GeneratedDatabase {
         dominioDB,
         bensPatrimoniaisDB,
         estruturaInventarioDB,
-        levantamentoDB,
+        inventarioDB,
         conexaoDB,
         unidadesGestorasDB,
         dadosBemPatrimoniaisDB,

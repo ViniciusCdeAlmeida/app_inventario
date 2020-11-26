@@ -63,9 +63,9 @@ class _ConfiguracaoBensTelaState extends State<ConfiguracaoBensTela> {
                 elevation: 5,
                 child: Container(
                   padding: EdgeInsets.only(
-                    top: 10,
-                    left: 10,
-                    right: 10,
+                    top: 10.0,
+                    left: 10.0,
+                    right: 10.0,
                     bottom: MediaQuery.of(context).viewInsets.bottom,
                   ),
                   child: Column(

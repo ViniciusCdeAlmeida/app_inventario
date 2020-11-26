@@ -1,11 +1,10 @@
 import 'package:app_inventario/models/serialized/dominio.dart';
-import 'package:flutter/material.dart' as mat;
 import 'package:json_annotation/json_annotation.dart';
 
-part 'levantamento.g.dart';
+part 'inventario.g.dart';
 
 @JsonSerializable()
-class Levantamento with mat.ChangeNotifier {
+class Inventario {
   final int id;
   final Dominio dominioTipoInventario;
   final Dominio dominioStatusInventario;
@@ -20,7 +19,7 @@ class Levantamento with mat.ChangeNotifier {
   final int quantidadeTotalBensBaixados;
   final int idOrganizacao;
 
-  Levantamento({
+  Inventario({
     this.id,
     this.dominioTipoInventario,
     this.dominioStatusInventario,
@@ -36,8 +35,8 @@ class Levantamento with mat.ChangeNotifier {
     this.idOrganizacao,
   });
 
-  factory Levantamento.fromJson(Map<String, dynamic> json) =>
-      _$LevantamentoFromJson(json);
+  factory Inventario.fromJson(Map<String, dynamic> json) =>
+      _$InventarioFromJson(json);
 
-  Map<String, dynamic> toJson() => _$LevantamentoToJson(this);
+  Map<String, dynamic> toJson() => _$InventarioToJson(this);
 }

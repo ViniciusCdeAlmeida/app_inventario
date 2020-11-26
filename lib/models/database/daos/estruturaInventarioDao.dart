@@ -1,3 +1,4 @@
+import 'package:app_inventario/models/database/tables/inventario.dart';
 import 'package:moor_flutter/moor_flutter.dart';
 
 import 'package:app_inventario/models/database/databaseMoor.dart';
@@ -6,7 +7,7 @@ import 'package:app_inventario/models/serialized/organizacao.dart';
 
 part 'estruturaInventarioDao.g.dart';
 
-@UseDao(tables: [LevantamentoDB])
+@UseDao(tables: [InventarioDB])
 class EstruturaInventarioDao extends DatabaseAccessor<AppDatabase>
     with _$EstruturaInventarioDaoMixin {
   final AppDatabase db;

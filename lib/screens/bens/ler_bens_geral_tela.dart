@@ -1,5 +1,6 @@
 import 'package:app_inventario/stores/bemPatrimonial_store.dart';
 import 'package:app_inventario/stores/bensPrevistos_store.dart';
+import 'package:app_inventario/stores/inventario_store.dart';
 import 'package:app_inventario/stores/login_store.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
@@ -49,8 +50,10 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
   String _usuarioColetante;
   int _idAtuaUl;
   int _idOrganizacao;
+  bool _tipoLevantamento;
 
   BemPatrimonialStore _bemPatrimonialStore;
+  InventarioStore _inventarioStore;
 
   var _expanded = false;
 
@@ -63,6 +66,8 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
   @override
   void didChangeDependencies() {
     unidadeArgs = ModalRoute.of(context).settings.arguments;
+    _inventarioStore = Provider.of<InventarioStore>(context, listen: false);
+    _inventarioStore.verificaTipoInventario(int.parse(unidadeArgs.arg2));
     _bemPatrimonialStore =
         Provider.of<BemPatrimonialStore>(context, listen: false);
     _bemPatrimonialStore.buscaDominios();
@@ -77,7 +82,6 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
         Provider.of<LoginStore>(context, listen: false).usuarioLogado.username;
     _qtdeDigitos = Provider.of<EstruturaLevantamento>(context, listen: false)
         .getDigitosLeitura;
-
     _bemPatrimonialStore.buscaBemPatrimonial(
         unidadeArgs.arg1, unidadeArgs.arg2, _idAtuaUl, unidadeArgs.arg3);
     super.didChangeDependencies();
@@ -237,7 +241,7 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
                   child: ListView(
                     children: <Widget>[
                       Padding(
-                        padding: const EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(10.0),
                         child: Text('Descrição: ' +
                             _bemPatrimonialStore
                                 .bemPatrimonial.material.codigoEDescricao),
@@ -246,7 +250,7 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
                           _bemPatrimonialStore
                               .bemPatrimonial.estruturaOrganizacionalAtual.id)
                         Padding(
-                          padding: const EdgeInsets.all(10),
+                          padding: const EdgeInsets.all(10.0),
                           child: Text(
                             'Bem pertence a U.L.: ' +
                                 _bemPatrimonialStore.bemPatrimonial
@@ -255,7 +259,7 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
                           ),
                         ),
                       Container(
-                        padding: const EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(10.0),
                         child: TextFormField(
                           key: Key('numeroPatrimonialText'),
                           enabled: false,
@@ -284,7 +288,7 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
                       Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Container(
-                          padding: const EdgeInsets.all(10),
+                          padding: const EdgeInsets.all(10.0),
                           decoration: BoxDecoration(
                             shape: BoxShape.rectangle,
                             border:
@@ -311,259 +315,270 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
                           ),
                         ),
                       ),
-                      _novoNumeroPatrimonial == true
-                          ? Container(
-                              padding: const EdgeInsets.all(10),
-                              child: TextFormField(
-                                key: Key('numeroPatrimonialNovoText'),
-                                initialValue: null,
-                                decoration: InputDecoration(
-                                  border: OutlineInputBorder(),
-                                  labelText: 'Numero Patrimonial Novo',
-                                ),
-                                keyboardType: TextInputType.number,
-                                textInputAction: TextInputAction.next,
-                                onFieldSubmitted: (_) {
-                                  FocusScope.of(context)
-                                      .requestFocus(_numeroNovoFocusNode);
-                                },
-                                onSaved: (value) {
-                                  _edicaoBemInvent.numeroPatrimonialNovo =
-                                      _digitoVerificador + value;
-                                },
-                                maxLength: _qtdeDigitos == null
-                                    ? null
-                                    : _qtdeDigitos.length,
-                              ),
-                            )
-                          : Container(),
-                      Padding(
-                        padding: const EdgeInsets.all(10.0),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            shape: BoxShape.rectangle,
-                            border:
-                                Border.all(width: 1, color: Colors.grey[500]),
-                            borderRadius: BorderRadius.all(
-                              Radius.circular(4),
+                      if (_novoNumeroPatrimonial == true)
+                        Container(
+                          padding: const EdgeInsets.all(10.0),
+                          child: TextFormField(
+                            key: Key('numeroPatrimonialNovoText'),
+                            initialValue: null,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: 'Numero Patrimonial Novo',
                             ),
+                            keyboardType: TextInputType.number,
+                            textInputAction: TextInputAction.next,
+                            onFieldSubmitted: (_) {
+                              FocusScope.of(context)
+                                  .requestFocus(_numeroNovoFocusNode);
+                            },
+                            onSaved: (value) {
+                              _edicaoBemInvent.numeroPatrimonialNovo =
+                                  _digitoVerificador + value;
+                            },
+                            maxLength: _qtdeDigitos == null
+                                ? null
+                                : _qtdeDigitos.length,
                           ),
-                          padding: const EdgeInsets.all(10),
-                          child: Flex(
-                            direction: Axis.vertical,
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text('Caracteristicas'),
-                                  IconButton(
-                                    icon: Icon(
-                                        (_expanded
-                                            ? Icons.expand_less
-                                            : Icons.expand_more),
-                                        color: Colors.black),
-                                    onPressed: () {
-                                      setState(
-                                        () {
-                                          _expanded = !_expanded;
-                                        },
-                                      );
-                                    },
-                                  ),
-                                ],
+                        ),
+                      if (_inventarioStore.tipoInventario)
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              shape: BoxShape.rectangle,
+                              border:
+                                  Border.all(width: 1, color: Colors.grey[500]),
+                              borderRadius: BorderRadius.all(
+                                Radius.circular(4),
                               ),
-                              if (_expanded)
-                                Flexible(
-                                  fit: FlexFit.loose,
-                                  child: ListView.builder(
-                                    physics: NeverScrollableScrollPhysics(),
-                                    shrinkWrap: true,
-                                    itemCount: _bemPatrimonialStore
-                                        .bemPatrimonial.caracteristicas.length,
-                                    itemBuilder: (_, idx) {
-                                      List<DropdownMenuItem<Dominio>>
-                                          _dominiosDropdownAtual =
-                                          _bemPatrimonialStore
-                                              .filtroDominiosDropdownBens(
-                                                  _bemPatrimonialStore
-                                                      .bemPatrimonial
-                                                      .caracteristicas[idx]
-                                                      .materialCaracteristica
-                                                      .caracteristica
-                                                      .chaveDominio);
-                                      Dominio itemAtual = _bemPatrimonialStore
-                                          .filtroDominio(_bemPatrimonialStore
-                                              .bemPatrimonial
-                                              .caracteristicas[idx]
-                                              .materialCaracteristica
-                                              .caracteristica
-                                              .chaveDominio)
-                                          .firstWhere(
-                                              (element) =>
-                                                  element.id.toString() ==
-                                                  _bemPatrimonialStore
-                                                      .bemPatrimonial
-                                                      .caracteristicas[idx]
-                                                      .valorMaterialCaracteristica,
-                                              orElse: () => null);
-                                      return _bemPatrimonialStore
-                                                  .bemPatrimonial
-                                                  .caracteristicas[idx]
-                                                  .materialCaracteristica
-                                                  .caracteristica
-                                                  .dominioTipoDado
-                                                  .nome ==
-                                              'TIPO_DOMINIO'
-                                          ? Padding(
-                                              padding:
-                                                  const EdgeInsets.all(10.0),
-                                              child: SearchableDropdown.single(
-                                                readOnly: _bemPatrimonialStore
-                                                            .bemPatrimonial
-                                                            .dadosBensPatrimoniais !=
-                                                        null
-                                                    ? _bemPatrimonialStore
+                            ),
+                            padding: const EdgeInsets.all(10.0),
+                            child: Flex(
+                              direction: Axis.vertical,
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text('Caracteristicas'),
+                                    IconButton(
+                                      icon: Icon(
+                                          (_expanded
+                                              ? Icons.expand_less
+                                              : Icons.expand_more),
+                                          color: Colors.black),
+                                      onPressed: () {
+                                        setState(
+                                          () {
+                                            _expanded = !_expanded;
+                                          },
+                                        );
+                                      },
+                                    ),
+                                  ],
+                                ),
+                                if (_expanded)
+                                  Flexible(
+                                    fit: FlexFit.loose,
+                                    child: ListView.builder(
+                                      physics: NeverScrollableScrollPhysics(),
+                                      shrinkWrap: true,
+                                      itemCount: _bemPatrimonialStore
+                                          .bemPatrimonial
+                                          .caracteristicas
+                                          .length,
+                                      itemBuilder: (_, idx) {
+                                        List<DropdownMenuItem<Dominio>>
+                                            _dominiosDropdownAtual =
+                                            _bemPatrimonialStore
+                                                .filtroDominiosDropdownBens(
+                                                    _bemPatrimonialStore
                                                         .bemPatrimonial
-                                                        .dadosBensPatrimoniais
-                                                        .inventariado
-                                                    : _bemPatrimonialStore
+                                                        .caracteristicas[idx]
+                                                        .materialCaracteristica
+                                                        .caracteristica
+                                                        .chaveDominio);
+                                        Dominio itemAtual = _bemPatrimonialStore
+                                            .filtroDominio(_bemPatrimonialStore
+                                                .bemPatrimonial
+                                                .caracteristicas[idx]
+                                                .materialCaracteristica
+                                                .caracteristica
+                                                .chaveDominio)
+                                            .firstWhere(
+                                                (element) =>
+                                                    element.id.toString() ==
+                                                    _bemPatrimonialStore
                                                         .bemPatrimonial
-                                                        .inventariado,
-                                                iconDisabledColor: Colors.black,
-                                                label: _bemPatrimonialStore
+                                                        .caracteristicas[idx]
+                                                        .valorMaterialCaracteristica,
+                                                orElse: () => null);
+                                        return _bemPatrimonialStore
                                                     .bemPatrimonial
                                                     .caracteristicas[idx]
                                                     .materialCaracteristica
                                                     .caracteristica
-                                                    .descricao,
-                                                searchFn: (String keyword,
-                                                    _dominiosDropdownAtual) {
-                                                  List<int> ret = List<int>();
-                                                  if (keyword != null &&
-                                                      _dominiosDropdownAtual !=
-                                                          null &&
-                                                      keyword.isNotEmpty) {
-                                                    keyword.split(" ").forEach(
-                                                      (k) {
-                                                        int i = 0;
-                                                        _dominiosInicial
-                                                            .forEach(
-                                                          (item) {
-                                                            if (k.isNotEmpty &&
-                                                                (item.descricao
-                                                                    .toString()
-                                                                    .toLowerCase()
-                                                                    .contains(k
-                                                                        .toLowerCase()))) {
-                                                              ret.add(i);
-                                                            }
-                                                            i++;
-                                                          },
-                                                        );
+                                                    .dominioTipoDado
+                                                    .nome ==
+                                                'TIPO_DOMINIO'
+                                            ? Padding(
+                                                padding:
+                                                    const EdgeInsets.all(10.0),
+                                                child:
+                                                    SearchableDropdown.single(
+                                                  readOnly: _bemPatrimonialStore
+                                                              .bemPatrimonial
+                                                              .dadosBensPatrimoniais !=
+                                                          null
+                                                      ? _bemPatrimonialStore
+                                                          .bemPatrimonial
+                                                          .dadosBensPatrimoniais
+                                                          .inventariado
+                                                      : _bemPatrimonialStore
+                                                          .bemPatrimonial
+                                                          .inventariado,
+                                                  iconDisabledColor:
+                                                      Colors.black,
+                                                  label: _bemPatrimonialStore
+                                                      .bemPatrimonial
+                                                      .caracteristicas[idx]
+                                                      .materialCaracteristica
+                                                      .caracteristica
+                                                      .descricao,
+                                                  searchFn: (String keyword,
+                                                      _dominiosDropdownAtual) {
+                                                    List<int> ret = List<int>();
+                                                    if (keyword != null &&
+                                                        _dominiosDropdownAtual !=
+                                                            null &&
+                                                        keyword.isNotEmpty) {
+                                                      keyword
+                                                          .split(" ")
+                                                          .forEach(
+                                                        (k) {
+                                                          int i = 0;
+                                                          _dominiosInicial
+                                                              .forEach(
+                                                            (item) {
+                                                              if (k.isNotEmpty &&
+                                                                  (item
+                                                                      .descricao
+                                                                      .toString()
+                                                                      .toLowerCase()
+                                                                      .contains(
+                                                                          k.toLowerCase()))) {
+                                                                ret.add(i);
+                                                              }
+                                                              i++;
+                                                            },
+                                                          );
+                                                        },
+                                                      );
+                                                    }
+                                                    if (keyword.isEmpty) {
+                                                      ret = Iterable<
+                                                                  int>.generate(
+                                                              _dominiosDropdownAtual
+                                                                  .length)
+                                                          .toList();
+                                                    }
+                                                    return (ret);
+                                                  },
+                                                  items: _dominiosDropdownAtual,
+                                                  value: itemAtual,
+                                                  hint: _bemPatrimonialStore
+                                                      .bemPatrimonial
+                                                      .caracteristicas[idx]
+                                                      .materialCaracteristica
+                                                      .caracteristica
+                                                      .descricao,
+                                                  isExpanded: true,
+                                                  onChanged: (itemSelecionado) {
+                                                    setState(
+                                                      () {
+                                                        _edicaoBemInvent
+                                                                .caracteristicas[
+                                                                    idx]
+                                                                .valorMaterialCaracteristica =
+                                                            (itemSelecionado ==
+                                                                    null
+                                                                ? null
+                                                                : itemSelecionado
+                                                                    .id
+                                                                    .toString());
                                                       },
                                                     );
-                                                  }
-                                                  if (keyword.isEmpty) {
-                                                    ret = Iterable<
-                                                                int>.generate(
-                                                            _dominiosDropdownAtual
-                                                                .length)
-                                                        .toList();
-                                                  }
-                                                  return (ret);
-                                                },
-                                                items: _dominiosDropdownAtual,
-                                                value: itemAtual,
-                                                hint: _bemPatrimonialStore
-                                                    .bemPatrimonial
-                                                    .caracteristicas[idx]
-                                                    .materialCaracteristica
-                                                    .caracteristica
-                                                    .descricao,
-                                                isExpanded: true,
-                                                onChanged: (itemSelecionado) {
-                                                  setState(
-                                                    () {
-                                                      _edicaoBemInvent
-                                                              .caracteristicas[idx]
-                                                              .valorMaterialCaracteristica =
-                                                          (itemSelecionado ==
-                                                                  null
-                                                              ? null
-                                                              : itemSelecionado
-                                                                  .id
-                                                                  .toString());
-                                                    },
-                                                  );
-                                                },
-                                              ),
-                                            )
-                                          : _bemPatrimonialStore
-                                                      .bemPatrimonial
-                                                      .caracteristicas[idx]
-                                                      .materialCaracteristica
-                                                      .caracteristica
-                                                      .dominioTipoDado
-                                                      .nome ==
-                                                  'TEXT_FIELD'
-                                              ? Container(
-                                                  padding:
-                                                      const EdgeInsets.all(10),
-                                                  child: TextFormField(
-                                                    key: Key(
-                                                        'numeroPatrimonialText'),
-                                                    enabled: _bemPatrimonialStore
-                                                                .bemPatrimonial
-                                                                .inventariado ==
-                                                            true
-                                                        ? false
-                                                        : true,
-                                                    initialValue:
-                                                        _bemPatrimonialStore
-                                                            .bemPatrimonial
-                                                            .caracteristicas[
-                                                                idx]
-                                                            .valorMaterialCaracteristica,
-                                                    textAlignVertical:
-                                                        TextAlignVertical
-                                                            .bottom,
-                                                    decoration: InputDecoration(
-                                                      labelText:
+                                                  },
+                                                ),
+                                              )
+                                            : _bemPatrimonialStore
+                                                        .bemPatrimonial
+                                                        .caracteristicas[idx]
+                                                        .materialCaracteristica
+                                                        .caracteristica
+                                                        .dominioTipoDado
+                                                        .nome ==
+                                                    'TEXT_FIELD'
+                                                ? Container(
+                                                    padding:
+                                                        const EdgeInsets.all(
+                                                            10.0),
+                                                    child: TextFormField(
+                                                      key: Key(
+                                                          'numeroPatrimonialText'),
+                                                      enabled: _bemPatrimonialStore
+                                                                  .bemPatrimonial
+                                                                  .inventariado ==
+                                                              true
+                                                          ? false
+                                                          : true,
+                                                      initialValue:
                                                           _bemPatrimonialStore
                                                               .bemPatrimonial
                                                               .caracteristicas[
                                                                   idx]
-                                                              .materialCaracteristica
-                                                              .caracteristica
-                                                              .descricao,
-                                                      border:
-                                                          OutlineInputBorder(),
+                                                              .valorMaterialCaracteristica,
+                                                      textAlignVertical:
+                                                          TextAlignVertical
+                                                              .bottom,
+                                                      decoration:
+                                                          InputDecoration(
+                                                        labelText:
+                                                            _bemPatrimonialStore
+                                                                .bemPatrimonial
+                                                                .caracteristicas[
+                                                                    idx]
+                                                                .materialCaracteristica
+                                                                .caracteristica
+                                                                .descricao,
+                                                        border:
+                                                            OutlineInputBorder(),
+                                                      ),
+                                                      onFieldSubmitted: (_) {
+                                                        FocusScope.of(context)
+                                                            .requestFocus(
+                                                                _dropdownFocusNode);
+                                                      },
+                                                      onSaved: (value) {
+                                                        _edicaoBemInvent
+                                                                .caracteristicas[
+                                                                    idx]
+                                                                .valorMaterialCaracteristica =
+                                                            value == ""
+                                                                ? null
+                                                                : value;
+                                                      },
                                                     ),
-                                                    onFieldSubmitted: (_) {
-                                                      FocusScope.of(context)
-                                                          .requestFocus(
-                                                              _dropdownFocusNode);
-                                                    },
-                                                    onSaved: (value) {
-                                                      _edicaoBemInvent
-                                                              .caracteristicas[idx]
-                                                              .valorMaterialCaracteristica =
-                                                          value == ""
-                                                              ? null
-                                                              : value;
-                                                    },
-                                                  ),
-                                                )
-                                              : Container();
-                                    },
-                                  ),
-                                )
-                            ],
+                                                  )
+                                                : Container();
+                                      },
+                                    ),
+                                  )
+                              ],
+                            ),
                           ),
                         ),
-                      ),
                     ],
                   ),
                 ),
@@ -611,9 +626,9 @@ class _LerBensGeralTelaState extends State<LerBensGeralTela> {
           .filtroDominiosDropdownBens(bem.dominioStatus.chave);
     }
     return Padding(
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10.0),
       child: Container(
-        padding: const EdgeInsets.all(10),
+        padding: const EdgeInsets.all(10.0),
         decoration: BoxDecoration(
           shape: BoxShape.rectangle,
           border: Border.all(width: 1, color: Colors.grey[500]),

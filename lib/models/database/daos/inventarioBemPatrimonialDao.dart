@@ -1,3 +1,4 @@
+import 'package:app_inventario/models/database/tables/inventarioBemPatrimonial.dart';
 import 'package:moor_flutter/moor_flutter.dart';
 
 import 'package:app_inventario/models/serialized/inventarioBemPatrimonial.dart';

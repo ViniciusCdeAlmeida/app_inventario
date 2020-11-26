@@ -12,8 +12,11 @@ enum Acoes {
   enviaInventario,
   gerarArquivoBackup,
   itensInventariados,
+  acessarBanco,
+}
+
+enum AcoesUnidade {
   lerBens,
   bensPrevistos,
   estatisticas,
-  acessarBanco,
 }

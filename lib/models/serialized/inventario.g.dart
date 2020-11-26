@@ -1,13 +1,13 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'levantamento.dart';
+part of 'inventario.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-Levantamento _$LevantamentoFromJson(Map<String, dynamic> json) {
-  return Levantamento(
+Inventario _$InventarioFromJson(Map<String, dynamic> json) {
+  return Inventario(
     id: json['id'] as int,
     dominioTipoInventario: json['dominioTipoInventario'] == null
         ? null
@@ -32,7 +32,7 @@ Levantamento _$LevantamentoFromJson(Map<String, dynamic> json) {
   );
 }
 
-Map<String, dynamic> _$LevantamentoToJson(Levantamento instance) =>
+Map<String, dynamic> _$InventarioToJson(Inventario instance) =>
     <String, dynamic>{
       'id': instance.id,
       'dominioTipoInventario': instance.dominioTipoInventario,

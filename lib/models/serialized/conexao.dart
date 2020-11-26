@@ -1,10 +1,9 @@
-import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'conexao.g.dart';
 
 @JsonSerializable()
-class Conexao with ChangeNotifier {
+class Conexao {
   int id;
   String url;
   String nome;

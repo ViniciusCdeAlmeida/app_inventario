@@ -1,4 +1,5 @@
 import 'package:app_inventario/models/database/databaseMoor.dart';
+import 'package:app_inventario/models/database/tables/usuario.dart';
 import 'package:app_inventario/models/serialized/organizacoes.dart';
 import 'package:moor_flutter/moor_flutter.dart';
 

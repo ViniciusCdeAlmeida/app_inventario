@@ -7,5 +7,5 @@ part of 'estruturaInventarioDao.dart';
 // **************************************************************************
 
 mixin _$EstruturaInventarioDaoMixin on DatabaseAccessor<AppDatabase> {
-  $LevantamentoDBTable get levantamentoDB => attachedDatabase.levantamentoDB;
+  $InventarioDBTable get inventarioDB => attachedDatabase.inventarioDB;
 }

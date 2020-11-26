@@ -1,5 +1,5 @@
-import 'package:app_inventario/screens/inventario/inventario_geral_tela.dart';
-import 'package:app_inventario/screens/inventario/levantamento_fisico_tela.dart';
+import 'package:app_inventario/screens/inventario/inventario/inventario_geral_tela.dart';
+import 'package:app_inventario/screens/inventario/levantamento/levantamento_fisico_tela.dart';
 import 'package:flutter/material.dart';
 
 class InventarioSelecaoItem extends StatelessWidget {
@@ -16,7 +16,8 @@ class InventarioSelecaoItem extends StatelessWidget {
         ListTileTheme(
           dense: false,
           child: ListTile(
-            contentPadding: const EdgeInsets.only(top: 5, left: 10, right: 5),
+            contentPadding:
+                const EdgeInsets.only(top: 5.0, left: 10.0, right: 5.0),
             title: Text(nome),
             leading: Container(
               child: Icon(

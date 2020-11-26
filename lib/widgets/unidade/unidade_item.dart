@@ -1,4 +1,4 @@
-import 'package:app_inventario/custom/acoes.dart';
+import 'package:app_inventario/custom/custom_acoes.dart';
 import 'package:app_inventario/models/serialized/estruturaInventario.dart';
 import 'package:app_inventario/models/telaArgumentos.dart';
 import 'package:app_inventario/screens/bens/previstos_bens_tela.dart';
@@ -17,7 +17,8 @@ class UnidadeItem extends StatefulWidget {
 
 class _UnidadeItemState extends State<UnidadeItem>
     with TickerProviderStateMixin {
-  Animation<Offset> _slideAnimation;
+  // Animation<Offset> _slideAnimation;
+  Animation<double> _fadeAnimation;
   AnimationController _controller;
 
   @override
@@ -28,9 +29,18 @@ class _UnidadeItemState extends State<UnidadeItem>
         milliseconds: 1000,
       ),
     );
-    _slideAnimation = Tween<Offset>(
-      begin: Offset(1.0, 0.0),
-      end: Offset(0, 0),
+    // _slideAnimation = Tween<Offset>(
+    //   begin: Offset(1.0, 0.0),
+    //   end: Offset(0, 0),
+    // ).animate(
+    //   CurvedAnimation(
+    //     parent: _controller,
+    //     curve: Curves.ease,
+    //   ),
+    // );
+    _fadeAnimation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
     ).animate(
       CurvedAnimation(
         parent: _controller,
@@ -51,9 +61,9 @@ class _UnidadeItemState extends State<UnidadeItem>
     super.dispose();
   }
 
-  void _redirecionamento(Acoes acoes, int idEstrutura) {
+  void _redirecionamento(AcoesUnidade acoes, int idEstrutura) {
     switch (acoes) {
-      case Acoes.lerBens:
+      case AcoesUnidade.lerBens:
         Navigator.of(context).pushNamed(
           LerBensItens.routeName,
           arguments: TelaArgumentos(
@@ -63,7 +73,7 @@ class _UnidadeItemState extends State<UnidadeItem>
           ),
         );
         break;
-      case Acoes.bensPrevistos:
+      case AcoesUnidade.bensPrevistos:
         Navigator.of(context).pushNamed(
           PrevistosBensTela.routeName,
           arguments: TelaArgumentos(
@@ -73,7 +83,7 @@ class _UnidadeItemState extends State<UnidadeItem>
           ),
         );
         break;
-      case Acoes.estatisticas:
+      case AcoesUnidade.estatisticas:
         print(idEstrutura);
         print('3');
         break;
@@ -84,8 +94,10 @@ class _UnidadeItemState extends State<UnidadeItem>
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: _controller,
-      builder: (context, child) =>
-          SlideTransition(position: _slideAnimation, child: child),
+      builder: (context, child) => FadeTransition(
+        opacity: _fadeAnimation,
+        child: child,
+      ),
       child: Column(
         children: [
           Card(
@@ -111,7 +123,7 @@ class _UnidadeItemState extends State<UnidadeItem>
                           Column(
                             children: <Widget>[
                               ListTile(
-                                trailing: PopupMenuButton<Acoes>(
+                                trailing: PopupMenuButton<AcoesUnidade>(
                                   icon: Icon(
                                     Icons.more_vert,
                                     color: Colors.black,
@@ -124,23 +136,23 @@ class _UnidadeItemState extends State<UnidadeItem>
                                   },
                                   offset: Offset(0, 100),
                                   itemBuilder: (context) =>
-                                      <PopupMenuEntry<Acoes>>[
-                                    PopupMenuItem<Acoes>(
+                                      <PopupMenuEntry<AcoesUnidade>>[
+                                    PopupMenuItem<AcoesUnidade>(
                                       child: PopupMenuCustom(
                                           'Ler Bens', Icons.visibility),
-                                      value: Acoes.lerBens,
+                                      value: AcoesUnidade.lerBens,
                                     ),
                                     const PopupMenuDivider(),
-                                    PopupMenuItem<Acoes>(
+                                    PopupMenuItem<AcoesUnidade>(
                                       child: PopupMenuCustom(
                                           'Bens', Icons.content_paste),
-                                      value: Acoes.bensPrevistos,
+                                      value: AcoesUnidade.bensPrevistos,
                                     ),
                                     const PopupMenuDivider(),
-                                    PopupMenuItem<Acoes>(
+                                    PopupMenuItem<AcoesUnidade>(
                                       child: PopupMenuCustom(
-                                          'Estatisticas', Icons.equalizer),
-                                      value: Acoes.estatisticas,
+                                          'Estatisticas', Icons.bar_chart),
+                                      value: AcoesUnidade.estatisticas,
                                     ),
                                   ],
                                 ),

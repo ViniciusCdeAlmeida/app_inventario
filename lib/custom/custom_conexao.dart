@@ -10,7 +10,7 @@ Future<void> buscaConexaoAtiva() async {
   try {
     conexaoAtiva = helperConexao(await db.conexaoDao.getConexaoAtiva()).url;
   } on NoSuchMethodError {
-    throw "Sem conexão ativa";
+    throw "Sem conexão ativa ou existe mais de uma conexão ativa.";
   }
 }
 
@@ -45,14 +45,29 @@ class Endpoint {
         .get('obterLevantamentosPorUGV3.json?idOrganizacao=$id');
   }
 
+  static Future getObterInventariosUg(int id) async {
+    return getConexaoPrefs()
+        .get('obterInventariosPorUGV2.json?idOrganizacao=$id');
+  }
+
   static Future getObterLevantamentosCodigo(String codigo) async {
     return getConexaoPrefs()
         .get('obterLevantamentoPorCodigoV2.json?codigo=$codigo');
   }
 
+  static Future getObterInventariosCodigo(String codigo) async {
+    return getConexaoPrefs()
+        .get('obterInventarioPorCodigoEUGV2.json?codigo=$codigo');
+  }
+
   static Future getSaveInventario(List itens) async {
     return getConexaoPrefs()
         .post('saveInventarioBemPatrimonialMobile.json', data: itens);
+  }
+
+  static Future getAtualizaDadosLevantamentos(int id) async {
+    return getConexaoPrefs()
+        .get("atualizaDadosLevantamentos.json?idLevantamento=$id");
   }
 
   static Future getAutenticacao({String usuario, String senha}) async =>

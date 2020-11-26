@@ -1,6 +1,6 @@
-import 'package:app_inventario/models/serialized/levantamento.dart';
+import 'package:app_inventario/models/serialized/inventario.dart';
 import 'package:app_inventario/providers/estruturaLevantamento.dart';
-import 'package:app_inventario/providers/levantamentos.dart';
+import 'package:app_inventario/providers/inventarios.dart';
 import 'package:mobx/mobx.dart';
 
 part 'levantamento_store.g.dart';
@@ -15,7 +15,7 @@ enum LevantamentosState {
 }
 
 abstract class _LevantamentoStore with Store {
-  final Levantamentos _levantamentos;
+  final Inventarios _levantamentos;
   final EstruturaLevantamento _estruturaLevantamento;
 
   _LevantamentoStore(this._levantamentos, this._estruturaLevantamento);
@@ -30,20 +30,20 @@ abstract class _LevantamentoStore with Store {
   bool atualizandoInv = false;
 
   @observable
-  Levantamento _levantamentoObservable;
+  Inventario _levantamentoObservable;
 
   @observable
-  ObservableList<Levantamento> _levantamentosObservable =
-      ObservableList<Levantamento>();
+  ObservableList<Inventario> _levantamentosObservable =
+      ObservableList<Inventario>();
 
   @observable
-  ObservableFuture<List<Levantamento>> _levantamentosFuture;
+  ObservableFuture<List<Inventario>> _levantamentosFuture;
 
   @observable
-  ObservableFuture<Levantamento> _levantamentoFuture;
+  ObservableFuture<Inventario> _levantamentoFuture;
 
   @observable
-  ObservableFuture<Levantamento> _levantamentoAtualizadoFuture;
+  ObservableFuture<Inventario> _levantamentoAtualizadoFuture;
 
   @computed
   // ignore: missing_return
@@ -68,19 +68,19 @@ abstract class _LevantamentoStore with Store {
   }
 
   @computed
-  List<Levantamento> get levantamentosDados {
+  List<Inventario> get levantamentosDados {
     return [..._levantamentosObservable];
   }
 
   @action
   Future verificaLevantamentos(int idOrganizacao, bool deleteDB) async {
     if (deleteDB) {
-      _levantamentos.deleteLevantamento();
+      _levantamentos.deleteInventario();
       _levantamentosFuture =
           ObservableFuture(_levantamentos.getLevantamentosDB(idOrganizacao));
       _levantamentosObservable = (await _levantamentosFuture).asObservable();
     }
-    _existeLevantamento = await _levantamentos.getVerificaInventariosDB();
+    _existeLevantamento = await _levantamentos.getVerificaLevantamentosDB();
 
     if (!_existeLevantamento) {
       try {
@@ -105,7 +105,7 @@ abstract class _LevantamentoStore with Store {
   }
 
   @action
-  Future verificaLevantamento() async {
+  Future verificaInventario() async {
     _existeLevantamento = await _levantamentos.getVerificaInventariosDB();
     if (_existeLevantamento) _levantamentosObservable.asObservable();
   }
@@ -114,7 +114,7 @@ abstract class _LevantamentoStore with Store {
   Future buscaLevantamento(String codigo) async {
     try {
       _levantamentoFuture = ObservableFuture(
-        _levantamentos.buscaLevantamento(codigo),
+        _levantamentos.buscaInventario(codigo),
       );
       _levantamentoObservable = await _levantamentoFuture;
 
@@ -132,7 +132,7 @@ abstract class _LevantamentoStore with Store {
     try {
       _levantamentosFuture = ObservableFuture(
         _levantamentos
-            .buscaLevantamentos(idOrganizacao)
+            .buscaInventarios(idOrganizacao)
             .whenComplete(() => _existeLevantamento = true),
       );
       _levantamentosObservable = (await _levantamentosFuture).asObservable();
@@ -146,7 +146,7 @@ abstract class _LevantamentoStore with Store {
     atualizandoInv = true;
     try {
       _levantamentoAtualizadoFuture =
-          ObservableFuture(_levantamentos.atualizaDadosInventario(id))
+          ObservableFuture(_levantamentos.atualizaDadosLevantamento(id))
               // ignore: missing_return
               .then((value) {
         var item =
@@ -161,7 +161,7 @@ abstract class _LevantamentoStore with Store {
   }
 
   @action
-  Future buscaEstruturasInventario(List<Levantamento> listaLevantamento) async {
+  Future buscaEstruturasLevantamento(List<Inventario> listaLevantamento) async {
     buscandoEstruturas = true;
     try {
       await _estruturaLevantamento

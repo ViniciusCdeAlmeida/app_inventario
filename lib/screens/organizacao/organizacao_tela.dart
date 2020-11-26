@@ -1,4 +1,4 @@
-import 'package:app_inventario/custom/erroModal.dart';
+import 'package:app_inventario/custom/custom_erroModal.dart';
 import 'package:app_inventario/stores/inicializacao_store.dart';
 import 'package:app_inventario/widgets/cabecalho/app_cabecalho.dart';
 import 'package:app_inventario/widgets/organizacao/organizacao_item.dart';
@@ -80,7 +80,7 @@ class _OrganizacaoTelaState extends State<OrganizacaoTela> {
               case InicializacaoState.carregado:
               case InicializacaoState.carregadoInicializacao:
                 return Padding(
-                  padding: const EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(8.0),
                   child: ListView.builder(
                     itemCount: _inicializacaoStore.organizacoes.length,
                     itemBuilder: (_, idx) => Column(

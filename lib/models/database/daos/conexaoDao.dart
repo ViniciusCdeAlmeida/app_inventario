@@ -1,4 +1,5 @@
 import 'package:app_inventario/models/database/databaseMoor.dart';
+import 'package:app_inventario/models/database/tables/conexao.dart';
 import 'package:app_inventario/models/serialized/conexao.dart';
 import 'package:moor_flutter/moor_flutter.dart';
 
@@ -46,6 +47,14 @@ class ConexaoDao extends DatabaseAccessor<AppDatabase> with _$ConexaoDaoMixin {
         ativo: Value(conexao.ativo),
         nome: Value(conexao.nome),
         url: Value(conexao.url),
+      ),
+    );
+  }
+
+  Future updateDesativaConexoes() {
+    return (update(conexaoDB)).write(
+      ConexaoDBCompanion(
+        ativo: Value(false),
       ),
     );
   }

@@ -94,19 +94,21 @@ abstract class _ConexaoStore with Store {
   @action
   Future salvarConexao({Conexao conexao, bool existente, int id}) async {
     try {
-      if (existente)
-        _conexoesProvider.editaConexao(conexao).then(
-          (_) {
-            var idx = _conexoesObservable
-                .indexWhere((element) => element.id == conexao.id);
-            _conexoesObservable.removeAt(idx);
-            _conexoesObservable.insert(idx, conexao);
-          },
-        );
-      else
-        _conexoesProvider
-            .salvaConexao(conexao)
-            .then((_) => _conexoesObservable.add(conexao));
+      if (existente) {
+        _conexoesProvider.editaConexao(conexao).then((_) {
+          if (conexao.ativo) {
+            _conexoesObservable.clear();
+            buscarConexoes();
+          }
+        });
+      } else
+        _conexoesProvider.salvaConexao(conexao).then((_) {
+          if (conexao.ativo) {
+            _conexoesObservable.clear();
+            buscarConexoes();
+          }
+          _conexoesObservable.add(conexao);
+        });
     } catch (e) {
       throw e;
     }

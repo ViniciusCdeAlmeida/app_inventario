@@ -1,4 +1,4 @@
-import 'package:app_inventario/custom/customSliverAppBar.dart';
+import 'package:app_inventario/custom/custom_sliverAppBar.dart';
 import 'package:app_inventario/models/telaArgumentos.dart';
 import 'package:app_inventario/stores/estruturaLevantamento_store.dart';
 import 'package:app_inventario/widgets/unidade/unidade_item.dart';
@@ -67,19 +67,6 @@ class _UnidadeTelaState extends State<UnidadeTela> {
                   ),
                 ],
               );
-            // Padding(
-            //   padding: const EdgeInsets.all(8),
-            //   child: ListView.builder(
-            //     itemCount: _estruturaLevantamentoStore.estruturas.length,
-            //     itemBuilder: (_, idx) => Column(
-            //       children: [
-            //         UnidadeItem(
-            //           _estruturaLevantamentoStore.estruturas[idx],
-            //         ),
-            //       ],
-            //     ),
-            //   ),
-            // );
           }
         },
       ),

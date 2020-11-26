@@ -1,4 +1,6 @@
 import 'package:app_inventario/models/database/databaseMoor.dart';
+import 'package:app_inventario/models/database/tables/mascara.dart';
+import 'package:app_inventario/models/database/tables/prefixo.dart';
 import 'package:moor_flutter/moor_flutter.dart';
 
 part 'configuracaoDao.g.dart';

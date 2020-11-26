@@ -50,9 +50,9 @@ class _LerBensItensState extends State<LerBensItens> {
           child: Card(
             child: Container(
               padding: EdgeInsets.only(
-                top: 10,
-                left: 10,
-                right: 10,
+                top: 10.0,
+                left: 10.0,
+                right: 10.0,
                 bottom: MediaQuery.of(context).viewInsets.bottom + 10,
               ),
               child: Column(
@@ -131,7 +131,7 @@ class _LerBensItensState extends State<LerBensItens> {
         child: Column(
           children: <Widget>[
             ListTile(
-              contentPadding: const EdgeInsets.all(10),
+              contentPadding: const EdgeInsets.all(10.0),
               trailing: IconButton(
                 icon: Icon(Icons.camera_alt),
                 color: Colors.black,
@@ -143,7 +143,7 @@ class _LerBensItensState extends State<LerBensItens> {
             ),
             Divider(),
             ListTile(
-              contentPadding: const EdgeInsets.all(10),
+              contentPadding: const EdgeInsets.all(10.0),
               trailing: IconButton(
                 icon: Icon(Icons.content_paste),
                 color: Colors.black,
@@ -155,7 +155,7 @@ class _LerBensItensState extends State<LerBensItens> {
             ),
             Divider(),
             ListTile(
-              contentPadding: const EdgeInsets.all(10),
+              contentPadding: const EdgeInsets.all(10.0),
               trailing: IconButton(
                 icon: Icon(Icons.usb),
                 color: Colors.black,
@@ -165,7 +165,7 @@ class _LerBensItensState extends State<LerBensItens> {
             ),
             Divider(),
             ListTile(
-              contentPadding: const EdgeInsets.all(10),
+              contentPadding: const EdgeInsets.all(10.0),
               trailing: IconButton(
                 icon: Icon(Icons.bluetooth),
                 color: Colors.black,

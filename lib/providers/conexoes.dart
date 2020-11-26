@@ -3,8 +3,12 @@ import 'package:app_inventario/main.dart';
 import 'package:app_inventario/models/serialized/conexao.dart';
 
 class Conexoes {
-  Future salvaConexao(Conexao conexao) async =>
-      await db.conexaoDao.insertConexao(conexao);
+  Future salvaConexao(Conexao conexao) async {
+    if (conexao.ativo) {
+      await db.conexaoDao.updateDesativaConexoes();
+    }
+    await db.conexaoDao.insertConexao(conexao);
+  }
 
   Future<Conexao> buscarConexao(int id) async =>
       helperConexao(await db.conexaoDao.getConexao(id));
@@ -12,8 +16,12 @@ class Conexoes {
   Future<List<Conexao>> buscarConexoes() async =>
       helperConexoes(await db.conexaoDao.getConexoes());
 
-  Future<void> editaConexao(Conexao conexao) async =>
-      await db.conexaoDao.updateConexao(conexao);
+  Future<void> editaConexao(Conexao conexao) async {
+    if (conexao.ativo) {
+      await db.conexaoDao.updateDesativaConexoes();
+    }
+    await db.conexaoDao.updateConexao(conexao);
+  }
 
   Future<void> deletaConexao(int id) async =>
       await db.conexaoDao.deleteConexao(id);

@@ -1,4 +1,4 @@
-import 'package:app_inventario/custom/bensPrevistos.dart';
+import 'package:app_inventario/custom/custom_bensPrevistos.dart';
 import 'package:app_inventario/models/serialized/dadosBensPatrimoniais.dart';
 import 'package:app_inventario/models/telaArgumentos.dart';
 import 'package:app_inventario/screens/bens/ler_bens_geral_tela.dart';
@@ -17,7 +17,8 @@ class PrevistosBensItem extends StatefulWidget {
 
 class _PrevistosBensItemState extends State<PrevistosBensItem>
     with SingleTickerProviderStateMixin {
-  Animation<Offset> _slideAnimation;
+  // Animation<Offset> _slideAnimation;
+  Animation<double> _fadeAnimation;
   AnimationController _controller;
 
   @override
@@ -28,9 +29,18 @@ class _PrevistosBensItemState extends State<PrevistosBensItem>
         milliseconds: 1000,
       ),
     );
-    _slideAnimation = Tween<Offset>(
-      begin: Offset(1.0, 0.0),
-      end: Offset(0, 0),
+    // _slideAnimation = Tween<Offset>(
+    //   begin: Offset(1.0, 0.0),
+    //   end: Offset(0, 0),
+    // ).animate(
+    //   CurvedAnimation(
+    //     parent: _controller,
+    //     curve: Curves.ease,
+    //   ),
+    // );
+    _fadeAnimation = Tween<double>(
+      begin: 0.0,
+      end: 1.0,
     ).animate(
       CurvedAnimation(
         parent: _controller,
@@ -55,8 +65,11 @@ class _PrevistosBensItemState extends State<PrevistosBensItem>
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: _controller,
-      builder: (context, child) =>
-          SlideTransition(position: _slideAnimation, child: child),
+      builder: (context, child) => FadeTransition(
+        // position: _slideAnimation,
+        opacity: _fadeAnimation,
+        child: child,
+      ),
       child: Row(
         children: <Widget>[
           Expanded(

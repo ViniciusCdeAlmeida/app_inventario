@@ -1,4 +1,4 @@
-import 'package:app_inventario/custom/conexao.dart';
+import 'package:app_inventario/custom/custom_conexao.dart';
 import 'package:app_inventario/models/serialized/bemPatrimonial.dart';
 import 'package:dio/dio.dart';
 
@@ -9,7 +9,7 @@ import 'package:app_inventario/helpers/helper_estruturaInventario.dart';
 
 import 'package:app_inventario/models/serialized/dadosBensPatrimoniais.dart';
 import 'package:app_inventario/models/serialized/estruturaInventario.dart';
-import 'package:app_inventario/models/serialized/levantamento.dart';
+import 'package:app_inventario/models/serialized/inventario.dart';
 
 class EstruturaLevantamento {
   List<EstruturaInventario> _estruturas = [];
@@ -119,7 +119,7 @@ class EstruturaLevantamento {
     }
   }
 
-  Future<void> buscaEstruturas(List<Levantamento> listLevantamento) async {
+  Future<void> buscaEstruturas(List<Inventario> listLevantamento) async {
     _estruturas.clear();
 
     db.deleteTable(db.estruturaInventarioDB);

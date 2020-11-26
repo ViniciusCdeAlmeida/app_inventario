@@ -1,4 +1,5 @@
 import 'package:app_inventario/models/database/databaseMoor.dart';
+import 'package:app_inventario/models/database/tables/dominio.dart';
 import 'package:moor_flutter/moor_flutter.dart';
 
 part 'dominioDao.g.dart';
