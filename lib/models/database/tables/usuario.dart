@@ -1,4 +1,4 @@
-import 'package:app_inventario/models/converters/organizacoesConverter.dart';
+import 'package:GRPInventario/models/converters/organizacoesConverter.dart';
 import 'package:moor/moor.dart';
 
 class UsuarioDB extends Table {

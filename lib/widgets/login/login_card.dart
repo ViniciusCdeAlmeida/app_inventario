@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
-import 'package:app_inventario/custom/index.dart';
-import 'package:app_inventario/screens/index.dart';
-import 'package:app_inventario/stores/index.dart';
+import 'package:GRPInventario/custom/index.dart';
+import 'package:GRPInventario/screens/index.dart';
+import 'package:GRPInventario/stores/index.dart';
 
 class LoginCard extends StatefulWidget {
   LoginCard({Key key}) : super(key: key);

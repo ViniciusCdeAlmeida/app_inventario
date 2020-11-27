@@ -1,5 +1,5 @@
-import 'package:app_inventario/models/database/databaseMoor.dart';
-import 'package:app_inventario/models/database/tables/index.dart';
+import 'package:GRPInventario/models/database/databaseMoor.dart';
+import 'package:GRPInventario/models/database/tables/index.dart';
 import 'package:moor_flutter/moor_flutter.dart';
 
 part 'dominioDao.g.dart';

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:app_inventario/models/database/databaseMoor.dart';
-import 'package:app_inventario/providers/index.dart';
-import 'package:app_inventario/screens/index.dart';
-import 'package:app_inventario/custom/index.dart';
+import 'package:GRPInventario/models/database/databaseMoor.dart';
+import 'package:GRPInventario/providers/index.dart';
+import 'package:GRPInventario/screens/index.dart';
+import 'package:GRPInventario/custom/index.dart';
 
 AppDatabase db;
 

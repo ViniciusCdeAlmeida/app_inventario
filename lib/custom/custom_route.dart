@@ -1,5 +1,5 @@
-import 'package:app_inventario/screens/index.dart';
-import 'package:app_inventario/widgets/index.dart';
+import 'package:GRPInventario/screens/index.dart';
+import 'package:GRPInventario/widgets/index.dart';
 import 'package:flutter/material.dart';
 
 class CustomPageTransitionBuilder extends PageTransitionsBuilder {

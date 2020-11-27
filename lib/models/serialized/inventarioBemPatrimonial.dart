@@ -1,4 +1,4 @@
-import 'package:app_inventario/models/serialized/index.dart';
+import 'package:GRPInventario/models/serialized/index.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'inventarioBemPatrimonial.g.dart';

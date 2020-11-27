@@ -1,5 +1,5 @@
-import 'package:app_inventario/models/serialized/inventarioBemPatrimonial.dart';
-import 'package:app_inventario/providers/inventarioBemPatrimonial.dart';
+import 'package:GRPInventario/models/serialized/inventarioBemPatrimonial.dart';
+import 'package:GRPInventario/providers/inventarioBemPatrimonial.dart';
 import 'package:mobx/mobx.dart';
 
 part 'bensInventariados_store.g.dart';

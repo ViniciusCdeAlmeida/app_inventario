@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:app_inventario/models/database/databaseMoor.dart';
-import 'package:app_inventario/models/serialized/index.dart';
+import 'package:GRPInventario/models/database/databaseMoor.dart';
+import 'package:GRPInventario/models/serialized/index.dart';
 
 List<EstruturaInventario> helperEstruturaInventarioLista(
     List<EstruturaInventarioDBData> listaUnidades) {

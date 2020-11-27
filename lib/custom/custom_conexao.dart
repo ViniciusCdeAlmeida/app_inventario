@@ -1,8 +1,8 @@
 import 'dart:io';
-import 'package:app_inventario/helpers/index.dart';
+import 'package:GRPInventario/helpers/index.dart';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
-import 'package:app_inventario/main.dart';
+import 'package:GRPInventario/main.dart';
 
 String conexaoAtiva;
 
@@ -72,8 +72,8 @@ class Endpoint {
 
   static Future getAutenticacao({String usuario, String senha}) async =>
       getConexaoPrefs()
-          .get('usuarioValidoV2/?username=vinicius.correa&password=interno');
-  // .get("usuarioValidoV2/?username=$usuario&password=$senha");
+          // .get('usuarioValidoV2/?username=vinicius.correa&password=interno');
+          .get("usuarioValidoV2/?username=$usuario&password=$senha");
   // .get("usuarioValido.json?username=citsmart&password=interno")
 
 }

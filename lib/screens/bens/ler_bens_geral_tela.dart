@@ -3,12 +3,12 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 import 'package:searchable_dropdown/searchable_dropdown.dart';
 
-import 'package:app_inventario/models/serialized/index.dart';
-import 'package:app_inventario/stores/index.dart';
-import 'package:app_inventario/providers/index.dart';
-import 'package:app_inventario/models/telaArgumentos.dart';
+import 'package:GRPInventario/models/serialized/index.dart';
+import 'package:GRPInventario/stores/index.dart';
+import 'package:GRPInventario/providers/index.dart';
+import 'package:GRPInventario/models/telaArgumentos.dart';
 
-import 'package:app_inventario/widgets/index.dart';
+import 'package:GRPInventario/widgets/index.dart';
 
 // ignore: must_be_immutable
 class LerBensGeralTela extends StatefulWidget {

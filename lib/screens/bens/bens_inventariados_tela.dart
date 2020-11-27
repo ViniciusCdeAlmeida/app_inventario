@@ -3,10 +3,10 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 import 'package:flare_flutter/flare_actor.dart';
 
-import 'package:app_inventario/stores/index.dart';
-import 'package:app_inventario/widgets/index.dart';
+import 'package:GRPInventario/stores/index.dart';
+import 'package:GRPInventario/widgets/index.dart';
 
-import 'package:app_inventario/providers/index.dart';
+import 'package:GRPInventario/providers/index.dart';
 
 class BensInventariadosTela extends StatefulWidget {
   static const routeName = '/bensInventariadosTela';

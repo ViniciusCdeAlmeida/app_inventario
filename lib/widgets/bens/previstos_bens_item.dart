@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:app_inventario/custom/index.dart';
-import 'package:app_inventario/models/serialized/index.dart';
-import 'package:app_inventario/models/telaArgumentos.dart';
-import 'package:app_inventario/screens/index.dart';
+import 'package:GRPInventario/custom/index.dart';
+import 'package:GRPInventario/models/serialized/index.dart';
+import 'package:GRPInventario/models/telaArgumentos.dart';
+import 'package:GRPInventario/screens/index.dart';
 
 // ignore: must_be_immutable
 class PrevistosBensItem extends StatefulWidget {

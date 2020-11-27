@@ -1,6 +1,6 @@
-import 'package:app_inventario/models/serialized/organizacoes.dart';
-import 'package:app_inventario/providers/autenticacao.dart';
-import 'package:app_inventario/providers/inicializacao.dart';
+import 'package:GRPInventario/models/serialized/organizacoes.dart';
+import 'package:GRPInventario/providers/autenticacao.dart';
+import 'package:GRPInventario/providers/inicializacao.dart';
 
 import 'package:mobx/mobx.dart';
 

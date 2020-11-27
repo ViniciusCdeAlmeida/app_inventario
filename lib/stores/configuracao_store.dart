@@ -1,6 +1,6 @@
-import 'package:app_inventario/models/serialized/mascara.dart';
-import 'package:app_inventario/models/serialized/prefixo.dart';
-import 'package:app_inventario/providers/configuracao.dart';
+import 'package:GRPInventario/models/serialized/mascara.dart';
+import 'package:GRPInventario/models/serialized/prefixo.dart';
+import 'package:GRPInventario/providers/configuracao.dart';
 
 import 'package:mobx/mobx.dart';
 

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
-import 'package:app_inventario/screens/index.dart';
-import 'package:app_inventario/models/telaArgumentos.dart';
-import 'package:app_inventario/widgets/index.dart';
+import 'package:GRPInventario/screens/index.dart';
+import 'package:GRPInventario/models/telaArgumentos.dart';
+import 'package:GRPInventario/widgets/index.dart';
 
 class LerBensItens extends StatefulWidget {
   static const routeName = '/lerBens';

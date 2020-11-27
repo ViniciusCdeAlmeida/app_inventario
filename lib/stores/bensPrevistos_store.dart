@@ -1,5 +1,5 @@
-import 'package:app_inventario/models/serialized/dadosBensPatrimoniais.dart';
-import 'package:app_inventario/providers/bensProvider.dart';
+import 'package:GRPInventario/models/serialized/dadosBensPatrimoniais.dart';
+import 'package:GRPInventario/providers/bensProvider.dart';
 import 'package:mobx/mobx.dart';
 
 part 'bensPrevistos_store.g.dart';

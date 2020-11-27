@@ -1,8 +1,8 @@
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
-import 'package:app_inventario/providers/index.dart';
-import 'package:app_inventario/stores/index.dart';
+import 'package:GRPInventario/providers/index.dart';
+import 'package:GRPInventario/stores/index.dart';
 
 List<SingleChildWidget> providers() => [
       Provider(

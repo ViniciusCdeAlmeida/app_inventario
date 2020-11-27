@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 // import 'dart:math';
 
-import 'package:app_inventario/widgets/index.dart';
+import 'package:GRPInventario/widgets/index.dart';
 
 class LoginTela extends StatefulWidget {
   static const routeName = '/home';

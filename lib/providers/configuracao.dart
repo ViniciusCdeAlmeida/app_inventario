@@ -1,7 +1,7 @@
-import 'package:app_inventario/helpers/index.dart';
-import 'package:app_inventario/models/serialized/index.dart';
+import 'package:GRPInventario/helpers/index.dart';
+import 'package:GRPInventario/models/serialized/index.dart';
 
-import 'package:app_inventario/main.dart';
+import 'package:GRPInventario/main.dart';
 
 class Configuracao {
   Future salvaMascara(String mascara) async =>

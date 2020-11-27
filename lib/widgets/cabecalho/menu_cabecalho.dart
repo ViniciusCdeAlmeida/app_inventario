@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:app_inventario/screens/index.dart';
+import 'package:GRPInventario/screens/index.dart';
 
 class MenuDrawer extends StatelessWidget {
   void _configBens(BuildContext ctx) {

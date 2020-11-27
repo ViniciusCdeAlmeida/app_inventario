@@ -1,4 +1,4 @@
-import 'package:app_inventario/models/converters/index.dart';
+import 'package:GRPInventario/models/converters/index.dart';
 import 'package:moor/moor.dart';
 
 class InventarioBemPatrimonialDB extends Table {

@@ -5,11 +5,11 @@
 // // gestures. You can also use WidgetTester to find child widgets in the widget
 // // tree, read text, and verify that the values of widget properties are correct.
 
-// import 'package:app_inventario/models/serialized/conexao.dart';
-// // import 'package:app_inventario/providers/autenticacao.dart';
-// import 'package:app_inventario/providers/configuracao_conexao.dart';
-// import 'package:app_inventario/screens/configuracao/configuracao_conexao_edicao_tela.dart';
-// import 'package:app_inventario/screens/configuracao/configuracao_conexao_tela.dart';
+// import 'package:GRPInventario/models/serialized/conexao.dart';
+// // import 'package:GRPInventario/providers/autenticacao.dart';
+// import 'package:GRPInventario/providers/configuracao_conexao.dart';
+// import 'package:GRPInventario/screens/configuracao/configuracao_conexao_edicao_tela.dart';
+// import 'package:GRPInventario/screens/configuracao/configuracao_conexao_tela.dart';
 // import 'package:provider/provider.dart';
 // import 'package:flutter/material.dart';
 // import 'package:flutter_test/flutter_test.dart';

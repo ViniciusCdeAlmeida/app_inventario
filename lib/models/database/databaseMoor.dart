@@ -4,13 +4,13 @@ import 'package:sqflite/sqflite.dart' show getDatabasesPath;
 import 'package:moor/moor.dart';
 import 'package:moor/ffi.dart';
 
-import 'package:app_inventario/models/database/tables/index.dart';
+import 'package:GRPInventario/models/database/tables/index.dart';
 
-import 'package:app_inventario/models/serialized/index.dart';
+import 'package:GRPInventario/models/serialized/index.dart';
 
-import 'package:app_inventario/models/converters/index.dart';
+import 'package:GRPInventario/models/converters/index.dart';
 
-import 'package:app_inventario/models/database/daos/index.dart';
+import 'package:GRPInventario/models/database/daos/index.dart';
 
 part 'databaseMoor.g.dart';
 

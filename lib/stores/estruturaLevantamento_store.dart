@@ -1,5 +1,5 @@
-import 'package:app_inventario/models/serialized/estruturaInventario.dart';
-import 'package:app_inventario/providers/estruturaLevantamento.dart';
+import 'package:GRPInventario/models/serialized/estruturaInventario.dart';
+import 'package:GRPInventario/providers/estruturaLevantamento.dart';
 import 'package:mobx/mobx.dart';
 
 part 'estruturaLevantamento_store.g.dart';

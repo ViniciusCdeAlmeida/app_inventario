@@ -3,11 +3,11 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:moor_db_viewer/moor_db_viewer.dart';
 import 'package:provider/provider.dart';
 
-import 'package:app_inventario/main.dart';
-import 'package:app_inventario/screens/index.dart';
-import 'package:app_inventario/stores/index.dart';
-import 'package:app_inventario/widgets/index.dart';
-import 'package:app_inventario/custom/index.dart';
+import 'package:GRPInventario/main.dart';
+import 'package:GRPInventario/screens/index.dart';
+import 'package:GRPInventario/stores/index.dart';
+import 'package:GRPInventario/widgets/index.dart';
+import 'package:GRPInventario/custom/index.dart';
 
 class InventarioGeralTela extends StatefulWidget {
   static const routeName = '/inventarioGeralTela';

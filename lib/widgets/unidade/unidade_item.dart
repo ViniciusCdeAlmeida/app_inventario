@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:app_inventario/custom/index.dart';
-import 'package:app_inventario/models/serialized/index.dart';
-import 'package:app_inventario/models/telaArgumentos.dart';
-import 'package:app_inventario/screens/index.dart';
-import 'package:app_inventario/widgets/index.dart';
+import 'package:GRPInventario/custom/index.dart';
+import 'package:GRPInventario/models/serialized/index.dart';
+import 'package:GRPInventario/models/telaArgumentos.dart';
+import 'package:GRPInventario/screens/index.dart';
+import 'package:GRPInventario/widgets/index.dart';
 
 class UnidadeItem extends StatefulWidget {
   final EstruturaInventario unidade;

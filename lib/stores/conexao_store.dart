@@ -1,5 +1,5 @@
-import 'package:app_inventario/models/serialized/conexao.dart';
-import 'package:app_inventario/providers/conexoes.dart';
+import 'package:GRPInventario/models/serialized/conexao.dart';
+import 'package:GRPInventario/providers/conexoes.dart';
 
 import 'package:mobx/mobx.dart';
 

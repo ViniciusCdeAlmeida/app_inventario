@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:app_inventario/widgets/index.dart';
+import 'package:GRPInventario/widgets/index.dart';
 
-import 'package:app_inventario/models/telaArgumentos.dart';
-import 'package:app_inventario/providers/index.dart';
+import 'package:GRPInventario/models/telaArgumentos.dart';
+import 'package:GRPInventario/providers/index.dart';
 
 class InventarioSelecaoTela extends StatelessWidget {
   static const routeName = '/inventarioSelecaoTela';

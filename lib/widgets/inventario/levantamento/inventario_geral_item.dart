@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
-import 'package:app_inventario/models/serialized/index.dart';
-import 'package:app_inventario/models/telaArgumentos.dart';
-import 'package:app_inventario/screens/index.dart';
-import 'package:app_inventario/stores/index.dart';
+import 'package:GRPInventario/models/serialized/index.dart';
+import 'package:GRPInventario/models/telaArgumentos.dart';
+import 'package:GRPInventario/screens/index.dart';
+import 'package:GRPInventario/stores/index.dart';
 
 class Inventarioitem extends StatefulWidget {
   final Inventario levantamento;

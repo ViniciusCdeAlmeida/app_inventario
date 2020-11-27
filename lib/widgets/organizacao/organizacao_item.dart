@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:app_inventario/models/telaArgumentos.dart';
-import 'package:app_inventario/screens/index.dart';
+import 'package:GRPInventario/models/telaArgumentos.dart';
+import 'package:GRPInventario/screens/index.dart';
 
 class OrganizacaoItem extends StatefulWidget {
   final int id;

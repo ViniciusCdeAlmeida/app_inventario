@@ -1,5 +1,5 @@
-import 'package:app_inventario/models/serialized/login.dart';
-import 'package:app_inventario/providers/autenticacao.dart';
+import 'package:GRPInventario/models/serialized/login.dart';
+import 'package:GRPInventario/providers/autenticacao.dart';
 
 import 'package:mobx/mobx.dart';
 

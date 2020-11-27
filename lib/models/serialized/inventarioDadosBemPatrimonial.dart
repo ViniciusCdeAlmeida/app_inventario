@@ -1,6 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import 'package:app_inventario/models/serialized/index.dart';
+import 'package:GRPInventario/models/serialized/index.dart';
 
 part 'inventarioDadosBemPatrimonial.g.dart';
 

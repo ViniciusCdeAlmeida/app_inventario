@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'package:dio/dio.dart';
-import 'package:app_inventario/custom/index.dart';
-import 'package:app_inventario/main.dart';
-import 'package:app_inventario/models/serialized/index.dart';
-import 'package:app_inventario/helpers/index.dart';
+import 'package:GRPInventario/custom/index.dart';
+import 'package:GRPInventario/main.dart';
+import 'package:GRPInventario/models/serialized/index.dart';
+import 'package:GRPInventario/helpers/index.dart';
 
 class Autenticacao {
   int idOrganizacao;

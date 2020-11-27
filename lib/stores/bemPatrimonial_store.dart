@@ -1,10 +1,10 @@
-import 'package:app_inventario/models/serialized/bemPatrimonial.dart';
-import 'package:app_inventario/models/serialized/dominio.dart';
-import 'package:app_inventario/models/serialized/inventarioBemPatrimonial.dart';
-import 'package:app_inventario/providers/bensProvider.dart';
-import 'package:app_inventario/providers/estruturaLevantamento.dart';
-import 'package:app_inventario/providers/inicializacao.dart';
-import 'package:app_inventario/providers/inventarioBemPatrimonial.dart';
+import 'package:GRPInventario/models/serialized/bemPatrimonial.dart';
+import 'package:GRPInventario/models/serialized/dominio.dart';
+import 'package:GRPInventario/models/serialized/inventarioBemPatrimonial.dart';
+import 'package:GRPInventario/providers/bensProvider.dart';
+import 'package:GRPInventario/providers/estruturaLevantamento.dart';
+import 'package:GRPInventario/providers/inicializacao.dart';
+import 'package:GRPInventario/providers/inventarioBemPatrimonial.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
 

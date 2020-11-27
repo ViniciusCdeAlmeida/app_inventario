@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:app_inventario/screens/index.dart';
-import 'package:app_inventario/stores/index.dart';
+import 'package:GRPInventario/screens/index.dart';
+import 'package:GRPInventario/stores/index.dart';
 
 class ConexaoItem extends StatefulWidget {
   final int id;
