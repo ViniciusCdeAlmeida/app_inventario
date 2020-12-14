@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'package:GRPInventario/screens/index.dart';
+import 'package:GRPInventario/screens/index_screens.dart';
 
 class MenuDrawer extends StatelessWidget {
   void _configBens(BuildContext ctx) {
@@ -10,7 +10,7 @@ class MenuDrawer extends StatelessWidget {
         return GestureDetector(
           onTap: () {},
           behavior: HitTestBehavior.opaque,
-          child: ConfiguracaoBensTela(),
+          child: ConfiguracaoBensScreen(),
         );
       },
     );
@@ -25,7 +25,7 @@ class MenuDrawer extends StatelessWidget {
         return GestureDetector(
           onTap: () {},
           behavior: HitTestBehavior.opaque,
-          child: ConfiguracaoNumeroTela(),
+          child: ConfiguracaoNumeroScreen(),
         );
       },
     );
@@ -55,7 +55,7 @@ class MenuDrawer extends StatelessWidget {
             leading: Icon(Icons.phonelink_setup),
             title: const Text('Conexão'),
             onTap: () {
-              Navigator.of(context).pushNamed(ConexaoTela.routeName);
+              Navigator.of(context).pushNamed(ConexaoScreen.routeName);
             },
           ),
           Divider(),

@@ -39,12 +39,12 @@
 //         create: (ctx) => ConfiguracaoConexao(),
 //         child: MaterialApp(
 //           routes: {
-//             ConfiguracaoConexaoTela.routeName: (ctx) =>
-//                 ConfiguracaoConexaoTela(),
-//             ConfiguracaoConexaoEdicaoTela.routeName: (ctx) =>
-//                 ConfiguracaoConexaoEdicaoTela()
+//             ConfiguracaoConexaoScreen.routeName: (ctx) =>
+//                 ConfiguracaoConexaoScreen(),
+//             ConfiguracaoConexaoEdicaoScreen.routeName: (ctx) =>
+//                 ConfiguracaoConexaoEdicaoScreen()
 //           },
-//           home: ConfiguracaoConexaoEdicaoTela(),
+//           home: ConfiguracaoConexaoEdicaoScreen(),
 //         ),
 //       ),
 //     );

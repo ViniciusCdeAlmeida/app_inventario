@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:GRPInventario/models/database/databaseMoor.dart';
-import 'package:GRPInventario/providers/index.dart';
-import 'package:GRPInventario/screens/index.dart';
-import 'package:GRPInventario/custom/index.dart';
+import 'package:GRPInventario/database/database_moor.dart';
+import 'package:GRPInventario/providers/index_providers.dart';
+import 'package:GRPInventario/screens/index_screens.dart';
+import 'package:GRPInventario/utils/providers_utils.dart';
+import 'package:GRPInventario/utils/route_utils.dart';
 
 AppDatabase db;
 
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: providers(),
-      child: Consumer<Autenticacao>(
+      child: Consumer<AutenticacaoProvider>(
         builder: (ctx, autenticacaoDados, _) => MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'APP inventario',
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
             ),
           ),
           initialRoute: '/',
-          home: LoginTela(),
+          home: LoginScreen(),
           routes: rotas(),
         ),
       ),

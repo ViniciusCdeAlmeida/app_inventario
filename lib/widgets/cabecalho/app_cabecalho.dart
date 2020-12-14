@@ -1,4 +1,4 @@
-import 'package:GRPInventario/screens/index.dart';
+import 'package:GRPInventario/screens/index_screens.dart';
 import 'package:flutter/material.dart';
 
 class AppDrawer extends StatelessWidget {
@@ -17,7 +17,7 @@ class AppDrawer extends StatelessWidget {
             leading: Icon(Icons.account_balance),
             title: const Text('Unidades Gestoras'),
             onTap: () {
-              Navigator.of(context).pushNamed(OrganizacaoTela.routeName);
+              Navigator.of(context).pushNamed(OrganizacaoScreen.routeName);
             },
           ),
           Divider(),

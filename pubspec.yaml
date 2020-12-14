@@ -57,6 +57,7 @@ dev_dependencies:
   moor_generator: 
   build_runner: 
   json_serializable: 
+  dartdoc: 
   flutter_launcher_icons: any
 
 flutter_icons:
