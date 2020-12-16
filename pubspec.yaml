@@ -52,13 +52,17 @@ dependencies:
   flare_flutter: any
   
 dev_dependencies:
+  flutter_driver:
+    sdk: flutter
   flutter_test:
     sdk: flutter
   moor_generator: 
   build_runner: 
   json_serializable: 
   dartdoc: 
+  test: 
   flutter_launcher_icons: any
+
 
 flutter_icons:
   android: "launcher_icon"

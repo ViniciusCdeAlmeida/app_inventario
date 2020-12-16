@@ -11,12 +11,20 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         title: const Text('Inventário - GRP'),
+        leading: IconButton(
+            icon: Icon(
+              Icons.view_headline,
+              key: ValueKey('menuDrawer'),
+            ),
+            onPressed: () => _scaffoldKey.currentState.openDrawer()),
       ),
       drawer: MenuDrawer(),
       body: Stack(

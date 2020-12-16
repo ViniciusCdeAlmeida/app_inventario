@@ -3,18 +3,19 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 import 'package:GRPInventario/components/stores/index_store.dart';
 
-class ConfiguracaoBensScreen extends StatefulWidget {
+class ConfiguracaoDigitosScreen extends StatefulWidget {
   @override
-  _ConfiguracaoBensScreenState createState() => _ConfiguracaoBensScreenState();
+  _ConfiguracaoDigitosScreenState createState() =>
+      _ConfiguracaoDigitosScreenState();
 }
 
-class _ConfiguracaoBensScreenState extends State<ConfiguracaoBensScreen> {
+class _ConfiguracaoDigitosScreenState extends State<ConfiguracaoDigitosScreen> {
   final _form = GlobalKey<FormState>();
   // String _valorInicial;
   String _valorFinal;
   ConfiguracaoStore _configuracaoStore;
 
-  void _adicionarDigitosBens() {
+  void _adicionarDigitos() {
     final isValid = _form.currentState.validate();
     if (!isValid) {
       return;
@@ -74,7 +75,7 @@ class _ConfiguracaoBensScreenState extends State<ConfiguracaoBensScreen> {
                       Form(
                         key: _form,
                         child: TextFormField(
-                          key: Key('digitosText'),
+                          key: Key('digitosForm'),
                           initialValue: _configuracaoStore.mascara != null
                               ? _configuracaoStore.mascara.mascara
                               : null,
@@ -102,8 +103,9 @@ class _ConfiguracaoBensScreenState extends State<ConfiguracaoBensScreen> {
                       ),
                       FlatButton.icon(
                         icon: Icon(Icons.save),
-                        onPressed: _adicionarDigitosBens,
-                        label: Text('Salvar'),
+                        onPressed: _adicionarDigitos,
+                        key: ValueKey('digitosButton'),
+                        label: const Text('Salvar Digitos'),
                         color: Theme.of(context).primaryColor,
                         textColor: Theme.of(context).textTheme.button.color,
                       )

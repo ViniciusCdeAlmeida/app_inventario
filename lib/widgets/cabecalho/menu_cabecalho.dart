@@ -10,7 +10,7 @@ class MenuDrawer extends StatelessWidget {
         return GestureDetector(
           onTap: () {},
           behavior: HitTestBehavior.opaque,
-          child: ConfiguracaoBensScreen(),
+          child: ConfiguracaoDigitosScreen(),
         );
       },
     );
@@ -25,12 +25,13 @@ class MenuDrawer extends StatelessWidget {
         return GestureDetector(
           onTap: () {},
           behavior: HitTestBehavior.opaque,
-          child: ConfiguracaoNumeroScreen(),
+          child: ConfiguracaoPrefixoScreen(),
         );
       },
     );
   }
 
+  @visibleForTesting
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -43,12 +44,19 @@ class MenuDrawer extends StatelessWidget {
           ),
           Divider(),
           ListTile(
-            leading: Icon(Icons.home),
-            title: const Text('Home'),
+            leading: Icon(
+              Icons.home,
+              // key: ValueKey('homeDrawer'),
+            ),
+            title: const Text(
+              'Home',
+              // key: ValueKey('homeDrawer'),
+            ),
             onTap: () {
               Navigator.of(context).pop();
               Navigator.of(context).pushReplacementNamed('/');
             },
+            key: ValueKey('homeDrawer'),
           ),
           Divider(),
           ListTile(
@@ -57,14 +65,18 @@ class MenuDrawer extends StatelessWidget {
             onTap: () {
               Navigator.of(context).pushNamed(ConexaoScreen.routeName);
             },
+            key: ValueKey('conexaoDrawer'),
           ),
           Divider(),
           ListTile(
-            leading: Icon(Icons.info_outline),
+            leading: Icon(
+              Icons.info_outline,
+            ),
             title: const Text('Leitura de bens'),
             onTap: () {
               _configBens(context);
             },
+            key: ValueKey('digitosDrawer'),
           ),
           Divider(),
           ListTile(
@@ -73,9 +85,11 @@ class MenuDrawer extends StatelessWidget {
             onTap: () {
               _configNumero(context);
             },
+            key: ValueKey('novaLetraDrawer'),
           ),
           Divider(),
           ListTile(
+            key: ValueKey('rfidDrawer'),
             leading: Icon(Icons.bluetooth),
             title: const Text('Configuração RFID'),
             onTap: null,

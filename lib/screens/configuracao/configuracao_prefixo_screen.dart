@@ -3,13 +3,13 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:GRPInventario/components/stores/index_store.dart';
 
-class ConfiguracaoNumeroScreen extends StatefulWidget {
+class ConfiguracaoPrefixoScreen extends StatefulWidget {
   @override
-  _ConfiguracaoNumeroScreenState createState() =>
-      _ConfiguracaoNumeroScreenState();
+  _ConfiguracaoPrefixoScreenState createState() =>
+      _ConfiguracaoPrefixoScreenState();
 }
 
-class _ConfiguracaoNumeroScreenState extends State<ConfiguracaoNumeroScreen> {
+class _ConfiguracaoPrefixoScreenState extends State<ConfiguracaoPrefixoScreen> {
   final _form = GlobalKey<FormState>();
   // String _valorInicial;
   String _valorFinal;
@@ -57,7 +57,7 @@ class _ConfiguracaoNumeroScreenState extends State<ConfiguracaoNumeroScreen> {
               Form(
                 key: _form,
                 child: TextFormField(
-                  key: Key('digitoText'),
+                  key: ValueKey('novaLetraForm'),
                   initialValue: _configuracaoStore.prefixo != null
                       ? _configuracaoStore.prefixo.prefixo
                       : null,
@@ -74,8 +74,9 @@ class _ConfiguracaoNumeroScreenState extends State<ConfiguracaoNumeroScreen> {
               ),
               FlatButton.icon(
                 icon: Icon(Icons.save),
+                key: ValueKey('novaLetraButton'),
                 onPressed: _adicionarLetra,
-                label: Text('Salvar'),
+                label: const Text('Salvar'),
                 color: Theme.of(context).primaryColor,
                 textColor: Theme.of(context).textTheme.button.color,
               )
