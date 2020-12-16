@@ -13,7 +13,7 @@ class ConexaoDao extends DatabaseAccessor<AppDatabase> with _$ConexaoDaoMixin {
 
   ConexaoDao(this.db) : super(db);
 
-  Future<void> insertConexao(Conexao conexao) async => into(conexaoDB).insert(
+  Future<int> insertConexao(Conexao conexao) async => into(conexaoDB).insert(
         ConexaoDBCompanion(
           ativo: Value(conexao.ativo),
           nome: Value(conexao.nome),

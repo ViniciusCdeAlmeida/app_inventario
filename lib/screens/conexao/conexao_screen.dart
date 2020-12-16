@@ -31,6 +31,7 @@ class _ConexaoScreenState extends State<ConexaoScreen> {
         title: const Text('Configurações de conexão'),
         actions: <Widget>[
           IconButton(
+            key: ValueKey('conexaoAdicaoButton'),
             icon: Icon(Icons.add),
             onPressed: () {
               Navigator.of(context).pushNamed(ConexaoEdicaoScreen.routeName);

@@ -20,7 +20,9 @@ class _ConfiguracaoPrefixoScreenState extends State<ConfiguracaoPrefixoScreen> {
 
     if (_configuracaoStore.prefixo != null) {
       _configuracaoStore.salvarPrefixo(
-        prefixo: _valorFinal,
+        prefixo: _valorFinal == null
+            ? _configuracaoStore.prefixo.prefixo
+            : _valorFinal,
         existente: false,
         id: _configuracaoStore.prefixo.id,
       );
@@ -57,7 +59,7 @@ class _ConfiguracaoPrefixoScreenState extends State<ConfiguracaoPrefixoScreen> {
               Form(
                 key: _form,
                 child: TextFormField(
-                  key: ValueKey('novaLetraForm'),
+                  key: ValueKey('prefixoForm'),
                   initialValue: _configuracaoStore.prefixo != null
                       ? _configuracaoStore.prefixo.prefixo
                       : null,
@@ -74,7 +76,7 @@ class _ConfiguracaoPrefixoScreenState extends State<ConfiguracaoPrefixoScreen> {
               ),
               FlatButton.icon(
                 icon: Icon(Icons.save),
-                key: ValueKey('novaLetraButton'),
+                key: ValueKey('prefixoButton'),
                 onPressed: _adicionarLetra,
                 label: const Text('Salvar'),
                 color: Theme.of(context).primaryColor,

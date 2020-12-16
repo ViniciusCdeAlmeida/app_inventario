@@ -14,6 +14,11 @@ class _ConfiguracaoDigitosScreenState extends State<ConfiguracaoDigitosScreen> {
   // String _valorInicial;
   String _valorFinal;
   ConfiguracaoStore _configuracaoStore;
+  RegExp _numeric = RegExp(r'^-?[0-9]+$');
+
+  bool isNumeric(String str) {
+    return _numeric.hasMatch(str);
+  }
 
   void _adicionarDigitos() {
     final isValid = _form.currentState.validate();
@@ -25,7 +30,9 @@ class _ConfiguracaoDigitosScreenState extends State<ConfiguracaoDigitosScreen> {
 
     if (_configuracaoStore.mascara != null) {
       _configuracaoStore.salvarMascara(
-        mascara: _valorFinal,
+        mascara: _valorFinal == null
+            ? _configuracaoStore.mascara.mascara
+            : _valorFinal,
         existente: false,
         id: _configuracaoStore.mascara.id,
       );
@@ -92,11 +99,12 @@ class _ConfiguracaoDigitosScreenState extends State<ConfiguracaoDigitosScreen> {
                           },
                           textInputAction: TextInputAction.done,
                           validator: (value) {
-                            if (value != null &&
+                            if (!isNumeric(value)) {
+                              return 'Permitido somente números.';
+                            } else if (value != null &&
                                 value != "" &&
-                                (value.length < 5 || value.length > 16)) {
+                                (value.length < 6 || value.length > 16))
                               return 'Valor inserido não está entre 6 e 15.';
-                            }
                             return null;
                           },
                         ),

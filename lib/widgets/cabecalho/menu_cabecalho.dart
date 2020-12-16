@@ -85,7 +85,7 @@ class MenuDrawer extends StatelessWidget {
             onTap: () {
               _configNumero(context);
             },
-            key: ValueKey('novaLetraDrawer'),
+            key: ValueKey('prefixoDrawer'),
           ),
           Divider(),
           ListTile(

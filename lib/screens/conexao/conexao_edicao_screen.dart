@@ -76,6 +76,7 @@ class _ConexaoEdicaoScreenState extends State<ConexaoEdicaoScreen> {
         title: const Text('Conexão'),
         actions: <Widget>[
           IconButton(
+            key: ValueKey('conexaoConclusaoButton'),
             icon: Icon(Icons.save),
             onPressed: _salvarForm,
           ),
@@ -97,35 +98,7 @@ class _ConexaoEdicaoScreenState extends State<ConexaoEdicaoScreen> {
                   child: ListView(
                     children: <Widget>[
                       TextFormField(
-                        key: Key('urlText'),
-                        initialValue: _conexaoStore.conexao == null
-                            ? null
-                            : _conexaoStore.conexao.url,
-                        decoration: InputDecoration(
-                          labelText: 'Url',
-                          helperText: 'Informe a Url',
-                        ),
-                        textInputAction: TextInputAction.next,
-                        onFieldSubmitted: (_) {
-                          FocusScope.of(context).requestFocus(_urlFocusNode);
-                        },
-                        validator: (value) {
-                          if (value.isEmpty) {
-                            return 'Informe a URL.';
-                          }
-                          return null;
-                        },
-                        onSaved: (value) {
-                          _edicaoConexao = Conexao(
-                            url: value,
-                            nome: _edicaoConexao.nome,
-                            ativo: _edicaoConexao.ativo,
-                            id: _edicaoConexao.id,
-                          );
-                        },
-                      ),
-                      TextFormField(
-                        key: Key('nomeText'),
+                        key: ValueKey('conexaoAdicaoNomeForm'),
                         initialValue: _conexaoStore.conexao == null
                             ? null
                             : _conexaoStore.conexao.nome,
@@ -152,13 +125,41 @@ class _ConexaoEdicaoScreenState extends State<ConexaoEdicaoScreen> {
                           );
                         },
                       ),
+                      TextFormField(
+                        key: ValueKey('conexaoAdicaoUrlForm'),
+                        initialValue: _conexaoStore.conexao == null
+                            ? null
+                            : _conexaoStore.conexao.url,
+                        decoration: InputDecoration(
+                          labelText: 'Url',
+                          helperText: 'Informe a Url',
+                        ),
+                        textInputAction: TextInputAction.next,
+                        onFieldSubmitted: (_) {
+                          FocusScope.of(context).requestFocus(_urlFocusNode);
+                        },
+                        validator: (value) {
+                          if (value.isEmpty) {
+                            return 'Informe a URL.';
+                          }
+                          return null;
+                        },
+                        onSaved: (value) {
+                          _edicaoConexao = Conexao(
+                            url: value,
+                            nome: _edicaoConexao.nome,
+                            ativo: _edicaoConexao.ativo,
+                            id: _edicaoConexao.id,
+                          );
+                        },
+                      ),
                       Container(
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
                             Text("Ativa"),
                             Switch(
-                              key: Key('switchText'),
+                              key: ValueKey('conexaoAdicaoSwitchForm'),
                               value: _conexaoStore.conexao == null
                                   ? _valoresIniciais.ativo
                                   : _conexaoStore.conexao.ativo,

@@ -83,7 +83,9 @@ class AppDatabase extends _$AppDatabase {
           return m.createTable(prefixoDB);
         },
         beforeOpen: (usuarioDB) async {
-          if (usuarioDB.wasCreated) usuarioDao.insertUsuario();
+          if (usuarioDB.wasCreated) {
+            usuarioDao.insertUsuario();
+          }
         },
       );
 

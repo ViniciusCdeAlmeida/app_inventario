@@ -7,7 +7,7 @@ class ConexoesProvider {
     if (conexao.ativo) {
       await db.conexaoDao.updateDesativaConexoes();
     }
-    await db.conexaoDao.insertConexao(conexao);
+    return await db.conexaoDao.insertConexao(conexao);
   }
 
   Future<Conexao> buscarConexao(int id) async =>

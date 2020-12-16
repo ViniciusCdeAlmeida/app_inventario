@@ -69,6 +69,7 @@ class _ConexaoItemState extends State<ConexaoItem> {
         child: Row(
           children: <Widget>[
             IconButton(
+              key: ValueKey('conexaoEdicaoButton'),
               icon: Icon(Icons.edit),
               onPressed: () {
                 Navigator.of(context).pushNamed(ConexaoEdicaoScreen.routeName,
@@ -77,6 +78,7 @@ class _ConexaoItemState extends State<ConexaoItem> {
               color: Theme.of(context).primaryColor,
             ),
             IconButton(
+              key: ValueKey('conexaoExclusaoButton'),
               icon: Icon(Icons.delete),
               onPressed: () {
                 _conexaoStore.deletaConexao(widget.id);

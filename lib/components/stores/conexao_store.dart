@@ -96,17 +96,16 @@ abstract class _ConexaoStore with Store {
     try {
       if (existente) {
         _conexoesProvider.editaConexao(conexao).then((_) {
-          if (conexao.ativo) {
-            _conexoesObservable.clear();
-            buscarConexoes();
-          }
+          _conexoesObservable.clear();
+          buscarConexoes();
         });
       } else
-        _conexoesProvider.salvaConexao(conexao).then((_) {
+        _conexoesProvider.salvaConexao(conexao).then((idConexao) {
           if (conexao.ativo) {
             _conexoesObservable.clear();
             buscarConexoes();
           }
+          conexao.id = idConexao;
           _conexoesObservable.add(conexao);
         });
     } catch (e) {
