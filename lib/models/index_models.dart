@@ -1,3 +1,6 @@
+///{@category Models}
+library models;
+
 export 'serialized/bem_patrimonial_model.dart';
 export 'serialized/caracteristicas_model.dart';
 export 'serialized/conexao_model.dart';

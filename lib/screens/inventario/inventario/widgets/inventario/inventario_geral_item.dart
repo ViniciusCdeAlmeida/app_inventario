@@ -3,7 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 import 'package:GRPInventario/models/index_models.dart';
 import 'package:GRPInventario/screens/index_screens.dart';
-import 'package:GRPInventario/components/stores/index_store.dart';
+import 'package:GRPInventario/providers/stores/index_store.dart';
 
 class InventarioGeralItem extends StatefulWidget {
   final Inventario levantamento;

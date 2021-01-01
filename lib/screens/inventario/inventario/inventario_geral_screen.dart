@@ -5,7 +5,7 @@ import 'package:provider/provider.dart';
 
 import 'package:GRPInventario/main.dart';
 import 'package:GRPInventario/screens/index_screens.dart';
-import 'package:GRPInventario/components/stores/index_store.dart';
+import 'package:GRPInventario/providers/stores/index_store.dart';
 import 'package:GRPInventario/utils/index_utils.dart';
 import 'package:GRPInventario/widgets/index_widget.dart';
 import 'package:GRPInventario/screens/inventario/inventario/widgets/inventario/inventario_geral_item.dart';
@@ -191,7 +191,6 @@ class _InventarioGeralScreenState extends State<InventarioGeralScreen> {
                   value: Acoes.buscarEstruturas,
                 ),
                 const PopupMenuDivider(),
-                // ),
               ],
             ),
           ),

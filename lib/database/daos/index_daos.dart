@@ -1,3 +1,6 @@
+///{@category Daos}
+library daos;
+
 export 'bem_patrimoniais_dao.dart';
 export 'conexao_dao.dart';
 export 'configuracao_dao.dart';

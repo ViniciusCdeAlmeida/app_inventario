@@ -3,10 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:GRPInventario/models/index_models.dart';
 import 'package:GRPInventario/screens/index_screens.dart';
 
-// ignore: must_be_immutable
 class PrevistosBensItem extends StatefulWidget {
-  DadosBensPatrimoniais bemInventario;
-  String idInventarioEstrutura;
+  final DadosBensPatrimoniais bemInventario;
+  final String idInventarioEstrutura;
 
   PrevistosBensItem({@required this.bemInventario, this.idInventarioEstrutura});
 
@@ -16,7 +15,6 @@ class PrevistosBensItem extends StatefulWidget {
 
 class _PrevistosBensItemState extends State<PrevistosBensItem>
     with SingleTickerProviderStateMixin {
-  // Animation<Offset> _slideAnimation;
   Animation<double> _fadeAnimation;
   AnimationController _controller;
 
@@ -28,15 +26,6 @@ class _PrevistosBensItemState extends State<PrevistosBensItem>
         milliseconds: 1000,
       ),
     );
-    // _slideAnimation = Tween<Offset>(
-    //   begin: Offset(1.0, 0.0),
-    //   end: Offset(0, 0),
-    // ).animate(
-    //   CurvedAnimation(
-    //     parent: _controller,
-    //     curve: Curves.ease,
-    //   ),
-    // );
     _fadeAnimation = Tween<double>(
       begin: 0.0,
       end: 1.0,
@@ -48,7 +37,7 @@ class _PrevistosBensItemState extends State<PrevistosBensItem>
     );
     WidgetsBinding.instance.addPostFrameCallback((_) {
       // Future.delayed(const Duration(seconds: 2), () =>
-      _controller.forward();
+      if (mounted) _controller.forward();
       // );
     });
     super.initState();

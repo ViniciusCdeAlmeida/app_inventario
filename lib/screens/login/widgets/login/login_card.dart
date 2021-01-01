@@ -1,8 +1,9 @@
+import 'package:GRPInventario/utils/keys_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 import 'package:GRPInventario/screens/index_screens.dart';
-import 'package:GRPInventario/components/stores/index_store.dart';
+import 'package:GRPInventario/providers/stores/index_store.dart';
 import 'package:GRPInventario/widgets/index_widget.dart';
 
 class LoginCard extends StatefulWidget {
@@ -13,7 +14,7 @@ class LoginCard extends StatefulWidget {
 }
 
 class _LoginCardState extends State<LoginCard> {
-  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
+  GlobalKey<ScaffoldState> _scaffoldLoginCard = GlobalKey();
   final GlobalKey<FormState> _formKey = GlobalKey();
   final _passwordController = TextEditingController();
   LoginStore _loginStore;
@@ -60,7 +61,7 @@ class _LoginCardState extends State<LoginCard> {
     final deviceSize = MediaQuery.of(context).size;
     return Observer(
       builder: (_) => Card(
-        key: _scaffoldKey,
+        key: _scaffoldLoginCard,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10.0),
         ),
@@ -95,6 +96,7 @@ class _LoginCardState extends State<LoginCard> {
                       children: [
                         Text('Iniciar Offline?'),
                         IconButton(
+                            key: Key(Keys.loginOfflineButton),
                             icon: Icon(Icons.check_box,
                                 color: _loginStore.usuarioOffline
                                     ? Theme.of(context).toggleableActiveColor
@@ -126,6 +128,7 @@ class _LoginCardState extends State<LoginCard> {
 
   Widget showButton() {
     return RaisedButton(
+      key: Key(Keys.submitLoginButton),
       onPressed: _submit,
       child: Text('Logar'),
       shape: RoundedRectangleBorder(

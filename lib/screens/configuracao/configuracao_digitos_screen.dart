@@ -1,7 +1,8 @@
+import 'package:GRPInventario/utils/index_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
-import 'package:GRPInventario/components/stores/index_store.dart';
+import 'package:GRPInventario/providers/stores/index_store.dart';
 
 class ConfiguracaoDigitosScreen extends StatefulWidget {
   @override
@@ -11,7 +12,6 @@ class ConfiguracaoDigitosScreen extends StatefulWidget {
 
 class _ConfiguracaoDigitosScreenState extends State<ConfiguracaoDigitosScreen> {
   final _form = GlobalKey<FormState>();
-  // String _valorInicial;
   String _valorFinal;
   ConfiguracaoStore _configuracaoStore;
   RegExp _numeric = RegExp(r'^-?[0-9]+$');
@@ -82,7 +82,7 @@ class _ConfiguracaoDigitosScreenState extends State<ConfiguracaoDigitosScreen> {
                       Form(
                         key: _form,
                         child: TextFormField(
-                          key: Key('digitosForm'),
+                          key: Key(Keys.digitosForm),
                           initialValue: _configuracaoStore.mascara != null
                               ? _configuracaoStore.mascara.mascara
                               : null,
@@ -112,7 +112,7 @@ class _ConfiguracaoDigitosScreenState extends State<ConfiguracaoDigitosScreen> {
                       FlatButton.icon(
                         icon: Icon(Icons.save),
                         onPressed: _adicionarDigitos,
-                        key: ValueKey('digitosButton'),
+                        key: Key(Keys.digitosButton),
                         label: const Text('Salvar Digitos'),
                         color: Theme.of(context).primaryColor,
                         textColor: Theme.of(context).textTheme.button.color,

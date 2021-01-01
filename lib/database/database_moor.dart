@@ -11,6 +11,7 @@ import 'package:GRPInventario/database/daos/index_daos.dart';
 
 part 'database_moor.g.dart';
 
+/// Agrega todas as tabelas e daos para serem usados.
 @UseMoor(
   tables: [
     DominioDB,
@@ -38,49 +39,27 @@ part 'database_moor.g.dart';
     ConexaoDao
   ],
 )
-// _$AppDatabase is the name of the generated class
+
+/// Configurações do banco de dados MOOR
+///
+/// É usado o tipo LAZY para aumentar o desempenho da aplicação com a integração com o banco.
 class AppDatabase extends _$AppDatabase {
   AppDatabase()
-      : super(
-          (
-              // FlutterQueryExecutor.inDatabaseFolder(
-              // path: 'db.sqlite',
-              // // Good for debugging - prints SQL in the console
-              // // logStatements: true,
-              LazyDatabase(
-            () async {
-              final dbFolder = await getDatabasesPath();
-              final file = File(p.join(dbFolder, 'db.sqlite'));
-              return VmDatabase(file);
-            },
-          )),
-        );
+      : super((LazyDatabase(
+          () async {
+            final dbFolder = await getDatabasesPath();
+            final file = File(p.join(dbFolder, 'db.sqlite'));
+            return VmDatabase(file);
+          },
+        )));
 
-  // Bump this when changing tables and columns.
-  // Migrations will be covered in the next part.
   @override
-  int get schemaVersion => 16;
+  int get schemaVersion => 1;
 
   @override
   MigrationStrategy get migration => MigrationStrategy(
         onCreate: (Migrator m) {
           return m.createAll();
-        },
-        onUpgrade: (m, from, to) {
-          // m.createTable(unidadesGestorasDB);
-          // m.addColumn(dadosBemPatrimoniaisDB, dadosBemPatrimoniaisDB.inventarioBemPatrimonial);inventariado
-          // m.drop(inventarioBemPatrimonialDB);
-          // m.addColumn(inventarioBemPatrimonialDB,
-          //     inventarioBemPatrimonialDB.idDominioSituacaoFisica);
-          // m.addColumn(inventarioBemPatrimonialDB,
-          //     inventarioBemPatrimonialDB.idDominioStatus);
-          // m.addColumn(inventarioBemPatrimonialDB,
-          //     inventarioBemPatrimonialDB.idMaterial);
-          // m.addColumn(inventarioBemPatrimonialDB,
-          //     inventarioBemPatrimonialDB.idEstruturaOrganizacionalAtual);
-
-          m.createTable(mascaraNumeroPatrimonialDB);
-          return m.createTable(prefixoDB);
         },
         beforeOpen: (usuarioDB) async {
           if (usuarioDB.wasCreated) {
@@ -89,5 +68,13 @@ class AppDatabase extends _$AppDatabase {
         },
       );
 
+  /// Apaga os registros de tabela [table] especifica.
   void deleteTable(TableInfo table) => delete(table).go();
+
+  /// Apaga todos os registros de todas as [tables].
+  void deleteTables(List<TableInfo> tables) {
+    for (var table in tables) {
+      delete(table).go();
+    }
+  }
 }

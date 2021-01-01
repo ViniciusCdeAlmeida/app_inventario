@@ -4,6 +4,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'caracteristicas_model.g.dart';
 
+/// Modelo para o objeto [Caracteristicas].
 @JsonSerializable()
 class Caracteristicas {
   final int id;

@@ -3,6 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'inventario_model.g.dart';
 
+/// Modelo para o objeto [Inventario].
 @JsonSerializable()
 class Inventario {
   final int id;

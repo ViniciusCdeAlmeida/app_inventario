@@ -1,6 +1,8 @@
+///{@category Helpers}
 import 'package:GRPInventario/database/database_moor.dart';
 import 'package:GRPInventario/models/index_models.dart';
 
+/// Converte o resultado de uma lista de [ConexaoDBData] em uma lista [Conexao].
 List<Conexao> helperConexoes(List<ConexaoDBData> conexoes) {
   if (conexoes != null) {
     return List<Conexao>.from(
@@ -17,6 +19,7 @@ List<Conexao> helperConexoes(List<ConexaoDBData> conexoes) {
     return null;
 }
 
+/// Converte [ConexaoDBData] em um objeto [Conexao].
 Conexao helperConexao(ConexaoDBData conexao) {
   if (conexao != null) {
     return Conexao(

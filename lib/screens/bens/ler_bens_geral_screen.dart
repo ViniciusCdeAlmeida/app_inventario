@@ -5,14 +5,13 @@ import 'package:provider/provider.dart';
 import 'package:searchable_dropdown/searchable_dropdown.dart';
 
 import 'package:GRPInventario/models/index_models.dart';
-import 'package:GRPInventario/components/stores/index_store.dart';
+import 'package:GRPInventario/providers/stores/index_store.dart';
 import 'package:GRPInventario/providers/index_providers.dart';
 
-// ignore: must_be_immutable
 class LerBensGeralScreen extends StatefulWidget {
   static const routeName = '/LerBensGeralScreen';
-  int id;
-  EstruturaInventario estrutura;
+  final int id;
+  final EstruturaInventario estrutura;
 
   LerBensGeralScreen({this.id, this.estrutura});
 
@@ -223,7 +222,6 @@ class _LerBensGeralScreenState extends State<LerBensGeralScreen> {
                     )
                 ],
               ),
-              // drawer: AppDrawer(),
               body: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Form(

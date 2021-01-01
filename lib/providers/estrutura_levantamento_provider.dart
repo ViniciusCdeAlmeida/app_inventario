@@ -63,7 +63,7 @@ class EstruturaLevantamentoProvider {
 
   Future<BemPatrimonial> buscaBensPorId(String numeroBemPatrimonial,
       String idInventario, int idUnidade, String idBem) async {
-    _bemPatrimonial = helperDadoBemPatrimonial2(
+    _bemPatrimonial = helperBemPatrimonial(
         await db.bemPatrimoniaisDao.getBemPatrimonial(numeroBemPatrimonial));
     _bemPatrimonial.dadosBensPatrimoniais = helperDadoBemPatrimonial(
         await db.dadosBemPatrimoniaisDao.getDadosInventariar(

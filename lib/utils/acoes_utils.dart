@@ -20,3 +20,8 @@ enum AcoesUnidade {
   bensPrevistos,
   estatisticas,
 }
+
+enum AcoesMenu {
+  ordernarPor,
+  pesquisar,
+}

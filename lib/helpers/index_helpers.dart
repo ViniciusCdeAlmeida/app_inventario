@@ -1,3 +1,7 @@
+///{@category Helpers}
+
+library helpers;
+
 export 'bem_patrimonial_helper.dart';
 export 'conexao_helper.dart';
 export 'dados_bem_patrimonial_helper.dart';

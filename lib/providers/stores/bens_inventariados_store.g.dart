@@ -94,20 +94,20 @@ mixin _$BensInventariadoStore on _BensInventariadoStore, Store {
     });
   }
 
-  final _$enviandoBensColetadosAtom =
-      Atom(name: '_BensInventariadoStore.enviandoBensColetados');
+  final _$_enviandoBensColetadosAtom =
+      Atom(name: '_BensInventariadoStore._enviandoBensColetados');
 
   @override
-  bool get enviandoBensColetados {
-    _$enviandoBensColetadosAtom.reportRead();
-    return super.enviandoBensColetados;
+  bool get _enviandoBensColetados {
+    _$_enviandoBensColetadosAtom.reportRead();
+    return super._enviandoBensColetados;
   }
 
   @override
-  set enviandoBensColetados(bool value) {
-    _$enviandoBensColetadosAtom.reportWrite(value, super.enviandoBensColetados,
-        () {
-      super.enviandoBensColetados = value;
+  set _enviandoBensColetados(bool value) {
+    _$_enviandoBensColetadosAtom
+        .reportWrite(value, super._enviandoBensColetados, () {
+      super._enviandoBensColetados = value;
     });
   }
 
@@ -133,7 +133,6 @@ mixin _$BensInventariadoStore on _BensInventariadoStore, Store {
   String toString() {
     return '''
 buscandoBensColetados: ${buscandoBensColetados},
-enviandoBensColetados: ${enviandoBensColetados},
 bensInventariadoState: ${bensInventariadoState},
 bensInventariados: ${bensInventariados},
 existeBensParaEnviar: ${existeBensParaEnviar},

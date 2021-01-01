@@ -4,6 +4,7 @@ import 'package:mobx/mobx.dart';
 
 part 'dados_bens_patrimoniais_model.g.dart';
 
+/// Modelo para o objeto [DadosBensPatrimoniais].
 @JsonSerializable()
 class DadosBensPatrimoniais {
   final int id;

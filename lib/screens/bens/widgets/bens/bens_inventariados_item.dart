@@ -2,9 +2,8 @@ import 'package:GRPInventario/screens/bens/widgets/bens/bens_previstos_item.dart
 import 'package:flutter/material.dart';
 import 'package:GRPInventario/models/index_models.dart';
 
-// ignore: must_be_immutable
 class BensInventariadosItem extends StatefulWidget {
-  InventarioBemPatrimonial bemInventariado;
+  final InventarioBemPatrimonial bemInventariado;
 
   BensInventariadosItem({@required this.bemInventariado});
 

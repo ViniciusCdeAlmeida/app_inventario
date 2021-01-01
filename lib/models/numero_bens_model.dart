@@ -1,3 +1,5 @@
+
+/// Modelo para o objeto [NumeroBens].
 class NumeroBens {
   final String numero;
 

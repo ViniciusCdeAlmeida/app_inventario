@@ -1,0 +1,4322 @@
+{
+ "totalPages": 1,
+ "totalItens": 3,
+ "objects": [{
+  "id": 1444,
+  "dominioStatusInventarioEstrutura": {
+   "id": 442,
+   "nome": "ABERTO",
+   "descricao": "Aberto",
+   "chave": "tipoStatusInventarioEstrutura",
+   "codigo": 1
+  },
+  "estruturaOrganizacional": {
+   "id": 4082,
+   "nome": "EST LEV 1",
+   "sigla": "ESLE 1",
+   "codigo": "004079",
+   "codigoENome": "004079 - EST LEV 1"
+  },
+  "inventario": {
+   "id": 75,
+   "dominioTipoInventario": {
+    "id": 438,
+    "nome": "INICIAL",
+    "descricao": "Inicial",
+    "chave": "tipoInventario",
+    "codigo": 2
+   },
+   "dominioStatusInventario": {
+    "id": 432,
+    "nome": "EM_ANDAMENTO",
+    "descricao": "Em andamento",
+    "chave": "tipoStatusInventario",
+    "codigo": 2
+   },
+   "codigo": "2020000022",
+   "nome": "teste CI vinicius",
+   "codigoENome": "2020000022 - teste CI vinicius",
+   "idOrganizacao": 1
+  },
+  "dadosBensPatrimoniais": [{
+   "id": 123091,
+   "numeroPatrimonial": "040949",
+   "material": {
+    "id": 391,
+    "descricao": "GAVETEIRO - GAVETEIRO EM MADEIRA",
+    "codigoEDescricao": "1.30.2.21.2 - GAVETEIRO - GAVETEIRO EM MADEIRA"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 4082,
+    "nome": "EST LEV 1",
+    "sigla": "ESLE 1",
+    "codigo": "004079",
+    "codigoENome": "004079 - EST LEV 1"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 49166,
+   "numeroPatrimonialCompleto": "040949",
+   "idEstruturaOrganizacional": 4082
+  }, {
+   "id": 123092,
+   "numeroPatrimonial": "020042",
+   "material": {
+    "id": 389,
+    "descricao": "QUADRO - QUADRO DE AVISO",
+    "codigoEDescricao": "1.30.2.20.2 - QUADRO - QUADRO DE AVISO"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 4082,
+    "nome": "EST LEV 1",
+    "sigla": "ESLE 1",
+    "codigo": "004079",
+    "codigoENome": "004079 - EST LEV 1"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 59251,
+   "numeroPatrimonialCompleto": "020042",
+   "idEstruturaOrganizacional": 4082
+  }, {
+   "id": 123093,
+   "numeroPatrimonial": "051417",
+   "material": {
+    "id": 301,
+    "descricao": "MESA DE CENTRO - MESA DE CENTRO COM TAMPO EM VIDRO",
+    "codigoEDescricao": "1.30.1.11.1 - MESA DE CENTRO - MESA DE CENTRO COM TAMPO EM VIDRO"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 4082,
+    "nome": "EST LEV 1",
+    "sigla": "ESLE 1",
+    "codigo": "004079",
+    "codigoENome": "004079 - EST LEV 1"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 59289,
+   "numeroPatrimonialCompleto": "051417",
+   "idEstruturaOrganizacional": 4082
+  }, {
+   "id": 123094,
+   "numeroPatrimonial": "020008",
+   "material": {
+    "id": 374,
+    "descricao": "MESA PARA MAQUINA DE ESCREVER - MESA PARA MAQUINA DE ESCREVER EM MADEIRA SEM GAVETEIRO",
+    "codigoEDescricao": "1.30.2.15.2 - MESA PARA MAQUINA DE ESCREVER - MESA PARA MAQUINA DE ESCREVER EM MADEIRA SEM GAVETEIRO"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 4082,
+    "nome": "EST LEV 1",
+    "sigla": "ESLE 1",
+    "codigo": "004079",
+    "codigoENome": "004079 - EST LEV 1"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 60366,
+   "numeroPatrimonialCompleto": "020008",
+   "idEstruturaOrganizacional": 4082
+  }, {
+   "id": 123095,
+   "numeroPatrimonial": "020013",
+   "material": {
+    "id": 34,
+    "descricao": "BEBEDOURO DE AGUA - BEBEDOURO DE AGUA TIPO GARRAFAO",
+    "codigoEDescricao": "1.13.1.2.1 - BEBEDOURO DE AGUA - BEBEDOURO DE AGUA TIPO GARRAFAO"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 4082,
+    "nome": "EST LEV 1",
+    "sigla": "ESLE 1",
+    "codigo": "004079",
+    "codigoENome": "004079 - EST LEV 1"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 61600,
+   "numeroPatrimonialCompleto": "020013",
+   "idEstruturaOrganizacional": 4082
+  }, {
+   "id": 123096,
+   "numeroPatrimonial": "051409",
+   "material": {
+    "id": 370,
+    "descricao": "MESA PARA ESCRITORIO - MESA PARA ESCRITORIO EM MADEIRA COM 01 GAVETEIRO",
+    "codigoEDescricao": "1.30.2.14.4 - MESA PARA ESCRITORIO - MESA PARA ESCRITORIO EM MADEIRA COM 01 GAVETEIRO"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 4082,
+    "nome": "EST LEV 1",
+    "sigla": "ESLE 1",
+    "codigo": "004079",
+    "codigoENome": "004079 - EST LEV 1"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 61845,
+   "numeroPatrimonialCompleto": "051409",
+   "idEstruturaOrganizacional": 4082
+  }, {
+   "id": 123097,
+   "numeroPatrimonial": "040944",
+   "material": {
+    "id": 414,
+    "descricao": "MESA - MESA PARA IMPRESSORA",
+    "codigoEDescricao": "1.30.4.7.1 - MESA - MESA PARA IMPRESSORA"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 4082,
+    "nome": "EST LEV 1",
+    "sigla": "ESLE 1",
+    "codigo": "004079",
+    "codigoENome": "004079 - EST LEV 1"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 64165,
+   "numeroPatrimonialCompleto": "040944",
+   "idEstruturaOrganizacional": 4082
+  }, {
+   "id": 123098,
+   "numeroPatrimonial": "020010",
+   "material": {
+    "id": 357,
+    "descricao": "CADEIRA GIRATORIA - CADEIRA GIRATORIA EM TECIDO",
+    "codigoEDescricao": "1.30.2.10.3 - CADEIRA GIRATORIA - CADEIRA GIRATORIA EM TECIDO"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 4082,
+    "nome": "EST LEV 1",
+    "sigla": "ESLE 1",
+    "codigo": "004079",
+    "codigoENome": "004079 - EST LEV 1"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 68140,
+   "numeroPatrimonialCompleto": "020010",
+   "idEstruturaOrganizacional": 4082
+  }, {
+   "id": 123099,
+   "numeroPatrimonial": "051410",
+   "material": {
+    "id": 2271,
+    "descricao": "APARELHO TELEFONICO - APARELHO TELEFONICO DIGITAL",
+    "codigoEDescricao": "1.21.1.1.10 - APARELHO TELEFONICO - APARELHO TELEFONICO DIGITAL"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 4082,
+    "nome": "EST LEV 1",
+    "sigla": "ESLE 1",
+    "codigo": "004079",
+    "codigoENome": "004079 - EST LEV 1"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 70877,
+   "numeroPatrimonialCompleto": "051410",
+   "idEstruturaOrganizacional": 4082
+  }, {
+   "id": 123100,
+   "numeroPatrimonial": "051414",
+   "material": {
+    "id": 2577,
+    "descricao": "SOFA - SOFA 1 LUGAR",
+    "codigoEDescricao": "1.30.1.17.11 - SOFA - SOFA 1 LUGAR"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 4082,
+    "nome": "EST LEV 1",
+    "sigla": "ESLE 1",
+    "codigo": "004079",
+    "codigoENome": "004079 - EST LEV 1"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 79966,
+   "numeroPatrimonialCompleto": "051414",
+   "idEstruturaOrganizacional": 4082
+  }, {
+   "id": 123101,
+   "numeroPatrimonial": "013579",
+   "material": {
+    "id": 34,
+    "descricao": "BEBEDOURO DE AGUA - BEBEDOURO DE AGUA TIPO GARRAFAO",
+    "codigoEDescricao": "1.13.1.2.1 - BEBEDOURO DE AGUA - BEBEDOURO DE AGUA TIPO GARRAFAO"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 4082,
+    "nome": "EST LEV 1",
+    "sigla": "ESLE 1",
+    "codigo": "004079",
+    "codigoENome": "004079 - EST LEV 1"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 94090,
+   "numeroPatrimonialCompleto": "013579",
+   "idEstruturaOrganizacional": 4082
+  }, {
+   "id": 123102,
+   "numeroPatrimonial": "051408",
+   "material": {
+    "id": 4050,
+    "descricao": "WIRELESS - WIRELESS PARA REDE",
+    "codigoEDescricao": "1.29.3.52.4 - WIRELESS - WIRELESS PARA REDE"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 4082,
+    "nome": "EST LEV 1",
+    "sigla": "ESLE 1",
+    "codigo": "004079",
+    "codigoENome": "004079 - EST LEV 1"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 61293,
+   "numeroPatrimonialCompleto": "051408",
+   "idEstruturaOrganizacional": 4082
+  }, {
+   "id": 123103,
+   "numeroPatrimonial": "051405",
+   "material": {
+    "id": 4050,
+    "descricao": "WIRELESS - WIRELESS PARA REDE",
+    "codigoEDescricao": "1.29.3.52.4 - WIRELESS - WIRELESS PARA REDE"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 4082,
+    "nome": "EST LEV 1",
+    "sigla": "ESLE 1",
+    "codigo": "004079",
+    "codigoENome": "004079 - EST LEV 1"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 61295,
+   "numeroPatrimonialCompleto": "051405",
+   "idEstruturaOrganizacional": 4082
+  }, {
+   "id": 123104,
+   "numeroPatrimonial": "051406",
+   "material": {
+    "id": 4050,
+    "descricao": "WIRELESS - WIRELESS PARA REDE",
+    "codigoEDescricao": "1.29.3.52.4 - WIRELESS - WIRELESS PARA REDE"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 4082,
+    "nome": "EST LEV 1",
+    "sigla": "ESLE 1",
+    "codigo": "004079",
+    "codigoENome": "004079 - EST LEV 1"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 61305,
+   "numeroPatrimonialCompleto": "051406",
+   "idEstruturaOrganizacional": 4082
+  }, {
+   "id": 123105,
+   "numeroPatrimonial": "051411",
+   "material": {
+    "id": 1936,
+    "descricao": "MONITOR DE VIDEO - MONITOR DE VIDEO LCD",
+    "codigoEDescricao": "1.29.2.8.6 - MONITOR DE VIDEO - MONITOR DE VIDEO LCD"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 4082,
+    "nome": "EST LEV 1",
+    "sigla": "ESLE 1",
+    "codigo": "004079",
+    "codigoENome": "004079 - EST LEV 1"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 72910,
+   "numeroPatrimonialCompleto": "051411",
+   "idEstruturaOrganizacional": 4082
+  }, {
+   "id": 123106,
+   "numeroPatrimonial": "020011",
+   "material": {
+    "id": 4126,
+    "descricao": "MICROCOMPUTADOR - MICROCOMPUTADOR, HD 80GB, CO MOUSE ÓPTICO DE 2 BOTOES",
+    "codigoEDescricao": "1.29.1.21.7 - MICROCOMPUTADOR - MICROCOMPUTADOR, HD 80GB, CO MOUSE ÓPTICO DE 2 BOTOES"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 4082,
+    "nome": "EST LEV 1",
+    "sigla": "ESLE 1",
+    "codigo": "004079",
+    "codigoENome": "004079 - EST LEV 1"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 74359,
+   "numeroPatrimonialCompleto": "020011",
+   "idEstruturaOrganizacional": 4082
+  }, {
+   "id": 123107,
+   "numeroPatrimonial": "020009",
+   "material": {
+    "id": 34,
+    "descricao": "BEBEDOURO DE AGUA - BEBEDOURO DE AGUA TIPO GARRAFAO",
+    "codigoEDescricao": "1.13.1.2.1 - BEBEDOURO DE AGUA - BEBEDOURO DE AGUA TIPO GARRAFAO"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 354,
+    "nome": "DISPONIVEL",
+    "descricao": "Disponível",
+    "chave": "tipoStatusBem",
+    "codigo": 3
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 4082,
+    "nome": "EST LEV 1",
+    "sigla": "ESLE 1",
+    "codigo": "004079",
+    "codigoENome": "004079 - EST LEV 1"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 83214,
+   "numeroPatrimonialCompleto": "020009",
+   "idEstruturaOrganizacional": 4082
+  }, {
+   "id": 123108,
+   "numeroPatrimonial": "051415",
+   "material": {
+    "id": 2576,
+    "descricao": "SOFA - SOFA 2 LUGARES",
+    "codigoEDescricao": "1.30.1.17.10 - SOFA - SOFA 2 LUGARES"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 354,
+    "nome": "DISPONIVEL",
+    "descricao": "Disponível",
+    "chave": "tipoStatusBem",
+    "codigo": 3
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 4082,
+    "nome": "EST LEV 1",
+    "sigla": "ESLE 1",
+    "codigo": "004079",
+    "codigoENome": "004079 - EST LEV 1"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 80038,
+   "numeroPatrimonialCompleto": "051415",
+   "idEstruturaOrganizacional": 4082
+  }, {
+   "id": 123109,
+   "numeroPatrimonial": "051413",
+   "material": {
+    "id": 2575,
+    "descricao": "SOFA - SOFA 3 LUGARES",
+    "codigoEDescricao": "1.30.1.17.9 - SOFA - SOFA 3 LUGARES"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 354,
+    "nome": "DISPONIVEL",
+    "descricao": "Disponível",
+    "chave": "tipoStatusBem",
+    "codigo": 3
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 4082,
+    "nome": "EST LEV 1",
+    "sigla": "ESLE 1",
+    "codigo": "004079",
+    "codigoENome": "004079 - EST LEV 1"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 80073,
+   "numeroPatrimonialCompleto": "051413",
+   "idEstruturaOrganizacional": 4082
+  }],
+  "idInventario": 75
+ }, {
+  "id": 1445,
+  "dominioStatusInventarioEstrutura": {
+   "id": 442,
+   "nome": "ABERTO",
+   "descricao": "Aberto",
+   "chave": "tipoStatusInventarioEstrutura",
+   "codigo": 1
+  },
+  "estruturaOrganizacional": {
+   "id": 3704,
+   "nome": "EST LEV 2",
+   "sigla": "ESLE 2",
+   "codigo": "003701",
+   "codigoENome": "003701 - EST LEV 2"
+  },
+  "inventario": {
+   "id": 75,
+   "dominioTipoInventario": {
+    "id": 438,
+    "nome": "INICIAL",
+    "descricao": "Inicial",
+    "chave": "tipoInventario",
+    "codigo": 2
+   },
+   "dominioStatusInventario": {
+    "id": 432,
+    "nome": "EM_ANDAMENTO",
+    "descricao": "Em andamento",
+    "chave": "tipoStatusInventario",
+    "codigo": 2
+   },
+   "codigo": "2020000022",
+   "nome": "teste CI vinicius",
+   "codigoENome": "2020000022 - teste CI vinicius",
+   "idOrganizacao": 1
+  },
+  "dadosBensPatrimoniais": [{
+   "id": 123110,
+   "numeroPatrimonial": "013159",
+   "material": {
+    "id": 4119,
+    "descricao": "ESTABILIZADOR - ESTABILIZADOR DE VOLTAGEM",
+    "codigoEDescricao": "1.23.1.3.4 - ESTABILIZADOR - ESTABILIZADOR DE VOLTAGEM"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 3704,
+    "nome": "EST LEV 2",
+    "sigla": "ESLE 2",
+    "codigo": "003701",
+    "codigoENome": "003701 - EST LEV 2"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 62262,
+   "numeroPatrimonialCompleto": "013159",
+   "idEstruturaOrganizacional": 3704
+  }, {
+   "id": 123111,
+   "numeroPatrimonial": "013160",
+   "material": {
+    "id": 415,
+    "descricao": "MESA  DE MADEIRA",
+    "codigoEDescricao": "1.30.4.7.2 - MESA  DE MADEIRA"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 3704,
+    "nome": "EST LEV 2",
+    "sigla": "ESLE 2",
+    "codigo": "003701",
+    "codigoENome": "003701 - EST LEV 2"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 62738,
+   "numeroPatrimonialCompleto": "013160",
+   "idEstruturaOrganizacional": 3704
+  }, {
+   "id": 123112,
+   "numeroPatrimonial": "013157",
+   "material": {
+    "id": 415,
+    "descricao": "MESA  DE MADEIRA",
+    "codigoEDescricao": "1.30.4.7.2 - MESA  DE MADEIRA"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 3704,
+    "nome": "EST LEV 2",
+    "sigla": "ESLE 2",
+    "codigo": "003701",
+    "codigoENome": "003701 - EST LEV 2"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 62775,
+   "numeroPatrimonialCompleto": "013157",
+   "idEstruturaOrganizacional": 3704
+  }, {
+   "id": 123113,
+   "numeroPatrimonial": "047846",
+   "material": {
+    "id": 408,
+    "descricao": "ESTANTE - ESTANTE EM MADEIRA",
+    "codigoEDescricao": "1.30.3.4.2 - ESTANTE - ESTANTE EM MADEIRA"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 3704,
+    "nome": "EST LEV 2",
+    "sigla": "ESLE 2",
+    "codigo": "003701",
+    "codigoENome": "003701 - EST LEV 2"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 63086,
+   "numeroPatrimonialCompleto": "047846",
+   "idEstruturaOrganizacional": 3704
+  }, {
+   "id": 123114,
+   "numeroPatrimonial": "047837",
+   "material": {
+    "id": 372,
+    "descricao": "MESA PARA ESCRITORIO - MESA PARA ESCRITORIO EM MADEIRA SEM GAVETEIRO",
+    "codigoEDescricao": "1.30.2.14.6 - MESA PARA ESCRITORIO - MESA PARA ESCRITORIO EM MADEIRA SEM GAVETEIRO"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 3704,
+    "nome": "EST LEV 2",
+    "sigla": "ESLE 2",
+    "codigo": "003701",
+    "codigoENome": "003701 - EST LEV 2"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 63959,
+   "numeroPatrimonialCompleto": "047837",
+   "idEstruturaOrganizacional": 3704
+  }, {
+   "id": 123115,
+   "numeroPatrimonial": "013154",
+   "material": {
+    "id": 382,
+    "descricao": "POLTRONA FIXA - POLTRONA FIXA EM TECIDO",
+    "codigoEDescricao": "1.30.2.18.3 - POLTRONA FIXA - POLTRONA FIXA EM TECIDO"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 3704,
+    "nome": "EST LEV 2",
+    "sigla": "ESLE 2",
+    "codigo": "003701",
+    "codigoENome": "003701 - EST LEV 2"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 64786,
+   "numeroPatrimonialCompleto": "013154",
+   "idEstruturaOrganizacional": 3704
+  }, {
+   "id": 123116,
+   "numeroPatrimonial": "013155",
+   "material": {
+    "id": 382,
+    "descricao": "POLTRONA FIXA - POLTRONA FIXA EM TECIDO",
+    "codigoEDescricao": "1.30.2.18.3 - POLTRONA FIXA - POLTRONA FIXA EM TECIDO"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 3704,
+    "nome": "EST LEV 2",
+    "sigla": "ESLE 2",
+    "codigo": "003701",
+    "codigoENome": "003701 - EST LEV 2"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 64890,
+   "numeroPatrimonialCompleto": "013155",
+   "idEstruturaOrganizacional": 3704
+  }, {
+   "id": 123117,
+   "numeroPatrimonial": "047836",
+   "material": {
+    "id": 3973,
+    "descricao": "GAVETEIRO - GAVETEIRO VOLANTE",
+    "codigoEDescricao": "1.30.2.21.3 - GAVETEIRO - GAVETEIRO VOLANTE"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 3704,
+    "nome": "EST LEV 2",
+    "sigla": "ESLE 2",
+    "codigo": "003701",
+    "codigoENome": "003701 - EST LEV 2"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 68270,
+   "numeroPatrimonialCompleto": "047836",
+   "idEstruturaOrganizacional": 3704
+  }, {
+   "id": 123118,
+   "numeroPatrimonial": "047844",
+   "material": {
+    "id": 3973,
+    "descricao": "GAVETEIRO - GAVETEIRO VOLANTE",
+    "codigoEDescricao": "1.30.2.21.3 - GAVETEIRO - GAVETEIRO VOLANTE"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 3704,
+    "nome": "EST LEV 2",
+    "sigla": "ESLE 2",
+    "codigo": "003701",
+    "codigoENome": "003701 - EST LEV 2"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 69097,
+   "numeroPatrimonialCompleto": "047844",
+   "idEstruturaOrganizacional": 3704
+  }, {
+   "id": 123119,
+   "numeroPatrimonial": "047838",
+   "material": {
+    "id": 2271,
+    "descricao": "APARELHO TELEFONICO - APARELHO TELEFONICO DIGITAL",
+    "codigoEDescricao": "1.21.1.1.10 - APARELHO TELEFONICO - APARELHO TELEFONICO DIGITAL"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 3704,
+    "nome": "EST LEV 2",
+    "sigla": "ESLE 2",
+    "codigo": "003701",
+    "codigoENome": "003701 - EST LEV 2"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 70454,
+   "numeroPatrimonialCompleto": "047838",
+   "idEstruturaOrganizacional": 3704
+  }, {
+   "id": 123120,
+   "numeroPatrimonial": "064255",
+   "material": {
+    "id": 478,
+    "descricao": "LIVROS -",
+    "codigoEDescricao": "1.35.1.4.2 - LIVROS -"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 3704,
+    "nome": "EST LEV 2",
+    "sigla": "ESLE 2",
+    "codigo": "003701",
+    "codigoENome": "003701 - EST LEV 2"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 75924,
+   "numeroPatrimonialCompleto": "064255",
+   "idEstruturaOrganizacional": 3704
+  }, {
+   "id": 123121,
+   "numeroPatrimonial": "047841",
+   "material": {
+    "id": 1936,
+    "descricao": "MONITOR DE VIDEO - MONITOR DE VIDEO LCD",
+    "codigoEDescricao": "1.29.2.8.6 - MONITOR DE VIDEO - MONITOR DE VIDEO LCD"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 3704,
+    "nome": "EST LEV 2",
+    "sigla": "ESLE 2",
+    "codigo": "003701",
+    "codigoENome": "003701 - EST LEV 2"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 72388,
+   "numeroPatrimonialCompleto": "047841",
+   "idEstruturaOrganizacional": 3704
+  }, {
+   "id": 123122,
+   "numeroPatrimonial": "L0478427",
+   "material": {
+    "id": 1936,
+    "descricao": "MONITOR DE VIDEO - MONITOR DE VIDEO LCD",
+    "codigoEDescricao": "1.29.2.8.6 - MONITOR DE VIDEO - MONITOR DE VIDEO LCD"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 3704,
+    "nome": "EST LEV 2",
+    "sigla": "ESLE 2",
+    "codigo": "003701",
+    "codigoENome": "003701 - EST LEV 2"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 72544,
+   "numeroPatrimonialCompleto": "L0478427",
+   "idEstruturaOrganizacional": 3704
+  }, {
+   "id": 123123,
+   "numeroPatrimonial": "047840",
+   "material": {
+    "id": 1936,
+    "descricao": "MONITOR DE VIDEO - MONITOR DE VIDEO LCD",
+    "codigoEDescricao": "1.29.2.8.6 - MONITOR DE VIDEO - MONITOR DE VIDEO LCD"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 3704,
+    "nome": "EST LEV 2",
+    "sigla": "ESLE 2",
+    "codigo": "003701",
+    "codigoENome": "003701 - EST LEV 2"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 72791,
+   "numeroPatrimonialCompleto": "047840",
+   "idEstruturaOrganizacional": 3704
+  }, {
+   "id": 123124,
+   "numeroPatrimonial": "013153",
+   "material": {
+    "id": 4126,
+    "descricao": "MICROCOMPUTADOR - MICROCOMPUTADOR, HD 80GB, CO MOUSE ÓPTICO DE 2 BOTOES",
+    "codigoEDescricao": "1.29.1.21.7 - MICROCOMPUTADOR - MICROCOMPUTADOR, HD 80GB, CO MOUSE ÓPTICO DE 2 BOTOES"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 3704,
+    "nome": "EST LEV 2",
+    "sigla": "ESLE 2",
+    "codigo": "003701",
+    "codigoENome": "003701 - EST LEV 2"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 74057,
+   "numeroPatrimonialCompleto": "013153",
+   "idEstruturaOrganizacional": 3704
+  }, {
+   "id": 123125,
+   "numeroPatrimonial": "013158",
+   "material": {
+    "id": 4126,
+    "descricao": "MICROCOMPUTADOR - MICROCOMPUTADOR, HD 80GB, CO MOUSE ÓPTICO DE 2 BOTOES",
+    "codigoEDescricao": "1.29.1.21.7 - MICROCOMPUTADOR - MICROCOMPUTADOR, HD 80GB, CO MOUSE ÓPTICO DE 2 BOTOES"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 3704,
+    "nome": "EST LEV 2",
+    "sigla": "ESLE 2",
+    "codigo": "003701",
+    "codigoENome": "003701 - EST LEV 2"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 74070,
+   "numeroPatrimonialCompleto": "013158",
+   "idEstruturaOrganizacional": 3704
+  }, {
+   "id": 123126,
+   "numeroPatrimonial": "010193",
+   "material": {
+    "id": 38,
+    "descricao": "GELADEIRA - GELADEIRA TIPO FRIGOBAR",
+    "codigoEDescricao": "1.13.1.4.2 - GELADEIRA - GELADEIRA TIPO FRIGOBAR"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 3704,
+    "nome": "EST LEV 2",
+    "sigla": "ESLE 2",
+    "codigo": "003701",
+    "codigoENome": "003701 - EST LEV 2"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 15783,
+   "numeroPatrimonialCompleto": "010193",
+   "idEstruturaOrganizacional": 3704
+  }, {
+   "id": 123127,
+   "numeroPatrimonial": "047839",
+   "material": {
+    "id": 3086,
+    "descricao": "MONITOR COLORIDO - MONITOR COLORIDO TELA PLANA DE 22 POLEGADAS",
+    "codigoEDescricao": "1.29.2.19.2 - MONITOR COLORIDO - MONITOR COLORIDO TELA PLANA DE 22 POLEGADAS"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 354,
+    "nome": "DISPONIVEL",
+    "descricao": "Disponível",
+    "chave": "tipoStatusBem",
+    "codigo": 3
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 3704,
+    "nome": "EST LEV 2",
+    "sigla": "ESLE 2",
+    "codigo": "003701",
+    "codigoENome": "003701 - EST LEV 2"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 36710,
+   "numeroPatrimonialCompleto": "047839",
+   "idEstruturaOrganizacional": 3704
+  }, {
+   "id": 123128,
+   "numeroPatrimonial": "013151",
+   "material": {
+    "id": 4021,
+    "descricao": "POLTRONA GIRATORIA - POLTRONA GIRATORIA ESPALDAR ALTO",
+    "codigoEDescricao": "1.30.2.19.8 - POLTRONA GIRATORIA - POLTRONA GIRATORIA ESPALDAR ALTO"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 354,
+    "nome": "DISPONIVEL",
+    "descricao": "Disponível",
+    "chave": "tipoStatusBem",
+    "codigo": 3
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 3704,
+    "nome": "EST LEV 2",
+    "sigla": "ESLE 2",
+    "codigo": "003701",
+    "codigoENome": "003701 - EST LEV 2"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 81716,
+   "numeroPatrimonialCompleto": "013151",
+   "idEstruturaOrganizacional": 3704
+  }, {
+   "id": 123129,
+   "numeroPatrimonial": "013152",
+   "material": {
+    "id": 4021,
+    "descricao": "POLTRONA GIRATORIA - POLTRONA GIRATORIA ESPALDAR ALTO",
+    "codigoEDescricao": "1.30.2.19.8 - POLTRONA GIRATORIA - POLTRONA GIRATORIA ESPALDAR ALTO"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 354,
+    "nome": "DISPONIVEL",
+    "descricao": "Disponível",
+    "chave": "tipoStatusBem",
+    "codigo": 3
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 3704,
+    "nome": "EST LEV 2",
+    "sigla": "ESLE 2",
+    "codigo": "003701",
+    "codigoENome": "003701 - EST LEV 2"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 81722,
+   "numeroPatrimonialCompleto": "013152",
+   "idEstruturaOrganizacional": 3704
+  }, {
+   "id": 123130,
+   "numeroPatrimonial": "013156",
+   "material": {
+    "id": 2576,
+    "descricao": "SOFA - SOFA 2 LUGARES",
+    "codigoEDescricao": "1.30.1.17.10 - SOFA - SOFA 2 LUGARES"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 354,
+    "nome": "DISPONIVEL",
+    "descricao": "Disponível",
+    "chave": "tipoStatusBem",
+    "codigo": 3
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 3704,
+    "nome": "EST LEV 2",
+    "sigla": "ESLE 2",
+    "codigo": "003701",
+    "codigoENome": "003701 - EST LEV 2"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 80015,
+   "numeroPatrimonialCompleto": "013156",
+   "idEstruturaOrganizacional": 3704
+  }],
+  "idInventario": 75
+ }, {
+  "id": 1446,
+  "dominioStatusInventarioEstrutura": {
+   "id": 442,
+   "nome": "ABERTO",
+   "descricao": "Aberto",
+   "chave": "tipoStatusInventarioEstrutura",
+   "codigo": 1
+  },
+  "estruturaOrganizacional": {
+   "id": 5037,
+   "nome": "EST LEV 3",
+   "sigla": "ESLE 3",
+   "codigo": "005034",
+   "codigoENome": "005034 - EST LEV 3"
+  },
+  "inventario": {
+   "id": 75,
+   "dominioTipoInventario": {
+    "id": 438,
+    "nome": "INICIAL",
+    "descricao": "Inicial",
+    "chave": "tipoInventario",
+    "codigo": 2
+   },
+   "dominioStatusInventario": {
+    "id": 432,
+    "nome": "EM_ANDAMENTO",
+    "descricao": "Em andamento",
+    "chave": "tipoStatusInventario",
+    "codigo": 2
+   },
+   "codigo": "2020000022",
+   "nome": "teste CI vinicius",
+   "codigoENome": "2020000022 - teste CI vinicius",
+   "idOrganizacao": 1
+  },
+  "dadosBensPatrimoniais": [{
+   "id": 123131,
+   "numeroPatrimonial": "012916",
+   "material": {
+    "id": 3073,
+    "descricao": "MICROCOMPUTADOR - HD 320GB, CM MOUSE ÓPTICO, DE 2 BOTOES.",
+    "codigoEDescricao": "1.29.1.16.9 - MICROCOMPUTADOR - HD 320GB, CM MOUSE ÓPTICO, DE 2 BOTOES."
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 36150,
+   "numeroPatrimonialCompleto": "012916",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123132,
+   "numeroPatrimonial": "043556",
+   "material": {
+    "id": 1936,
+    "descricao": "MONITOR DE VIDEO - MONITOR DE VIDEO LCD",
+    "codigoEDescricao": "1.29.2.8.6 - MONITOR DE VIDEO - MONITOR DE VIDEO LCD"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 36299,
+   "numeroPatrimonialCompleto": "043556",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123133,
+   "numeroPatrimonial": "043580",
+   "material": {
+    "id": 1936,
+    "descricao": "MONITOR DE VIDEO - MONITOR DE VIDEO LCD",
+    "codigoEDescricao": "1.29.2.8.6 - MONITOR DE VIDEO - MONITOR DE VIDEO LCD"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 36357,
+   "numeroPatrimonialCompleto": "043580",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123134,
+   "numeroPatrimonial": "043565",
+   "material": {
+    "id": 1936,
+    "descricao": "MONITOR DE VIDEO - MONITOR DE VIDEO LCD",
+    "codigoEDescricao": "1.29.2.8.6 - MONITOR DE VIDEO - MONITOR DE VIDEO LCD"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 36437,
+   "numeroPatrimonialCompleto": "043565",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123135,
+   "numeroPatrimonial": "043575",
+   "material": {
+    "id": 3086,
+    "descricao": "MONITOR COLORIDO - MONITOR COLORIDO TELA PLANA DE 22 POLEGADAS",
+    "codigoEDescricao": "1.29.2.19.2 - MONITOR COLORIDO - MONITOR COLORIDO TELA PLANA DE 22 POLEGADAS"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 36764,
+   "numeroPatrimonialCompleto": "043575",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123136,
+   "numeroPatrimonial": "043555",
+   "material": {
+    "id": 3086,
+    "descricao": "MONITOR COLORIDO - MONITOR COLORIDO TELA PLANA DE 22 POLEGADAS",
+    "codigoEDescricao": "1.29.2.19.2 - MONITOR COLORIDO - MONITOR COLORIDO TELA PLANA DE 22 POLEGADAS"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 36846,
+   "numeroPatrimonialCompleto": "043555",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123137,
+   "numeroPatrimonial": "043559",
+   "material": {
+    "id": 3086,
+    "descricao": "MONITOR COLORIDO - MONITOR COLORIDO TELA PLANA DE 22 POLEGADAS",
+    "codigoEDescricao": "1.29.2.19.2 - MONITOR COLORIDO - MONITOR COLORIDO TELA PLANA DE 22 POLEGADAS"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 36990,
+   "numeroPatrimonialCompleto": "043559",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123138,
+   "numeroPatrimonial": "012913",
+   "material": {
+    "id": 357,
+    "descricao": "CADEIRA GIRATORIA - CADEIRA GIRATORIA EM TECIDO",
+    "codigoEDescricao": "1.30.2.10.3 - CADEIRA GIRATORIA - CADEIRA GIRATORIA EM TECIDO"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 37606,
+   "numeroPatrimonialCompleto": "012913",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123139,
+   "numeroPatrimonial": "012906",
+   "material": {
+    "id": 3073,
+    "descricao": "MICROCOMPUTADOR - HD 320GB, CM MOUSE ÓPTICO, DE 2 BOTOES.",
+    "codigoEDescricao": "1.29.1.16.9 - MICROCOMPUTADOR - HD 320GB, CM MOUSE ÓPTICO, DE 2 BOTOES."
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 38116,
+   "numeroPatrimonialCompleto": "012906",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123140,
+   "numeroPatrimonial": "012917",
+   "material": {
+    "id": 3073,
+    "descricao": "MICROCOMPUTADOR - HD 320GB, CM MOUSE ÓPTICO, DE 2 BOTOES.",
+    "codigoEDescricao": "1.29.1.16.9 - MICROCOMPUTADOR - HD 320GB, CM MOUSE ÓPTICO, DE 2 BOTOES."
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 38123,
+   "numeroPatrimonialCompleto": "012917",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123141,
+   "numeroPatrimonial": "012914",
+   "material": {
+    "id": 3073,
+    "descricao": "MICROCOMPUTADOR - HD 320GB, CM MOUSE ÓPTICO, DE 2 BOTOES.",
+    "codigoEDescricao": "1.29.1.16.9 - MICROCOMPUTADOR - HD 320GB, CM MOUSE ÓPTICO, DE 2 BOTOES."
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 38253,
+   "numeroPatrimonialCompleto": "012914",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123142,
+   "numeroPatrimonial": "012911",
+   "material": {
+    "id": 3073,
+    "descricao": "MICROCOMPUTADOR - HD 320GB, CM MOUSE ÓPTICO, DE 2 BOTOES.",
+    "codigoEDescricao": "1.29.1.16.9 - MICROCOMPUTADOR - HD 320GB, CM MOUSE ÓPTICO, DE 2 BOTOES."
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 38410,
+   "numeroPatrimonialCompleto": "012911",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123143,
+   "numeroPatrimonial": "037727",
+   "material": {
+    "id": 1936,
+    "descricao": "MONITOR DE VIDEO - MONITOR DE VIDEO LCD",
+    "codigoEDescricao": "1.29.2.8.6 - MONITOR DE VIDEO - MONITOR DE VIDEO LCD"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 38479,
+   "numeroPatrimonialCompleto": "037727",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123144,
+   "numeroPatrimonial": "043573",
+   "material": {
+    "id": 1936,
+    "descricao": "MONITOR DE VIDEO - MONITOR DE VIDEO LCD",
+    "codigoEDescricao": "1.29.2.8.6 - MONITOR DE VIDEO - MONITOR DE VIDEO LCD"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 38495,
+   "numeroPatrimonialCompleto": "043573",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123145,
+   "numeroPatrimonial": "043577",
+   "material": {
+    "id": 1936,
+    "descricao": "MONITOR DE VIDEO - MONITOR DE VIDEO LCD",
+    "codigoEDescricao": "1.29.2.8.6 - MONITOR DE VIDEO - MONITOR DE VIDEO LCD"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 38609,
+   "numeroPatrimonialCompleto": "043577",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123146,
+   "numeroPatrimonial": "043558",
+   "material": {
+    "id": 1936,
+    "descricao": "MONITOR DE VIDEO - MONITOR DE VIDEO LCD",
+    "codigoEDescricao": "1.29.2.8.6 - MONITOR DE VIDEO - MONITOR DE VIDEO LCD"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 38625,
+   "numeroPatrimonialCompleto": "043558",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123147,
+   "numeroPatrimonial": "012910",
+   "material": {
+    "id": 47,
+    "descricao": "UMIDIFICADOR - UMIDIFICADOR DE AR",
+    "codigoEDescricao": "1.13.3.5.3 - UMIDIFICADOR - UMIDIFICADOR DE AR"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 39497,
+   "numeroPatrimonialCompleto": "012910",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123148,
+   "numeroPatrimonial": "043549",
+   "material": {
+    "id": 515,
+    "descricao": "ARMÁRIO EM MADEIRA",
+    "codigoEDescricao": "1.42.3.1.5 - ARMÁRIO EM MADEIRA"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 40929,
+   "numeroPatrimonialCompleto": "043549",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123149,
+   "numeroPatrimonial": "N033651",
+   "material": {
+    "id": 3101,
+    "descricao": "NOTEBOOK - NOTEBOOK",
+    "codigoEDescricao": "1.29.1.23.8 - NOTEBOOK - NOTEBOOK"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 41333,
+   "numeroPatrimonialCompleto": "N033651",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123150,
+   "numeroPatrimonial": "012909",
+   "material": {
+    "id": 2626,
+    "descricao": "SUPORTE EM AÇO - SUPORTE EM AÇO PARA CPU",
+    "codigoEDescricao": "1.30.4.11.2 - SUPORTE EM AÇO - SUPORTE EM AÇO PARA CPU"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 41575,
+   "numeroPatrimonialCompleto": "012909",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123151,
+   "numeroPatrimonial": "043560",
+   "material": {
+    "id": 414,
+    "descricao": "MESA - MESA PARA IMPRESSORA",
+    "codigoEDescricao": "1.30.4.7.1 - MESA - MESA PARA IMPRESSORA"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 42397,
+   "numeroPatrimonialCompleto": "043560",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123152,
+   "numeroPatrimonial": "043542",
+   "material": {
+    "id": 515,
+    "descricao": "ARMÁRIO EM MADEIRA",
+    "codigoEDescricao": "1.42.3.1.5 - ARMÁRIO EM MADEIRA"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 42777,
+   "numeroPatrimonialCompleto": "043542",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123153,
+   "numeroPatrimonial": "043570",
+   "material": {
+    "id": 391,
+    "descricao": "GAVETEIRO - GAVETEIRO EM MADEIRA",
+    "codigoEDescricao": "1.30.2.21.2 - GAVETEIRO - GAVETEIRO EM MADEIRA"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 44653,
+   "numeroPatrimonialCompleto": "043570",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123154,
+   "numeroPatrimonial": "012903",
+   "material": {
+    "id": 388,
+    "descricao": "POLTRONA GIRATORIA - POLTRONA GIRATORIA COM BRAÇO",
+    "codigoEDescricao": "1.30.2.19.5 - POLTRONA GIRATORIA - POLTRONA GIRATORIA COM BRAÇO"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 45401,
+   "numeroPatrimonialCompleto": "012903",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123155,
+   "numeroPatrimonial": "012907",
+   "material": {
+    "id": 388,
+    "descricao": "POLTRONA GIRATORIA - POLTRONA GIRATORIA COM BRAÇO",
+    "codigoEDescricao": "1.30.2.19.5 - POLTRONA GIRATORIA - POLTRONA GIRATORIA COM BRAÇO"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 45647,
+   "numeroPatrimonialCompleto": "012907",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123156,
+   "numeroPatrimonial": "012902",
+   "material": {
+    "id": 388,
+    "descricao": "POLTRONA GIRATORIA - POLTRONA GIRATORIA COM BRAÇO",
+    "codigoEDescricao": "1.30.2.19.5 - POLTRONA GIRATORIA - POLTRONA GIRATORIA COM BRAÇO"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 47673,
+   "numeroPatrimonialCompleto": "012902",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123157,
+   "numeroPatrimonial": "012900",
+   "material": {
+    "id": 388,
+    "descricao": "POLTRONA GIRATORIA - POLTRONA GIRATORIA COM BRAÇO",
+    "codigoEDescricao": "1.30.2.19.5 - POLTRONA GIRATORIA - POLTRONA GIRATORIA COM BRAÇO"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 47758,
+   "numeroPatrimonialCompleto": "012900",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123158,
+   "numeroPatrimonial": "012915",
+   "material": {
+    "id": 388,
+    "descricao": "POLTRONA GIRATORIA - POLTRONA GIRATORIA COM BRAÇO",
+    "codigoEDescricao": "1.30.2.19.5 - POLTRONA GIRATORIA - POLTRONA GIRATORIA COM BRAÇO"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 47769,
+   "numeroPatrimonialCompleto": "012915",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123159,
+   "numeroPatrimonial": "012901",
+   "material": {
+    "id": 388,
+    "descricao": "POLTRONA GIRATORIA - POLTRONA GIRATORIA COM BRAÇO",
+    "codigoEDescricao": "1.30.2.19.5 - POLTRONA GIRATORIA - POLTRONA GIRATORIA COM BRAÇO"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 47827,
+   "numeroPatrimonialCompleto": "012901",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123160,
+   "numeroPatrimonial": "043552",
+   "material": {
+    "id": 3191,
+    "descricao": "MESA - MESA AUTO PORTANTE EM \"L\"",
+    "codigoEDescricao": "1.30.4.7.3 - MESA - MESA AUTO PORTANTE EM \"L\""
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 49072,
+   "numeroPatrimonialCompleto": "043552",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123161,
+   "numeroPatrimonial": "043578",
+   "material": {
+    "id": 3594,
+    "descricao": "TELEFONE IP - TELEFONE IP TIPO 1",
+    "codigoEDescricao": "1.29.1.6.1 - TELEFONE IP - TELEFONE IP TIPO 1"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 51475,
+   "numeroPatrimonialCompleto": "043578",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123162,
+   "numeroPatrimonial": "043569",
+   "material": {
+    "id": 3594,
+    "descricao": "TELEFONE IP - TELEFONE IP TIPO 1",
+    "codigoEDescricao": "1.29.1.6.1 - TELEFONE IP - TELEFONE IP TIPO 1"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 51478,
+   "numeroPatrimonialCompleto": "043569",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123163,
+   "numeroPatrimonial": "043584",
+   "material": {
+    "id": 3594,
+    "descricao": "TELEFONE IP - TELEFONE IP TIPO 1",
+    "codigoEDescricao": "1.29.1.6.1 - TELEFONE IP - TELEFONE IP TIPO 1"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 51481,
+   "numeroPatrimonialCompleto": "043584",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123164,
+   "numeroPatrimonial": "043557",
+   "material": {
+    "id": 3594,
+    "descricao": "TELEFONE IP - TELEFONE IP TIPO 1",
+    "codigoEDescricao": "1.29.1.6.1 - TELEFONE IP - TELEFONE IP TIPO 1"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 51518,
+   "numeroPatrimonialCompleto": "043557",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123165,
+   "numeroPatrimonial": "040914",
+   "material": {
+    "id": 3594,
+    "descricao": "TELEFONE IP - TELEFONE IP TIPO 1",
+    "codigoEDescricao": "1.29.1.6.1 - TELEFONE IP - TELEFONE IP TIPO 1"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 51519,
+   "numeroPatrimonialCompleto": "040914",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123166,
+   "numeroPatrimonial": "043562",
+   "material": {
+    "id": 3594,
+    "descricao": "TELEFONE IP - TELEFONE IP TIPO 1",
+    "codigoEDescricao": "1.29.1.6.1 - TELEFONE IP - TELEFONE IP TIPO 1"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 51527,
+   "numeroPatrimonialCompleto": "043562",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123167,
+   "numeroPatrimonial": "043545",
+   "material": {
+    "id": 3595,
+    "descricao": "TELEFONE IP - TELEFONE IP TIPO 2",
+    "codigoEDescricao": "1.29.1.6.2 - TELEFONE IP - TELEFONE IP TIPO 2"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 51911,
+   "numeroPatrimonialCompleto": "043545",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123168,
+   "numeroPatrimonial": "043544",
+   "material": {
+    "id": 3191,
+    "descricao": "MESA - MESA AUTO PORTANTE EM \"L\"",
+    "codigoEDescricao": "1.30.4.7.3 - MESA - MESA AUTO PORTANTE EM \"L\""
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 53663,
+   "numeroPatrimonialCompleto": "043544",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123169,
+   "numeroPatrimonial": "012898",
+   "material": {
+    "id": 47,
+    "descricao": "UMIDIFICADOR - UMIDIFICADOR DE AR",
+    "codigoEDescricao": "1.13.3.5.3 - UMIDIFICADOR - UMIDIFICADOR DE AR"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 53784,
+   "numeroPatrimonialCompleto": "012898",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123170,
+   "numeroPatrimonial": "043547",
+   "material": {
+    "id": 3614,
+    "descricao": "MÓDULO DE EXPANSÃO DE TECLAS - MÓDULO DE EXPANSÃO DE TECLAS MÓDULO DE EXPANSÃO DE TECLAS",
+    "codigoEDescricao": "1.29.1.32.2 - MÓDULO DE EXPANSÃO DE TECLAS - MÓDULO DE EXPANSÃO DE TECLAS MÓDULO DE EXPANSÃO DE TECLAS"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 54439,
+   "numeroPatrimonialCompleto": "043547",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123171,
+   "numeroPatrimonial": "043582",
+   "material": {
+    "id": 3994,
+    "descricao": "MESA - MESA :",
+    "codigoEDescricao": "1.30.2.28.8 - MESA - MESA :"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 62157,
+   "numeroPatrimonialCompleto": "043582",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123172,
+   "numeroPatrimonial": "043550",
+   "material": {
+    "id": 414,
+    "descricao": "MESA - MESA PARA IMPRESSORA",
+    "codigoEDescricao": "1.30.4.7.1 - MESA - MESA PARA IMPRESSORA"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 64247,
+   "numeroPatrimonialCompleto": "043550",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123173,
+   "numeroPatrimonial": "043586",
+   "material": {
+    "id": 414,
+    "descricao": "MESA - MESA PARA IMPRESSORA",
+    "codigoEDescricao": "1.30.4.7.1 - MESA - MESA PARA IMPRESSORA"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 64328,
+   "numeroPatrimonialCompleto": "043586",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123174,
+   "numeroPatrimonial": "043543",
+   "material": {
+    "id": 414,
+    "descricao": "MESA - MESA PARA IMPRESSORA",
+    "codigoEDescricao": "1.30.4.7.1 - MESA - MESA PARA IMPRESSORA"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 64343,
+   "numeroPatrimonialCompleto": "043543",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123175,
+   "numeroPatrimonial": "043585",
+   "material": {
+    "id": 3936,
+    "descricao": ". - ARMARIO .",
+    "codigoEDescricao": "1.30.3.5.1 - . - ARMARIO ."
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 66473,
+   "numeroPatrimonialCompleto": "043585",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123176,
+   "numeroPatrimonial": "043574",
+   "material": {
+    "id": 250,
+    "descricao": "ESTAÇÃO - ESTAÇÃO DE TRABALHO",
+    "codigoEDescricao": "1.29.1.24.1 - ESTAÇÃO - ESTAÇÃO DE TRABALHO"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 66848,
+   "numeroPatrimonialCompleto": "043574",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123177,
+   "numeroPatrimonial": "043571",
+   "material": {
+    "id": 250,
+    "descricao": "ESTAÇÃO - ESTAÇÃO DE TRABALHO",
+    "codigoEDescricao": "1.29.1.24.1 - ESTAÇÃO - ESTAÇÃO DE TRABALHO"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 66930,
+   "numeroPatrimonialCompleto": "043571",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123178,
+   "numeroPatrimonial": "043548",
+   "material": {
+    "id": 3973,
+    "descricao": "GAVETEIRO - GAVETEIRO VOLANTE",
+    "codigoEDescricao": "1.30.2.21.3 - GAVETEIRO - GAVETEIRO VOLANTE"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 68178,
+   "numeroPatrimonialCompleto": "043548",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123179,
+   "numeroPatrimonial": "043566",
+   "material": {
+    "id": 3973,
+    "descricao": "GAVETEIRO - GAVETEIRO VOLANTE",
+    "codigoEDescricao": "1.30.2.21.3 - GAVETEIRO - GAVETEIRO VOLANTE"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 68261,
+   "numeroPatrimonialCompleto": "043566",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123180,
+   "numeroPatrimonial": "043581",
+   "material": {
+    "id": 3973,
+    "descricao": "GAVETEIRO - GAVETEIRO VOLANTE",
+    "codigoEDescricao": "1.30.2.21.3 - GAVETEIRO - GAVETEIRO VOLANTE"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 68293,
+   "numeroPatrimonialCompleto": "043581",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123181,
+   "numeroPatrimonial": "043551",
+   "material": {
+    "id": 3973,
+    "descricao": "GAVETEIRO - GAVETEIRO VOLANTE",
+    "codigoEDescricao": "1.30.2.21.3 - GAVETEIRO - GAVETEIRO VOLANTE"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 68424,
+   "numeroPatrimonialCompleto": "043551",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123182,
+   "numeroPatrimonial": "043561",
+   "material": {
+    "id": 3973,
+    "descricao": "GAVETEIRO - GAVETEIRO VOLANTE",
+    "codigoEDescricao": "1.30.2.21.3 - GAVETEIRO - GAVETEIRO VOLANTE"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 68617,
+   "numeroPatrimonialCompleto": "043561",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123183,
+   "numeroPatrimonial": "043579",
+   "material": {
+    "id": 3973,
+    "descricao": "GAVETEIRO - GAVETEIRO VOLANTE",
+    "codigoEDescricao": "1.30.2.21.3 - GAVETEIRO - GAVETEIRO VOLANTE"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 68716,
+   "numeroPatrimonialCompleto": "043579",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123184,
+   "numeroPatrimonial": "043563",
+   "material": {
+    "id": 1936,
+    "descricao": "MONITOR DE VIDEO - MONITOR DE VIDEO LCD",
+    "codigoEDescricao": "1.29.2.8.6 - MONITOR DE VIDEO - MONITOR DE VIDEO LCD"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 73063,
+   "numeroPatrimonialCompleto": "043563",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123185,
+   "numeroPatrimonial": "046955",
+   "material": {
+    "id": 4007,
+    "descricao": "MONITOR DE VIDEO - MONITOR DE VIDEO",
+    "codigoEDescricao": "1.29.2.8.1 - MONITOR DE VIDEO - MONITOR DE VIDEO"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 94301,
+   "numeroPatrimonialCompleto": "046955",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123186,
+   "numeroPatrimonial": "008413",
+   "material": {
+    "id": 3087,
+    "descricao": "MICROCOMPUTADOR - MICROCOMPUTADOR .",
+    "codigoEDescricao": "1.29.1.21.3 - MICROCOMPUTADOR - MICROCOMPUTADOR ."
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 94330,
+   "numeroPatrimonialCompleto": "008413",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123187,
+   "numeroPatrimonial": "010222",
+   "material": {
+    "id": 389,
+    "descricao": "QUADRO - QUADRO DE AVISO",
+    "codigoEDescricao": "1.30.2.20.2 - QUADRO - QUADRO DE AVISO"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 3026,
+   "numeroPatrimonialCompleto": "010222",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123188,
+   "numeroPatrimonial": "040913",
+   "material": {
+    "id": 40,
+    "descricao": "CONDICIONADOR DE AR - CONDICIONADOR DE AR DE PAREDE/JANELA",
+    "codigoEDescricao": "1.13.2.1.3 - CONDICIONADOR DE AR - CONDICIONADOR DE AR DE PAREDE/JANELA"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 352,
+    "nome": "UTILIZADO",
+    "descricao": "Utilizado",
+    "chave": "tipoStatusBem",
+    "codigo": 1
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 3142,
+   "numeroPatrimonialCompleto": "040913",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123189,
+   "numeroPatrimonial": "012899",
+   "material": {
+    "id": 4021,
+    "descricao": "POLTRONA GIRATORIA - POLTRONA GIRATORIA ESPALDAR ALTO",
+    "codigoEDescricao": "1.30.2.19.8 - POLTRONA GIRATORIA - POLTRONA GIRATORIA ESPALDAR ALTO"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 354,
+    "nome": "DISPONIVEL",
+    "descricao": "Disponível",
+    "chave": "tipoStatusBem",
+    "codigo": 3
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 81695,
+   "numeroPatrimonialCompleto": "012899",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123190,
+   "numeroPatrimonial": "012908",
+   "material": {
+    "id": 4020,
+    "descricao": "POLTRONA GIRATORIA - POLTRONA GIRATORIA ESPALDAR  MEDIO",
+    "codigoEDescricao": "1.30.2.19.7 - POLTRONA GIRATORIA - POLTRONA GIRATORIA ESPALDAR  MEDIO"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 354,
+    "nome": "DISPONIVEL",
+    "descricao": "Disponível",
+    "chave": "tipoStatusBem",
+    "codigo": 3
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 82384,
+   "numeroPatrimonialCompleto": "012908",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123191,
+   "numeroPatrimonial": "012904",
+   "material": {
+    "id": 4021,
+    "descricao": "POLTRONA GIRATORIA - POLTRONA GIRATORIA ESPALDAR ALTO",
+    "codigoEDescricao": "1.30.2.19.8 - POLTRONA GIRATORIA - POLTRONA GIRATORIA ESPALDAR ALTO"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 354,
+    "nome": "DISPONIVEL",
+    "descricao": "Disponível",
+    "chave": "tipoStatusBem",
+    "codigo": 3
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 81453,
+   "numeroPatrimonialCompleto": "012904",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123192,
+   "numeroPatrimonial": "043583",
+   "material": {
+    "id": 359,
+    "descricao": "CADEIRA GIRATORIA - CADEIRA GIRATORIA COM BRAÇO",
+    "codigoEDescricao": "1.30.2.10.5 - CADEIRA GIRATORIA - CADEIRA GIRATORIA COM BRAÇO"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 354,
+    "nome": "DISPONIVEL",
+    "descricao": "Disponível",
+    "chave": "tipoStatusBem",
+    "codigo": 3
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 81485,
+   "numeroPatrimonialCompleto": "043583",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123193,
+   "numeroPatrimonial": "043576",
+   "material": {
+    "id": 359,
+    "descricao": "CADEIRA GIRATORIA - CADEIRA GIRATORIA COM BRAÇO",
+    "codigoEDescricao": "1.30.2.10.5 - CADEIRA GIRATORIA - CADEIRA GIRATORIA COM BRAÇO"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 354,
+    "nome": "DISPONIVEL",
+    "descricao": "Disponível",
+    "chave": "tipoStatusBem",
+    "codigo": 3
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 81555,
+   "numeroPatrimonialCompleto": "043576",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123194,
+   "numeroPatrimonial": "043568",
+   "material": {
+    "id": 359,
+    "descricao": "CADEIRA GIRATORIA - CADEIRA GIRATORIA COM BRAÇO",
+    "codigoEDescricao": "1.30.2.10.5 - CADEIRA GIRATORIA - CADEIRA GIRATORIA COM BRAÇO"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 354,
+    "nome": "DISPONIVEL",
+    "descricao": "Disponível",
+    "chave": "tipoStatusBem",
+    "codigo": 3
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 81586,
+   "numeroPatrimonialCompleto": "043568",
+   "idEstruturaOrganizacional": 5037
+  }, {
+   "id": 123195,
+   "numeroPatrimonial": "043567",
+   "material": {
+    "id": 359,
+    "descricao": "CADEIRA GIRATORIA - CADEIRA GIRATORIA COM BRAÇO",
+    "codigoEDescricao": "1.30.2.10.5 - CADEIRA GIRATORIA - CADEIRA GIRATORIA COM BRAÇO"
+   },
+   "dominioSituacaoFisica": {
+    "id": 98,
+    "nome": "BOM",
+    "descricao": "Bom",
+    "chave": "tipoSituacaoFisica",
+    "codigo": 1
+   },
+   "dominioStatus": {
+    "id": 354,
+    "nome": "DISPONIVEL",
+    "descricao": "Disponível",
+    "chave": "tipoStatusBem",
+    "codigo": 3
+   },
+   "dominioStatusInventarioBem": {
+    "id": 446,
+    "nome": "NAO_INFORMADO",
+    "descricao": "Não informado",
+    "chave": "tipoStatusInventarioBemPatrimonial",
+    "codigo": 1
+   },
+   "estruturaOrganizacionalAtual": {
+    "id": 5037,
+    "nome": "EST LEV 3",
+    "sigla": "ESLE 3",
+    "codigo": "005034",
+    "codigoENome": "005034 - EST LEV 3"
+   },
+   "idInventario": 75,
+   "idBemPatrimonial": 81590,
+   "numeroPatrimonialCompleto": "043567",
+   "idEstruturaOrganizacional": 5037
+  }],
+  "idInventario": 75
+ }]
+}

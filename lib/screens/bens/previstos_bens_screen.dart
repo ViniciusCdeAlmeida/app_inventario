@@ -1,11 +1,12 @@
 import 'package:GRPInventario/screens/bens/widgets/bens/previstos_bens_item.dart';
+import 'package:GRPInventario/utils/dominios_utils.dart';
 import 'package:GRPInventario/widgets/index_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 
 import 'package:GRPInventario/providers/index_providers.dart';
-import 'package:GRPInventario/components/stores/index_store.dart';
+import 'package:GRPInventario/providers/stores/index_store.dart';
 
 import 'package:GRPInventario/models/index_models.dart';
 
@@ -38,7 +39,6 @@ class _PrevistosBensScreenState extends State<PrevistosBensScreen> {
     _bensPrevistosStore =
         Provider.of<BensPrevistosStore>(context, listen: false);
     return Scaffold(
-      // drawer: AppDrawer(),
       body: Observer(
         // ignore: missing_return
         builder: (_) {
@@ -55,10 +55,12 @@ class _PrevistosBensScreenState extends State<PrevistosBensScreen> {
             case BensPrevistosState.carregado:
               return CustomScrollView(
                 slivers: [
-                  MySliverAppBar(
+                  SliverAppBarCustom(
                     titulo: unidadeArgs.arg2,
                     filtro: _bensPrevistosStore.filtraBens,
                     limpar: _bensPrevistosStore.limpaFiltrados,
+                    ordenacao: _bensPrevistosStore.ordenaBens,
+                    tipoMenu: Dominios.menuBensPrevistosOrdenacao,
                   ),
                   SliverList(
                     delegate: SliverChildListDelegate(

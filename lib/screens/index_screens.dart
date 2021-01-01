@@ -1,3 +1,6 @@
+///{@category Screens}
+library screens;
+
 export 'bens/bens_inventariados_screen.dart';
 export 'bens/ler_bens_geral_screen.dart';
 export 'bens/previstos_bens_screen.dart';

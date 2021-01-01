@@ -1,4 +1,6 @@
-export 'bem_patrimonial_converter.dart';
+///{@category Converters}
+library converters;
+
 export 'caracteristicas_converter.dart';
 export 'caracteristica_converter.dart';
 export 'conexao_converter.dart';

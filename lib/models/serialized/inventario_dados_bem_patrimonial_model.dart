@@ -4,6 +4,7 @@ import 'package:GRPInventario/models/index_models.dart';
 
 part 'inventario_dados_bem_patrimonial_model.g.dart';
 
+/// Modelo para o objeto [InventarioDadosBemPatrimonial].
 @JsonSerializable()
 class InventarioDadosBemPatrimonial {
   int id;

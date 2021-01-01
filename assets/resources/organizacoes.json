@@ -1,0 +1,32 @@
+{
+ "id": 21240,
+ "username": "vinicius.correa",
+ "organizacoes": [{
+  "id": 21245,
+  "organizacao": {
+   "id": 2,
+   "codigo": "123",
+   "nome": "DEPARTAMENTO 1",
+   "sigla": "DPT 1",
+   "codigoENome": "1 - DEPARTAMENTO 1"
+  }
+ }, {
+  "id": 21259,
+  "organizacao": {
+   "id": 1,
+   "codigo": "1234",
+   "nome": "DEPARTAMENTO 2",
+   "sigla": "DPT 2",
+   "codigoENome": "1234 - DEPARTAMENTO 2"
+  }
+ }, {
+  "id": 21260,
+  "organizacao": {
+   "id": 3,
+   "codigo": "12345",
+   "nome": "DEPARTAMENTO 3",
+   "sigla": "DPT 3",
+   "codigoENome": "12345 - DEPARTAMENTO 3"
+  }
+ }]
+}

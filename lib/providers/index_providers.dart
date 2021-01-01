@@ -1,3 +1,6 @@
+///{@category Providers}
+library providers;
+
 export 'autenticacao_provider.dart';
 export 'bens_provider.dart';
 export 'conexoes_provider.dart';

@@ -29,6 +29,7 @@ class _OrganizacaoItemState extends State<OrganizacaoItem> {
             children: <Widget>[
               IconButton(
                 icon: Icon(Icons.chevron_right),
+                key: Key('organizacao_${widget.id}'),
                 onPressed: () {
                   Navigator.of(context).pushNamed(
                     InventarioSelecaoScreen.routeName,

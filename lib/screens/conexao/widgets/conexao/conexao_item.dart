@@ -1,8 +1,9 @@
+import 'package:GRPInventario/utils/index_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:GRPInventario/screens/index_screens.dart';
-import 'package:GRPInventario/components/stores/index_store.dart';
+import 'package:GRPInventario/providers/stores/index_store.dart';
 
 class ConexaoItem extends StatefulWidget {
   final int id;
@@ -69,7 +70,7 @@ class _ConexaoItemState extends State<ConexaoItem> {
         child: Row(
           children: <Widget>[
             IconButton(
-              key: ValueKey('conexaoEdicaoButton'),
+              key: Key(Keys.conexaoEdicaoButton),
               icon: Icon(Icons.edit),
               onPressed: () {
                 Navigator.of(context).pushNamed(ConexaoEdicaoScreen.routeName,
@@ -78,7 +79,7 @@ class _ConexaoItemState extends State<ConexaoItem> {
               color: Theme.of(context).primaryColor,
             ),
             IconButton(
-              key: ValueKey('conexaoExclusaoButton'),
+              key: Key(Keys.conexaoExclusaoButton),
               icon: Icon(Icons.delete),
               onPressed: () {
                 _conexaoStore.deletaConexao(widget.id);

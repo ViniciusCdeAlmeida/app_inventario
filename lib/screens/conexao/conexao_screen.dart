@@ -1,10 +1,11 @@
 import 'package:GRPInventario/screens/conexao/widgets/conexao/conexao_item.dart';
+import 'package:GRPInventario/utils/index_utils.dart';
 import 'package:GRPInventario/widgets/index_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 
-import 'package:GRPInventario/components/stores/index_store.dart';
+import 'package:GRPInventario/providers/stores/index_store.dart';
 
 import 'package:GRPInventario/screens/index_screens.dart';
 
@@ -26,12 +27,21 @@ class _ConexaoScreenState extends State<ConexaoScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final GlobalKey<ScaffoldState> _scaffoldConexaoScreen =
+        GlobalKey<ScaffoldState>();
     return Scaffold(
+      key: _scaffoldConexaoScreen,
       appBar: AppBar(
         title: const Text('Configurações de conexão'),
+        leading: IconButton(
+            icon: Icon(
+              Icons.view_headline,
+              key: Key(Keys.menuConexao),
+            ),
+            onPressed: () => _scaffoldConexaoScreen.currentState.openDrawer()),
         actions: <Widget>[
           IconButton(
-            key: ValueKey('conexaoAdicaoButton'),
+            key: Key(Keys.conexaoAdicaoButton),
             icon: Icon(Icons.add),
             onPressed: () {
               Navigator.of(context).pushNamed(ConexaoEdicaoScreen.routeName);

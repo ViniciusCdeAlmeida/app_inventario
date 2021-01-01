@@ -1,7 +1,9 @@
+///{@category Helpers}
 import 'package:GRPInventario/helpers/index_helpers.dart';
 import 'package:GRPInventario/database/database_moor.dart';
 import 'package:GRPInventario/models/index_models.dart';
 
+/// Converte o resultado de uma lista de [InventarioDBData] em uma lista [Inventario].
 List<Inventario> helperInventarioList(
     List<InventarioDBData> listaLevantamento) {
   return List<Inventario>.from(
@@ -27,6 +29,7 @@ List<Inventario> helperInventarioList(
   );
 }
 
+/// Converte [InventarioDBData] em um objeto [Inventario].
 Inventario helperInventario(InventarioDBData levantamento) {
   if (levantamento != null) {
     return Inventario(

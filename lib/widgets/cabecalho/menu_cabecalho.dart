@@ -1,6 +1,9 @@
+import 'package:GRPInventario/main.dart';
+import 'package:GRPInventario/utils/index_utils.dart';
 import 'package:flutter/material.dart';
 
 import 'package:GRPInventario/screens/index_screens.dart';
+import 'package:moor_db_viewer/moor_db_viewer.dart';
 
 class MenuDrawer extends StatelessWidget {
   void _configBens(BuildContext ctx) {
@@ -46,17 +49,15 @@ class MenuDrawer extends StatelessWidget {
           ListTile(
             leading: Icon(
               Icons.home,
-              // key: ValueKey('homeDrawer'),
             ),
             title: const Text(
               'Home',
-              // key: ValueKey('homeDrawer'),
             ),
             onTap: () {
               Navigator.of(context).pop();
               Navigator.of(context).pushReplacementNamed('/');
             },
-            key: ValueKey('homeDrawer'),
+            key: Key(Keys.homeDrawer),
           ),
           Divider(),
           ListTile(
@@ -65,7 +66,7 @@ class MenuDrawer extends StatelessWidget {
             onTap: () {
               Navigator.of(context).pushNamed(ConexaoScreen.routeName);
             },
-            key: ValueKey('conexaoDrawer'),
+            key: Key(Keys.conexaoDrawer),
           ),
           Divider(),
           ListTile(
@@ -76,7 +77,7 @@ class MenuDrawer extends StatelessWidget {
             onTap: () {
               _configBens(context);
             },
-            key: ValueKey('digitosDrawer'),
+            key: Key(Keys.digitosDrawer),
           ),
           Divider(),
           ListTile(
@@ -85,14 +86,23 @@ class MenuDrawer extends StatelessWidget {
             onTap: () {
               _configNumero(context);
             },
-            key: ValueKey('prefixoDrawer'),
+            key: Key(Keys.prefixoDrawer),
           ),
           Divider(),
           ListTile(
-            key: ValueKey('rfidDrawer'),
+            key: Key(Keys.rfidDrawer),
             leading: Icon(Icons.bluetooth),
             title: const Text('Configuração RFID'),
             onTap: null,
+          ),
+          Divider(),
+          ListTile(
+            leading: Icon(Icons.ac_unit),
+            title: const Text('Banco de dados'),
+            onTap: () {
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => MoorDbViewer(db)));
+            },
           ),
         ],
       ),

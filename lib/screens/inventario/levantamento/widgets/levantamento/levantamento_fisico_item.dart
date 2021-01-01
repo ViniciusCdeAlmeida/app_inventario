@@ -3,7 +3,7 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 import 'package:GRPInventario/models/index_models.dart';
 import 'package:GRPInventario/screens/index_screens.dart';
-import 'package:GRPInventario/components/stores/index_store.dart';
+import 'package:GRPInventario/providers/stores/index_store.dart';
 
 class LevantamentoFisicoItem extends StatefulWidget {
   final Inventario levantamento;
@@ -18,7 +18,6 @@ class _LevantamentoFisicoItemState extends State<LevantamentoFisicoItem>
   // ignore: unused_field
   AnimationController _controller, _controllerCard;
   LevantamentoStore _levantamentoStore;
-  // Animation<Offset> _slideAnimation;
   Animation<double> _fadeAnimation;
 
   @override
@@ -35,15 +34,6 @@ class _LevantamentoFisicoItemState extends State<LevantamentoFisicoItem>
         milliseconds: 1000,
       ),
     );
-    // _slideAnimation = Tween<Offset>(
-    //   begin: Offset(1.0, 0.0),
-    //   end: Offset(0, 0),
-    // ).animate(
-    //   CurvedAnimation(
-    //     parent: _controllerCard,
-    //     curve: Curves.ease,
-    //   ),
-    // );
     _fadeAnimation = Tween<double>(
       begin: 0.0,
       end: 1.0,
@@ -92,6 +82,7 @@ class _LevantamentoFisicoItemState extends State<LevantamentoFisicoItem>
               children: <Widget>[
                 ListTile(
                   leading: IconButton(
+                    key: Key('expandCardButton_${widget.levantamento.id}'),
                     icon: Icon(
                       (_expanded ? Icons.expand_less : Icons.expand_more),
                       color: Colors.black,
@@ -105,6 +96,8 @@ class _LevantamentoFisicoItemState extends State<LevantamentoFisicoItem>
                   subtitle: Text(widget.levantamento.codigo),
                   title: Text(widget.levantamento.nome),
                   trailing: IconButton(
+                    key: Key(
+                        'levantamento_estruturas_${widget.levantamento.id}'),
                     icon: Icon(Icons.arrow_forward, color: Colors.black),
                     onPressed: () {
                       Navigator.of(context).pushNamed(
@@ -155,7 +148,7 @@ class _LevantamentoFisicoItemState extends State<LevantamentoFisicoItem>
                                     ],
                                   ),
                                   Padding(
-                                    padding: const EdgeInsets.only(left: 64.0),
+                                    padding: const EdgeInsets.only(left: 54.0),
                                     child: IconButton(
                                         icon: Icon(Icons.refresh),
                                         onPressed: () {

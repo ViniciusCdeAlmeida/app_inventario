@@ -1,6 +1,8 @@
+///{@category Helpers}
 import 'package:GRPInventario/database/database_moor.dart';
 import 'package:GRPInventario/models/index_models.dart';
 
+/// Converte o resultado de [Dominio] ou de uma [String] em um objeto [Dominio].
 Dominio helperDominio(dynamic dominio) {
   if (dominio != null) {
     return Dominio(
@@ -14,6 +16,7 @@ Dominio helperDominio(dynamic dominio) {
     return null;
 }
 
+/// Converte o resultado de uma lista de [DominioDBData] em uma lista [Dominio].
 List<Dominio> helperDominioLista(List<DominioDBData> listaDominios) {
   return List<Dominio>.from(
     (listaDominios).map(

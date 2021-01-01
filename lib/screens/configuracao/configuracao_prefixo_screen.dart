@@ -1,7 +1,8 @@
+import 'package:GRPInventario/utils/index_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:GRPInventario/components/stores/index_store.dart';
+import 'package:GRPInventario/providers/stores/index_store.dart';
 
 class ConfiguracaoPrefixoScreen extends StatefulWidget {
   @override
@@ -11,7 +12,6 @@ class ConfiguracaoPrefixoScreen extends StatefulWidget {
 
 class _ConfiguracaoPrefixoScreenState extends State<ConfiguracaoPrefixoScreen> {
   final _form = GlobalKey<FormState>();
-  // String _valorInicial;
   String _valorFinal;
   ConfiguracaoStore _configuracaoStore;
 
@@ -59,7 +59,7 @@ class _ConfiguracaoPrefixoScreenState extends State<ConfiguracaoPrefixoScreen> {
               Form(
                 key: _form,
                 child: TextFormField(
-                  key: ValueKey('prefixoForm'),
+                  key: Key(Keys.prefixoForm),
                   initialValue: _configuracaoStore.prefixo != null
                       ? _configuracaoStore.prefixo.prefixo
                       : null,
@@ -76,7 +76,7 @@ class _ConfiguracaoPrefixoScreenState extends State<ConfiguracaoPrefixoScreen> {
               ),
               FlatButton.icon(
                 icon: Icon(Icons.save),
-                key: ValueKey('prefixoButton'),
+                key: Key(Keys.prefixoButton),
                 onPressed: _adicionarLetra,
                 label: const Text('Salvar'),
                 color: Theme.of(context).primaryColor,

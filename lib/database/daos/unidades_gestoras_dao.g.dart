@@ -7,5 +7,6 @@ part of 'unidades_gestoras_dao.dart';
 // **************************************************************************
 
 mixin _$UnidadesGestorasDaoMixin on DatabaseAccessor<AppDatabase> {
-  $DominioDBTable get dominioDB => attachedDatabase.dominioDB;
+  $UnidadesGestorasDBTable get unidadesGestorasDB =>
+      attachedDatabase.unidadesGestorasDB;
 }

@@ -28,22 +28,4 @@ class ConexoesProvider {
 
   Future<Conexao> buscaConexaoAtiva() async =>
       helperConexao(await db.conexaoDao.getConexaoAtiva());
-
-  // void ativarConexao(String id) {
-  // _conexao.forEach(
-  //   (element) {
-  //     if (element.ativo == true) element.ativo = false;
-  //   },
-  // );
-  // atualizarConexaoAtiva(id);
-  // }
-
-  // void atualizarConexaoAtiva(String id) {
-  // final conexaoIdx = _conexao.indexWhere((value) => value.id == id);
-  // if (!_conexao[conexaoIdx].ativo) {
-  //   _conexao[conexaoIdx].ativo = true;
-  // } else {
-  //   _conexao[conexaoIdx].ativo = false;
-  // }
-  // }
 }

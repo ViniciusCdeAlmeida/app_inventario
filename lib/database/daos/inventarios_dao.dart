@@ -7,12 +7,15 @@ import 'package:moor/extensions/json1.dart';
 part 'inventarios_dao.g.dart';
 
 @UseDao(tables: [InventarioDB])
+
+/// Classe responsável por gerar as operações de banco de dados da tabela [InventarioDB].
 class InventariosDao extends DatabaseAccessor<AppDatabase>
     with _$InventariosDaoMixin {
   final AppDatabase db;
 
   InventariosDao(this.db) : super(db);
 
+  /// Método responsável por buscar todos os levantamentos de uma unidade organizacional [idOrganizacao].
   Future<List<InventarioDBData>> getAllLevantamentos(int idOrganizacao) =>
       (select(db.inventarioDB)
             ..where((tbl) =>
@@ -25,6 +28,7 @@ class InventariosDao extends DatabaseAccessor<AppDatabase>
                     .equals('tipoInventario')))
           .get();
 
+  /// Método responsável por buscar todos os inventários de uma unidade organizacional [idOrganizacao].
   Future<List<InventarioDBData>> getAllInventarios(int idOrganizacao) =>
       (select(db.inventarioDB)
             ..where((tbl) =>
@@ -37,12 +41,15 @@ class InventariosDao extends DatabaseAccessor<AppDatabase>
                     .equals('tipoInventario')))
           .get();
 
+  /// Método responsável por buscar um levantamento [id].
   Future<InventarioDBData> getLevantamento(int id) =>
       (select(db.inventarioDB)..where((tbl) => tbl.id.equals(id))).getSingle();
 
+  /// Método responsável por busca um inventário [id].
   Future<InventarioDBData> getInventario(int id) =>
       (select(db.inventarioDB)..where((tbl) => tbl.id.equals(id))).getSingle();
 
+  /// Método responsável por verificar a existência de levantamentos.
   Future<InventarioDBData> getVerificaLevantamentos() =>
       (select(db.inventarioDB)
             ..limit(1)
@@ -55,6 +62,17 @@ class InventariosDao extends DatabaseAccessor<AppDatabase>
                     .equals('tipoInventario')))
           .getSingle();
 
+  /// Método responsável por verificar a existência de inventarios.
+  Future<InventarioDBData> getVerificaInventarios() => (select(db.inventarioDB)
+        ..limit(1)
+        ..where((tbl) =>
+            tbl.dominioTipoInventario.jsonExtract<int>(r'$.codigo').equals(5) &
+            tbl.dominioTipoInventario
+                .jsonExtract<String>(r'$.chave')
+                .equals('tipoInventario')))
+      .getSingle();
+
+  /// Método responsável por verificar qual o tipo do inventário.
   Future<InventarioDBData> getVerificaTipoInventario(int id) =>
       (select(db.inventarioDB)
             ..limit(1)
@@ -65,17 +83,7 @@ class InventariosDao extends DatabaseAccessor<AppDatabase>
                 tbl.id.equals(id)))
           .getSingle();
 
-  Future<InventarioDBData> getVerificaInventarios() => (select(db.inventarioDB)
-        ..limit(1)
-        ..where((tbl) =>
-            tbl.dominioTipoInventario.jsonExtract<int>(r'$.codigo').equals(5) &
-            tbl.dominioTipoInventario
-                .jsonExtract<String>(r'$.chave')
-                .equals('tipoInventario')))
-      .getSingle();
-
-  void deletarLevantamentos(Table database) async => delete(database);
-
+  /// Método responsável por atualizar um inventário [inventario].
   Future<void> updateAtualizaDados(Inventario inventario) =>
       (update(db.inventarioDB)
             ..where(
@@ -95,6 +103,7 @@ class InventariosDao extends DatabaseAccessor<AppDatabase>
         ),
       );
 
+  /// Método responsável por inserir uma lista [levantamentos] de inventários no banco de dados.
   Future<void> insertLevantamentos(List levantamentos) async => await batch(
         (l) {
           l.insertAll(

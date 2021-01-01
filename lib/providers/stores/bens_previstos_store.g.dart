@@ -132,6 +132,17 @@ mixin _$BensPrevistosStore on _BensPrevistosStore, Store {
   }
 
   @override
+  void ordenaBens(int tipoOrdenacao) {
+    final _$actionInfo = _$_BensPrevistosStoreActionController.startAction(
+        name: '_BensPrevistosStore.ordenaBens');
+    try {
+      return super.ordenaBens(tipoOrdenacao);
+    } finally {
+      _$_BensPrevistosStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   void limpaFiltrados() {
     final _$actionInfo = _$_BensPrevistosStoreActionController.startAction(
         name: '_BensPrevistosStore.limpaFiltrados');

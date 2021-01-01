@@ -3,6 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'material_caracteristica_model.g.dart';
 
+/// Modelo para o objeto [MaterialCaracteristica].
 @JsonSerializable()
 class MaterialCaracteristica {
   final int id;

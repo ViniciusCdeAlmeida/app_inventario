@@ -1,7 +1,7 @@
-import 'package:GRPInventario/utils/index_utils.dart';
 import 'package:GRPInventario/helpers/index_helpers.dart';
-import 'package:GRPInventario/models/index_models.dart';
 import 'package:GRPInventario/main.dart';
+import 'package:GRPInventario/models/index_models.dart';
+import 'package:GRPInventario/utils/index_utils.dart';
 
 class InventarioBensPatrimoniaisProvider {
   bool _isLoading = false;

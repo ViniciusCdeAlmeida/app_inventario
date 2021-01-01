@@ -30,6 +30,7 @@ class InventarioSelecaoItem extends StatelessWidget {
               child: Row(
                 children: <Widget>[
                   IconButton(
+                    key: Key('inventarioTipo_$tipo'),
                     icon: Icon(Icons.arrow_forward),
                     onPressed: () {
                       tipo == 1

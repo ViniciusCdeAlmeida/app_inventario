@@ -3,6 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'login_model.g.dart';
 
+/// Modelo para o objeto [Login].
 @JsonSerializable()
 class Login {
   final int id;

@@ -1,8 +1,9 @@
+import 'package:GRPInventario/providers/stores/sliver_app_bar_custom_classificacao_store.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
 import 'package:GRPInventario/providers/index_providers.dart';
-import 'package:GRPInventario/components/stores/index_store.dart';
+import 'package:GRPInventario/providers/stores/index_store.dart';
 
 List<SingleChildWidget> providers() => [
       Provider(
@@ -88,5 +89,8 @@ List<SingleChildWidget> providers() => [
           InventariosProvider(),
           EstruturaLevantamentoProvider(),
         ),
+      ),
+      Provider(
+        create: (ctx) => SliverAppBarCustomClassificacaoStore(),
       ),
     ];

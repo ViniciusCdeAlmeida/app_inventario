@@ -29,12 +29,12 @@ abstract class _BensInventariadoStore with Store {
   bool buscandoBensColetados = false;
 
   @observable
-  bool enviandoBensColetados = false;
+  bool _enviandoBensColetados = false;
 
   @computed
   // ignore: missing_return
   BensInventariadoState get bensInventariadoState {
-    if (!enviandoBensColetados) {
+    if (!_enviandoBensColetados) {
       return BensInventariadoState.carregado;
     }
 
@@ -65,7 +65,7 @@ abstract class _BensInventariadoStore with Store {
 
   @computed
   bool get enviandoBens {
-    return enviandoBensColetados;
+    return _enviandoBensColetados;
   }
 
   @action
@@ -90,14 +90,14 @@ abstract class _BensInventariadoStore with Store {
         .where((element) => element.enviado == false)
         .toList();
     if (_listaEnviar.isNotEmpty) {
-      enviandoBensColetados = true;
+      _enviandoBensColetados = true;
       try {
         ObservableFuture(
           Future.delayed(Duration(seconds: 2)).then(
             (_) {
               _inventarioBemPatrimonial.enviaDados(_listaEnviar).whenComplete(
                     () => {
-                      enviandoBensColetados = false,
+                      _enviandoBensColetados = false,
                       buscaBensColetados(idUnidade),
                     },
                   );
@@ -105,7 +105,7 @@ abstract class _BensInventariadoStore with Store {
           ),
         );
       } catch (e) {
-        enviandoBensColetados = false;
+        _enviandoBensColetados = false;
         throw (e);
       }
     }

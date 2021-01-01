@@ -2,6 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'prefixo_model.g.dart';
 
+/// Modelo para o objeto [Prefixo].
 @JsonSerializable()
 class Prefixo {
   final int id;

@@ -1,0 +1,33 @@
+{
+ "status": "SUCCESS",
+ "code": "200",
+ "message": "Request processed successfully",
+ "payload": [{
+  "id": 75,
+  "dominioTipoInventario": {
+   "id": 438,
+   "nome": "INICIAL",
+   "descricao": "Inicial",
+   "chave": "tipoInventario",
+   "codigo": 2
+  },
+  "dominioStatusInventario": {
+   "id": 435,
+   "nome": "INICIADO_MOBILE",
+   "descricao": "Iniciado mobile",
+   "chave": "tipoStatusInventario",
+   "codigo": 5
+  },
+  "codigo": "2020000021",
+  "nome": "teste levantamento",
+  "codigoENome": "2020000021 - teste levantamento",
+  "quantidadeEstruturas": 3,
+  "quantidadeTotalBens": 105,
+  "quantidadeTotalBensTratados": 0,
+  "quantidadeTotalBensEmInconsistencia": 0,
+  "quantidadeTotalBensSemInconsistencia": 0,
+  "quantidadeTotalBensBaixados": 0,
+  "idOrganizacao": 1
+ }],
+ "y": false
+}

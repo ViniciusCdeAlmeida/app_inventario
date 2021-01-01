@@ -2,6 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'dominio_model.g.dart';
 
+/// Modelo para o objeto [Dominio].
 @JsonSerializable()
 class Dominio {
   int id;

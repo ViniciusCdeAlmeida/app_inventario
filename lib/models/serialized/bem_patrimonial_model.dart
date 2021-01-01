@@ -3,6 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'bem_patrimonial_model.g.dart';
 
+/// Modelo para o objeto [BemPatrimonial].
 @JsonSerializable()
 class BemPatrimonial {
   int id;

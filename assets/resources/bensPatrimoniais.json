@@ -1,0 +1,1589 @@
+{
+ "totalPages": 4968,
+ "totalItens": 49680,
+ "objects": [{
+  "id": 66374,
+  "numeroPatrimonial": "000830",
+  "numeroPatrimonialCompleto": "000830",
+  "dominioSituacaoFisica": {
+   "id": 98,
+   "nome": "BOM",
+   "descricao": "Bom",
+   "chave": "tipoSituacaoFisica",
+   "codigo": 1
+  },
+  "dominioStatus": {
+   "id": 352,
+   "nome": "UTILIZADO",
+   "descricao": "Utilizado",
+   "chave": "tipoStatusBem",
+   "codigo": 1
+  },
+  "estruturaOrganizacionalAtual": {
+   "id": 5580,
+   "nome": "ESTRUTURA 1",
+   "sigla": "EST 1",
+   "codigo": "051428"
+  },
+  "material": {
+   "id": 3936,
+   "descricao": ". - ARMARIO .",
+   "codigoEDescricao": "1.30.3.5.1 - . - ARMARIO .",
+   "codigoDescricaoCodigoCC": "1.30.3.5.1 - . - ARMARIO . - 0303"
+  },
+  "caracteristicas": [{
+   "id": 129197,
+   "valorMaterialCaracteristica": "1252",
+   "materialCaracteristica": {
+    "id": 4824,
+    "codigo": "032",
+    "caracteristica": {
+     "id": 20,
+     "codigo": "032",
+     "descricao": "MARCA",
+     "dominioTipoDado": {
+      "id": 16,
+      "nome": "TIPO_DOMINIO",
+      "descricao": "Tabela tipo domínio",
+      "chave": "tipoDado",
+      "codigo": 6
+     },
+     "chaveDominio": "tipoCaractMarca"
+    }
+   }
+  }, {
+   "id": 139542,
+   "valorMaterialCaracteristica": "ALTO EM MDF REVESTIDO EM LAMINADO, COR OVO, PADRÃO A2 MED. 900X2100X450MM",
+   "materialCaracteristica": {
+    "id": 4826,
+    "codigo": "031",
+    "caracteristica": {
+     "id": 44,
+     "codigo": "031",
+     "descricao": "DESCRICAO",
+     "dominioTipoDado": {
+      "id": 11,
+      "nome": "TEXT_FIELD",
+      "descricao": "Texto curto",
+      "chave": "tipoDado",
+      "codigo": 1
+     }
+    }
+   }
+  }, {
+   "id": 304519,
+   "valorMaterialCaracteristica": "L1C4FNC",
+   "materialCaracteristica": {
+    "id": 4823,
+    "codigo": "034",
+    "caracteristica": {
+     "id": 22,
+     "codigo": "034",
+     "descricao": "SERIE",
+     "dominioTipoDado": {
+      "id": 11,
+      "nome": "TEXT_FIELD",
+      "descricao": "Texto curto",
+      "chave": "tipoDado",
+      "codigo": 1
+     }
+    }
+   }
+  }, {
+   "id": 304520,
+   "materialCaracteristica": {
+    "id": 5266,
+    "codigo": "059",
+    "caracteristica": {
+     "id": 52,
+     "codigo": "059",
+     "descricao": "NUMERO ANTIGO",
+     "dominioTipoDado": {
+      "id": 11,
+      "nome": "TEXT_FIELD",
+      "descricao": "Texto curto",
+      "chave": "tipoDado",
+      "codigo": 1
+     }
+    }
+   }
+  }, {
+   "id": 375910,
+   "materialCaracteristica": {
+    "id": 4825,
+    "codigo": "033",
+    "caracteristica": {
+     "id": 21,
+     "codigo": "033",
+     "descricao": "MODELO",
+     "dominioTipoDado": {
+      "id": 16,
+      "nome": "TIPO_DOMINIO",
+      "descricao": "Tabela tipo domínio",
+      "chave": "tipoDado",
+      "codigo": 6
+     },
+     "chaveDominio": "tipoCaractModelo"
+    }
+   }
+  }, {
+   "id": 447326,
+   "materialCaracteristica": {
+    "id": 5403,
+    "codigo": "059",
+    "caracteristica": {
+     "id": 51,
+     "codigo": "059",
+     "descricao": "COMUNICACOES",
+     "dominioTipoDado": {
+      "id": 11,
+      "nome": "TEXT_FIELD",
+      "descricao": "Texto curto",
+      "chave": "tipoDado",
+      "codigo": 1
+     }
+    }
+   }
+  }, {
+   "id": 551288,
+   "materialCaracteristica": {
+    "id": 6094,
+    "caracteristica": {
+     "id": 9,
+     "codigo": "009",
+     "descricao": "COR",
+     "dominioTipoDado": {
+      "id": 16,
+      "nome": "TIPO_DOMINIO",
+      "descricao": "Tabela tipo domínio",
+      "chave": "tipoDado",
+      "codigo": 6
+     },
+     "chaveDominio": "tipoCaractCor"
+    }
+   }
+  }]
+ }, {
+  "id": 73736,
+  "numeroPatrimonial": "000831",
+  "numeroPatrimonialCompleto": "000831",
+  "dominioSituacaoFisica": {
+   "id": 98,
+   "nome": "BOM",
+   "descricao": "Bom",
+   "chave": "tipoSituacaoFisica",
+   "codigo": 1
+  },
+  "dominioStatus": {
+   "id": 352,
+   "nome": "UTILIZADO",
+   "descricao": "Utilizado",
+   "chave": "tipoStatusBem",
+   "codigo": 1
+  },
+  "estruturaOrganizacionalAtual": {
+   "id": 5580,
+   "nome": "ESTRUTURA 1",
+   "sigla": "EST 1",
+   "codigo": "051428"
+  },
+  "material": {
+   "id": 4126,
+   "descricao": "MICROCOMPUTADOR - MICROCOMPUTADOR, HD 80GB, CO MOUSE ÓPTICO DE 2 BOTOES",
+   "codigoEDescricao": "1.29.1.21.7 - MICROCOMPUTADOR - MICROCOMPUTADOR, HD 80GB, CO MOUSE ÓPTICO DE 2 BOTOES",
+   "codigoDescricaoCodigoCC": "1.29.1.21.7 - MICROCOMPUTADOR - MICROCOMPUTADOR, HD 80GB, CO MOUSE ÓPTICO DE 2 BOTOES - 0201"
+  },
+  "caracteristicas": [{
+   "id": 128922,
+   "valorMaterialCaracteristica": "1760",
+   "materialCaracteristica": {
+    "id": 4634,
+    "caracteristica": {
+     "id": 20,
+     "codigo": "032",
+     "descricao": "MARCA",
+     "dominioTipoDado": {
+      "id": 16,
+      "nome": "TIPO_DOMINIO",
+      "descricao": "Tabela tipo domínio",
+      "chave": "tipoDado",
+      "codigo": 6
+     },
+     "chaveDominio": "tipoCaractMarca"
+    }
+   }
+  }, {
+   "id": 139266,
+   "valorMaterialCaracteristica": "M91P, SFF/17, 2600/4X2GB/500GB/W7PRO64/DVDRW//A, TIHD5450.",
+   "materialCaracteristica": {
+    "id": 4636,
+    "caracteristica": {
+     "id": 44,
+     "codigo": "031",
+     "descricao": "DESCRICAO",
+     "dominioTipoDado": {
+      "id": 11,
+      "nome": "TEXT_FIELD",
+      "descricao": "Texto curto",
+      "chave": "tipoDado",
+      "codigo": 1
+     }
+    }
+   }
+  }, {
+   "id": 312532,
+   "materialCaracteristica": {
+    "id": 5333,
+    "caracteristica": {
+     "id": 52,
+     "codigo": "059",
+     "descricao": "NUMERO ANTIGO",
+     "dominioTipoDado": {
+      "id": 11,
+      "nome": "TEXT_FIELD",
+      "descricao": "Texto curto",
+      "chave": "tipoDado",
+      "codigo": 1
+     }
+    }
+   }
+  }, {
+   "id": 312533,
+   "materialCaracteristica": {
+    "id": 5735,
+    "caracteristica": {
+     "id": 51,
+     "codigo": "059",
+     "descricao": "COMUNICACOES",
+     "dominioTipoDado": {
+      "id": 11,
+      "nome": "TEXT_FIELD",
+      "descricao": "Texto curto",
+      "chave": "tipoDado",
+      "codigo": 1
+     }
+    }
+   }
+  }, {
+   "id": 383916,
+   "materialCaracteristica": {
+    "id": 4635,
+    "caracteristica": {
+     "id": 21,
+     "codigo": "033",
+     "descricao": "MODELO",
+     "dominioTipoDado": {
+      "id": 16,
+      "nome": "TIPO_DOMINIO",
+      "descricao": "Tabela tipo domínio",
+      "chave": "tipoDado",
+      "codigo": 6
+     },
+     "chaveDominio": "tipoCaractModelo"
+    }
+   }
+  }, {
+   "id": 526798,
+   "valorMaterialCaracteristica": "L1C4FWG",
+   "materialCaracteristica": {
+    "id": 4637,
+    "caracteristica": {
+     "id": 22,
+     "codigo": "034",
+     "descricao": "SERIE",
+     "dominioTipoDado": {
+      "id": 11,
+      "nome": "TEXT_FIELD",
+      "descricao": "Texto curto",
+      "chave": "tipoDado",
+      "codigo": 1
+     }
+    }
+   }
+  }, {
+   "id": 551739,
+   "materialCaracteristica": {
+    "id": 6125,
+    "caracteristica": {
+     "id": 9,
+     "codigo": "009",
+     "descricao": "COR",
+     "dominioTipoDado": {
+      "id": 16,
+      "nome": "TIPO_DOMINIO",
+      "descricao": "Tabela tipo domínio",
+      "chave": "tipoDado",
+      "codigo": 6
+     },
+     "chaveDominio": "tipoCaractCor"
+    }
+   }
+  }]
+ }, {
+  "id": 73667,
+  "numeroPatrimonial": "000832",
+  "numeroPatrimonialCompleto": "000832",
+  "dominioSituacaoFisica": {
+   "id": 98,
+   "nome": "BOM",
+   "descricao": "Bom",
+   "chave": "tipoSituacaoFisica",
+   "codigo": 1
+  },
+  "dominioStatus": {
+   "id": 352,
+   "nome": "UTILIZADO",
+   "descricao": "Utilizado",
+   "chave": "tipoStatusBem",
+   "codigo": 1
+  },
+  "estruturaOrganizacionalAtual": {
+   "id": 5580,
+   "nome": "ESTRUTURA 1",
+   "sigla": "EST 1",
+   "codigo": "051428"
+  },
+  "material": {
+   "id": 4126,
+   "descricao": "MICROCOMPUTADOR - MICROCOMPUTADOR, HD 80GB, CO MOUSE ÓPTICO DE 2 BOTOES",
+   "codigoEDescricao": "1.29.1.21.7 - MICROCOMPUTADOR - MICROCOMPUTADOR, HD 80GB, CO MOUSE ÓPTICO DE 2 BOTOES",
+   "codigoDescricaoCodigoCC": "1.29.1.21.7 - MICROCOMPUTADOR - MICROCOMPUTADOR, HD 80GB, CO MOUSE ÓPTICO DE 2 BOTOES - 0201"
+  },
+  "caracteristicas": [{
+   "id": 128985,
+   "valorMaterialCaracteristica": "1760",
+   "materialCaracteristica": {
+    "id": 4634,
+    "caracteristica": {
+     "id": 20,
+     "codigo": "032",
+     "descricao": "MARCA",
+     "dominioTipoDado": {
+      "id": 16,
+      "nome": "TIPO_DOMINIO",
+      "descricao": "Tabela tipo domínio",
+      "chave": "tipoDado",
+      "codigo": 6
+     },
+     "chaveDominio": "tipoCaractMarca"
+    }
+   }
+  }, {
+   "id": 139329,
+   "valorMaterialCaracteristica": "M91P, SFF/17, 2600/4X2GB/500GB/W7PRO64/DVDRW//A, TIHD5450.",
+   "materialCaracteristica": {
+    "id": 4636,
+    "caracteristica": {
+     "id": 44,
+     "codigo": "031",
+     "descricao": "DESCRICAO",
+     "dominioTipoDado": {
+      "id": 11,
+      "nome": "TEXT_FIELD",
+      "descricao": "Texto curto",
+      "chave": "tipoDado",
+      "codigo": 1
+     }
+    }
+   }
+  }, {
+   "id": 312462,
+   "valorMaterialCaracteristica": "L1C4FH8",
+   "materialCaracteristica": {
+    "id": 4637,
+    "caracteristica": {
+     "id": 22,
+     "codigo": "034",
+     "descricao": "SERIE",
+     "dominioTipoDado": {
+      "id": 11,
+      "nome": "TEXT_FIELD",
+      "descricao": "Texto curto",
+      "chave": "tipoDado",
+      "codigo": 1
+     }
+    }
+   }
+  }, {
+   "id": 455282,
+   "materialCaracteristica": {
+    "id": 5333,
+    "caracteristica": {
+     "id": 52,
+     "codigo": "059",
+     "descricao": "NUMERO ANTIGO",
+     "dominioTipoDado": {
+      "id": 11,
+      "nome": "TEXT_FIELD",
+      "descricao": "Texto curto",
+      "chave": "tipoDado",
+      "codigo": 1
+     }
+    }
+   }
+  }, {
+   "id": 455283,
+   "materialCaracteristica": {
+    "id": 5735,
+    "caracteristica": {
+     "id": 51,
+     "codigo": "059",
+     "descricao": "COMUNICACOES",
+     "dominioTipoDado": {
+      "id": 11,
+      "nome": "TEXT_FIELD",
+      "descricao": "Texto curto",
+      "chave": "tipoDado",
+      "codigo": 1
+     }
+    }
+   }
+  }, {
+   "id": 526732,
+   "materialCaracteristica": {
+    "id": 4635,
+    "caracteristica": {
+     "id": 21,
+     "codigo": "033",
+     "descricao": "MODELO",
+     "dominioTipoDado": {
+      "id": 16,
+      "nome": "TIPO_DOMINIO",
+      "descricao": "Tabela tipo domínio",
+      "chave": "tipoDado",
+      "codigo": 6
+     },
+     "chaveDominio": "tipoCaractModelo"
+    }
+   }
+  }, {
+   "id": 551726,
+   "materialCaracteristica": {
+    "id": 6125,
+    "caracteristica": {
+     "id": 9,
+     "codigo": "009",
+     "descricao": "COR",
+     "dominioTipoDado": {
+      "id": 16,
+      "nome": "TIPO_DOMINIO",
+      "descricao": "Tabela tipo domínio",
+      "chave": "tipoDado",
+      "codigo": 6
+     },
+     "chaveDominio": "tipoCaractCor"
+    }
+   }
+  }]
+ }, {
+  "id": 46626,
+  "numeroPatrimonial": "000833",
+  "numeroPatrimonialCompleto": "000833",
+  "dominioSituacaoFisica": {
+   "id": 98,
+   "nome": "BOM",
+   "descricao": "Bom",
+   "chave": "tipoSituacaoFisica",
+   "codigo": 1
+  },
+  "dominioStatus": {
+   "id": 352,
+   "nome": "UTILIZADO",
+   "descricao": "Utilizado",
+   "chave": "tipoStatusBem",
+   "codigo": 1
+  },
+  "estruturaOrganizacionalAtual": {
+   "id": 5580,
+   "nome": "ESTRUTURA 1",
+   "sigla": "EST 1",
+   "codigo": "051428"
+  },
+  "material": {
+   "id": 3536,
+   "descricao": "MICROCOMPUTADOR - MICROCOMPUTADOR DELL",
+   "codigoEDescricao": "1.29.1.16.7 - MICROCOMPUTADOR - MICROCOMPUTADOR DELL",
+   "codigoDescricaoCodigoCC": "1.29.1.16.7 - MICROCOMPUTADOR - MICROCOMPUTADOR DELL - 0201"
+  },
+  "caracteristicas": [{
+   "id": 84410,
+   "materialCaracteristica": {
+    "id": 3813,
+    "codigo": "049",
+    "caracteristica": {
+     "id": 34,
+     "codigo": "049",
+     "descricao": "CAPACIDADE DE HD",
+     "dominioTipoDado": {
+      "id": 16,
+      "nome": "TIPO_DOMINIO",
+      "descricao": "Tabela tipo domínio",
+      "chave": "tipoDado",
+      "codigo": 6
+     },
+     "chaveDominio": "tipoCaractCapacidadeDeHd"
+    }
+   }
+  }, {
+   "id": 84729,
+   "materialCaracteristica": {
+    "id": 3815,
+    "codigo": "032",
+    "caracteristica": {
+     "id": 20,
+     "codigo": "032",
+     "descricao": "MARCA",
+     "dominioTipoDado": {
+      "id": 16,
+      "nome": "TIPO_DOMINIO",
+      "descricao": "Tabela tipo domínio",
+      "chave": "tipoDado",
+      "codigo": 6
+     },
+     "chaveDominio": "tipoCaractMarca"
+    }
+   }
+  }, {
+   "id": 85048,
+   "materialCaracteristica": {
+    "id": 3816,
+    "codigo": "050",
+    "caracteristica": {
+     "id": 35,
+     "codigo": "050",
+     "descricao": "MEMÓRIA",
+     "dominioTipoDado": {
+      "id": 16,
+      "nome": "TIPO_DOMINIO",
+      "descricao": "Tabela tipo domínio",
+      "chave": "tipoDado",
+      "codigo": 6
+     },
+     "chaveDominio": "tipoCaractMemoria"
+    }
+   }
+  }, {
+   "id": 85367,
+   "materialCaracteristica": {
+    "id": 3817,
+    "codigo": "033",
+    "caracteristica": {
+     "id": 21,
+     "codigo": "033",
+     "descricao": "MODELO",
+     "dominioTipoDado": {
+      "id": 16,
+      "nome": "TIPO_DOMINIO",
+      "descricao": "Tabela tipo domínio",
+      "chave": "tipoDado",
+      "codigo": 6
+     },
+     "chaveDominio": "tipoCaractModelo"
+    }
+   }
+  }, {
+   "id": 85686,
+   "materialCaracteristica": {
+    "id": 3818,
+    "codigo": "031",
+    "caracteristica": {
+     "id": 44,
+     "codigo": "031",
+     "descricao": "DESCRICAO",
+     "dominioTipoDado": {
+      "id": 11,
+      "nome": "TEXT_FIELD",
+      "descricao": "Texto curto",
+      "chave": "tipoDado",
+      "codigo": 1
+     }
+    }
+   }
+  }, {
+   "id": 103837,
+   "valorMaterialCaracteristica": "CWG4041",
+   "materialCaracteristica": {
+    "id": 3814,
+    "codigo": "034",
+    "caracteristica": {
+     "id": 22,
+     "codigo": "034",
+     "descricao": "SERIE",
+     "dominioTipoDado": {
+      "id": 11,
+      "nome": "TEXT_FIELD",
+      "descricao": "Texto curto",
+      "chave": "tipoDado",
+      "codigo": 1
+     }
+    }
+   }
+  }, {
+   "id": 548045,
+   "materialCaracteristica": {
+    "id": 6062,
+    "caracteristica": {
+     "id": 9,
+     "codigo": "009",
+     "descricao": "COR",
+     "dominioTipoDado": {
+      "id": 16,
+      "nome": "TIPO_DOMINIO",
+      "descricao": "Tabela tipo domínio",
+      "chave": "tipoDado",
+      "codigo": 6
+     },
+     "chaveDominio": "tipoCaractCor"
+    }
+   }
+  }]
+ }, {
+  "id": 74105,
+  "numeroPatrimonial": "000834",
+  "numeroPatrimonialCompleto": "000834",
+  "dominioSituacaoFisica": {
+   "id": 98,
+   "nome": "BOM",
+   "descricao": "Bom",
+   "chave": "tipoSituacaoFisica",
+   "codigo": 1
+  },
+  "dominioStatus": {
+   "id": 352,
+   "nome": "UTILIZADO",
+   "descricao": "Utilizado",
+   "chave": "tipoStatusBem",
+   "codigo": 1
+  },
+  "estruturaOrganizacionalAtual": {
+   "id": 5580,
+   "nome": "ESTRUTURA 1",
+   "sigla": "EST 1",
+   "codigo": "051428"
+  },
+  "material": {
+   "id": 4126,
+   "descricao": "MICROCOMPUTADOR - MICROCOMPUTADOR, HD 80GB, CO MOUSE ÓPTICO DE 2 BOTOES",
+   "codigoEDescricao": "1.29.1.21.7 - MICROCOMPUTADOR - MICROCOMPUTADOR, HD 80GB, CO MOUSE ÓPTICO DE 2 BOTOES",
+   "codigoDescricaoCodigoCC": "1.29.1.21.7 - MICROCOMPUTADOR - MICROCOMPUTADOR, HD 80GB, CO MOUSE ÓPTICO DE 2 BOTOES - 0201"
+  },
+  "caracteristicas": [{
+   "id": 138558,
+   "valorMaterialCaracteristica": "DELL OPTIPLEX 7010 MINITORRE. WINDOWS 7. MARCA: DELL",
+   "materialCaracteristica": {
+    "id": 4636,
+    "caracteristica": {
+     "id": 44,
+     "codigo": "031",
+     "descricao": "DESCRICAO",
+     "dominioTipoDado": {
+      "id": 11,
+      "nome": "TEXT_FIELD",
+      "descricao": "Texto curto",
+      "chave": "tipoDado",
+      "codigo": 1
+     }
+    }
+   }
+  }, {
+   "id": 144949,
+   "valorMaterialCaracteristica": "2J40GW1",
+   "materialCaracteristica": {
+    "id": 4637,
+    "caracteristica": {
+     "id": 22,
+     "codigo": "034",
+     "descricao": "SERIE",
+     "dominioTipoDado": {
+      "id": 11,
+      "nome": "TEXT_FIELD",
+      "descricao": "Texto curto",
+      "chave": "tipoDado",
+      "codigo": 1
+     }
+    }
+   }
+  }, {
+   "id": 312904,
+   "materialCaracteristica": {
+    "id": 5735,
+    "caracteristica": {
+     "id": 51,
+     "codigo": "059",
+     "descricao": "COMUNICACOES",
+     "dominioTipoDado": {
+      "id": 11,
+      "nome": "TEXT_FIELD",
+      "descricao": "Texto curto",
+      "chave": "tipoDado",
+      "codigo": 1
+     }
+    }
+   }
+  }, {
+   "id": 384284,
+   "materialCaracteristica": {
+    "id": 5333,
+    "caracteristica": {
+     "id": 52,
+     "codigo": "059",
+     "descricao": "NUMERO ANTIGO",
+     "dominioTipoDado": {
+      "id": 11,
+      "nome": "TEXT_FIELD",
+      "descricao": "Texto curto",
+      "chave": "tipoDado",
+      "codigo": 1
+     }
+    }
+   }
+  }, {
+   "id": 455723,
+   "materialCaracteristica": {
+    "id": 4635,
+    "caracteristica": {
+     "id": 21,
+     "codigo": "033",
+     "descricao": "MODELO",
+     "dominioTipoDado": {
+      "id": 16,
+      "nome": "TIPO_DOMINIO",
+      "descricao": "Tabela tipo domínio",
+      "chave": "tipoDado",
+      "codigo": 6
+     },
+     "chaveDominio": "tipoCaractModelo"
+    }
+   }
+  }, {
+   "id": 527172,
+   "materialCaracteristica": {
+    "id": 4634,
+    "caracteristica": {
+     "id": 20,
+     "codigo": "032",
+     "descricao": "MARCA",
+     "dominioTipoDado": {
+      "id": 16,
+      "nome": "TIPO_DOMINIO",
+      "descricao": "Tabela tipo domínio",
+      "chave": "tipoDado",
+      "codigo": 6
+     },
+     "chaveDominio": "tipoCaractMarca"
+    }
+   }
+  }, {
+   "id": 551794,
+   "materialCaracteristica": {
+    "id": 6125,
+    "caracteristica": {
+     "id": 9,
+     "codigo": "009",
+     "descricao": "COR",
+     "dominioTipoDado": {
+      "id": 16,
+      "nome": "TIPO_DOMINIO",
+      "descricao": "Tabela tipo domínio",
+      "chave": "tipoDado",
+      "codigo": 6
+     },
+     "chaveDominio": "tipoCaractCor"
+    }
+   }
+  }]
+ }, {
+  "id": 74554,
+  "numeroPatrimonial": "000835",
+  "numeroPatrimonialCompleto": "000835",
+  "dominioSituacaoFisica": {
+   "id": 98,
+   "nome": "BOM",
+   "descricao": "Bom",
+   "chave": "tipoSituacaoFisica",
+   "codigo": 1
+  },
+  "dominioStatus": {
+   "id": 352,
+   "nome": "UTILIZADO",
+   "descricao": "Utilizado",
+   "chave": "tipoStatusBem",
+   "codigo": 1
+  },
+  "estruturaOrganizacionalAtual": {
+   "id": 5580,
+   "nome": "ESTRUTURA 1",
+   "sigla": "EST 1",
+   "codigo": "051428"
+  },
+  "material": {
+   "id": 4126,
+   "descricao": "MICROCOMPUTADOR - MICROCOMPUTADOR, HD 80GB, CO MOUSE ÓPTICO DE 2 BOTOES",
+   "codigoEDescricao": "1.29.1.21.7 - MICROCOMPUTADOR - MICROCOMPUTADOR, HD 80GB, CO MOUSE ÓPTICO DE 2 BOTOES",
+   "codigoDescricaoCodigoCC": "1.29.1.21.7 - MICROCOMPUTADOR - MICROCOMPUTADOR, HD 80GB, CO MOUSE ÓPTICO DE 2 BOTOES - 0201"
+  },
+  "caracteristicas": [{
+   "id": 140949,
+   "valorMaterialCaracteristica": "DELL OPTIPLEX 7010 MINITORRE. WINDOWS 7. MARCA: DELL",
+   "materialCaracteristica": {
+    "id": 4636,
+    "caracteristica": {
+     "id": 44,
+     "codigo": "031",
+     "descricao": "DESCRICAO",
+     "dominioTipoDado": {
+      "id": 11,
+      "nome": "TEXT_FIELD",
+      "descricao": "Texto curto",
+      "chave": "tipoDado",
+      "codigo": 1
+     }
+    }
+   }
+  }, {
+   "id": 145398,
+   "valorMaterialCaracteristica": "EK525W1",
+   "materialCaracteristica": {
+    "id": 4637,
+    "caracteristica": {
+     "id": 22,
+     "codigo": "034",
+     "descricao": "SERIE",
+     "dominioTipoDado": {
+      "id": 11,
+      "nome": "TEXT_FIELD",
+      "descricao": "Texto curto",
+      "chave": "tipoDado",
+      "codigo": 1
+     }
+    }
+   }
+  }, {
+   "id": 313355,
+   "materialCaracteristica": {
+    "id": 4634,
+    "caracteristica": {
+     "id": 20,
+     "codigo": "032",
+     "descricao": "MARCA",
+     "dominioTipoDado": {
+      "id": 16,
+      "nome": "TIPO_DOMINIO",
+      "descricao": "Tabela tipo domínio",
+      "chave": "tipoDado",
+      "codigo": 6
+     },
+     "chaveDominio": "tipoCaractMarca"
+    }
+   }
+  }, {
+   "id": 384732,
+   "materialCaracteristica": {
+    "id": 5735,
+    "caracteristica": {
+     "id": 51,
+     "codigo": "059",
+     "descricao": "COMUNICACOES",
+     "dominioTipoDado": {
+      "id": 11,
+      "nome": "TEXT_FIELD",
+      "descricao": "Texto curto",
+      "chave": "tipoDado",
+      "codigo": 1
+     }
+    }
+   }
+  }, {
+   "id": 456172,
+   "materialCaracteristica": {
+    "id": 5333,
+    "caracteristica": {
+     "id": 52,
+     "codigo": "059",
+     "descricao": "NUMERO ANTIGO",
+     "dominioTipoDado": {
+      "id": 11,
+      "nome": "TEXT_FIELD",
+      "descricao": "Texto curto",
+      "chave": "tipoDado",
+      "codigo": 1
+     }
+    }
+   }
+  }, {
+   "id": 527620,
+   "materialCaracteristica": {
+    "id": 4635,
+    "caracteristica": {
+     "id": 21,
+     "codigo": "033",
+     "descricao": "MODELO",
+     "dominioTipoDado": {
+      "id": 16,
+      "nome": "TIPO_DOMINIO",
+      "descricao": "Tabela tipo domínio",
+      "chave": "tipoDado",
+      "codigo": 6
+     },
+     "chaveDominio": "tipoCaractModelo"
+    }
+   }
+  }, {
+   "id": 551855,
+   "materialCaracteristica": {
+    "id": 6125,
+    "caracteristica": {
+     "id": 9,
+     "codigo": "009",
+     "descricao": "COR",
+     "dominioTipoDado": {
+      "id": 16,
+      "nome": "TIPO_DOMINIO",
+      "descricao": "Tabela tipo domínio",
+      "chave": "tipoDado",
+      "codigo": 6
+     },
+     "chaveDominio": "tipoCaractCor"
+    }
+   }
+  }]
+ }, {
+  "id": 73866,
+  "numeroPatrimonial": "000836",
+  "numeroPatrimonialCompleto": "000836",
+  "dominioSituacaoFisica": {
+   "id": 98,
+   "nome": "BOM",
+   "descricao": "Bom",
+   "chave": "tipoSituacaoFisica",
+   "codigo": 1
+  },
+  "dominioStatus": {
+   "id": 352,
+   "nome": "UTILIZADO",
+   "descricao": "Utilizado",
+   "chave": "tipoStatusBem",
+   "codigo": 1
+  },
+  "estruturaOrganizacionalAtual": {
+   "id": 5580,
+   "nome": "ESTRUTURA 1",
+   "sigla": "EST 1",
+   "codigo": "051428"
+  },
+  "material": {
+   "id": 4126,
+   "descricao": "MICROCOMPUTADOR - MICROCOMPUTADOR, HD 80GB, CO MOUSE ÓPTICO DE 2 BOTOES",
+   "codigoEDescricao": "1.29.1.21.7 - MICROCOMPUTADOR - MICROCOMPUTADOR, HD 80GB, CO MOUSE ÓPTICO DE 2 BOTOES",
+   "codigoDescricaoCodigoCC": "1.29.1.21.7 - MICROCOMPUTADOR - MICROCOMPUTADOR, HD 80GB, CO MOUSE ÓPTICO DE 2 BOTOES - 0201"
+  },
+  "caracteristicas": [{
+   "id": 138799,
+   "valorMaterialCaracteristica": "DELL OPTIPLEX 7010 MINITORRE. WINDOWS 7. MARCA: DELL",
+   "materialCaracteristica": {
+    "id": 4636,
+    "caracteristica": {
+     "id": 44,
+     "codigo": "031",
+     "descricao": "DESCRICAO",
+     "dominioTipoDado": {
+      "id": 11,
+      "nome": "TEXT_FIELD",
+      "descricao": "Texto curto",
+      "chave": "tipoDado",
+      "codigo": 1
+     }
+    }
+   }
+  }, {
+   "id": 144719,
+   "valorMaterialCaracteristica": "GU5Z5W1",
+   "materialCaracteristica": {
+    "id": 4637,
+    "caracteristica": {
+     "id": 22,
+     "codigo": "034",
+     "descricao": "SERIE",
+     "dominioTipoDado": {
+      "id": 11,
+      "nome": "TEXT_FIELD",
+      "descricao": "Texto curto",
+      "chave": "tipoDado",
+      "codigo": 1
+     }
+    }
+   }
+  }, {
+   "id": 312663,
+   "materialCaracteristica": {
+    "id": 4634,
+    "caracteristica": {
+     "id": 20,
+     "codigo": "032",
+     "descricao": "MARCA",
+     "dominioTipoDado": {
+      "id": 16,
+      "nome": "TIPO_DOMINIO",
+      "descricao": "Tabela tipo domínio",
+      "chave": "tipoDado",
+      "codigo": 6
+     },
+     "chaveDominio": "tipoCaractMarca"
+    }
+   }
+  }, {
+   "id": 455480,
+   "materialCaracteristica": {
+    "id": 5333,
+    "caracteristica": {
+     "id": 52,
+     "codigo": "059",
+     "descricao": "NUMERO ANTIGO",
+     "dominioTipoDado": {
+      "id": 11,
+      "nome": "TEXT_FIELD",
+      "descricao": "Texto curto",
+      "chave": "tipoDado",
+      "codigo": 1
+     }
+    }
+   }
+  }, {
+   "id": 455481,
+   "materialCaracteristica": {
+    "id": 5735,
+    "caracteristica": {
+     "id": 51,
+     "codigo": "059",
+     "descricao": "COMUNICACOES",
+     "dominioTipoDado": {
+      "id": 11,
+      "nome": "TEXT_FIELD",
+      "descricao": "Texto curto",
+      "chave": "tipoDado",
+      "codigo": 1
+     }
+    }
+   }
+  }, {
+   "id": 526931,
+   "materialCaracteristica": {
+    "id": 4635,
+    "caracteristica": {
+     "id": 21,
+     "codigo": "033",
+     "descricao": "MODELO",
+     "dominioTipoDado": {
+      "id": 16,
+      "nome": "TIPO_DOMINIO",
+      "descricao": "Tabela tipo domínio",
+      "chave": "tipoDado",
+      "codigo": 6
+     },
+     "chaveDominio": "tipoCaractModelo"
+    }
+   }
+  }, {
+   "id": 551756,
+   "materialCaracteristica": {
+    "id": 6125,
+    "caracteristica": {
+     "id": 9,
+     "codigo": "009",
+     "descricao": "COR",
+     "dominioTipoDado": {
+      "id": 16,
+      "nome": "TIPO_DOMINIO",
+      "descricao": "Tabela tipo domínio",
+      "chave": "tipoDado",
+      "codigo": 6
+     },
+     "chaveDominio": "tipoCaractCor"
+    }
+   }
+  }]
+ }, {
+  "id": 74028,
+  "numeroPatrimonial": "000837",
+  "numeroPatrimonialCompleto": "000837",
+  "dominioSituacaoFisica": {
+   "id": 98,
+   "nome": "BOM",
+   "descricao": "Bom",
+   "chave": "tipoSituacaoFisica",
+   "codigo": 1
+  },
+  "dominioStatus": {
+   "id": 352,
+   "nome": "UTILIZADO",
+   "descricao": "Utilizado",
+   "chave": "tipoStatusBem",
+   "codigo": 1
+  },
+  "estruturaOrganizacionalAtual": {
+   "id": 5580,
+   "nome": "ESTRUTURA 1",
+   "sigla": "EST 1",
+   "codigo": "051428"
+  },
+  "material": {
+   "id": 4126,
+   "descricao": "MICROCOMPUTADOR - MICROCOMPUTADOR, HD 80GB, CO MOUSE ÓPTICO DE 2 BOTOES",
+   "codigoEDescricao": "1.29.1.21.7 - MICROCOMPUTADOR - MICROCOMPUTADOR, HD 80GB, CO MOUSE ÓPTICO DE 2 BOTOES",
+   "codigoDescricaoCodigoCC": "1.29.1.21.7 - MICROCOMPUTADOR - MICROCOMPUTADOR, HD 80GB, CO MOUSE ÓPTICO DE 2 BOTOES - 0201"
+  },
+  "caracteristicas": [{
+   "id": 138637,
+   "valorMaterialCaracteristica": "DELL OPTIPLEX 7010 MINITORRE. WINDOWS 7. MARCA: DELL",
+   "materialCaracteristica": {
+    "id": 4636,
+    "caracteristica": {
+     "id": 44,
+     "codigo": "031",
+     "descricao": "DESCRICAO",
+     "dominioTipoDado": {
+      "id": 11,
+      "nome": "TEXT_FIELD",
+      "descricao": "Texto curto",
+      "chave": "tipoDado",
+      "codigo": 1
+     }
+    }
+   }
+  }, {
+   "id": 144872,
+   "valorMaterialCaracteristica": "GZ8U5W1",
+   "materialCaracteristica": {
+    "id": 4637,
+    "caracteristica": {
+     "id": 22,
+     "codigo": "034",
+     "descricao": "SERIE",
+     "dominioTipoDado": {
+      "id": 11,
+      "nome": "TEXT_FIELD",
+      "descricao": "Texto curto",
+      "chave": "tipoDado",
+      "codigo": 1
+     }
+    }
+   }
+  }, {
+   "id": 312828,
+   "materialCaracteristica": {
+    "id": 5735,
+    "caracteristica": {
+     "id": 51,
+     "codigo": "059",
+     "descricao": "COMUNICACOES",
+     "dominioTipoDado": {
+      "id": 11,
+      "nome": "TEXT_FIELD",
+      "descricao": "Texto curto",
+      "chave": "tipoDado",
+      "codigo": 1
+     }
+    }
+   }
+  }, {
+   "id": 384207,
+   "materialCaracteristica": {
+    "id": 5333,
+    "caracteristica": {
+     "id": 52,
+     "codigo": "059",
+     "descricao": "NUMERO ANTIGO",
+     "dominioTipoDado": {
+      "id": 11,
+      "nome": "TEXT_FIELD",
+      "descricao": "Texto curto",
+      "chave": "tipoDado",
+      "codigo": 1
+     }
+    }
+   }
+  }, {
+   "id": 455644,
+   "materialCaracteristica": {
+    "id": 4635,
+    "caracteristica": {
+     "id": 21,
+     "codigo": "033",
+     "descricao": "MODELO",
+     "dominioTipoDado": {
+      "id": 16,
+      "nome": "TIPO_DOMINIO",
+      "descricao": "Tabela tipo domínio",
+      "chave": "tipoDado",
+      "codigo": 6
+     },
+     "chaveDominio": "tipoCaractModelo"
+    }
+   }
+  }, {
+   "id": 527096,
+   "materialCaracteristica": {
+    "id": 4634,
+    "caracteristica": {
+     "id": 20,
+     "codigo": "032",
+     "descricao": "MARCA",
+     "dominioTipoDado": {
+      "id": 16,
+      "nome": "TIPO_DOMINIO",
+      "descricao": "Tabela tipo domínio",
+      "chave": "tipoDado",
+      "codigo": 6
+     },
+     "chaveDominio": "tipoCaractMarca"
+    }
+   }
+  }, {
+   "id": 551780,
+   "materialCaracteristica": {
+    "id": 6125,
+    "caracteristica": {
+     "id": 9,
+     "codigo": "009",
+     "descricao": "COR",
+     "dominioTipoDado": {
+      "id": 16,
+      "nome": "TIPO_DOMINIO",
+      "descricao": "Tabela tipo domínio",
+      "chave": "tipoDado",
+      "codigo": 6
+     },
+     "chaveDominio": "tipoCaractCor"
+    }
+   }
+  }]
+ }, {
+  "id": 74279,
+  "numeroPatrimonial": "000838",
+  "numeroPatrimonialCompleto": "000838",
+  "dominioSituacaoFisica": {
+   "id": 98,
+   "nome": "BOM",
+   "descricao": "Bom",
+   "chave": "tipoSituacaoFisica",
+   "codigo": 1
+  },
+  "dominioStatus": {
+   "id": 352,
+   "nome": "UTILIZADO",
+   "descricao": "Utilizado",
+   "chave": "tipoStatusBem",
+   "codigo": 1
+  },
+  "estruturaOrganizacionalAtual": {
+   "id": 5580,
+   "nome": "ESTRUTURA 1",
+   "sigla": "EST 1",
+   "codigo": "051428"
+  },
+  "material": {
+   "id": 4126,
+   "descricao": "MICROCOMPUTADOR - MICROCOMPUTADOR, HD 80GB, CO MOUSE ÓPTICO DE 2 BOTOES",
+   "codigoEDescricao": "1.29.1.21.7 - MICROCOMPUTADOR - MICROCOMPUTADOR, HD 80GB, CO MOUSE ÓPTICO DE 2 BOTOES",
+   "codigoDescricaoCodigoCC": "1.29.1.21.7 - MICROCOMPUTADOR - MICROCOMPUTADOR, HD 80GB, CO MOUSE ÓPTICO DE 2 BOTOES - 0201"
+  },
+  "caracteristicas": [{
+   "id": 141226,
+   "valorMaterialCaracteristica": "DELL OPTIPLEX 7010 MINITORRE. WINDOWS 7. MARCA: DELL",
+   "materialCaracteristica": {
+    "id": 4636,
+    "caracteristica": {
+     "id": 44,
+     "codigo": "031",
+     "descricao": "DESCRICAO",
+     "dominioTipoDado": {
+      "id": 11,
+      "nome": "TEXT_FIELD",
+      "descricao": "Texto curto",
+      "chave": "tipoDado",
+      "codigo": 1
+     }
+    }
+   }
+  }, {
+   "id": 145123,
+   "valorMaterialCaracteristica": "JD7X5W1",
+   "materialCaracteristica": {
+    "id": 4637,
+    "caracteristica": {
+     "id": 22,
+     "codigo": "034",
+     "descricao": "SERIE",
+     "dominioTipoDado": {
+      "id": 11,
+      "nome": "TEXT_FIELD",
+      "descricao": "Texto curto",
+      "chave": "tipoDado",
+      "codigo": 1
+     }
+    }
+   }
+  }, {
+   "id": 313076,
+   "materialCaracteristica": {
+    "id": 5333,
+    "caracteristica": {
+     "id": 52,
+     "codigo": "059",
+     "descricao": "NUMERO ANTIGO",
+     "dominioTipoDado": {
+      "id": 11,
+      "nome": "TEXT_FIELD",
+      "descricao": "Texto curto",
+      "chave": "tipoDado",
+      "codigo": 1
+     }
+    }
+   }
+  }, {
+   "id": 313077,
+   "materialCaracteristica": {
+    "id": 5735,
+    "caracteristica": {
+     "id": 51,
+     "codigo": "059",
+     "descricao": "COMUNICACOES",
+     "dominioTipoDado": {
+      "id": 11,
+      "nome": "TEXT_FIELD",
+      "descricao": "Texto curto",
+      "chave": "tipoDado",
+      "codigo": 1
+     }
+    }
+   }
+  }, {
+   "id": 384458,
+   "materialCaracteristica": {
+    "id": 4635,
+    "caracteristica": {
+     "id": 21,
+     "codigo": "033",
+     "descricao": "MODELO",
+     "dominioTipoDado": {
+      "id": 16,
+      "nome": "TIPO_DOMINIO",
+      "descricao": "Tabela tipo domínio",
+      "chave": "tipoDado",
+      "codigo": 6
+     },
+     "chaveDominio": "tipoCaractModelo"
+    }
+   }
+  }, {
+   "id": 455899,
+   "materialCaracteristica": {
+    "id": 4634,
+    "caracteristica": {
+     "id": 20,
+     "codigo": "032",
+     "descricao": "MARCA",
+     "dominioTipoDado": {
+      "id": 16,
+      "nome": "TIPO_DOMINIO",
+      "descricao": "Tabela tipo domínio",
+      "chave": "tipoDado",
+      "codigo": 6
+     },
+     "chaveDominio": "tipoCaractMarca"
+    }
+   }
+  }, {
+   "id": 551816,
+   "materialCaracteristica": {
+    "id": 6125,
+    "caracteristica": {
+     "id": 9,
+     "codigo": "009",
+     "descricao": "COR",
+     "dominioTipoDado": {
+      "id": 16,
+      "nome": "TIPO_DOMINIO",
+      "descricao": "Tabela tipo domínio",
+      "chave": "tipoDado",
+      "codigo": 6
+     },
+     "chaveDominio": "tipoCaractCor"
+    }
+   }
+  }]
+ }, {
+  "id": 35958,
+  "numeroPatrimonial": "000839",
+  "numeroPatrimonialCompleto": "000839",
+  "dominioSituacaoFisica": {
+   "id": 98,
+   "nome": "BOM",
+   "descricao": "Bom",
+   "chave": "tipoSituacaoFisica",
+   "codigo": 1
+  },
+  "dominioStatus": {
+   "id": 352,
+   "nome": "UTILIZADO",
+   "descricao": "Utilizado",
+   "chave": "tipoStatusBem",
+   "codigo": 1
+  },
+  "estruturaOrganizacionalAtual": {
+   "id": 5580,
+   "nome": "ESTRUTURA 1",
+   "sigla": "EST 1",
+   "codigo": "051428"
+  },
+  "material": {
+   "id": 3073,
+   "descricao": "MICROCOMPUTADOR - HD 320GB, CM MOUSE ÓPTICO, DE 2 BOTOES.",
+   "codigoEDescricao": "1.29.1.16.9 - MICROCOMPUTADOR - HD 320GB, CM MOUSE ÓPTICO, DE 2 BOTOES.",
+   "codigoDescricaoCodigoCC": "1.29.1.16.9 - MICROCOMPUTADOR - HD 320GB, CM MOUSE ÓPTICO, DE 2 BOTOES. - 0201"
+  },
+  "caracteristicas": [{
+   "id": 71237,
+   "materialCaracteristica": {
+    "id": 3515,
+    "caracteristica": {
+     "id": 21,
+     "codigo": "033",
+     "descricao": "MODELO",
+     "dominioTipoDado": {
+      "id": 16,
+      "nome": "TIPO_DOMINIO",
+      "descricao": "Tabela tipo domínio",
+      "chave": "tipoDado",
+      "codigo": 6
+     },
+     "chaveDominio": "tipoCaractModelo"
+    }
+   }
+  }, {
+   "id": 72140,
+   "materialCaracteristica": {
+    "id": 3516,
+    "caracteristica": {
+     "id": 20,
+     "codigo": "032",
+     "descricao": "MARCA",
+     "dominioTipoDado": {
+      "id": 16,
+      "nome": "TIPO_DOMINIO",
+      "descricao": "Tabela tipo domínio",
+      "chave": "tipoDado",
+      "codigo": 6
+     },
+     "chaveDominio": "tipoCaractMarca"
+    }
+   }
+  }, {
+   "id": 73049,
+   "materialCaracteristica": {
+    "id": 3517,
+    "caracteristica": {
+     "id": 35,
+     "codigo": "050",
+     "descricao": "MEMÓRIA",
+     "dominioTipoDado": {
+      "id": 16,
+      "nome": "TIPO_DOMINIO",
+      "descricao": "Tabela tipo domínio",
+      "chave": "tipoDado",
+      "codigo": 6
+     },
+     "chaveDominio": "tipoCaractMemoria"
+    }
+   }
+  }, {
+   "id": 73941,
+   "materialCaracteristica": {
+    "id": 3518,
+    "caracteristica": {
+     "id": 34,
+     "codigo": "049",
+     "descricao": "CAPACIDADE DE HD",
+     "dominioTipoDado": {
+      "id": 16,
+      "nome": "TIPO_DOMINIO",
+      "descricao": "Tabela tipo domínio",
+      "chave": "tipoDado",
+      "codigo": 6
+     },
+     "chaveDominio": "tipoCaractCapacidadeDeHd"
+    }
+   }
+  }, {
+   "id": 74833,
+   "materialCaracteristica": {
+    "id": 3519,
+    "caracteristica": {
+     "id": 44,
+     "codigo": "031",
+     "descricao": "DESCRICAO",
+     "dominioTipoDado": {
+      "id": 11,
+      "nome": "TEXT_FIELD",
+      "descricao": "Texto curto",
+      "chave": "tipoDado",
+      "codigo": 1
+     }
+    }
+   }
+  }, {
+   "id": 100577,
+   "valorMaterialCaracteristica": "2NPZ851",
+   "materialCaracteristica": {
+    "id": 3514,
+    "caracteristica": {
+     "id": 22,
+     "codigo": "034",
+     "descricao": "SERIE",
+     "dominioTipoDado": {
+      "id": 11,
+      "nome": "TEXT_FIELD",
+      "descricao": "Texto curto",
+      "chave": "tipoDado",
+      "codigo": 1
+     }
+    }
+   }
+  }, {
+   "id": 422719,
+   "materialCaracteristica": {
+    "id": 3603,
+    "caracteristica": {
+     "id": 40,
+     "codigo": "057",
+     "descricao": "NOME NA REDE",
+     "dominioTipoDado": {
+      "id": 11,
+      "nome": "TEXT_FIELD",
+      "descricao": "Texto curto",
+      "chave": "tipoDado",
+      "codigo": 1
+     }
+    }
+   }
+  }, {
+   "id": 542453,
+   "materialCaracteristica": {
+    "id": 6032,
+    "caracteristica": {
+     "id": 9,
+     "codigo": "009",
+     "descricao": "COR",
+     "dominioTipoDado": {
+      "id": 16,
+      "nome": "TIPO_DOMINIO",
+      "descricao": "Tabela tipo domínio",
+      "chave": "tipoDado",
+      "codigo": 6
+     },
+     "chaveDominio": "tipoCaractCor"
+    }
+   }
+  }]
+ }]
+}

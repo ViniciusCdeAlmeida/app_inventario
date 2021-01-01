@@ -1,8 +1,9 @@
+import 'package:GRPInventario/utils/index_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 import 'package:GRPInventario/models/index_models.dart';
-import 'package:GRPInventario/components/stores/index_store.dart';
+import 'package:GRPInventario/providers/stores/index_store.dart';
 
 class ConexaoEdicaoScreen extends StatefulWidget {
   static const routeName = '/ConexaoEdicaoScreen';
@@ -76,7 +77,7 @@ class _ConexaoEdicaoScreenState extends State<ConexaoEdicaoScreen> {
         title: const Text('Conexão'),
         actions: <Widget>[
           IconButton(
-            key: ValueKey('conexaoConclusaoButton'),
+            key: Key(Keys.conexaoConclusaoButton),
             icon: Icon(Icons.save),
             onPressed: _salvarForm,
           ),
@@ -98,7 +99,7 @@ class _ConexaoEdicaoScreenState extends State<ConexaoEdicaoScreen> {
                   child: ListView(
                     children: <Widget>[
                       TextFormField(
-                        key: ValueKey('conexaoAdicaoNomeForm'),
+                        key: Key(Keys.conexaoAdicaoNomeForm),
                         initialValue: _conexaoStore.conexao == null
                             ? null
                             : _conexaoStore.conexao.nome,
@@ -126,7 +127,7 @@ class _ConexaoEdicaoScreenState extends State<ConexaoEdicaoScreen> {
                         },
                       ),
                       TextFormField(
-                        key: ValueKey('conexaoAdicaoUrlForm'),
+                        key: Key(Keys.conexaoAdicaoUrlForm),
                         initialValue: _conexaoStore.conexao == null
                             ? null
                             : _conexaoStore.conexao.url,
@@ -159,7 +160,7 @@ class _ConexaoEdicaoScreenState extends State<ConexaoEdicaoScreen> {
                           children: <Widget>[
                             Text("Ativa"),
                             Switch(
-                              key: ValueKey('conexaoAdicaoSwitchForm'),
+                              key: Key(Keys.conexaoAdicaoSwitchForm),
                               value: _conexaoStore.conexao == null
                                   ? _valoresIniciais.ativo
                                   : _conexaoStore.conexao.ativo,

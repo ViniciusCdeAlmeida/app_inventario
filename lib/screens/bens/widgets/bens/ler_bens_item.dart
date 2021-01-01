@@ -62,7 +62,6 @@ class _LerBensItensState extends State<LerBensItens> {
                     key: _form,
                     child: TextFormField(
                       key: Key('numeroPatrimonialText'),
-                      // initialValue: _valorInicial,
                       textInputAction: TextInputAction.done,
                       autofocus: true,
                       controller: _controller,

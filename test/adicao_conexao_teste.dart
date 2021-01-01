@@ -40,13 +40,13 @@
 //        * received will be able to mock that a certain request returns a
 //        * certain value.
 //        */
-//       driver.requestData("login");
+// driver.requestData("login");
 
-//       SerializableFinder email = findByKey("email");
-//       SerializableFinder pwd = findByKey("pwd");
+// SerializableFinder email = findByKey("email");
+// SerializableFinder pwd = findByKey("pwd");
 
-//       await type(email, "thisisatest@thisisatest.com");
-//       await type(pwd, "thisisatest");
+// await type(email, "thisisatest@thisisatest.com");
+// await type(pwd, "thisisatest");
 
 //       SerializableFinder button = findByKey("button");
 //       await tap(button);

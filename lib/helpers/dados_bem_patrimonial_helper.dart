@@ -1,7 +1,9 @@
+///{@category Helpers}
 import 'package:GRPInventario/database/database_moor.dart';
 
 import 'package:GRPInventario/models/index_models.dart';
 
+/// Converte o resultado de uma lista de [DadosBemPatrimoniaisDBData] em uma lista de objetos [DadosBensPatrimoniais].
 List<DadosBensPatrimoniais> helperDadosBemPatrimonialLista(
     List<DadosBemPatrimoniaisDBData> listaBemPatrimonial) {
   if (listaBemPatrimonial != null) {
@@ -28,6 +30,7 @@ List<DadosBensPatrimoniais> helperDadosBemPatrimonialLista(
     return null;
 }
 
+/// Converte o resultado de uma lista de [InventarioBemPatrimonialDBData] que estão fora do espelho em uma lista [DadosBensPatrimoniais].
 List<DadosBensPatrimoniais> helperDadosBemPatrimonialForaEspelhoLista(
     List<InventarioBemPatrimonialDBData> listaBemPatrimonial,
     int idEstruturaOrganizacional) {
@@ -53,6 +56,7 @@ List<DadosBensPatrimoniais> helperDadosBemPatrimonialForaEspelhoLista(
     return null;
 }
 
+/// Converte o resultado de [DadosBemPatrimoniaisDBData] em um objeto [DadosBensPatrimoniais].
 DadosBensPatrimoniais helperDadoBemPatrimonial(
     DadosBemPatrimoniaisDBData dadosBemPatrimonial) {
   if (dadosBemPatrimonial != null) {
@@ -72,27 +76,6 @@ DadosBensPatrimoniais helperDadoBemPatrimonial(
       idEstruturaOrganizacional: dadosBemPatrimonial.idEstruturaOrganizacional,
       numeroPatrimonialCompleto: dadosBemPatrimonial.numeroPatrimonialCompleto,
       inventariado: dadosBemPatrimonial.inventariado,
-    );
-  } else
-    return null;
-}
-
-BemPatrimonial helperDadoBemPatrimonial2(
-    BensPatrimoniaisDBData bemPatrimonial) {
-  if (bemPatrimonial != null) {
-    return BemPatrimonial(
-      id: bemPatrimonial.id,
-      caracteristicas: bemPatrimonial.caracteristicas,
-      dadosBensPatrimoniais: bemPatrimonial.dadosBensPatrimoniais,
-      dominioSituacaoFisica: bemPatrimonial.dominioSituacaoFisica,
-      dominioStatus: bemPatrimonial.dominioStatus,
-      estruturaOrganizacionalAtual: bemPatrimonial.estruturaOrganizacionalAtual,
-      material: bemPatrimonial.material,
-      numeroPatrimonial: bemPatrimonial.numeroPatrimonial,
-      numeroPatrimonialCompleto: bemPatrimonial.numeroPatrimonialCompleto,
-      numeroPatrimonialCompletoAntigo:
-          bemPatrimonial.numeroPatrimonialCompletoAntigo,
-      inventariado: bemPatrimonial.inventariado,
     );
   } else
     return null;

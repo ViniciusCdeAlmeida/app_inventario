@@ -1,6 +1,8 @@
+///{@category Helpers}
 import 'package:GRPInventario/database/database_moor.dart';
 import 'package:GRPInventario/models/index_models.dart';
 
+/// Converte [UnidadesGestorasDBData] em um objeto [Organizacoes].
 Organizacoes helperOrganizacoes(UnidadesGestorasDBData organizacoes) {
   if (organizacoes != null) {
     return Organizacoes(
@@ -11,6 +13,7 @@ Organizacoes helperOrganizacoes(UnidadesGestorasDBData organizacoes) {
     return null;
 }
 
+/// Converte o resultado de uma lista de [UnidadesGestorasDBData] em uma lista [Organizacoes].
 List<Organizacoes> helperOrganizacoesListaDB(
     List<UnidadesGestorasDBData> organizacoes) {
   if (organizacoes != null) {
@@ -26,6 +29,7 @@ List<Organizacoes> helperOrganizacoesListaDB(
     return null;
 }
 
+/// Converte o resultado de um [Map] vinda de um Json em uma lista [Organizacoes].
 List<Organizacoes> helperOrganizacoesLista(List organizacoes) {
   if (organizacoes != null) {
     return List<Organizacoes>.from(

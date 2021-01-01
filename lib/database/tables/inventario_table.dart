@@ -1,6 +1,7 @@
 import 'package:GRPInventario/database/converters/index_converters.dart';
 import 'package:moor/moor.dart';
 
+/// Responsável por criar a tabela [InventarioDB] e seus campos no banco de dados.
 class InventarioDB extends Table {
   IntColumn get id => integer()();
   IntColumn get idOrganizacao => integer().nullable()();

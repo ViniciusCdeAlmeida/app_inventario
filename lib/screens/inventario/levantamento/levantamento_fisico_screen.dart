@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 
 import 'package:GRPInventario/main.dart';
 import 'package:GRPInventario/screens/index_screens.dart';
-import 'package:GRPInventario/components/stores/index_store.dart';
+import 'package:GRPInventario/providers/stores/index_store.dart';
 import 'package:GRPInventario/utils/index_utils.dart';
 import 'package:GRPInventario/widgets/index_widget.dart';
 
@@ -155,7 +155,7 @@ class _LevantamentoFisicoScreenState extends State<LevantamentoFisicoScreen> {
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
-        title: Text('Levantamentos'),
+        title: const Text('Levantamentos'),
         actions: <Widget>[
           GestureDetector(
             child: PopupMenuButton<Acoes>(

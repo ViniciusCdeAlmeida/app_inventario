@@ -1,7 +1,6 @@
 import 'package:GRPInventario/screens/login/widgets/login/login_card.dart';
 import 'package:GRPInventario/widgets/index_widget.dart';
 import 'package:flutter/material.dart';
-// import 'dart:math';
 
 class LoginScreen extends StatefulWidget {
   static const routeName = '/home';
@@ -11,12 +10,13 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldState> _scaffoldLoginScreen =
+      GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     final deviceSize = MediaQuery.of(context).size;
     return Scaffold(
-      key: _scaffoldKey,
+      key: _scaffoldLoginScreen,
       appBar: AppBar(
         title: const Text('Inventário - GRP'),
         leading: IconButton(
@@ -24,7 +24,7 @@ class _LoginScreenState extends State<LoginScreen> {
               Icons.view_headline,
               key: ValueKey('menuDrawer'),
             ),
-            onPressed: () => _scaffoldKey.currentState.openDrawer()),
+            onPressed: () => _scaffoldLoginScreen.currentState.openDrawer()),
       ),
       drawer: MenuDrawer(),
       body: Stack(
@@ -57,14 +57,6 @@ class _LoginScreenState extends State<LoginScreen> {
                           vertical: 8.0, horizontal: 94.0),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
-                        // color: Colors.deepOrange.shade900,
-                        // boxShadow: [
-                        //   BoxShadow(
-                        //     blurRadius: 8,
-                        //     color: Colors.black26,
-                        //     offset: Offset(0, 2),
-                        //   ),
-                        // ],
                       ),
                       child: const Text(
                         'App Inventario',

@@ -6,18 +6,22 @@ import 'package:GRPInventario/database/tables/index_tables.dart';
 part 'dados_bem_patrimoniais_dao.g.dart';
 
 @UseDao(tables: [DadosBemPatrimoniaisDB])
+
+/// Classe responsável por gerar as operações de banco de dados da tabela [DadosBemPatrimoniaisDB].
 class DadosBemPatrimoniaisDao extends DatabaseAccessor<AppDatabase>
     with _$DadosBemPatrimoniaisDaoMixin {
   final AppDatabase db;
 
   DadosBemPatrimoniaisDao(this.db) : super(db);
 
+  /// Método responsável por buscar todos os dados bem patrimoniais dado uma estrutura.
   Future<List<DadosBemPatrimoniaisDBData>> getAllDadosPorEstrutura(
           int idEstrutura) =>
       (select(db.dadosBemPatrimoniaisDB)
             ..where((tbl) => tbl.idEstruturaOrganizacional.equals(idEstrutura)))
           .get();
 
+  /// Método responsável por buscar o dado bem patrimonial de um bem patrimonial.
   Future<DadosBemPatrimoniaisDBData> getDadosInventariar(
           String numeroBemPatrimonial, String idInventario, int idUnidade) =>
       (select(db.dadosBemPatrimoniaisDB)
@@ -27,6 +31,7 @@ class DadosBemPatrimoniaisDao extends DatabaseAccessor<AppDatabase>
                 tbl.idEstruturaOrganizacional.equals(idUnidade)))
           .getSingle();
 
+  /// Método responsável por atualizar um dado bem patrimonial marcando-o como inventariado.
   Future<void> updateDadosBemPatrimonial(int idBemPatrimonial) =>
       (update(db.dadosBemPatrimoniaisDB)
             ..where(
@@ -38,6 +43,7 @@ class DadosBemPatrimoniaisDao extends DatabaseAccessor<AppDatabase>
         ),
       );
 
+  /// Método responsável por inserir uma lista de dados bens patrimoniais no banco de dados.
   Future<void> insertDadosBensPatrimoniais(List dadosBemPatrimonial) async =>
       await batch(
         (l) {

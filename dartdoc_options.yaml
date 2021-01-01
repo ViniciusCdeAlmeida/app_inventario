@@ -1,0 +1,38 @@
+dartdoc:
+   useCategories: true
+   showUndocumentedCategories: true
+   # If there is no matching category defined in dartdoc_options.yaml, those declared categories in the source code will be invisible.
+   categories:
+      "Helpers":
+         name: Helpers
+      "Converters":
+         name: Converters
+      "Widgets":
+         name: Widgets
+      "Screens":
+         name: Screens
+      "Utils":
+         name: Utils
+      "Models":
+         name: Models
+      "Stores":
+         name: Stores
+      "Providers":
+         name: Providers
+      "Daos":
+         name: Daos
+      "Tables":
+         name: Tables
+   categoryOrder:
+      [
+         "Screens",
+         "Providers",
+         "Stores",
+         "Widgets",
+         "Utils",
+         "Models",
+         "Daos",
+         "Tables",
+         "Helpers",
+         "Converters",
+      ]

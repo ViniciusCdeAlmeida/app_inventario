@@ -6,15 +6,19 @@ import 'package:moor_flutter/moor_flutter.dart';
 part 'bem_patrimoniais_dao.g.dart';
 
 @UseDao(tables: [BensPatrimoniaisDB])
+
+/// Classe responsável por gerar as operações de banco de dados da tabela [BensPatrimoniaisDB].
 class BemPatrimoniaisDao extends DatabaseAccessor<AppDatabase>
     with _$BemPatrimoniaisDaoMixin {
   final AppDatabase db;
 
   BemPatrimoniaisDao(this.db) : super(db);
 
+  /// Método responsável por buscar todos os bens patrimoniais.
   Future<List<BensPatrimoniaisDBData>> getAllBensPatrimoniais() =>
       select(db.bensPatrimoniaisDB).get();
 
+  /// Método responsável por buscar um bem patrimonial dado um [numeroPatrimonialCompleto].
   Future<BensPatrimoniaisDBData> getBemPatrimonial(
           String numeroPatrimonialCompleto) =>
       (select(db.bensPatrimoniaisDB)
@@ -22,9 +26,11 @@ class BemPatrimoniaisDao extends DatabaseAccessor<AppDatabase>
                 .equals(numeroPatrimonialCompleto)))
           .getSingle();
 
+  /// Método responsável por verificar a existência de bens patrimoniais.
   Future<BensPatrimoniaisDBData> getVerificaBensPatrimoniais() =>
       (select(db.bensPatrimoniaisDB)..limit(1)).getSingle();
 
+  /// Método responsável por atualizar um bem patrimonial [idBemPatrimonial] marcando-o como inventariado.
   Future<void> updateBemPatrimonial(int idBemPatrimonial) =>
       (update(db.bensPatrimoniaisDB)
             ..where(
@@ -36,6 +42,7 @@ class BemPatrimoniaisDao extends DatabaseAccessor<AppDatabase>
         ),
       );
 
+  /// Método responsável por inserir uma lista [bensPatrimoniais] de bens patrimoniais no banco de dados.
   Future<void> insertBensPatrimoniais(List bensPatrimoniais) async =>
       await batch(
         (l) {

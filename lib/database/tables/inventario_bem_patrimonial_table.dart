@@ -1,6 +1,7 @@
 import 'package:GRPInventario/database/converters/index_converters.dart';
 import 'package:moor/moor.dart';
 
+/// Responsável por criar a tabela [InventarioBemPatrimonialDB] e seus campos no banco de dados.
 class InventarioBemPatrimonialDB extends Table {
   IntColumn get id => integer().nullable()();
   IntColumn get idDadosBemPatrimonialMobile => integer().nullable()();

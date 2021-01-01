@@ -1,8 +1,8 @@
-import 'dart:convert';
-
+///{@category Helpers}
 import 'package:GRPInventario/database/database_moor.dart';
 import 'package:GRPInventario/models/index_models.dart';
 
+/// Converte o resultado de uma lista de [EstruturaInventarioDBData] em uma lista [EstruturaInventario].
 List<EstruturaInventario> helperEstruturaInventarioLista(
     List<EstruturaInventarioDBData> listaUnidades) {
   return List<EstruturaInventario>.from(
@@ -15,16 +15,4 @@ List<EstruturaInventario> helperEstruturaInventarioLista(
           idInventario: item.idInventario),
     ),
   );
-}
-
-EstruturaInventario helperEstruturaInventario(Map estrutura) {
-  return EstruturaInventario(
-      id: estrutura['id'],
-      dominioStatusInventarioEstrutura: Dominio.fromJson(
-        json.decode(estrutura['dominio_status_inventario_estrutura']),
-      ),
-      estruturaOrganizacional: Organizacao.fromJson(
-        json.decode(estrutura['estrutura_organizacional']),
-      ),
-      idInventario: estrutura['id_inventario']);
 }

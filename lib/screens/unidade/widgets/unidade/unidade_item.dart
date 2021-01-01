@@ -16,7 +16,6 @@ class UnidadeItem extends StatefulWidget {
 
 class _UnidadeItemState extends State<UnidadeItem>
     with TickerProviderStateMixin {
-  // Animation<Offset> _slideAnimation;
   Animation<double> _fadeAnimation;
   AnimationController _controller;
 
@@ -28,15 +27,6 @@ class _UnidadeItemState extends State<UnidadeItem>
         milliseconds: 1000,
       ),
     );
-    // _slideAnimation = Tween<Offset>(
-    //   begin: Offset(1.0, 0.0),
-    //   end: Offset(0, 0),
-    // ).animate(
-    //   CurvedAnimation(
-    //     parent: _controller,
-    //     curve: Curves.ease,
-    //   ),
-    // );
     _fadeAnimation = Tween<double>(
       begin: 0.0,
       end: 1.0,
@@ -123,6 +113,8 @@ class _UnidadeItemState extends State<UnidadeItem>
                             children: <Widget>[
                               ListTile(
                                 trailing: PopupMenuButton<AcoesUnidade>(
+                                  key: Key(
+                                      'unidade_levatamento_${widget.unidade.id}'),
                                   icon: Icon(
                                     Icons.more_vert,
                                     color: Colors.black,
@@ -137,18 +129,23 @@ class _UnidadeItemState extends State<UnidadeItem>
                                   itemBuilder: (context) =>
                                       <PopupMenuEntry<AcoesUnidade>>[
                                     PopupMenuItem<AcoesUnidade>(
+                                      key: Key('ler_bens_${widget.unidade.id}'),
                                       child: PopupMenuCustom(
                                           'Ler Bens', Icons.visibility),
                                       value: AcoesUnidade.lerBens,
                                     ),
                                     const PopupMenuDivider(),
                                     PopupMenuItem<AcoesUnidade>(
+                                      key: Key(
+                                          'bens_previstos_${widget.unidade.id}'),
                                       child: PopupMenuCustom(
                                           'Bens', Icons.content_paste),
                                       value: AcoesUnidade.bensPrevistos,
                                     ),
                                     const PopupMenuDivider(),
                                     PopupMenuItem<AcoesUnidade>(
+                                      key: Key(
+                                          'estatisticas_${widget.unidade.id}'),
                                       child: PopupMenuCustom(
                                           'Estatisticas', Icons.bar_chart),
                                       value: AcoesUnidade.estatisticas,

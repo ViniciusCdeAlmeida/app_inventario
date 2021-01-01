@@ -1,12 +1,12 @@
+import 'package:GRPInventario/utils/index_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 import 'package:GRPInventario/models/index_models.dart';
-import 'package:GRPInventario/components/stores/index_store.dart';
+import 'package:GRPInventario/providers/stores/index_store.dart';
 import 'package:GRPInventario/screens/unidade/widgets/unidade/unidade_item.dart';
 import 'package:GRPInventario/widgets/index_widget.dart';
 
-// ignore: must_be_immutable
 class UnidadeScreen extends StatefulWidget {
   static const routeName = '/unidadeScreen';
   @override
@@ -48,10 +48,11 @@ class _UnidadeScreenState extends State<UnidadeScreen> {
             case EstruturasLevantamentoState.carregado:
               return CustomScrollView(
                 slivers: [
-                  MySliverAppBar(
+                  SliverAppBarCustom(
                     titulo: unidadeArgs.arg1,
                     filtro: _estruturaLevantamentoStore.filtraBens,
                     limpar: _estruturaLevantamentoStore.limpaFiltrados,
+                    tipoMenu: Dominios.menuEstruturaOrdenacao,
                   ),
                   SliverList(
                     delegate: SliverChildListDelegate(

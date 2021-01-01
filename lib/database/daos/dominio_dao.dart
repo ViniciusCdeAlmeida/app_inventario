@@ -5,23 +5,21 @@ import 'package:moor_flutter/moor_flutter.dart';
 part 'dominio_dao.g.dart';
 
 @UseDao(tables: [DominioDB])
+
+/// Classe responsável por gerar as operações de banco de dados da tabela [DominioDB].
 class DominioDao extends DatabaseAccessor<AppDatabase> with _$DominioDaoMixin {
   final AppDatabase db;
 
   DominioDao(this.db) : super(db);
 
+  /// Método responsável por buscar todos os dominios.
   Future<List<DominioDBData>> getAllDominio() => select(db.dominioDB).get();
 
+  /// Método responsável por verificar a existência de dominios.
   Future<DominioDBData> getVerificaDominios() =>
       (select(db.dominioDB)..limit(1)).getSingle();
 
-  Future<List<DominioDBData>> getDominioBens(String chave) async =>
-      await (select(db.dominioDB)
-            ..where(
-              (tbl) => tbl.chave.equals(chave),
-            ))
-          .get();
-
+  /// Método responsável por inserir uma lista de dominios no banco de dados.
   Future<void> insertDominio(List dominio) async => await batch((l) {
         l.insertAll(
             db.dominioDB,

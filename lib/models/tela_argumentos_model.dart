@@ -1,3 +1,4 @@
+/// Modelo para o objeto [ScreenArgumentos].
 class ScreenArgumentos {
   final int id;
   final String arg1;
