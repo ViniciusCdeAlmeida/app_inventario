@@ -4,15 +4,6 @@ import 'package:GRPInventario/models/index_models.dart';
 import 'package:GRPInventario/utils/index_utils.dart';
 
 class InventarioBensPatrimoniaisProvider {
-  bool _isLoading = false;
-  List<InventarioBemPatrimonial> _inventariados = [];
-
-  bool get isLoading => _isLoading;
-
-  List<InventarioBemPatrimonial> get getInventariados {
-    return [..._inventariados];
-  }
-
   Future<List<InventarioBemPatrimonial>> buscaBensInventariados(
           int idUnidade) async =>
       helperInventarioBemPatrimonialLista(

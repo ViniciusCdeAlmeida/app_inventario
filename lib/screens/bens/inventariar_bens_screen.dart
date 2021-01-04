@@ -8,18 +8,18 @@ import 'package:GRPInventario/models/index_models.dart';
 import 'package:GRPInventario/providers/stores/index_store.dart';
 import 'package:GRPInventario/providers/index_providers.dart';
 
-class LerBensGeralScreen extends StatefulWidget {
-  static const routeName = '/LerBensGeralScreen';
+class InventariarBensScreen extends StatefulWidget {
+  static const routeName = '/InventariarBensScreen';
   final int id;
   final EstruturaInventario estrutura;
 
-  LerBensGeralScreen({this.id, this.estrutura});
+  InventariarBensScreen({this.id, this.estrutura});
 
   @override
-  _LerBensGeralScreenState createState() => _LerBensGeralScreenState();
+  _InventariarBensScreenState createState() => _InventariarBensScreenState();
 }
 
-class _LerBensGeralScreenState extends State<LerBensGeralScreen> {
+class _InventariarBensScreenState extends State<InventariarBensScreen> {
   final _numeroNovoFocusNode = FocusNode();
   final _numeroAntigoFocusNode = FocusNode();
   final _numeroAtualFocusNode = FocusNode();
@@ -41,6 +41,9 @@ class _LerBensGeralScreenState extends State<LerBensGeralScreen> {
 
   BemPatrimonialStore _bemPatrimonialStore;
   InventarioStore _inventarioStore;
+  ConfiguracaoStore _configuracaoStore;
+  EstruturaLevantamentoStore _estruturaLevantamentoStore;
+  LoginStore _loginStore;
 
   var _expanded = false;
 
@@ -48,31 +51,62 @@ class _LerBensGeralScreenState extends State<LerBensGeralScreen> {
     tipoMobile: 'levantamentoFisico',
     bemNaoEncontrado: false,
     bemNaoInventariado: false,
+    enviado: false,
   );
+
+  void _variaveisInicializacao() {
+    unidadeArgs = ModalRoute.of(context).settings.arguments;
+    _inventarioStore = Provider.of<InventarioStore>(context, listen: false);
+    _configuracaoStore = Provider.of<ConfiguracaoStore>(context, listen: false);
+    _estruturaLevantamentoStore =
+        Provider.of<EstruturaLevantamentoStore>(context, listen: false);
+    _bemPatrimonialStore =
+        Provider.of<BemPatrimonialStore>(context, listen: false);
+    _loginStore = Provider.of<LoginStore>(context, listen: false);
+    _bemPatrimonialStore.buscaDominios();
+    _configuracaoStore.buscarPrefixo();
+    _configuracaoStore.buscarMascara();
+    _inventarioStore.verificaTipoInventario(int.parse(unidadeArgs.arg2));
+    _idOrganizacao = _loginStore.unidadeAtual;
+    _idAtuaUl = _estruturaLevantamentoStore.idUlAtual;
+    _usuarioColetante = _loginStore.usuarioLogado.username;
+    _bemPatrimonialStore.buscaBemPatrimonial(
+        unidadeArgs.arg1, unidadeArgs.arg2, _idAtuaUl, unidadeArgs.arg3);
+  }
+
+  void _atribuiValores(BemPatrimonial bem) {
+    if (bem != null) {
+      unidadeArgs = ModalRoute.of(context).settings.arguments;
+
+      if (bem.dadosBensPatrimoniais != null &&
+          bem.dadosBensPatrimoniais.inventarioBemPatrimonial != null) {
+        bem.dadosBensPatrimoniais.inventariado = true;
+      }
+
+      _edicaoBemInvent.dominioSituacaoFisica = bem.dominioSituacaoFisica;
+      _edicaoBemInvent.dominioStatus = bem.dominioStatus;
+      _edicaoBemInvent.dominioStatusInventarioBem =
+          bem.dadosBensPatrimoniais?.dominioStatusInventarioBem;
+      _edicaoBemInvent.idDadosBemPatrimonialMobile = bem.id;
+      _edicaoBemInvent.idInventarioEstruturaOrganizacionalMobile =
+          unidadeArgs.id;
+      _edicaoBemInvent.material = bem.material;
+      _edicaoBemInvent.caracteristicas = bem.caracteristicas;
+      _edicaoBemInvent.nomeUsuarioColeta = _usuarioColetante;
+      _edicaoBemInvent.numeroPatrimonial = bem.numeroPatrimonial;
+      _edicaoBemInvent.numeroPatrimonialAntigo = bem.numeroPatrimonial;
+      _edicaoBemInvent.idUnidadeOrganizacional = _idOrganizacao;
+      _edicaoBemInvent.idDominioSituacaoFisica = bem.dominioSituacaoFisica.id;
+      _edicaoBemInvent.idDominioStatus = bem.dominioStatus.id;
+      _edicaoBemInvent.idEstruturaOrganizacionalAtual =
+          bem.estruturaOrganizacionalAtual.id;
+      _edicaoBemInvent.idMaterial = bem.material.id;
+    }
+  }
 
   @override
   void didChangeDependencies() {
-    unidadeArgs = ModalRoute.of(context).settings.arguments;
-    _inventarioStore = Provider.of<InventarioStore>(context, listen: false);
-    _inventarioStore.verificaTipoInventario(int.parse(unidadeArgs.arg2));
-    _bemPatrimonialStore =
-        Provider.of<BemPatrimonialStore>(context, listen: false);
-    _bemPatrimonialStore.buscaDominios();
-    _idOrganizacao =
-        Provider.of<AutenticacaoProvider>(context, listen: false).idUnidade;
-    _idAtuaUl =
-        Provider.of<EstruturaLevantamentoProvider>(context, listen: false)
-            .getUlAtual;
-    _digitoVerificador =
-        Provider.of<EstruturaLevantamentoProvider>(context, listen: false)
-            .getDigitoVerificador;
-    _usuarioColetante =
-        Provider.of<LoginStore>(context, listen: false).usuarioLogado.username;
-    _qtdeDigitos =
-        Provider.of<EstruturaLevantamentoProvider>(context, listen: false)
-            .getDigitosLeitura;
-    _bemPatrimonialStore.buscaBemPatrimonial(
-        unidadeArgs.arg1, unidadeArgs.arg2, _idAtuaUl, unidadeArgs.arg3);
+    _variaveisInicializacao();
     super.didChangeDependencies();
   }
 
@@ -135,40 +169,6 @@ class _LerBensGeralScreenState extends State<LerBensGeralScreen> {
     Navigator.of(context).pop();
   }
 
-  void _atribuiValores(BemPatrimonial bem) {
-    if (bem != null) {
-      unidadeArgs = ModalRoute.of(context).settings.arguments;
-
-      if (bem.dadosBensPatrimoniais != null &&
-          bem.dadosBensPatrimoniais.inventarioBemPatrimonial != null) {
-        bem.dadosBensPatrimoniais.inventariado = true;
-      }
-
-      _edicaoBemInvent.dominioSituacaoFisica = bem.dominioSituacaoFisica;
-      _edicaoBemInvent.dominioStatus = bem.dominioStatus;
-      _edicaoBemInvent.dominioStatusInventarioBem =
-          bem.dadosBensPatrimoniais != null
-              ? bem.dadosBensPatrimoniais.dominioStatusInventarioBem
-              : null;
-      _edicaoBemInvent.idDadosBemPatrimonialMobile = bem.id;
-      _edicaoBemInvent.idInventarioEstruturaOrganizacionalMobile =
-          unidadeArgs.id;
-      _edicaoBemInvent.material = bem.material;
-      _edicaoBemInvent.caracteristicas = bem.caracteristicas;
-      _edicaoBemInvent.nomeUsuarioColeta = _usuarioColetante;
-      _edicaoBemInvent.numeroPatrimonial = bem.numeroPatrimonial;
-      _edicaoBemInvent.numeroPatrimonialAntigo = bem.numeroPatrimonial;
-      _edicaoBemInvent.idUnidadeOrganizacional = _idOrganizacao;
-      _edicaoBemInvent.idDominioSituacaoFisica = bem.dominioSituacaoFisica.id;
-      _edicaoBemInvent.idDominioStatus = bem.dominioStatus.id;
-      _edicaoBemInvent.idEstruturaOrganizacionalAtual =
-          bem.estruturaOrganizacionalAtual.id;
-      _edicaoBemInvent.idMaterial = bem.material.id;
-
-      _edicaoBemInvent.enviado = false;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Observer(
@@ -198,12 +198,14 @@ class _LerBensGeralScreenState extends State<LerBensGeralScreen> {
               ),
             );
           case BemPatrimonialState.carregado:
+            _digitoVerificador = _configuracaoStore.prefixo?.prefixo;
+            _qtdeDigitos = _configuracaoStore.mascara?.mascara;
             _atribuiValores(_bemPatrimonialStore.bemPatrimonial);
             return Scaffold(
               appBar: AppBar(
                 title: Text(
                   'Item: ${_bemPatrimonialStore.bemPatrimonial.numeroPatrimonial}',
-                  style: TextStyle(fontSize: 15),
+                  style: const TextStyle(fontSize: 15),
                 ),
                 actions: [
                   if (_bemPatrimonialStore
@@ -281,7 +283,7 @@ class _LerBensGeralScreenState extends State<LerBensGeralScreen> {
                             shape: BoxShape.rectangle,
                             border:
                                 Border.all(width: 1, color: Colors.grey[500]),
-                            borderRadius: BorderRadius.all(
+                            borderRadius: const BorderRadius.all(
                               Radius.circular(4),
                             ),
                           ),
@@ -336,7 +338,7 @@ class _LerBensGeralScreenState extends State<LerBensGeralScreen> {
                               shape: BoxShape.rectangle,
                               border:
                                   Border.all(width: 1, color: Colors.grey[500]),
-                              borderRadius: BorderRadius.all(
+                              borderRadius: const BorderRadius.all(
                                 Radius.circular(4),
                               ),
                             ),
@@ -620,7 +622,7 @@ class _LerBensGeralScreenState extends State<LerBensGeralScreen> {
         decoration: BoxDecoration(
           shape: BoxShape.rectangle,
           border: Border.all(width: 1, color: Colors.grey[500]),
-          borderRadius: BorderRadius.all(
+          borderRadius: const BorderRadius.all(
             Radius.circular(4),
           ),
         ),

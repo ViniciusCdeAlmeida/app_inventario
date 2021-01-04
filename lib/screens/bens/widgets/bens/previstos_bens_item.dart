@@ -131,7 +131,7 @@ class _PrevistosBensItemState extends State<PrevistosBensItem>
                           : Icon(Icons.check),
                       onPressed: () {
                         Navigator.of(context).pushNamed(
-                          LerBensGeralScreen.routeName,
+                          InventariarBensScreen.routeName,
                           arguments: ScreenArgumentos(
                             id: int.parse(widget.idInventarioEstrutura),
                             arg1: widget.bemInventario

@@ -10,16 +10,7 @@ import 'package:GRPInventario/utils/index_utils.dart';
 
 /// Responsável por gerenciar as requisições dos stores [InicializacaoStore] e [LoginStore].
 class AutenticacaoProvider {
-  int idOrganizacao;
   bool _existeOrganizacao = false;
-
-  int get idUnidade {
-    return idOrganizacao;
-  }
-
-  set idUnidade(int idOrganizacao) {
-    this.idOrganizacao = idOrganizacao;
-  }
 
   /// Verifica se já existe uma [Organizacao] presente na base de dados.
   Future<void> _getVerificaOrganizacaoDB() async {
@@ -82,9 +73,9 @@ class AutenticacaoProvider {
   ///Realiza a autenticação de um usuário seja ele online ou não e retornando um [Login].
   Future<Login> login({String userName, String password, bool offline}) async {
     try {
-      await buscaConexaoAtiva();
       await _getVerificaOrganizacaoDB();
       if (!offline) {
+        await buscaConexaoAtiva();
         // db.deleteTable(db.unidadesGestorasDB);
         return await _authenticate(userName, password);
       } else

@@ -24,6 +24,8 @@ abstract class _LoginStore with Store {
   @observable
   int _qtdeItens = 0;
 
+  int unidade;
+
   @observable
   bool _loginOffline = false;
 
@@ -41,6 +43,10 @@ abstract class _LoginStore with Store {
 
   Login get usuarioLogado {
     return _usuarioLogado;
+  }
+
+  int get unidadeAtual {
+    return unidade;
   }
 
   bool get usuarioOffline {

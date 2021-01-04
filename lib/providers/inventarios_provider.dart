@@ -6,15 +6,6 @@ import 'package:GRPInventario/models/index_models.dart';
 import 'package:GRPInventario/utils/index_utils.dart';
 
 class InventariosProvider {
-  final int idOrganizacao;
-  String _nomeInventario;
-
-  InventariosProvider({this.idOrganizacao});
-
-  String get getNomeLevantamentos {
-    return _nomeInventario;
-  }
-
   Future<Inventario> atualizaDadosInventario(int id) async =>
       await _getAtualizaDadosInventario(id);
 

@@ -33,11 +33,8 @@ List<SingleChildWidget> providers() => [
       Provider(
         create: (ctx) => EstruturaLevantamentoProvider(),
       ),
-      ProxyProvider<AutenticacaoProvider, InventariosProvider>(
+      Provider(
         create: (context) => InventariosProvider(),
-        update: (ctx, autenticacao, _) => InventariosProvider(
-          idOrganizacao: autenticacao.idUnidade,
-        ),
       ),
       Provider(
         create: (ctx) => InicializacaoStore(

@@ -1,22 +1,22 @@
 ///{@category Models}
 library models;
 
+export 'numero_bens_model.dart';
 export 'serialized/bem_patrimonial_model.dart';
+export 'serialized/caracteristica_model.dart';
 export 'serialized/caracteristicas_model.dart';
 export 'serialized/conexao_model.dart';
 export 'serialized/dados_bens_patrimoniais_model.dart';
 export 'serialized/dominio_model.dart';
 export 'serialized/estrutura_inventario_model.dart';
-export 'serialized/inventario_model.dart';
 export 'serialized/inventario_bem_patrimonial_model.dart';
-export 'serialized/caracteristica_model.dart';
 export 'serialized/inventario_dados_bem_patrimonial_model.dart';
+export 'serialized/inventario_model.dart';
 export 'serialized/login_model.dart';
 export 'serialized/mascara_model.dart';
-export 'serialized/material_model.dart';
 export 'serialized/material_caracteristica_model.dart';
+export 'serialized/material_model.dart';
 export 'serialized/organizacao_model.dart';
 export 'serialized/organizacoes_model.dart';
 export 'serialized/prefixo_model.dart';
-export 'numero_bens_model.dart';
 export 'tela_argumentos_model.dart';

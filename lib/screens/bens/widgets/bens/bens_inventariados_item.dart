@@ -30,6 +30,8 @@ class _BensInventariadosItemState extends State<BensInventariadosItem> {
                       widget.bemInventariado.dominioSituacaoFisica.descricao),
                   BensPrevistosItem('Status do bem: ',
                       widget.bemInventariado.dominioStatus.descricao),
+                  // BensPrevistosItem(
+                  //     'UL Coletada: ', widget.bemInventariado..descricao), 020604,021212
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [

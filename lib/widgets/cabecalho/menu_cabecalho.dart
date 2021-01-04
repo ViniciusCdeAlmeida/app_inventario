@@ -95,15 +95,15 @@ class MenuDrawer extends StatelessWidget {
             title: const Text('Configuração RFID'),
             onTap: null,
           ),
-          Divider(),
-          ListTile(
-            leading: Icon(Icons.ac_unit),
-            title: const Text('Banco de dados'),
-            onTap: () {
-              Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => MoorDbViewer(db)));
-            },
-          ),
+          // Divider(),
+          // ListTile(
+          //   leading: Icon(Icons.ac_unit),
+          //   title: const Text('Banco de dados'),
+          //   onTap: () {
+          //     Navigator.of(context).push(
+          //         MaterialPageRoute(builder: (context) => MoorDbViewer(db)));
+          //   },
+          // ),
         ],
       ),
     );

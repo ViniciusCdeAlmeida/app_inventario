@@ -7,62 +7,13 @@ import 'package:GRPInventario/utils/index_utils.dart';
 import 'package:GRPInventario/models/index_models.dart';
 
 class EstruturaLevantamentoProvider {
-  List<EstruturaInventario> _estruturas = [];
-  List<EstruturaInventario> _levantamentosEstrutura = [];
-  List<DadosBensPatrimoniais> _bensEstrutura = [];
-  int _idUlAtual;
-  BemPatrimonial _bemPatrimonial;
-  String _quantidadeDigitos;
-  String _digitoVerificador;
-
-  String _nomeEstrutura;
-
-  List<EstruturaInventario> get getLevantamentos {
-    return _estruturas;
-  }
-
-  int get getUlAtual {
-    return _idUlAtual;
-  }
-
-  List<EstruturaInventario> get getLevantamentosEstrutura {
-    return [..._levantamentosEstrutura];
-  }
-
-  BemPatrimonial get getBemPatrimonial {
-    return _bemPatrimonial;
-  }
-
-  String get getNomeEstrutura {
-    return _nomeEstrutura;
-  }
-
-  String get getDigitosLeitura {
-    return _quantidadeDigitos;
-  }
-
-  String get getDigitoVerificador {
-    return _digitoVerificador;
-  }
-
-  void ulAtual(int id) {
-    this._idUlAtual = id;
-  }
-
-  void setDigitosLeitura(String digitos) {
-    _quantidadeDigitos = digitos;
-  }
-
-  void setDigitoVerificador(String digito) {
-    _digitoVerificador = digito;
-  }
-
   Future<List<EstruturaInventario>> buscaPorEstrutura(int id) async =>
       helperEstruturaInventarioLista(
           await db.estruturaInventarioDao.getAllEstruturasPorLevantamento(id));
 
   Future<BemPatrimonial> buscaBensPorId(String numeroBemPatrimonial,
       String idInventario, int idUnidade, String idBem) async {
+    BemPatrimonial _bemPatrimonial;
     _bemPatrimonial = helperBemPatrimonial(
         await db.bemPatrimoniaisDao.getBemPatrimonial(numeroBemPatrimonial));
     _bemPatrimonial.dadosBensPatrimoniais = helperDadoBemPatrimonial(
@@ -97,8 +48,8 @@ class EstruturaLevantamentoProvider {
             : error.error.message;
       });
 
-      _nomeEstrutura = (response.data["objects"] as List<dynamic>)
-          .first["inventario"]["codigoENome"];
+      // _nomeEstrutura = (response.data["objects"] as List<dynamic>)
+      //     .first["inventario"]["codigoENome"];
 
       await db.estruturaInventarioDao
           .insertEstruturaInventario((response.data["objects"] as List));
@@ -107,15 +58,8 @@ class EstruturaLevantamentoProvider {
     }
   }
 
-  void atualizaDados(BemPatrimonial item) {
-    final idx = _bensEstrutura.indexWhere((value) => value.id == item.id);
-    if (idx >= 0) {
-      _bensEstrutura[idx].inventariado = true;
-    }
-  }
-
   Future<void> buscaEstruturas(List<Inventario> listLevantamento) async {
-    _estruturas.clear();
+    // _estruturas.clear();
 
     db.deleteTable(db.estruturaInventarioDB);
     db.deleteTable(db.dadosBemPatrimoniaisDB);
@@ -124,7 +68,7 @@ class EstruturaLevantamentoProvider {
         .toList()
         .whenComplete(
       () {
-        _nomeEstrutura = null;
+        // _nomeEstrutura = null;
       },
     );
   }

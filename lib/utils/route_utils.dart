@@ -31,7 +31,7 @@ Map<String, Widget Function(BuildContext)> rotas() {
     LevantamentoFisicoScreen.routeName: (ctx) => LevantamentoFisicoScreen(),
     LerBensItens.routeName: (ctx) => LerBensItens(),
     PrevistosBensScreen.routeName: (ctx) => PrevistosBensScreen(),
-    LerBensGeralScreen.routeName: (ctx) => LerBensGeralScreen(),
+    InventariarBensScreen.routeName: (ctx) => InventariarBensScreen(),
     BensInventariadosScreen.routeName: (ctx) => BensInventariadosScreen(),
     InicializacaoScreen.routeName: (ctx) => InicializacaoScreen(),
   };

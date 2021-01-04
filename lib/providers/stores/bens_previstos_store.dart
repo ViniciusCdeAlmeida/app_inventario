@@ -1,7 +1,8 @@
-import 'package:GRPInventario/models/index_models.dart';
-import 'package:GRPInventario/providers/bens_provider.dart';
-import 'package:GRPInventario/utils/index_utils.dart';
 import 'package:mobx/mobx.dart';
+
+import 'package:GRPInventario/models/index_models.dart';
+import 'package:GRPInventario/providers/index_providers.dart';
+import 'package:GRPInventario/utils/index_utils.dart';
 
 part 'bens_previstos_store.g.dart';
 
@@ -164,7 +165,7 @@ abstract class _BensPrevistosStore with Store {
               )
               .toList()
               .asObservable();
-    } else if (ordenacao == Dominios.ordenacaoNaoInventaridos) {
+    } else if (ordenacao == Dominios.ordenacaoNaoInventariados) {
       _dadosBensPatrimoniaisFiltradoObservable =
           _dadosBensPatrimoniaisObservable
               .where((element) => !element.inventariado)
@@ -216,7 +217,7 @@ abstract class _BensPrevistosStore with Store {
                 .toList()
                 .asObservable();
         break;
-      case Dominios.ordenacaoNaoInventaridos:
+      case Dominios.ordenacaoNaoInventariados:
         _dadosBensPatrimoniaisFiltradoObservable =
             _dadosBensPatrimoniaisObservable
                 .where((element) => !element.inventariado)

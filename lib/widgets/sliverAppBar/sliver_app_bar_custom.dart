@@ -1,9 +1,10 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import 'package:GRPInventario/providers/stores/index_store.dart';
 import 'package:GRPInventario/utils/index_utils.dart';
 import 'package:GRPInventario/widgets/index_widget.dart';
 import 'package:GRPInventario/widgets/sliverAppBar/sliver_app_bar_custom_classificacao.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class SliverAppBarCustom extends StatefulWidget {
   final String titulo;

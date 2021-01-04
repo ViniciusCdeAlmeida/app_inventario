@@ -22,6 +22,8 @@ abstract class _EstruturaLevantamentoStore with Store {
   @observable
   bool buscandoEstruturas = false;
 
+  int idUlAtual;
+
   @observable
   List<EstruturaInventario> _estruturasObservable = [];
 
@@ -31,6 +33,7 @@ abstract class _EstruturaLevantamentoStore with Store {
   @observable
   ObservableFuture<List<EstruturaInventario>> _estruturasFuture;
 
+  // int get ulAtual
   @computed
   // ignore: missing_return
   EstruturasLevantamentoState get estruturasState {

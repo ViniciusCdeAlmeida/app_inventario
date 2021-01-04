@@ -6,8 +6,6 @@ import 'package:flare_flutter/flare_actor.dart';
 
 import 'package:GRPInventario/providers/stores/index_store.dart';
 
-import 'package:GRPInventario/providers/index_providers.dart';
-
 class BensInventariadosScreen extends StatefulWidget {
   static const routeName = '/bensInventariadosScreen';
 
@@ -22,7 +20,7 @@ class _BensInventariadosScreenState extends State<BensInventariadosScreen> {
 
   @override
   void didChangeDependencies() {
-    final idUnidade = Provider.of<AutenticacaoProvider>(context).idUnidade;
+    final idUnidade = Provider.of<LoginStore>(context).unidadeAtual;
     _bensInventariadoStore =
         Provider.of<BensInventariadoStore>(context, listen: false);
     _bensInventariadoStore.buscaBensColetados(idUnidade);
@@ -75,7 +73,7 @@ class _BensInventariadosScreenState extends State<BensInventariadosScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final idUnidade = Provider.of<AutenticacaoProvider>(context).idUnidade;
+    final idUnidade = Provider.of<LoginStore>(context).unidadeAtual;
 
     return Scaffold(
       body: Observer(

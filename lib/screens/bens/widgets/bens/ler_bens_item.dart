@@ -31,7 +31,7 @@ class _LerBensItensState extends State<LerBensItens> {
   void _buscaBemPatrimonial() {
     _args = ModalRoute.of(context).settings.arguments;
     Navigator.of(context).pushNamed(
-      LerBensGeralScreen.routeName,
+      InventariarBensScreen.routeName,
       arguments: ScreenArgumentos(
         id: _args.id,
         arg1: _controller.text,
@@ -107,7 +107,7 @@ class _LerBensItensState extends State<LerBensItens> {
     setState(() {
       _args = ModalRoute.of(context).settings.arguments;
       Navigator.of(context).pushNamed(
-        LerBensGeralScreen.routeName,
+        InventariarBensScreen.routeName,
         arguments: ScreenArgumentos(
           id: _args.id,
           arg1: barcodeScanRes,

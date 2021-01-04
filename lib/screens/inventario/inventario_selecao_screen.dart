@@ -1,3 +1,4 @@
+import 'package:GRPInventario/providers/stores/index_store.dart';
 import 'package:GRPInventario/screens/inventario/widgets/inventario/inventario_selecao_item.dart';
 import 'package:GRPInventario/widgets/index_widget.dart';
 import 'package:flutter/material.dart';
@@ -14,8 +15,7 @@ class InventarioSelecaoScreen extends StatelessWidget {
         Provider.of<TipoInventarioProvider>(context, listen: false);
     final ScreenArgumentos unidadeDados =
         ModalRoute.of(context).settings.arguments;
-    Provider.of<AutenticacaoProvider>(context, listen: false).idUnidade =
-        unidadeDados.id;
+    Provider.of<LoginStore>(context, listen: false).unidade = unidadeDados.id;
     return Scaffold(
       appBar: AppBar(
         title: Text('Selecione um tipo de inventario'),

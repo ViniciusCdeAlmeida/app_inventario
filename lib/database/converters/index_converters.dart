@@ -1,8 +1,8 @@
 ///{@category Converters}
 library converters;
 
-export 'caracteristicas_converter.dart';
 export 'caracteristica_converter.dart';
+export 'caracteristicas_converter.dart';
 export 'conexao_converter.dart';
 export 'dados_bens_patrimoniais_converter.dart';
 export 'dominio_converter.dart';

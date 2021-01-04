@@ -1,14 +1,12 @@
-import 'package:GRPInventario/screens/bens/widgets/bens/previstos_bens_item.dart';
-import 'package:GRPInventario/utils/dominios_utils.dart';
-import 'package:GRPInventario/widgets/index_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:provider/provider.dart';
 
-import 'package:GRPInventario/providers/index_providers.dart';
-import 'package:GRPInventario/providers/stores/index_store.dart';
-
 import 'package:GRPInventario/models/index_models.dart';
+import 'package:GRPInventario/providers/stores/index_store.dart';
+import 'package:GRPInventario/screens/bens/widgets/bens/previstos_bens_item.dart';
+import 'package:GRPInventario/utils/index_utils.dart';
+import 'package:GRPInventario/widgets/index_widget.dart';
 
 class PrevistosBensScreen extends StatefulWidget {
   static const routeName = '/bensPrevistosScreen';
@@ -20,6 +18,7 @@ class PrevistosBensScreen extends StatefulWidget {
 class _PrevistosBensScreenState extends State<PrevistosBensScreen> {
   ScreenArgumentos unidadeArgs;
   BensPrevistosStore _bensPrevistosStore;
+  EstruturaLevantamentoStore _estruturaLevantamentoStore;
 
   @override
   void didChangeDependencies() {
@@ -29,7 +28,9 @@ class _PrevistosBensScreenState extends State<PrevistosBensScreen> {
         Provider.of<BensPrevistosStore>(context, listen: false);
     _bensPrevistosStore.limpaFiltrados();
     _bensPrevistosStore.buscaBensPorEstrutura(unidadeArgs.id, unidadeArgs.arg1);
-    Provider.of<EstruturaLevantamentoProvider>(context).ulAtual(unidadeArgs.id);
+    _estruturaLevantamentoStore =
+        Provider.of<EstruturaLevantamentoStore>(context);
+    _estruturaLevantamentoStore.idUlAtual = unidadeArgs.id;
     super.didChangeDependencies();
   }
 
